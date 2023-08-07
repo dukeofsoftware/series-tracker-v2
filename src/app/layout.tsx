@@ -1,4 +1,5 @@
-import './globals.css'
+import Providers from '@/components/Providers'
+import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -16,7 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${process.env.NODE_ENV !== "production" && "debug-screens"}`}>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   )
 }
