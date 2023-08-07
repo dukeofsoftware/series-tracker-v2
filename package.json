@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "serve":"next build && next start ",
+    "format": "prettier --write ./src",
     "lint": "next lint"
   },
   "dependencies": {
