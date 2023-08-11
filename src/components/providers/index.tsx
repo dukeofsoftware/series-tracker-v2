@@ -2,12 +2,15 @@
 
 import { FC, useEffect, useState } from 'react'
 import { ThemeProvider } from "next-themes"
+import { Toaster } from "@/components/ui/toaster"
+
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {
     QueryClient,
     QueryClientProvider,
-    useQuery,
 } from '@tanstack/react-query'
+
+
 interface ProvidersProps {
     children: React.ReactNode
 }
@@ -20,12 +23,13 @@ const Providers: FC<ProvidersProps> = ({ children }) => {
     }, [])
     if (!isMounted) return null
     return <>
-        <QueryClientProvider client={queryClient}>
 
-            <ThemeProvider attribute='class' enableSystem>
-                {children}
-                <ReactQueryDevtools initialIsOpen={false} />
-            </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+                <ThemeProvider attribute='class' enableSystem>
+                    {children}
+                    <ReactQueryDevtools initialIsOpen={false} />
+                    <Toaster />
+                </ThemeProvider>
         </QueryClientProvider>
 
     </>
