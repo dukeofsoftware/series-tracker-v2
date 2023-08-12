@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getTokens } from "next-firebase-auth-edge/lib/next/tokens"
 
-import { authConfig } from "@/config/server-config"
 import { options } from "@/config/tmdb-config"
 
 export async function GET(request: NextRequest) {
-  const tokens = await getTokens(request.cookies, authConfig)
+ /*  const tokens = await getTokens(request.cookies, authConfig)
 
   if (!tokens) {
     throw new Error("Cannot update custom claims of unauthenticated user")
@@ -13,7 +11,7 @@ export async function GET(request: NextRequest) {
   if (tokens) {
     return NextResponse.json("user logged in")
   }
-
+ */
   try {
     const { searchParams } = new URL(request.url)
     const isAdult = searchParams.get("isAdult") || false
