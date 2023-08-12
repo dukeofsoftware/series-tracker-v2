@@ -8,14 +8,6 @@ import {
   type Output,
 } from "valibot"
 
-// 0.76 kB
-
-export const LoginSchema = object({
-  email: string([email()]),
-  password: string([minLength(8)]),
-})
-
-export type LoginType = Output<typeof LoginSchema>
 
 export const resetEmailValidator = object(
   {

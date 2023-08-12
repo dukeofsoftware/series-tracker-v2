@@ -14,29 +14,34 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { User,  updatePassword } from 'firebase/auth'
-import { useAuthContext } from '../AuthContext'
-import { toast } from '../ui/use-toast'
+import { updatePassword } from 'firebase/auth'
+import { toast } from '@/components/ui/use-toast'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
 import { ResetPasswordType, resetPasswordValidator } from '@/lib/validators/resetPassword'
-interface PasswordTabProps { }
-const PasswordTab: FC<PasswordTabProps> = ({ }) => {
-    const { user } = useAuthContext()
+import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
+import { dictionary } from '@/content'
+interface PasswordTabProps {
+    language: string
+
+}
+const PasswordTab: FC<PasswordTabProps> = ({ language }) => {
+    const { getFirebaseAuth } = useFirebaseAuth()
+    const user = getFirebaseAuth().currentUser!
     const form = useForm<ResetPasswordType>({
         resolver: valibotResolver(resetPasswordValidator),
 
     })
     async function onSubmit(values: ResetPasswordType) {
-        await updatePassword(user as User, values.password).then(() => {
+        await updatePassword(user, values.password).then(() => {
             toast({
-                title: "Success",
-                description: "Your email is changed successfully",
+                title: dictionary[language]?.toast?.success,
+                description: dictionary[language]?.settings?.passwordTab?.toastDescription,
 
             })
         }).catch((error) => {
             console.error("EMAİL UPDATE ERROR:", error)
             toast({
-                title: "Error",
+                title: dictionary[language]?.toast?.error,
                 description: error.message,
                 variant: "destructive"
             })
@@ -44,66 +49,69 @@ const PasswordTab: FC<PasswordTabProps> = ({ }) => {
         });
     }
 
-    return <>
-        <Card className=''>
-            <CardHeader>
-                <CardTitle>
-                    Change Your Password
-                </CardTitle>
-                <CardDescription>
-                    You can change your password here
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Password</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            type="password"
-                                            placeholder="*********" {...field} />
-                                    </FormControl>
-                                    <FormDescription>
+    return <Card >
+        <CardHeader>
+            <CardTitle>
+                {dictionary[language]?.settings?.passwordTab?.title}
+            </CardTitle>
+            <CardDescription>
+                {
+                    dictionary[language]?.settings?.passwordTab?.description
+                }
+            </CardDescription>
+        </CardHeader>
+        <CardContent>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>{dictionary[language]?.settings?.passwordTab?.inputLabel}</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type="password"
+                                        placeholder="*********" {...field} />
+                                </FormControl>
+                                <FormDescription>
 
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
 
-                            name="confirmPassword"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Confirm Your Password</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            type="password"
+                        name="confirmPassword"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>{dictionary[language]?.settings?.passwordTab?.confirmInputLabel}</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type="password"
 
-                                            placeholder="********" {...field} />
-                                    </FormControl>
-                                    <FormDescription>
-                                        Type your password again.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                       
-                        <Button type="submit">Change Password</Button>
-                    </form>
-                </Form>
+                                        placeholder="********" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {
+                                        dictionary[language]?.settings?.passwordTab?.confirmInputDescription
+                                    }
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <Button type="submit">{dictionary[language]?.settings?.passwordTab?.buttonLabel}</Button>
+                </form>
+            </Form>
 
 
-            </CardContent>
-        </Card>
-    </>
+        </CardContent>
+    </Card>
+
 }
 
 export default PasswordTab

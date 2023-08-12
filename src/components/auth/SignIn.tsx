@@ -21,10 +21,7 @@ import Link from "next/link"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import { useAuth } from "../providers/context"
 const SignIn = ({ }) => {
-  const {user} =useAuth()
-  console.log(user)
 
   const router = useRouter();
   const params = useSearchParams();
@@ -49,7 +46,7 @@ const SignIn = ({ }) => {
         },
       });
       setHasLogged(true);
-      router.back();
+      router.push("/profile/settings");
     });
 
 

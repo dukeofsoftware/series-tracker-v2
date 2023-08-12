@@ -12,7 +12,6 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from '../ui/input'
-import { useAuthContext } from '../AuthContext'
 import { useForm } from 'react-hook-form'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Button } from '../ui/button'
@@ -22,10 +21,16 @@ import { uploadProfilePhoto } from '@/lib/firebase/strotage'
 import { useRouter } from 'next/navigation'
 import { toast } from '../ui/use-toast'
 import { updateProfile } from 'firebase/auth'
-interface AccountTabProps { }
 
-const AccountTab: FC<AccountTabProps> = ({ }) => {
-    const { user } = useAuthContext()
+import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
+import { DictionaryEntry, dictionary } from '@/content'
+interface AccountTabProps {
+    language: string
+}
+
+const AccountTab: FC<AccountTabProps> = ({ language }) => {
+    const { getFirebaseAuth } = useFirebaseAuth()
+    const user = getFirebaseAuth()
     const [loading, setLoading] = useState<boolean>(false)
     const [photo, setPhoto] = useState<File | null>(null)
     const router = useRouter()
@@ -34,13 +39,13 @@ const AccountTab: FC<AccountTabProps> = ({ }) => {
 
     })
     const handleProfileNameSubmit = async (data: ChangeProfileNameType) => {
-        if (!user) return
-        await updateProfile(user, {
+        if (!user) return null
+        await updateProfile(user.currentUser!, {
             displayName: data.profileName
         })
         toast({
-            title: "Success",
-            description: "Profile name updated",
+            title: dictionary[language]?.toast?.success,
+            description: dictionary[language]?.settings?.accountTab?.profileName?.toastDescription,
         })
         router.refresh()
 
@@ -53,42 +58,43 @@ const AccountTab: FC<AccountTabProps> = ({ }) => {
             if (!user) return null
             setLoading(true)
             if (!photo) return null
-            await uploadProfilePhoto(photo, user)
+            await uploadProfilePhoto(photo, user.currentUser!)
             setPhoto(null)
             setLoading(false)
             router.refresh()
         } catch (error: any) {
-            console.log(error)
+            console.error(error)
             toast({
-                title: "Error",
+                title: dictionary[language]?.toast?.error,
                 description: error.message,
+                variant:"destructive"
             })
         }
 
     }
 
     return <div className='flex flex-col md:flex-row gap-2'>
-        <Card className='grow'>
+        <Card className='md:grow w-full'>
             <CardHeader>
                 <div className='flex items-center gap-3'>
                     <Avatar>
                         <AvatarImage
                             height={90}
                             width={90}
-                            src={user?.photoURL || ""}
+                            src={user.currentUser?.photoURL || ""}
                         />
                         <AvatarFallback>
-                            {user?.displayName && user?.displayName[0]}
+                            {user.currentUser?.displayName && user?.currentUser.displayName[0]}
                         </AvatarFallback>
                     </Avatar>
 
                     <CardTitle>
 
-                        Change Your Profile Photo
+                        {dictionary[language]?.settings?.accountTab.profilePhoto.title}
                     </CardTitle>
                 </div>
                 <CardDescription>
-                    You can change your display photo here
+                    {dictionary[language]?.settings?.accountTab.profilePhoto.description}
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -107,25 +113,27 @@ const AccountTab: FC<AccountTabProps> = ({ }) => {
 
 
 
-                    <Button type="submit" disabled={loading}>Change Profile Photo</Button>
+                    <Button type="submit" disabled={loading}>{dictionary[language]?.settings?.accountTab.profilePhoto.buttonLabel}</Button>
                 </form>
 
 
             </CardContent>
         </Card>
-        <Card className='grow'>
+        <Card className='md:grow  w-full'>
             <CardHeader>
                 <div className='flex items-center gap-3'>
 
 
                     <CardTitle>
 
-                        Change Your Profile Name
+                        {dictionary[language]?.settings?.accountTab?.profileName?.title}
                     </CardTitle>
                 </div>
                 <CardDescription>
-                    You can change your display name here. {user?.displayName && <p>
-                        Currently your name is {user?.displayName} </p>}
+                    {
+                        dictionary[language].settings.accountTab.profileName.description
+                    }{user.currentUser?.displayName && <p>
+                        {dictionary[language]?.settings?.accountTab?.profileName?.currentName} {user?.currentUser.displayName} </p>}
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -136,7 +144,7 @@ const AccountTab: FC<AccountTabProps> = ({ }) => {
                             name="profileName"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Profile Name</FormLabel>
+                                    <FormLabel>  {dictionary[language].settings.accountTab.profileName.inputLabel}</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="string"
@@ -145,14 +153,15 @@ const AccountTab: FC<AccountTabProps> = ({ }) => {
                                         />
                                     </FormControl>
                                     <FormDescription>
-                                        Your profile name is how other users will see you.
+                                        {dictionary[language]?.settings?.accountTab?.profileName?.inputDescription}
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
 
-                        <Button type="submit" >Change Profile Name</Button>
+                        <Button type="submit" >{
+                            dictionary[language]?.settings?.accountTab?.profileName?.buttonLabel}</Button>
                     </form>
                 </Form>
 

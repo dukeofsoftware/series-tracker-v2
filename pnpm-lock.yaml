@@ -8,6 +8,9 @@ dependencies:
   '@auth/firebase-adapter':
     specifier: ^1.0.0
     version: 1.0.0(firebase-admin@11.10.1)
+  '@formatjs/intl-localematcher':
+    specifier: ^0.4.0
+    version: 0.4.0
   '@hookform/resolvers':
     specifier: ^3.2.0
     version: 3.2.0(react-hook-form@7.45.4)
@@ -110,6 +113,9 @@ dependencies:
   lucide-react:
     specifier: ^0.265.0
     version: 0.265.0(react@18.2.0)
+  negotiator:
+    specifier: ^0.6.3
+    version: 0.6.3
   next:
     specifier: 13.4.13
     version: 13.4.13(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)
@@ -134,9 +140,6 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
-  react-dropzone:
-    specifier: ^14.2.3
-    version: 14.2.3(react@18.2.0)
   react-hook-form:
     specifier: ^7.45.4
     version: 7.45.4(react@18.2.0)
@@ -156,8 +159,8 @@ dependencies:
     specifier: ^1.0.6
     version: 1.0.6(tailwindcss@3.3.3)
   valibot:
-    specifier: ^0.11.1
-    version: 0.11.1
+    specifier: ^0.12.0
+    version: 0.12.0
   zod:
     specifier: ^3.21.4
     version: 3.21.4
@@ -172,6 +175,9 @@ devDependencies:
   '@next/bundle-analyzer':
     specifier: ^13.4.13
     version: 13.4.13
+  '@types/negotiator':
+    specifier: ^0.6.1
+    version: 0.6.1
   '@types/node':
     specifier: ^20.4.8
     version: 20.4.8
@@ -2417,6 +2423,12 @@ packages:
     resolution: {integrity: sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==}
     dev: false
 
+  /@formatjs/intl-localematcher@0.4.0:
+    resolution: {integrity: sha512-bRTd+rKomvfdS4QDlVJ6TA/Jx1F2h/TBVO5LjvhQ7QPPHp19oPNMIum7W2CMEReq/zPxpmCeB31F9+5gl/qtvw==}
+    dependencies:
+      tslib: 2.6.1
+    dev: false
+
   /@google-cloud/firestore@6.7.0(encoding@0.1.13):
     resolution: {integrity: sha512-bkH2jb5KkQSUa+NAvpip9HQ+rpYhi77IaqHovWuN07adVmvNXX08gPpvPWEzoXYa/wDjEVI7LiAtCWkJJEYTNg==}
     engines: {node: '>=12.0.0'}
@@ -4440,6 +4452,10 @@ packages:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: false
 
+  /@types/negotiator@0.6.1:
+    resolution: {integrity: sha512-c4mvXFByghezQ/eVGN5HvH/jI63vm3B7FiE81BUzDAWmuiohRecCO6ddU60dfq29oKUMiQujsoB2h0JQC7JHKA==}
+    dev: true
+
   /@types/node@12.20.55:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: false
@@ -4846,11 +4862,6 @@ packages:
 
   /asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
-    dev: false
-
-  /attr-accept@2.2.2:
-    resolution: {integrity: sha512-7prDjvt9HmqiZ0cl5CRjtS84sEyhsHP2coDkaZKRKVfCDo9s7iw7ChVmar78Gu9pC4SoR/28wFu/G5JJhTnqEg==}
-    engines: {node: '>=4'}
     dev: false
 
   /autoprefixer@10.4.14(postcss@8.4.27):
@@ -6393,13 +6404,6 @@ packages:
     dependencies:
       flat-cache: 3.0.4
     dev: true
-
-  /file-selector@0.6.0:
-    resolution: {integrity: sha512-QlZ5yJC0VxHxQQsQhXvBaC7VRJ2uaxTf+Tfpu4Z/OcVQJVpZO+DGU0rkoVW5ce2SccxugvpBJoMvUs59iILYdw==}
-    engines: {node: '>= 12'}
-    dependencies:
-      tslib: 2.6.1
-    dev: false
 
   /fill-range@7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
@@ -9537,18 +9541,6 @@ packages:
       scheduler: 0.23.0
     dev: false
 
-  /react-dropzone@14.2.3(react@18.2.0):
-    resolution: {integrity: sha512-O3om8I+PkFKbxCukfIR3QAGftYXDZfOE2N1mr/7qebQJHs7U+/RSL/9xomJNpRg9kM5h9soQSdf0Gc7OHF5Fug==}
-    engines: {node: '>= 10.13'}
-    peerDependencies:
-      react: '>= 16.8 || 18.0.0'
-    dependencies:
-      attr-accept: 2.2.2
-      file-selector: 0.6.0
-      prop-types: 15.8.1
-      react: 18.2.0
-    dev: false
-
   /react-hook-form@7.45.4(react@18.2.0):
     resolution: {integrity: sha512-HGDV1JOOBPZj10LB3+OZgfDBTn+IeEsNOKiq/cxbQAIbKaiJUe/KV8DBUzsx0Gx/7IG/orWqRRm736JwOfUSWQ==}
     engines: {node: '>=12.22.0'}
@@ -10913,8 +10905,8 @@ packages:
     hasBin: true
     dev: false
 
-  /valibot@0.11.1:
-    resolution: {integrity: sha512-35v3J5FFHuxr/erQKASwy1VmbI9bc/GJzBd1QZWccXr3lh0xq6a/nzQfI49xBjJeHrAyFfbopr7ZT2TwkMFuPw==}
+  /valibot@0.12.0:
+    resolution: {integrity: sha512-EGx/uDUpRa9wB9NkD7fsktc02rvXWlJzDTC/ihbE+NybhzAsMhns2OOdNv2R4BtdGnDvaCEGi/DbgR5RvgCS8A==}
     dev: false
 
   /validate-npm-package-license@3.0.4:

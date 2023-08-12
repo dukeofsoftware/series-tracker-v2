@@ -3,7 +3,6 @@ import {
   getAuth,
   
   sendEmailVerification,
-  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth"
@@ -13,7 +12,6 @@ import {
   signInWithPopup,
   useDeviceLanguage,
 } from "firebase/auth";
-import { toast } from "@/components/ui/use-toast"
 import { app } from "."
 
 export const auth = getAuth(app)
@@ -47,19 +45,12 @@ export const emailVerification = async () => {
   try {
     if (auth.currentUser) {
       await sendEmailVerification(auth.currentUser)
-      toast({
-        title: "Email verification sent",
-        description: "Check your email for a verification link",
-      })
+     
       return
     }
     return
   } catch (error: any) {
-    toast({
-      title: "Error",
-      description: error.message,
-      variant: "destructive",
-    })
+    
     throw new Error(error.message)
   }
 }

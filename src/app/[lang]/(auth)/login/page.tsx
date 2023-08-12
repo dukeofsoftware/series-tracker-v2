@@ -1,9 +1,9 @@
 import SignIn from '@/components/auth/SignIn'
 
 
-const Page = ({ }) => {
+const Page = ({ params }: { params: { lang: string } }) => {
   return <>
-  
+
     <SignIn />
   </>
 }

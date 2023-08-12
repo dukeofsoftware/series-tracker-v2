@@ -17,42 +17,51 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { User, updateEmail } from 'firebase/auth'
-import { useAuthContext } from '../AuthContext'
+import { updateEmail } from 'firebase/auth'
 import { toast } from '../ui/use-toast'
-interface MailTabProps { }
+import { useRouter } from 'next/navigation'
+import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
+import { dictionary } from '@/content'
+interface MailTabProps {
+    language: string
+}
 
-const MailTab: FC<MailTabProps> = ({ }) => {
-    const { user } = useAuthContext()
+const MailTab: FC<MailTabProps> = ({ language }) => {
+    const { getFirebaseAuth } = useFirebaseAuth()
+    const user = getFirebaseAuth().currentUser!
+    const router = useRouter()
     const form = useForm<ResetEmailType>({
         resolver: valibotResolver(resetEmailValidator),
 
     })
     async function onSubmit(values: ResetEmailType) {
-        await updateEmail(user as User, values.email).then(() => {
+        await updateEmail(user, values.email).then(() => {
             toast({
-                title: "Success",
+                title: dictionary[language].toast.success,
                 description: "Your email is changed successfully",
 
             })
+            router.refresh()
         }).catch((error) => {
             console.error("EMAİL UPDATE ERROR:", error)
             toast({
-                title: "Error",
+                title: dictionary[language].toast.error,
                 description: error.message,
                 variant: "destructive"
             })
 
         });
     }
-    return <div className='flex flex-col md:flex-row gap-3'>
-        <Card className='md:grow'>
+    return <div className='flex flex-col md:flex-row gap-2'>
+        <Card className='md:grow w-full'>
             <CardHeader>
                 <CardTitle>
-                    Change Your Email
+                    {dictionary[language]?.settings?.emailTab?.changeEmail?.title}
                 </CardTitle>
                 <CardDescription>
-                    You can change your email here
+                    {
+                        dictionary[language]?.settings?.emailTab?.changeEmail?.description
+                    }
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -68,7 +77,9 @@ const MailTab: FC<MailTabProps> = ({ }) => {
                                         <Input placeholder="emre@gmail.com" {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        Type your email.
+                                        {
+                                            dictionary[language]?.settings?.emailTab?.changeEmail?.inputDescription
+                                        }
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -79,35 +90,35 @@ const MailTab: FC<MailTabProps> = ({ }) => {
                             name="confirmEmail"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Confirm Your Email</FormLabel>
+                                    <FormLabel>{dictionary[language]?.settings?.emailTab?.changeEmail?.confirmInputLabel}</FormLabel>
                                     <FormControl>
                                         <Input placeholder="emre@gmail.com" {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        Type your email again.
+                                        {dictionary[language]?.settings?.emailTab?.changeEmail?.confirmInputDescription}
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit">Change Email</Button>
+                        <Button type="submit">{dictionary[language]?.settings?.emailTab?.changeEmail?.buttonLabel}</Button>
                     </form>
                 </Form>
 
 
             </CardContent>
         </Card>
-        <Card className='grow'>
+        <Card className='md:grow w-full'>
             <CardHeader>
                 <CardTitle>
-                    Verify your email
+                    {dictionary[language]?.settings?.emailTab?.verifyEmail?.title}
                 </CardTitle>
                 <CardDescription>
-                    Verify your email
+                    {dictionary[language]?.settings?.emailTab?.verifyEmail?.description}
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <VerifyMail />
+                <VerifyMail language={language} />
 
             </CardContent>
         </Card>

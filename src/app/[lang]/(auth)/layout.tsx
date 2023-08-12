@@ -12,4 +12,3 @@ const Layout: FC<layoutProps> = ({ children }) => {
 }
 
 export default Layout
-export const dynamic = 'force-static'
