@@ -26,8 +26,7 @@ function getLocale(request: Request): string {
 
 export const withMultiLanguage: MiddlewareFactory = (next: NextMiddleware) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
-    /* @ts-expect-error */
-    const languageCookie = request.cookies.get("localeCookie").value
+    const languageCookie = request.cookies.get("localeCookie")?.value
     const pathname = request.nextUrl.pathname
 
     if (!languageCookie) {
