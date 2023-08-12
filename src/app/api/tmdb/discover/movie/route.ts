@@ -22,8 +22,6 @@ export async function GET(request: NextRequest) {
     const genres = searchParams.get("genres") || ""
     const page = searchParams.get("page") || 1
 
-   
-
     const movies = await fetch(
       `https://api.themoviedb.org/3/discover/movie?include_adult=${isAdult}&include_video=false&language=${language}&page=${page.toString()}&sort_by=popularity.desc`,
       options

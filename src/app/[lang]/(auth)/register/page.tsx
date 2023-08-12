@@ -1,14 +1,15 @@
-import Register from '@/components/auth/Register'
-import { FC } from 'react'
+import { FC } from "react"
 
-interface pageProps { }
+import Register from "@/components/auth/Register"
 
-const Page: FC<pageProps> = ({ }) => {
-  return <main className=''>
-    
-    <Register />
+interface pageProps {}
 
-  </main>
+const Page: FC<pageProps> = ({}) => {
+  return (
+    <main className="">
+      <Register />
+    </main>
+  )
 }
 
 export default Page

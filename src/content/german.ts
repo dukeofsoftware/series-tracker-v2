@@ -1,4 +1,4 @@
-import { DictionaryEntry } from ".";
+import { DictionaryEntry } from "."
 
 export const german: DictionaryEntry = {
   trendingTitle: "Trends",
@@ -66,4 +66,4 @@ export const german: DictionaryEntry = {
       toastDescription: "Ihr Passwort wurde geändert",
     },
   },
-};
+}

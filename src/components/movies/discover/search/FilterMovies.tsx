@@ -1,13 +1,11 @@
-'use client'
+"use client"
 
-import { FC } from 'react'
+import { FC } from "react"
 
 interface FilterMoviesProps {}
 
 const FilterMovies: FC<FilterMoviesProps> = ({}) => {
-  return <>
-    FilterMovies
-  </>
+  return <>FilterMovies</>
 }
 
 export default FilterMovies

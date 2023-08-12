@@ -1,14 +1,17 @@
-import { ServerAuthProvider } from '@/components/providers/server-auth-provider'
-import { FC } from 'react'
+import { FC } from "react"
+
+import { ServerAuthProvider } from "@/components/providers/server-auth-provider"
 
 interface layoutProps {
-    children: React.ReactNode
+  children: React.ReactNode
 }
 
 const Layout: FC<layoutProps> = ({ children }) => {
-    return <>
-        <ServerAuthProvider>{children}</ServerAuthProvider>;
+  return (
+    <>
+      <ServerAuthProvider>{children}</ServerAuthProvider>;
     </>
+  )
 }
 
 export default Layout

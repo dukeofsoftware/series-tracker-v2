@@ -1,11 +1,11 @@
-import SignIn from '@/components/auth/SignIn'
-
+import SignIn from "@/components/auth/SignIn"
 
 const Page = ({ params }: { params: { lang: string } }) => {
-  return <>
-
-    <SignIn />
-  </>
+  return (
+    <>
+      <SignIn />
+    </>
+  )
 }
 
 export default Page

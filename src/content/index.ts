@@ -4,7 +4,7 @@ import { turkish } from "./turkish"
 
 export interface DictionaryEntry {
   trendingTitle: string
-  toast:{
+  toast: {
     error: string
     success: string
   }
@@ -49,13 +49,13 @@ export interface DictionaryEntry {
         buttonLabel: string
       }
       verifyEmail: {
-        toastDescription:string
-        toastTitle:string
+        toastDescription: string
+        toastTitle: string
         title: string
         description: string
         verified: string
-        verifiedMail:string
-        verifyButton:string
+        verifiedMail: string
+        verifyButton: string
       }
     }
     passwordTab: {

@@ -1,11 +1,11 @@
+import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 
 import { withAuth } from "./middlewares/AuthenticationMiddleware"
 import { withMultiLanguage } from "./middlewares/MultiLanguageMiddleware"
-import { cookies } from "next/headers"
 
-export async function defaultMiddleware() 
-{const languageCookie = cookies().get("localeCookie")
+export async function defaultMiddleware() {
+  const languageCookie = cookies().get("localeCookie")
 
   return NextResponse.next()
 }

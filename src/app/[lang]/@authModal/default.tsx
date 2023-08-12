@@ -1,7 +1,7 @@
-import type { FC } from "react";
+import type { FC } from "react"
 
 const Default: FC = () => {
-return null;
-};
+  return null
+}
 
-export default Default;
+export default Default

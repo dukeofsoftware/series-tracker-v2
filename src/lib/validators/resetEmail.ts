@@ -8,7 +8,6 @@ import {
   type Output,
 } from "valibot"
 
-
 export const resetEmailValidator = object(
   {
     email: string([

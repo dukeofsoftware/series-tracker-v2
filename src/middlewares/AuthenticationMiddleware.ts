@@ -1,8 +1,13 @@
+import {
+  NextFetchEvent,
+  NextMiddleware,
+  NextRequest,
+  NextResponse,
+} from "next/server"
+import { MiddlewareFactory } from "@/types"
 import { authentication } from "next-firebase-auth-edge/lib/next/middleware"
 
 import { authConfig } from "@/config/server-config"
-import { NextFetchEvent, NextMiddleware, NextRequest, NextResponse } from "next/server"
-import { MiddlewareFactory } from "@/types"
 
 const PUBLIC_PATHS = ["/register", "/login", "/reset-password", "/"]
 const PUBLIC_PROTECT = ["/register", "/login", "/reset-password"]
