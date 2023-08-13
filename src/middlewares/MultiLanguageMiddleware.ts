@@ -24,20 +24,41 @@ function getLocale(request: Request): string {
   return match(languages, locales, defaultLocale)
 }
 
-export const withMultiLanguage: MiddlewareFactory = (next: NextMiddleware) => {
+/* export const withMultiLanguage: MiddlewareFactory = (next: NextMiddleware) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
-    const languageCookie = request.cookies.get("localeCookie")?.value
-    const pathname = request.nextUrl.pathname
+      const languageCookie = request.cookies.get("localeCookie")?.value
+      const pathname = request.nextUrl.pathname
 
+      if (!languageCookie) {
+        let locale = getLocale(request) ?? defaultLocale
+
+        const newUrl = new URL(`/${locale}${pathname}`, request.nextUrl)
+
+        return NextResponse.rewrite(newUrl)
+      }
+      const newUrl = new URL(`/${languageCookie}${pathname}`, request.nextUrl)
+
+      return NextResponse.rewrite(newUrl)
+    
+  }
+} */
+export function withMultiLanguage(middleware: NextMiddleware) {
+  return async (request: NextRequest, event: NextFetchEvent) => {
+    const languageCookie = request.cookies.get("localeCookie")?.value
+    console.log(request.nextUrl.pathname)
+
+    const pathname = request.nextUrl.pathname.replace(/\/$/, "")
     if (!languageCookie) {
       let locale = getLocale(request) ?? defaultLocale
-
       const newUrl = new URL(`/${locale}${pathname}`, request.nextUrl)
 
       return NextResponse.rewrite(newUrl)
     }
     const newUrl = new URL(`/${languageCookie}${pathname}`, request.nextUrl)
 
-    return NextResponse.rewrite(newUrl)
+    if (languageCookie) {
+      return NextResponse.rewrite(newUrl)
+    }
+    return middleware(request, event)
   }
 }

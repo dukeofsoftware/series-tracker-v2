@@ -1,15 +1,12 @@
-import { cookies } from "next/headers"
-import { NextResponse } from "next/server"
 
 import { withAuth } from "./middlewares/AuthenticationMiddleware"
 import { withMultiLanguage } from "./middlewares/MultiLanguageMiddleware"
+import { chain } from "./middlewares/chain"
 
-export async function defaultMiddleware() {
-  const languageCookie = cookies().get("localeCookie")
 
-  return NextResponse.next()
-}
-export default withMultiLanguage(withAuth(defaultMiddleware))
+
+export default chain([withAuth, withMultiLanguage])
+
 export const config = {
   matcher: [
     "/",

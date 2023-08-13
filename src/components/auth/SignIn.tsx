@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import {  useRouter, useSearchParams } from "next/navigation"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { signInWithEmailAndPassword } from "firebase/auth"
@@ -70,7 +70,7 @@ const SignIn = ({}) => {
     }
   }
   if (hasLogged) {
-    ;<div className="flex h-full w-full flex-col items-center justify-center gap-2">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2">
       <span>
         Redirecting to <strong>{redirect || "/"}</strong>
       </span>
