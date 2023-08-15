@@ -2,7 +2,6 @@
 
 import { FC } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { TrendingPage } from "@/types/trending"
 import {
   BsChevronBarLeft,
   BsChevronBarRight,
@@ -15,10 +14,11 @@ import {
 import { Button } from "@/components/ui/button"
 
 interface PaginationButtonsProps {
-  data: TrendingPage
+  total_pages: number
+  pageDB: number
 }
 
-const PaginationButtons: FC<PaginationButtonsProps> = ({ data }) => {
+const PaginationButtons: FC<PaginationButtonsProps> = ({ total_pages, pageDB }) => {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -26,13 +26,12 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({ data }) => {
   const page = parseInt(searchParams.get("page")!) || 1
 
   return (
-    <>
-      <div className="mb-16 mt-8 flex justify-center gap-1">
+          <div className="mb-16 mt-8 flex w-full justify-center gap-1">
         <Button
           variant="outline"
           size="icon"
-          onClick={() => router.push(`/?page=${page - 1}`)}
-          disabled={data.page <= 1 || pathname.includes("page=1")}
+          onClick={() => router.push(`${pathname}?page=${page - 1}`)}
+          disabled={pageDB <= 1 || pathname.includes("page=1")}
         >
           <BsChevronLeft className="h-4 w-4" />
           <p className="sr-only">go previous</p>
@@ -40,8 +39,8 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({ data }) => {
         <Button
           variant="outline"
           size="icon"
-          disabled={data.page <= 2}
-          onClick={() => router.push(`/?page=${page - 2}`)}
+          disabled={pageDB <= 2}
+          onClick={() => router.push(`${pathname}?page=${page - 2}`)}
         >
           <BsChevronDoubleLeft className="h-4 w-4" />
           <p className="sr-only">go 2 previous page</p>
@@ -49,8 +48,8 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({ data }) => {
         <Button
           variant="outline"
           size="icon"
-          disabled={data.page === 1}
-          onClick={() => router.push(`/?page=${1}`)}
+          disabled={pageDB === 1}
+          onClick={() => router.push(`${pathname}?page=${1}`)}
         >
           <BsChevronBarLeft className="h-4 w-4" />
           <p className="sr-only">go to start</p>
@@ -59,8 +58,8 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({ data }) => {
         <Button
           variant="outline"
           size="icon"
-          disabled={data.total_pages === data.page || data.page >= 500}
-          onClick={() => router.push(`/?page=${500}`)}
+          disabled={total_pages === pageDB || pageDB >= 500}
+          onClick={() => router.push(`${pathname}?page=${500}`)}
         >
           <BsChevronBarRight className="h-4 w-4" />
           <p className="sr-only">go to end</p>
@@ -68,8 +67,8 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({ data }) => {
         <Button
           variant="outline"
           size="icon"
-          disabled={data.total_pages <= data.page + 1 || data.page >= 500}
-          onClick={() => router.push(`/?page=${page + 2}`)}
+          disabled={total_pages <= pageDB + 1 || pageDB >= 500}
+          onClick={() => router.push(`${pathname}?page=${page + 2}`)}
         >
           <BsChevronDoubleRight className="h-4 w-4" />
           <p className="sr-only">go 2 next page</p>
@@ -77,14 +76,14 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({ data }) => {
         <Button
           variant="outline"
           size="icon"
-          disabled={data.total_pages === data.page || data.page >= 500}
-          onClick={() => router.push(`/?page=${page + 1}`)}
+          disabled={total_pages === pageDB || pageDB >= 500}
+          onClick={() => router.push(`${pathname}?page=${page + 1}`)}
         >
           <BsChevronRight className="h-4 w-4" />
           <p className="sr-only">go next</p>
         </Button>
       </div>
-    </>
+    
   )
 }
 

@@ -32,10 +32,7 @@ const Sidebar: FC<SidebarProps> = ({ }) => {
 
     const router = useRouter()
     useEffect(() => {
-        if (value === "") {
-            router.push(path)
-            return
-        }
+        
         /* check for spaces */
 
         let currentQuery = {}
@@ -56,9 +53,9 @@ const Sidebar: FC<SidebarProps> = ({ }) => {
         )
 
         router.push(url)
-    }, [value])
+    }, [value, params])
     useEffect(() => {
-        
+
         let currentQuery = {}
         if (params) {
             currentQuery = qs.parse(params.toString())
@@ -98,29 +95,29 @@ const Sidebar: FC<SidebarProps> = ({ }) => {
 
     }, [adult])
 
-    return    <aside className=' fixed h-[91vh] w-72  bg-gray-900 py-2 rounded-md'>
-            <ScrollArea className='flex flex-col mx-3 '>
-                <SearchBar text={text} setText={setText} />
-                <Select defaultValue={type} onValueChange={(e) => setType(e)}>
-                    <SelectTrigger className="w-full my-2">
-                        <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectItem value="all">All</SelectItem>
-                            <SelectItem value="movies">Movies</SelectItem>
-                            <SelectItem value="series">Series</SelectItem>
-                            <SelectItem value="people">People</SelectItem>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-                <div className="flex items-center space-x-2 mt-2">
-                    <Switch checked={adult} onCheckedChange={(e) => setAdult(e
-                    )} className='' id="adult" />
-                    <Label htmlFor="adult" className='font-bold text-lg'>Adult Content</Label>
-                </div>
-            </ScrollArea>
-        </aside>
+    return <aside className=' fixed h-[91vh] w-72  bg-gray-900 py-2 rounded-md'>
+        <ScrollArea className='flex flex-col mx-3 '>
+            <SearchBar text={text} setText={setText} />
+            <Select defaultValue={type} onValueChange={(e) => setType(e)}>
+                <SelectTrigger  className="w-full my-2">
+                    <SelectValue placeholder="Select type" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectGroup>
+                        <SelectItem value="all">All</SelectItem>
+                        <SelectItem value="movies">Movies</SelectItem>
+                        <SelectItem value="series">Series</SelectItem>
+                        <SelectItem value="people">People</SelectItem>
+                    </SelectGroup>
+                </SelectContent>
+            </Select>
+            <div className="flex items-center space-x-2 mt-2">
+                <Switch checked={adult} onCheckedChange={(e) => setAdult(e
+                )} className='' id="adult" />
+                <Label htmlFor="adult" className='font-bold text-lg'>Adult Content</Label>
+            </div>
+        </ScrollArea>
+    </aside>
 
 }
 

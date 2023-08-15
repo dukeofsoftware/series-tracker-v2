@@ -10,16 +10,15 @@ export const usePaginateSearch = () => {
     const type = params.get('type')
     const year = params.get('year')
     const adult = params.get('adult')
-    const page = params.get('page')
+    const page = params.get('page') || "1"
 
     const response = useQuery(
         ["search-pagination"],
         async ({ }) => {
             if (!query) return
-            const responseQuery = `/api/tmdb/search?query=${query}&
+            const responseQuery = `/api/tmdb/search?query=${query}&page=${page}
                 ${type ? `type=${type}&` : ''}
                 ${adult ? `adult=${adult}&` : ''}
-                ${page ? `page=${page}&` : ''}
                 ${year ? `year=${year}&` : ''}
             `
             const { data } = await axios.get(responseQuery)
@@ -35,12 +34,11 @@ export const usePaginateSearch = () => {
         }
     )
     useEffect(() => {
-        console.log("refetch")
-        console.log(response.data)
+
         response.refetch()
     }, [query, type, year, adult, page])
     return {
         ...response,
     }
-    
+
 }

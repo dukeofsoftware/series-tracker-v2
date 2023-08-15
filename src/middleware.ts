@@ -25,7 +25,6 @@ function getLocale(request: NextRequest): string | undefined {
 
 
 function redirectToHome(request: NextRequest) {
-  console.log("first")
   if (!PUBLIC_PATHS.includes(request.nextUrl.pathname)) {
     const defaultLocale =
       getLocale(request) || request.headers.get("x-default-locale") || "en"

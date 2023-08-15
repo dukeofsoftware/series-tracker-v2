@@ -47,7 +47,7 @@ export default async function RootLayout({
     <html lang={formatLanguage(lang)}>
       <body
         className={`${inter.className} ${process.env.NODE_ENV !== "production" && "debug-screens"
-          }`}
+          }  w-full`}
       >
         <NextIntlClientProvider locale={formatLanguage(lang)} messages={messages} >
 

@@ -26,7 +26,7 @@ const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
   useEffect(() => {
     refetch()
   }, [page, refetch])
-  
+
   return (
     <>
       <h1 className="my-2 text-center text-2xl font-bold">
@@ -57,7 +57,7 @@ const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
           </div>
         </div>
       )}
-      <PaginationButtons data={data || cachedData} />
+      <PaginationButtons total_pages={data.total_pages} pageDB={data.page} />
     </>
   )
 }

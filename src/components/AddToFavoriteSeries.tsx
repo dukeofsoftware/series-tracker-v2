@@ -52,7 +52,6 @@ const AddToFavoriteSeries: FC<AddToFavoriteSeriesProps> = ({ result }) => {
         setIsFavorite((prev) => !prev)
 
         try {
-            console.log(result.first_air_date)
             await addData(`users/${user.uid}/series`, result.id.toString(), {
                 isFavorite: !isFavorite,
                 id: result.id,

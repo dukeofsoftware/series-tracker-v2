@@ -14,17 +14,16 @@ export async function GET(request: Request) {
     const adult = searchParams.get("adult") || "false"
     const query = searchParams.get("query") || ""
     const type = searchParams.get("type") || "all"
+    console.log("page: ",page)
     if (!query)
       return NextResponse.json({ error: "Query is required" }, { status: 400 })
     if (type === "all") {
-   
       const data = await fetch(
         `https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=${adult}&language=${language}&page=${page}`,
         options
       )
         .then((response) => response.json())
         .catch((err) => console.error(err))
-        console.log(data)
       return NextResponse.json(data)
     }
     if (type === "movie") {
