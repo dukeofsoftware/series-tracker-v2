@@ -1,7 +1,8 @@
-import admin from "firebase-admin"
+import admin, { firestore } from "firebase-admin"
 
 import { authConfig } from "@/config/server-config"
 
+firestore
 const initializeApp = () => {
   return admin.initializeApp({
     credential: admin.credential.cert(authConfig.serviceAccount),
@@ -15,3 +16,12 @@ export const getFirebaseAdminApp = () => {
 
   return initializeApp()
 }
+
+export const getFirebaseAdminAuth = () => {
+  return getFirebaseAdminApp().auth()
+}
+
+export const getFirebaseAdminFirestore = () => {
+  return getFirebaseAdminApp().firestore()
+}
+

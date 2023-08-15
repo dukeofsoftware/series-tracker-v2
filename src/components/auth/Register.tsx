@@ -1,8 +1,8 @@
 "use client"
 
-import { FC, useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import {
@@ -10,7 +10,6 @@ import {
   sendEmailVerification,
 } from "firebase/auth"
 import { useForm } from "react-hook-form"
-import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { useLoadingCallback } from "react-loading-hook"
 
 import { RegisterSchema, RegisterType } from "@/lib/validators/authSchema"
@@ -26,15 +25,18 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
+import { useTranslations } from "next-intl"
+import { useFirebaseError } from "@/hooks/useFirebaseError"
 
-interface RegisterProps {}
 
-const Register: FC<RegisterProps> = ({}) => {
+const Register = ({ }) => {
   const router = useRouter()
-  const params = useSearchParams()
-  const [hasLogged, setHasLogged] = useState(false)
   const { getFirebaseAuth } = useFirebaseAuth()
-  const redirect = params?.get("redirect")
+  const global = useTranslations("global")
+  const t = useTranslations("pages.auth.register")
+
+
+  const [hasLogged, setHasLogged] = useState(false)
   const [registerWithEmailAndPassword, isRegisterLoading, error] =
     useLoadingCallback(async ({ email, password }: RegisterType) => {
       setHasLogged(false)
@@ -53,16 +55,10 @@ const Register: FC<RegisterProps> = ({}) => {
         },
       })
       setHasLogged(true)
-      router.push(redirect ?? "/")
+      router.push("/profile/settings")
     })
 
-  function getLoginUrl() {
-    if (redirect) {
-      return `/login?redirect=${redirect}`
-    }
 
-    return "/login"
-  }
   const form = useForm<RegisterType>({
     resolver: valibotResolver(RegisterSchema),
   })
@@ -71,32 +67,21 @@ const Register: FC<RegisterProps> = ({}) => {
     try {
       await registerWithEmailAndPassword(data)
       toast({
-        title: "Success",
-        description: "You are logged in successfully",
+        title: global("toast.success"),
+        description: t("toastSuccessDescription"),
       })
       toast({
-        title: "Check Your Email",
-        description: "Plase check your email and verify.",
+        title: t("verifyToastTitle"),
+        description: t("verifyToastDescription"),
       })
       return
     } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error,
-        variant: "destructive",
-      })
-      return
+
+      useFirebaseError(error)
     }
   }
 
-  if (hasLogged) {
-    <div className="flex h-full w-full flex-col items-center justify-center gap-2">
-      <span>
-        Redirecting to <strong>{redirect || "/"}</strong>
-      </span>
-      <AiOutlineLoading3Quarters className="h-4 w-4 animate-spin" />
-    </div>
-  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 px-4">
@@ -109,7 +94,7 @@ const Register: FC<RegisterProps> = ({}) => {
               <FormControl>
                 <Input placeholder="shadcn@gmail.com" {...field} />
               </FormControl>
-              <FormDescription>We'll never share your email.</FormDescription>
+              <FormDescription>{t("emailInputDescription")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -119,12 +104,12 @@ const Register: FC<RegisterProps> = ({}) => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t("passwordLabel")}</FormLabel>
               <FormControl>
                 <Input placeholder="********" type="password" {...field} />
               </FormControl>
               <FormDescription>
-                We'll never share your password.
+                {t("passwordInputDescription")}
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -135,26 +120,26 @@ const Register: FC<RegisterProps> = ({}) => {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
+              <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
               <FormControl>
                 <Input placeholder="********" type="password" {...field} />
               </FormControl>
-              <FormDescription>Type your password again</FormDescription>
+              <FormDescription>{t("confirmPasswordInputDescription")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
         <p>
-          Already have an account?{" "}
+          {t("alreadyHaveAccount")}{" "}
           <Link
             href="/sign-in"
             className="text-sky-500 hover:underline active:underline"
           >
-            Sign in
+            {t("login")}
           </Link>
         </p>
         <Button type="submit" disabled={isRegisterLoading}>
-          Register
+          {t("buttonLabel")}
         </Button>
       </form>
     </Form>

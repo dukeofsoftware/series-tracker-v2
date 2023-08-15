@@ -1,0 +1,129 @@
+{
+  "global": {
+    "toast": {
+      "success": "Başarılı",
+      "error": "Hata {code}",
+      "firebase": {
+        "emailVerify": "Bu işlemi yapabilmek için e-posta adresinizi doğrulamanız gerekiyor",
+        "username": "Profilinizin herkese görünmesi için bir kullanıcı adınız olmalı."
+      }
+    },
+    "messages": {
+      "notFound": "Veri bulunamadı"
+    }
+  },
+  "favorites":{
+    "addToFavorites":"{title} favorilere eklendi",
+    "removeFromFavorites":"{title} favorilerden kaldırıldı"
+  },
+  "navbar": {
+    "themes": {
+      "darkMode": "Karanlık Mod",
+      "lightMode": "Aydınlık Mod"
+    },
+    "accountDropdown": {
+      "dropdownTitle": "Hesabım",
+      "logout": "Çıkış Yap",
+      "favorites": "Favoriler",
+      "myLists": "Listelerim",
+      "profile": "Profil",
+      "settings": "Ayarlar"
+    }
+  },
+  "pages": {
+    "main": {
+      "trendingTitle": "Trendler"
+    },
+    "settings": {
+      "title": "Ayarlar",
+      "accountTab": {
+        "updateProfilePhoto": {
+          "title": "Profil Fotoğrafı",
+          "description": "Profil fotoğrafınızı değiştirin",
+          "buttonLabel": "Fotoğrafı Değiştir",
+          "toastDescription": "Profil fotoğrafınız değiştirildi"
+        },
+        "updateDisplayName": {
+          "toastDescription": "Profil adınız değiştirildi",
+          "currentName": "Şuanki isminiz {name}",
+          "title": "Profil Adı",
+          "description": "Profil adınızı değiştirin",
+          "inputLabel": "Yeni Ad",
+          "inputDescription": "Yeni profil adınızı girin",
+          "buttonLabel": "Adı Değiştir"
+        },
+        "updateUsername": {
+          "toastDescription": "Kullanıcı adınız değiştirildi",
+          "currentUsername": "Şuanki kullanıcı adınız {username}",
+          "title": "Kullanıcı Adı",
+          "description": "Kullanıcı adınızı değiştirin",
+          "inputLabel": "Yeni Kullanıcı Adı",
+          "inputDescription": "Yeni kullanıcı adınızı girin",
+          "buttonLabel": "Kullanıcı Adını Değiştir"
+        }
+      },
+      "emailTab": {
+        "changeEmail": {
+          "title": "E-postayı Değiştir",
+          "toastDescription": "E-posta adresiniz değiştirildi",
+          "description": "E-posta adresinizi değiştirin",
+          "inputLabel": "Yeni E-posta",
+          "confirmInputLabel": "Yeni E-posta Tekrar",
+          "confirmInputDescription": "Yeni e-postayı tekrar girin",
+          "inputDescription": "Yeni e-posta adresinizi girin",
+          "buttonLabel": "E-postayı Değiştir"
+        },
+        "verifyEmail": {
+          "toastDescription": "E-posta adresinize doğrulama e-postası gönderildi",
+          "toastTitle": "E-posta Doğrulama",
+          "verifiedMail": "E-posta adresiniz doğrulanmış",
+          "verifyButtonLabel": "E-postayı Doğrula",
+          "title": "E-posta Doğrulama",
+          "description": "E-posta adresinizi buradan doğrulayabilirsiniz",
+          "verified": "Doğrulandı"
+        }
+      },
+      "passwordTab": {
+        "title": "Şifre Değiştirme",
+        "description": "Hesap şifrenizi değiştirin",
+        "inputLabel": "Yeni Şifre",
+        "inputDescription": "Yeni şifrenizi girin",
+        "confirmInputLabel": "Yeni Şifre Tekrar",
+        "confirmInputDescription": "Yeni şifreyi tekrar girin",
+        "buttonLabel": "Şifreyi Değiştir",
+        "toastDescription": "Şifreniz değiştirildi"
+      }
+    },
+    "auth": {
+      "login": {
+        "emailInputDescription": "E-posta adresinizi kimseyle paylaşmayacağız",
+        "passwordLabel": "Şifre",
+        "passwordInputDescription": "Şifrenizi kimseyle paylaşmayacağız",
+        "dontHaveAccount": "Hesabınız yok mu?",
+        "register": "Kayıt Ol",
+        "buttonLabel": "Giriş Yap",
+        "toastDescription": "Başarıyla giriş yaptınız"
+      },
+      "register": {
+        "toastSuccessDescription": "Başarıyla kayıt oldunuz",
+        "verifyToastTitle": "E-postanızı kontrol edin",
+        "verifyToastDescription": "E-postanızı doğrulamak için bir e-posta gönderdik",
+        "emailInputDescription": "E-posta adresinizi kimseyle paylaşmayacağız",
+        "passwordLabel": "Şifre",
+        "passwordInputDescription": "Şifrenizi kimseyle paylaşmayacağız",
+        "confirmPasswordLabel": "Şifreyi Tekrarla",
+        "confirmPasswordInputDescription": "Şifrenizi tekrar girin",
+        "alreadyHaveAccount": "Zaten hesabınız var mı?",
+        "login": "Giriş Yap",
+        "buttonLabel": "Kayıt Ol"
+      }
+    },
+    "tmdb":{
+      "movies":{
+        "movie":{
+          "similarMovies":"Benzer Filmler"
+        }
+      }
+    }
+  }
+}

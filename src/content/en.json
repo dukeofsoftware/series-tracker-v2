@@ -1,0 +1,118 @@
+{
+  "global": {
+    "toast": {
+      "success": "Successful",
+      "error": "Error {code}"
+    },
+    "messages": {
+      "notFound": "Data not found"
+    }
+  },
+  "favorites": {
+    "addToFavorites": "{title} successfully added to favorites",
+    "removeFromFavorites": "{title} successfully removed from favorites"
+  },
+  "navbar": {
+    "themes": {
+      "darkMode": "Dark Mode",
+      "lightMode": "Light Mode"
+    },
+    "accountDropdown": {
+      "dropdownTitle": "My Account",
+      "logout": "Logout",
+      "favorites": "Favorites",
+      "myLists": "My Lists",
+      "profile": "Profile",
+      "settings": "Settings"
+    }
+  },
+  "pages": {
+    "main": {
+      "trendingTitle": "Trending"
+    },
+    "settings": {
+      "title": "Settings",
+      "accountTab": {
+        "updateProfilePhoto": {
+          "title": "Profile Photo",
+          "description": "Change your profile photo",
+          "buttonLabel": "Change Photo",
+          "toastDescription": "Your profile photo has been changed"
+        },
+        "updateDisplayName": {
+          "toastDescription": "Your profile name has been changed",
+          "currentName": "Your current name is {name}",
+          "title": "Profile Name",
+          "description": "Change your profile name",
+          "inputLabel": "New Name",
+          "inputDescription": "Enter your new profile name",
+          "buttonLabel": "Change Name"
+        },
+        "updateUsername": {
+          "toastDescription": "Your username has been changed",
+          "currentUsername": "Your current username is {username}",
+          "title": "Username",
+          "description": "Change your username",
+          "inputLabel": "New Username",
+          "inputDescription": "Enter your new username",
+          "buttonLabel": "Change Username"
+        }
+      },
+      "emailTab": {
+        "changeEmail": {
+          "title": "Change Email",
+          "toastDescription": "Your email address has been changed",
+          "description": "Change your email address",
+          "inputLabel": "New Email",
+          "confirmInputLabel": "Confirm New Email",
+          "confirmInputDescription": "Enter the new email again",
+          "inputDescription": "Enter your new email address",
+          "buttonLabel": "Change Email"
+        },
+        "verifyEmail": {
+          "toastDescription": "A verification email has been sent to your email address",
+          "toastTitle": "Email Verification",
+          "verifiedMail": "Your email address has been verified",
+          "verifyButtonLabel": "Verify Email",
+          "title": "Email Verification",
+          "description": "You can verify your email address here",
+          "verified": "Verified"
+        }
+      },
+      "passwordTab": {
+        "title": "Change Password",
+        "description": "Change your account password",
+        "inputLabel": "New Password",
+        "inputDescription": "Enter your new password",
+        "confirmInputLabel": "Confirm New Password",
+        "confirmInputDescription": "Enter the new password again",
+        "buttonLabel": "Change Password",
+        "toastDescription": "Your password has been changed"
+      }
+    },
+    "auth": {
+      "login": {
+        "emailInputDescription": "We will not share your email address with anyone",
+        "passwordLabel": "Password",
+        "passwordInputDescription": "We will not share your password with anyone",
+        "dontHaveAccount": "Don't have an account?",
+        "register": "Register",
+        "buttonLabel": "Login",
+        "toastDescription": "You have successfully logged in"
+      },
+      "register": {
+        "toastSuccessDescription": "You have successfully registered",
+        "verifyToastTitle": "Check your emails",
+        "verifyToastDescription": "We have sent an email for verification",
+        "emailInputDescription": "We will not share your email address with anyone",
+        "passwordLabel": "Password",
+        "passwordInputDescription": "We will not share your password with anyone",
+        "confirmPasswordLabel": "Confirm Password",
+        "confirmPasswordInputDescription": "Enter the password again",
+        "alreadyHaveAccount": "Already have an account?",
+        "login": "Login",
+        "buttonLabel": "Register"
+      }
+    }
+  }
+}

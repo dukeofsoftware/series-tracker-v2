@@ -1,0 +1,122 @@
+{
+  "global": {
+    "toast": {
+      "success": "Erfolgreich",
+      "error": "Fehler {code}",
+      "firebase": {
+        "emailVerify": "Um diese Aktion auszuführen, müssen Sie Ihre E-Mail-Adresse bestätigen",
+        "username": "Sie benötigen einen Benutzernamen, um Ihr Profil für alle sichtbar zu machen."
+      }
+    },
+    "messages": {
+      "notFound": "Daten nicht gefunden"
+    }
+  },
+  "favorites": {
+    "addToFavorites": "{title} wurde zu Favoriten hinzugefügt",
+    "removeFromFavorites": "{title} wurde aus Favoriten entfernt"
+  },
+  "navbar": {
+    "themes": {
+      "darkMode": "Dunkler Modus",
+      "lightMode": "Heller Modus"
+    },
+    "accountDropdown": {
+      "dropdownTitle": "Mein Konto",
+      "logout": "Abmelden",
+      "favorites": "Favoriten",
+      "myLists": "Meine Listen",
+      "profile": "Profil",
+      "settings": "Einstellungen"
+    }
+  },
+  "pages": {
+    "main": {
+      "trendingTitle": "Trends"
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "accountTab": {
+        "updateProfilePhoto": {
+          "title": "Profilbild",
+          "description": "Ändern Sie Ihr Profilbild",
+          "buttonLabel": "Bild ändern",
+          "toastDescription": "Ihr Profilbild wurde geändert"
+        },
+        "updateDisplayName": {
+          "toastDescription": "Ihr Profilname wurde geändert",
+          "currentName": "Ihr aktueller Name ist {name}",
+          "title": "Profilname",
+          "description": "Ändern Sie Ihren Profilnamen",
+          "inputLabel": "Neuer Name",
+          "inputDescription": "Geben Sie Ihren neuen Profilnamen ein",
+          "buttonLabel": "Namen ändern"
+        },
+        "updateUsername": {
+          "toastDescription": "Ihr Benutzername wurde geändert",
+          "currentUsername": "Ihr aktueller Benutzername ist {username}",
+          "title": "Benutzername",
+          "description": "Ändern Sie Ihren Benutzernamen",
+          "inputLabel": "Neuer Benutzername",
+          "inputDescription": "Geben Sie Ihren neuen Benutzernamen ein",
+          "buttonLabel": "Benutzernamen ändern"
+        }
+      },
+      "emailTab": {
+        "changeEmail": {
+          "title": "E-Mail ändern",
+          "toastDescription": "Ihre E-Mail-Adresse wurde geändert",
+          "description": "Ändern Sie Ihre E-Mail-Adresse",
+          "inputLabel": "Neue E-Mail",
+          "confirmInputLabel": "Neue E-Mail erneut eingeben",
+          "confirmInputDescription": "Geben Sie die neue E-Mail erneut ein",
+          "inputDescription": "Geben Sie Ihre neue E-Mail-Adresse ein",
+          "buttonLabel": "E-Mail ändern"
+        },
+        "verifyEmail": {
+          "toastDescription": "Bestätigungsmail an Ihre E-Mail-Adresse gesendet",
+          "toastTitle": "E-Mail-Bestätigung",
+          "verifiedMail": "Ihre E-Mail-Adresse wurde bestätigt",
+          "verifyButtonLabel": "E-Mail bestätigen",
+          "title": "E-Mail-Bestätigung",
+          "description": "Sie können Ihre E-Mail-Adresse hier bestätigen",
+          "verified": "Bestätigt"
+        }
+      },
+      "passwordTab": {
+        "title": "Passwort ändern",
+        "description": "Ändern Sie Ihr Kontopasswort",
+        "inputLabel": "Neues Passwort",
+        "inputDescription": "Geben Sie Ihr neues Passwort ein",
+        "confirmInputLabel": "Neues Passwort erneut eingeben",
+        "confirmInputDescription": "Geben Sie das neue Passwort erneut ein",
+        "buttonLabel": "Passwort ändern",
+        "toastDescription": "Ihr Passwort wurde geändert"
+      }
+    },
+    "auth": {
+      "login": {
+        "emailInputDescription": "Wir werden Ihre E-Mail-Adresse mit niemandem teilen",
+        "passwordLabel": "Passwort",
+        "passwordInputDescription": "Wir werden Ihr Passwort mit niemandem teilen",
+        "dontHaveAccount": "Kein Konto? ",
+        "register": "Registrieren",
+        "buttonLabel": "Anmelden",
+        "toastDescription": "Sie haben sich erfolgreich angemeldet"
+      },
+      "register": {
+        "toastSuccessDescription": "Sie haben sich erfolgreich registriert",
+        "verifyToastTitle": "Überprüfen Sie Ihre E-Mails",
+        "verifyToastDescription": "Wir haben Ihnen eine E-Mail zur Bestätigung geschickt",
+        "emailInputDescription": "Wir werden Ihre E-Mail-Adresse mit niemandem teilen",
+        "passwordLabel": "Passwort",
+        "passwordInputDescription": "Wir werden Ihr Passwort mit niemandem teilen",
+        "confirmPasswordLabel": "Passwort bestätigen",
+        "confirmPasswordInputDescription": "Geben Sie das Passwort erneut ein",
+        "alreadyHaveAccount": "Bereits ein Konto? ",
+        "login": "Anmelden",
+        "buttonLabel": "Registrieren"
+      }
+    }
+  }
+}

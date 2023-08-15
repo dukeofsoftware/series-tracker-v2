@@ -1,12 +1,13 @@
 "use client"
-
-import { FC } from "react"
-import { dictionary } from "@/content"
+import { FC, useEffect } from "react"
 
 import { formatLanguage } from "@/lib/utils"
 import AccountTab from "@/components/settings/AccountTab"
 import MailTab from "@/components/settings/MailTab"
 import PasswordTab from "@/components/settings/PasswordTab"
+import { useRouter } from "next/navigation"
+import { useAuth } from "@/components/providers/context"
+import {useTranslations} from 'next-intl';
 
 interface pageProps {
   params: {
@@ -14,17 +15,16 @@ interface pageProps {
   }
 }
 
-const Page: FC<pageProps> = ({ params }) => {
-  const language = formatLanguage(params.lang)
+const Page: FC<pageProps> = async ({ params }) => {
 
   return (
     <main className="container mt-6 flex flex-col gap-4">
       <h1 className="my-2 text-center text-2xl font-bold">
-        {dictionary[language].settings?.title}
+
       </h1>
-      <AccountTab language={language} />
-      <MailTab language={language} />
-      <PasswordTab language={language} />
+      <AccountTab  />
+      <MailTab  />
+      <PasswordTab  />
     </main>
   )
 }

@@ -1,11 +1,9 @@
 "use client"
 
-import { dictionary } from "@/content"
-import { useLanguageStore } from "@/hooks/useLanguageStore"
 import { useTheme } from "next-themes"
 import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs"
 
-import { cn, formatLanguage } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -13,13 +11,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useTranslations } from 'next-intl';
 
-const ThemeToggler = ({}) => {
+const ThemeToggler = ({ }) => {
   const { theme, setTheme } = useTheme()
-  const language = useLanguageStore((state) => formatLanguage(state.language))
+  const t = useTranslations('navbar.themes');
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
+        role="button"
+        aria-label="change theme"
         className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
       >
         {theme === "dark" ? (
@@ -33,12 +36,12 @@ const ThemeToggler = ({}) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          <BsFillSunFill className="mr-2 h-4 w-4 text-yellow-500" />{" "}
-          {dictionary[language]?.themes?.lightMode}
+          <BsFillSunFill className="mr-2 h-4 w-4 text-yellow-500" />
+          {t("lightMode")}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
           <BsFillMoonFill className="mr-2 h-4 w-4 text-slate-900 dark:text-slate-100" />
-          {dictionary[language]?.themes?.darkMode}
+          {t("darkMode")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

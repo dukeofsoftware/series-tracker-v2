@@ -1,7 +1,6 @@
 "use client"
 
 import { FC } from "react"
-import { dictionary } from "@/content"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { updatePassword } from "firebase/auth"
@@ -29,33 +28,29 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card"
+} from "@/components/ui/card"
+import { useFirebaseError } from "@/hooks/useFirebaseError"
+import { useTranslations } from "next-intl"
 
-interface PasswordTabProps {
-  language: string
-}
-const PasswordTab: FC<PasswordTabProps> = ({ language }) => {
+
+const PasswordTab = () => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const user = getFirebaseAuth().currentUser!
   const form = useForm<ResetPasswordType>({
     resolver: valibotResolver(resetPasswordValidator),
   })
+  const t = useTranslations("pages.settings.passwordTab")
+  const global = useTranslations("global")
   async function onSubmit(values: ResetPasswordType) {
     await updatePassword(user, values.password)
       .then(() => {
         toast({
-          title: dictionary[language]?.toast?.success,
-          description:
-            dictionary[language]?.settings?.passwordTab?.toastDescription,
+          title: global("toast.success"),
+          description: t("toastDescription"),
         })
       })
       .catch((error) => {
-        console.error("EMAİL UPDATE ERROR:", error)
-        toast({
-          title: dictionary[language]?.toast?.error,
-          description: error.message,
-          variant: "destructive",
-        })
+        useFirebaseError(error)
       })
   }
 
@@ -63,10 +58,10 @@ const PasswordTab: FC<PasswordTabProps> = ({ language }) => {
     <Card>
       <CardHeader>
         <CardTitle>
-          {dictionary[language]?.settings?.passwordTab?.title}
+          {t("title")}
         </CardTitle>
         <CardDescription>
-          {dictionary[language]?.settings?.passwordTab?.description}
+          {t("description")}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -78,12 +73,12 @@ const PasswordTab: FC<PasswordTabProps> = ({ language }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    {dictionary[language]?.settings?.passwordTab?.inputLabel}
+                    {t("inputLabel")}
                   </FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="*********" {...field} />
                   </FormControl>
-                  <FormDescription></FormDescription>
+                  <FormDescription>{t("inputDescription")}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -95,8 +90,7 @@ const PasswordTab: FC<PasswordTabProps> = ({ language }) => {
                 <FormItem>
                   <FormLabel>
                     {
-                      dictionary[language]?.settings?.passwordTab
-                        ?.confirmInputLabel
+                      t("confirmInputLabel")
                     }
                   </FormLabel>
                   <FormControl>
@@ -104,8 +98,7 @@ const PasswordTab: FC<PasswordTabProps> = ({ language }) => {
                   </FormControl>
                   <FormDescription>
                     {
-                      dictionary[language]?.settings?.passwordTab
-                        ?.confirmInputDescription
+                      t("confirmInputDescription")
                     }
                   </FormDescription>
                   <FormMessage />
@@ -114,7 +107,7 @@ const PasswordTab: FC<PasswordTabProps> = ({ language }) => {
             />
 
             <Button type="submit">
-              {dictionary[language]?.settings?.passwordTab?.buttonLabel}
+              {t("buttonLabel")}
             </Button>
           </form>
         </Form>

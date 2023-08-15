@@ -7,11 +7,12 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const language =
-      searchParams.get("language") || cookies().get("localeCookie") || "en-US"
+      searchParams.get("language") ||
+      cookies().get("NEXT_LOCALE")?.value ||
+      "en-US"
     const page = searchParams.get("page") || "1"
     const data = await fetch(
-      /* @ts-expect-error */
-      `https://api.themoviedb.org/3/trending/all/day?language=${language.value}&page=${page}`,
+      `https://api.themoviedb.org/3/trending/all/day?language=${language}&page=${page}`,
       options
     ).then((response) => response.json())
     data.results = data.results.filter(

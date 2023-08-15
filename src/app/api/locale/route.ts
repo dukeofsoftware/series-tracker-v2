@@ -4,7 +4,7 @@ import { NextRequest } from "next/server"
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    cookies().set("localeCookie", body.language)
+    cookies().set("NEXT_LOCALE", body.language)
 
     return new Response(JSON.stringify({ message: "success" }), {
       status: 200,

@@ -2,14 +2,22 @@ import Navbar from "@/components/navbar"
 import Providers from "@/components/providers"
 
 import "@/styles/globals.css"
+import { Locale, i18n } from '@/config/i18n.config'
 
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import { defaultLocale } from "@/middlewares/MultiLanguageMiddleware"
-
 import { ServerAuthProvider } from "@/components/providers/server-auth-provider"
+import { Toaster } from "@/components/ui/toaster"
+import { NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
+import { formatLanguage } from "@/lib/utils"
 
 const inter = Inter({ subsets: ["latin"] })
+
+export async function generateStaticParams() {
+  return i18n.locales.map(locale => ({ lang: locale }))
+}
+
 
 export const metadata: Metadata = {
   title: "Tracker",
@@ -18,27 +26,41 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  authModal,
-  params,
+  params: {
+    lang
+  }
 }: {
   children: React.ReactNode
-  authModal: React.ReactNode
-  params: { lang: string }
+  params: { lang: Locale }
 }) {
+
+  
+  let messages;
+  try {
+    messages = (await import(`@/content/${formatLanguage(lang)}.json`)).default;
+  } catch (error) {
+    console.error(error);
+    messages = (await import(`@/content/${formatLanguage("en")}.json`)).default;
+
+  }
   return (
-    <html lang={params.lang ?? defaultLocale}>
+    <html lang={formatLanguage(lang)}>
       <body
-        className={`${inter.className} ${
-          process.env.NODE_ENV !== "production" && "debug-screens"
-        }`}
+        className={`${inter.className} ${process.env.NODE_ENV !== "production" && "debug-screens"
+          }`}
       >
-        <ServerAuthProvider>
-          <Providers>
-            <Navbar />
-            {authModal}
-            {children}
-          </Providers>
-        </ServerAuthProvider>
+        <NextIntlClientProvider locale={formatLanguage(lang)} messages={messages} >
+
+          <ServerAuthProvider>
+
+            <Providers>
+              <Navbar />
+              {children}
+              <Toaster />
+            </Providers>
+          </ServerAuthProvider>
+        </NextIntlClientProvider>
+
       </body>
     </html>
   )

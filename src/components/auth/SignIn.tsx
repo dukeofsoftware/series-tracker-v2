@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import {  useRouter, useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { signInWithEmailAndPassword } from "firebase/auth"
@@ -23,18 +23,24 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
+import { useTranslations } from "next-intl"
+import { useFirebaseError } from "@/hooks/useFirebaseError"
 
-const SignIn = ({}) => {
+const SignIn = ({ }) => {
+  const { getFirebaseAuth } = useFirebaseAuth()
+
+  const auth = getFirebaseAuth()
+
   const router = useRouter()
+
   const params = useSearchParams()
   const [hasLogged, setHasLogged] = useState(false)
-  const { getFirebaseAuth } = useFirebaseAuth()
   const redirect = params?.get("redirect")
-
+  const t = useTranslations("pages.auth.login")
+  const global = useTranslations("global.toast")
   const [handleLoginWithEmailAndPassword, isEmailLoading, error] =
     useLoadingCallback(async ({ email, password }: LoginType) => {
       setHasLogged(false)
-      const auth = getFirebaseAuth()
       const credential = await signInWithEmailAndPassword(auth, email, password)
       const idTokenResult = await credential.user.getIdTokenResult()
       await fetch("/api/login", {
@@ -55,17 +61,13 @@ const SignIn = ({}) => {
     try {
       await handleLoginWithEmailAndPassword(data)
       toast({
-        title: "Success",
-        description: "You are logged in successfully",
+        title: global("success"),
+        description: t("toastDescription"),
       })
 
       return
     } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error,
-        variant: "destructive",
-      })
+      useFirebaseError(error)
       return
     }
   }
@@ -89,7 +91,7 @@ const SignIn = ({}) => {
               <FormControl>
                 <Input placeholder="shadcn@gmail.com" {...field} />
               </FormControl>
-              <FormDescription>We'll never share your email.</FormDescription>
+              <FormDescription>{t("emailInputDescription")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -99,29 +101,29 @@ const SignIn = ({}) => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t("passwordLabel")}</FormLabel>
               <FormControl>
                 <Input placeholder="********" type="password" {...field} />
               </FormControl>
               <FormDescription>
-                We'll never share your password.
+                {t("passwordInputDescription")}
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
         <p>
-          Don't have an account?{" "}
+          {t("dontHaveAccount")}
           <Link
             href="/register"
             className="text-sky-500 hover:underline active:underline"
           >
-            Register
+            {t("register")}
           </Link>
         </p>
 
         <Button type="submit" disabled={isEmailLoading}>
-          Sign In
+          {t("buttonLabel")}
         </Button>
       </form>
     </Form>

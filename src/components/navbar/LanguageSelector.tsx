@@ -1,6 +1,7 @@
 "use client"
+'use client'
 
-import { useLanguageStore } from "@/hooks/useLanguageStore"
+
 import axios from "axios"
 import { IoLanguage } from "react-icons/io5"
 
@@ -13,13 +14,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-const LanguageSelector = ({}) => {
-  const setLanguage = useLanguageStore((state) => state.setLanguage)
+const LanguageSelector = ({ }) => {
   const changeLanguage = async (lang: string) => {
     await axios.post("/api/locale", {
       language: lang,
     })
-    setLanguage(lang)
     window.location.reload()
   }
 
@@ -33,6 +32,8 @@ const LanguageSelector = ({}) => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger
+          role="button"
+          aria-label="Language Selector"
           className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
         >
           <IoLanguage />
@@ -48,6 +49,18 @@ const LanguageSelector = ({}) => {
               {lang.name}
             </DropdownMenuItem>
           ))}
+         {/*  {
+            languages.map((lang, i) => (
+              <DropdownMenuItem
+      asChild
+              >
+                <Link href={pathname} locale={lang.code} className="w-full">
+                {lang.name}
+
+                </Link>
+              </DropdownMenuItem>
+            ))
+          } */}
         </DropdownMenuContent>
       </DropdownMenu>
     </>

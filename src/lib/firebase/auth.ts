@@ -21,7 +21,7 @@ export const registerUser = async (email: string, password: string) => {
 
     return user
   } catch (error: any) {
-    throw new Error(error.message)
+    throw new Error(error)
   }
 }
 export const signInUser = async (email: string, password: string) => {
@@ -29,7 +29,7 @@ export const signInUser = async (email: string, password: string) => {
     const { user } = await signInWithEmailAndPassword(auth, email, password)
     return user
   } catch (error: any) {
-    throw new Error(error.message)
+    throw new Error(error)
   }
 }
 export const logOutUser = async () => {
@@ -49,7 +49,7 @@ export const emailVerification = async () => {
     }
     return
   } catch (error: any) {
-    throw new Error(error.message)
+    throw new Error(error)
   }
 }
 

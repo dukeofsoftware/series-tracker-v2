@@ -2,10 +2,12 @@
 
 import { FC, useEffect, useState } from "react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+
+import dynamic from "next/dynamic"
+const ReactQueryDevtools = dynamic(() => import("@tanstack/react-query-devtools").then((mod) => mod.ReactQueryDevtools), { ssr: false })
+
 import { ThemeProvider } from "next-themes"
 
-import { Toaster } from "@/components/ui/toaster"
 
 interface ProvidersProps {
   children: React.ReactNode
@@ -20,13 +22,16 @@ const Providers: FC<ProvidersProps> = ({ children }) => {
   if (!isMounted) return null
   return (
     <>
+
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" enableSystem>
+        <ThemeProvider attribute="class" enableSystem >
+
           {children}
           <ReactQueryDevtools initialIsOpen={false} />
-          <Toaster />
         </ThemeProvider>
+
       </QueryClientProvider>
+
     </>
   )
 }

@@ -1,52 +1,72 @@
 "use client"
 
-import { FC } from "react"
-import { dictionary } from "@/content"
 
 import { emailVerification } from "@/lib/firebase/auth"
 import { useAuth } from "@/components/providers/context"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { useTranslations } from "next-intl"
+import { useFirebaseError } from "@/hooks/useFirebaseError"
 
-interface VerifyMailProps {
-  language: string
-}
-
-const VerifyMail: FC<VerifyMailProps> = ({ language }) => {
+const VerifyMail = () => {
   const { user } = useAuth()
+  const t = useTranslations("pages.settings.emailTab.verifyEmail")
   const sendVerificationEmail = async () => {
+    if (!user) return
     try {
       await emailVerification()
       toast({
-        title:
-          dictionary[language]?.settings?.emailTab?.verifyEmail?.toastTitle,
-        description:
-          dictionary[language]?.settings?.emailTab?.verifyEmail
-            ?.toastDescription,
+        title: t("toastTitle"),
+        description: t("toastDescription")
       })
     } catch (error: any) {
-      toast({
-        title: dictionary[language]?.toast.error,
-        description: error.message,
-        variant: "destructive",
-      })
-      throw new Error(error)
+      useFirebaseError(error)
     }
   }
 
   if (user?.emailVerified) {
     return (
-      <p className="text-xl font-semibold text-emerald-500">
-        {dictionary[language]?.settings?.emailTab?.verifyEmail?.verifiedMail}
-      </p>
+      <Card className="w-full md:grow">
+        <CardHeader>
+          <CardTitle>
+            {t("title")}
+          </CardTitle>
+          <CardDescription>
+            {t("description")}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="text-xl font-semibold text-emerald-500">
+            {t("verifiedMail")}
+          </p>
+        </CardContent>
+      </Card>
+
     )
   }
-  return (
-    <>
+  return (<Card className="w-full md:grow">
+    <CardHeader>
+      <CardTitle>
+        {t("title")}
+      </CardTitle>
+      <CardDescription>
+        {t("description")}
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
       <Button onClick={sendVerificationEmail}>
-        {dictionary[language]?.settings?.emailTab?.verifyEmail?.verifyButton}
+        {t("verifyButtonLabel")}
       </Button>
-    </>
+    </CardContent>
+  </Card>
+
   )
 }
 

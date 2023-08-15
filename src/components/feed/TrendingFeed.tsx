@@ -2,21 +2,23 @@
 
 import { FC, useEffect, useMemo } from "react"
 import { useSearchParams } from "next/navigation"
-import { dictionary } from "@/content"
 import { usePaginateTrending } from "@/hooks/usePaginateTrending"
 import { TrendingPage, TrendingResult } from "@/types/trending"
 
 import PaginationButtons from "../PaginationButtons"
-import TrendFeedCard, { TrendFeedCardSkeleton } from "./TrendFeedCard"
+import TrendFeedCard, { TrendFeedCardSkeleton } from "./card/TrendFeedCard"
+import { useTranslations } from "next-intl"
 
 interface TrendingFeedProps {
   cachedData: TrendingPage
-  lang: string
 }
 
-const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData, lang }) => {
+const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
   const params = useSearchParams()
   const page = useMemo(() => params.get("page")!, [params]) || "1"
+  const pageTranslation = useTranslations('pages.main');
+  const t = useTranslations('global.messages');
+
   const { data, isLoading, refetch, isFetching } = usePaginateTrending(
     cachedData,
     page
@@ -24,10 +26,11 @@ const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData, lang }) => {
   useEffect(() => {
     refetch()
   }, [page, refetch])
+  
   return (
     <>
       <h1 className="my-2 text-center text-2xl font-bold">
-        {dictionary[lang]?.trendingTitle}
+        {pageTranslation("trendingTitle")}
       </h1>
       {isLoading || isFetching ? (
         <TrendFeedCardSkeleton />
@@ -36,11 +39,19 @@ const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData, lang }) => {
           <div className="min-h-screen ">
             <ul className="mt-6 flex flex-wrap justify-center gap-5 px-20">
               {data ? (
-                data?.results?.map((result: TrendingResult, index: number) => (
-                  <TrendFeedCard result={result} key={index} />
-                ))
+                data?.results?.map((result: TrendingResult, index: number) => {
+
+                  if (index < 4) {
+                    return (
+                      <li key={index}>   <TrendFeedCard result={result} priorImage={true} /></li>
+
+                    )
+                  }
+                  return (<li key={index}><TrendFeedCard result={result} /></li>
+                  )
+                })
               ) : (
-                <div>data Not found</div>
+                <div>{t("notFound")}</div>
               )}
             </ul>
           </div>
