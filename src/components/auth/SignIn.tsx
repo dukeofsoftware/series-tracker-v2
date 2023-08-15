@@ -24,15 +24,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { useTranslations } from "next-intl"
-import { useFirebaseError } from "@/hooks/useFirebaseError"
 
 const SignIn = ({ }) => {
   const { getFirebaseAuth } = useFirebaseAuth()
-
   const auth = getFirebaseAuth()
 
   const router = useRouter()
-
+  
   const params = useSearchParams()
   const [hasLogged, setHasLogged] = useState(false)
   const redirect = params?.get("redirect")
@@ -67,9 +65,14 @@ const SignIn = ({ }) => {
 
       return
     } catch (error: any) {
-      useFirebaseError(error)
-      return
-    }
+      console.error(error)
+      toast({
+        title: global("error", {
+            code: error.code,
+        }),
+        description: error.message,
+        variant: "destructive",
+    });    }
   }
   if (hasLogged) {
     <div className="flex h-full w-full flex-col items-center justify-center gap-2">

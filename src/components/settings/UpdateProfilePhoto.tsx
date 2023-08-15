@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, SyntheticEvent, useState } from 'react'
+import {  SyntheticEvent, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
     Card,
@@ -16,10 +16,8 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { useFirebaseError } from '@/hooks/useFirebaseError'
-interface UpdateProfilePhotoProps { }
 
-const UpdateProfilePhoto: FC<UpdateProfilePhotoProps> = ({ }) => {
+const UpdateProfilePhoto= ({ }) => {
     const [loading, setLoading] = useState<boolean>(false)
     const [photo, setPhoto] = useState<File | null>(null)
     const { getFirebaseAuth } = useFirebaseAuth()
@@ -42,8 +40,14 @@ const UpdateProfilePhoto: FC<UpdateProfilePhotoProps> = ({ }) => {
                 description: t("toastDescription"),
             })
         } catch (error: any) {
-            useFirebaseError(error)
-        }
+            console.error(error)
+            toast({
+              title: global("error", {
+                  code: error.code,
+              }),
+              description: error.message,
+              variant: "destructive",
+          });         }
     }
     return <>
         <Card className="w-full md:grow">

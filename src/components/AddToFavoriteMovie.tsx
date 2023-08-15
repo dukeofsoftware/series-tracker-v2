@@ -9,18 +9,18 @@ import { toast } from './ui/use-toast'
 import { MovieResponse } from '@/types/movies'
 import { useFirebaseMailVerifyError } from '@/hooks/useFirebaseMailVerify'
 import { useTranslations } from 'next-intl'
-import { useFirebaseError } from '@/hooks/useFirebaseError'
 import { BiLoaderAlt } from 'react-icons/bi'
-interface AddToFavoritesProps {
+interface AddToFavoriteMovieProps {
     result: MovieResponse
 }
 
-const AddToFavorites: FC<AddToFavoritesProps> = ({ result }) => {
+const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const { user } = useAuth()
     const t = useTranslations("favorites")
     const global = useTranslations("global")
     const [isFavorite, setIsFavorite] = useState<boolean | null>(null)
+
     if (!user) return null
     useEffect(() => {
         const getData = async () => {
@@ -78,8 +78,14 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({ result }) => {
         } catch (error: any) {
             setIsFavorite((prev) => !prev)
 
-            useFirebaseError(error)
-        }
+            console.error(error);
+            toast({
+              title: global("toast.error", {
+                code: error.code,
+              }),
+              description: error.message,
+              variant: "destructive",
+            });        }
 
     }
     if (isLoading) return (
@@ -97,4 +103,4 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({ result }) => {
 
 }
 
-export default AddToFavorites
+export default AddToFavoriteMovie

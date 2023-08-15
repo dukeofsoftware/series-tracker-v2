@@ -13,10 +13,10 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { useTranslations } from "next-intl"
-import { useFirebaseError } from "@/hooks/useFirebaseError"
 
 const VerifyMail = () => {
   const { user } = useAuth()
+  const global = useTranslations("global")
   const t = useTranslations("pages.settings.emailTab.verifyEmail")
   const sendVerificationEmail = async () => {
     if (!user) return
@@ -27,7 +27,14 @@ const VerifyMail = () => {
         description: t("toastDescription")
       })
     } catch (error: any) {
-      useFirebaseError(error)
+      console.error(error)
+      toast({
+        title: global("toast.error", {
+            code: error.code,
+        }),
+        description: error.message,
+        variant: "destructive",
+    }); 
     }
   }
 

@@ -18,8 +18,8 @@ const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage }) => {
   return (
     <Link href={
       result.media_type === "movie"
-        ? `/movies/${result.id}`
-        : `/series/${result.id}`
+        ? `/tmdb/movies/${result.id}`
+        : `/tmdb/series/${result.id}`
 
     }>
       <Card className="group relative h-[420px] w-[280px] rounded-md">

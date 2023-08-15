@@ -30,10 +30,9 @@ import {
 } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
 import { useTranslations } from 'next-intl'
-import { useFirebaseError } from '@/hooks/useFirebaseError'
 
 
-const UpdateEmail= ({ }) => {
+const UpdateEmail = ({ }) => {
     const { getFirebaseAuth } = useFirebaseAuth()
     const user = getFirebaseAuth().currentUser!
     const router = useRouter()
@@ -53,68 +52,74 @@ const UpdateEmail= ({ }) => {
                 router.refresh()
             })
             .catch((error) => {
-                useFirebaseError(error)
-            })
+                console.error(error)
+                toast({
+                  title: global("error", {
+                      code: error.code,
+                  }),
+                  description: error.message,
+                  variant: "destructive",
+              });             })
     }
-    return   <Card className="w-full md:grow">
-            <CardHeader>
-                <CardTitle>
-                    {t("title")}
-                </CardTitle>
-                <CardDescription>
-                   {t("description")}
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Email</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="emre@gmail.com" {...field} />
-                                    </FormControl>
-                                    <FormDescription>
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="confirmEmail"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>
-                                       {
+    return <Card className="w-full md:grow">
+        <CardHeader>
+            <CardTitle>
+                {t("title")}
+            </CardTitle>
+            <CardDescription>
+                {t("description")}
+            </CardDescription>
+        </CardHeader>
+        <CardContent>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="emre@gmail.com" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="confirmEmail"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>
+                                    {
                                         t("confirmInputLabel")
-                                       }
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="emre@gmail.com" {...field} />
-                                    </FormControl>
-                                    <FormDescription>
-                                        {
-                                         t("confirmInputDescription")
-                                        }
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <Button type="submit">
-                            {
-                                t("buttonLabel")
-                            }
-                        </Button>
-                    </form>
-                </Form>
-            </CardContent>
-        </Card>
-    
+                                    }
+                                </FormLabel>
+                                <FormControl>
+                                    <Input placeholder="emre@gmail.com" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {
+                                        t("confirmInputDescription")
+                                    }
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit">
+                        {
+                            t("buttonLabel")
+                        }
+                    </Button>
+                </form>
+            </Form>
+        </CardContent>
+    </Card>
+
 }
 
 export default UpdateEmail

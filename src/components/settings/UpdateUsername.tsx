@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { ChangeUsernameValidator, ChangeUsernameType } from '@/lib/validators/usernameEdit'
 import { useTranslations } from 'next-intl'
-import { useFirebaseError } from '@/hooks/useFirebaseError'
 import { addData } from '@/lib/firebase/firestore'
 import { useAuth } from '../providers/context'
 import { toast } from '../ui/use-toast'
@@ -16,6 +15,7 @@ import { toast } from '../ui/use-toast'
 const UpdateUsername = ({ }) => {
     const { user } = useAuth()
     const t = useTranslations("pages.settings.accountTab.updateUsername")
+    const global = useTranslations("global")
     const toastTranslate = useTranslations("global.toast")
     const form = useForm<ChangeUsernameType>({
         resolver: valibotResolver(ChangeUsernameValidator)
@@ -30,10 +30,17 @@ const UpdateUsername = ({ }) => {
             toast({
                 title: toastTranslate("success"),
                 description: t("toastDescription"),
-                
+
             })
-        } catch (error) {
-            useFirebaseError(error)
+        } catch (error: any) {
+            console.error(error)
+            toast({
+                title: global("toast.error", {
+                    code: error.code,
+                }),
+                description: error.message,
+                variant: "destructive",
+            });
         }
 
     }

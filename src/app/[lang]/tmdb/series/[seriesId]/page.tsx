@@ -1,22 +1,29 @@
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { FC } from 'react'
 import Image from 'next/image'
-import { MovieResponse } from '@/types/movies'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { FrontendSeriesResponse } from '@/types/series'
 import { Badge } from '@/components/ui/badge'
 import { formatMinutes } from '@/lib/utils'
-import AddToFavorites from '@/components/AddToFavorites'
-
-import MovieCard from '@/components/feed/card/MovieCard'
-interface pageProps {
+import { getDictionary } from '@/lib/dictionary'
+import AddToFavoriteSeries from '@/components/AddToFavoriteSeries'
+interface PageProps {
   params: {
-    movieId: string
+    seriesId: string
+    lang: "en-US" | "tr-TR" | "de-DE"
   }
 }
-export const revalidate = 0
-const Page: FC<pageProps> = async ({ params }) => {
-  const data: MovieResponse = await fetch(
-    `${process.env.SITE_URL}/api/tmdb/movies/${params.movieId}`
-  ).then((res) => res.json())
+
+const Page: FC<PageProps> = async (
+  { params }
+) => {
+  const { pages } = await getDictionary(params.lang)
+
+  const data: FrontendSeriesResponse = await fetch(
+    `${process.env.SITE_URL}/api/tmdb/series/${params.seriesId}`
+  ).then(async (res) => {
+
+    return res.json()
+  })
   return <div className='container w-full px-0 relative '>
     <div className='max-h-[520px] relative -z-10'>
 
@@ -27,8 +34,6 @@ const Page: FC<pageProps> = async ({ params }) => {
           fill
           className='object-cover '
         />
-        {/*       <div className='max-h-[520px] h-full w-full  top-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent from-50%  to-black absolute  '></div>
- */}
 
       </AspectRatio>
     </div>
@@ -49,27 +54,30 @@ const Page: FC<pageProps> = async ({ params }) => {
         <div className='flex flex-wrap gap-3 justify-between items-center mb-2'>
           <div className='flex gap-2 items-center'>
             <h1 className='font-bold text-3xl  '>
-              {data.title || data.original_title}
+              {data.title}
             </h1>
-            <AddToFavorites  result={data}/>
+            <AddToFavoriteSeries result={data} />
           </div>
           <div className='flex gap-2 flex-wrap'>
-            <Badge className="  bg-sky-500 hover:bg-sky-600 active:bg-sky-600 text-sm font-medium text-white ">
-              {data.release_date}
-            </Badge>
 
             <Badge className='bg-green-600 
-            active:bg-green-700 hover:bg-green-700 text-white'>
+          active:bg-green-700 hover:bg-green-700 text-white'>
               {data.status}
             </Badge>
+            <Badge className='bg-sky-600 
+          active:bg-sky-700 hover:bg-sky-700 text-white'>
+              {data.number_of_seasons}{" "}
+              sezon
+            </Badge>
             {data.adult && <Badge className='bg-red-600
-            active:bg-red-700 hover:bg-red-700 text-white'>
+          active:bg-red-700 hover:bg-red-700 text-white'>
               Adult
             </Badge>
 
             }
             <Badge>
-              {formatMinutes(data.runtime)}
+              {formatMinutes(data.runtime.reduce((a, b) => a + b, 0))}
+
             </Badge>
 
           </div>
@@ -94,24 +102,9 @@ const Page: FC<pageProps> = async ({ params }) => {
         </div>
       </div>
     </div>
-    <h2 className='font-bold text-2xl my-2 text-center mt-16'>Similar Movies</h2>
 
-    <ul className=" flex flex-wrap justify-center gap-5 px-20 mb-20">
-      {
-
-        data?.similar?.map((movie, index) => (
-          <li key={index}>
-            <MovieCard result={movie} />
-          </li>
-
-        ))
-      }
-
-    </ul>
   </div >
-
 
 }
 
 export default Page
-

@@ -29,11 +29,9 @@ import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { updateProfile } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
-import { useFirebaseError } from "@/hooks/useFirebaseError"
 
 const UpdateDisplayName = ({ }) => {
     const router = useRouter()
-
     const { getFirebaseAuth } = useFirebaseAuth()
     const user = getFirebaseAuth()
     const global = useTranslations("global")
@@ -53,11 +51,17 @@ const UpdateDisplayName = ({ }) => {
                 description: t("toastDescription"),
             })
             router.refresh()
-        } catch (error) {
-            useFirebaseError(error)
-
+        } catch (error: any) {
+            console.error(error)
+            toast({
+                title: global("toast.error", {
+                    code: error.code,
+                }),
+                description: error.message,
+                variant: "destructive",
+            });
         }
-        useFirebaseError
+
     }
     return <Card className="w-full  md:grow">
         <CardHeader>

@@ -12,9 +12,9 @@
       "notFound": "Veri bulunamadı"
     }
   },
-  "favorites":{
-    "addToFavorites":"{title} favorilere eklendi",
-    "removeFromFavorites":"{title} favorilerden kaldırıldı"
+  "favorites": {
+    "addToFavorites": "{title} favorilere eklendi",
+    "removeFromFavorites": "{title} favorilerden kaldırıldı"
   },
   "navbar": {
     "themes": {
@@ -118,10 +118,20 @@
         "buttonLabel": "Kayıt Ol"
       }
     },
-    "tmdb":{
-      "movies":{
-        "movie":{
-          "similarMovies":"Benzer Filmler"
+    "tmdb": {
+      "movies": {
+        "movie": {
+          "similarMovies": "Benzer Filmler"
+        }
+      },
+      "series": {
+        "tv": {
+          "similarSeries": "Benzer Diziler",
+          "season": {
+            "season": "Sezon ",
+            "episodes": "Bölümler",
+            "episode": "Bölüm {episodeNumber}"
+          }
         }
       }
     }

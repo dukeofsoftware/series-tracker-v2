@@ -29,7 +29,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { useFirebaseError } from "@/hooks/useFirebaseError"
 import { useTranslations } from "next-intl"
 
 
@@ -50,7 +49,15 @@ const PasswordTab = () => {
         })
       })
       .catch((error) => {
-        useFirebaseError(error)
+        console.error(error)
+        toast({
+          title: global("toast.error", {
+            code: error.code,
+          }),
+          description: error.message,
+          variant: "destructive",
+        });
+
       })
   }
 

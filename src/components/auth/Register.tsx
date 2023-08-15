@@ -26,7 +26,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { useTranslations } from "next-intl"
-import { useFirebaseError } from "@/hooks/useFirebaseError"
 
 
 const Register = ({ }) => {
@@ -76,74 +75,82 @@ const Register = ({ }) => {
       })
       return
     } catch (error: any) {
-
-      useFirebaseError(error)
+      console.error(error);
+      toast({
+        title: global("toast.error", {
+          code: error.code,
+        }),
+        description: error.message,
+        variant: "destructive",
+      });
     }
+
   }
 
 
-  return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 px-4">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn@gmail.com" {...field} />
-              </FormControl>
-              <FormDescription>{t("emailInputDescription")}</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("passwordLabel")}</FormLabel>
-              <FormControl>
-                <Input placeholder="********" type="password" {...field} />
-              </FormControl>
-              <FormDescription>
-                {t("passwordInputDescription")}
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
-              <FormControl>
-                <Input placeholder="********" type="password" {...field} />
-              </FormControl>
-              <FormDescription>{t("confirmPasswordInputDescription")}</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <p>
-          {t("alreadyHaveAccount")}{" "}
-          <Link
-            href="/sign-in"
-            className="text-sky-500 hover:underline active:underline"
-          >
-            {t("login")}
-          </Link>
-        </p>
-        <Button type="submit" disabled={isRegisterLoading}>
-          {t("buttonLabel")}
-        </Button>
-      </form>
-    </Form>
-  )
+
+return (
+  <Form {...form}>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 px-4">
+      <FormField
+        control={form.control}
+        name="email"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Email</FormLabel>
+            <FormControl>
+              <Input placeholder="shadcn@gmail.com" {...field} />
+            </FormControl>
+            <FormDescription>{t("emailInputDescription")}</FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="password"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{t("passwordLabel")}</FormLabel>
+            <FormControl>
+              <Input placeholder="********" type="password" {...field} />
+            </FormControl>
+            <FormDescription>
+              {t("passwordInputDescription")}
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="confirmPassword"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
+            <FormControl>
+              <Input placeholder="********" type="password" {...field} />
+            </FormControl>
+            <FormDescription>{t("confirmPasswordInputDescription")}</FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <p>
+        {t("alreadyHaveAccount")}{" "}
+        <Link
+          href="/sign-in"
+          className="text-sky-500 hover:underline active:underline"
+        >
+          {t("login")}
+        </Link>
+      </p>
+      <Button type="submit" disabled={isRegisterLoading}>
+        {t("buttonLabel")}
+      </Button>
+    </form>
+  </Form>
+)
 }
 
 export default Register

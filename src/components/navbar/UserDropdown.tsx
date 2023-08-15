@@ -23,12 +23,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
-import { useFirebaseError } from "@/hooks/useFirebaseError"
+import { toast } from "../ui/use-toast"
 
 const UserDropdown = ({ }) => {
   const { user } = useAuth()
   const [loading, setLoading] = useState(false)
   const t = useTranslations("navbar.accountDropdown")
+  const global = useTranslations("global")
   if (!user) return null
   const dropdownMenuArray = [
     {
@@ -63,8 +64,15 @@ const UserDropdown = ({ }) => {
       });
       setLoading(false)
       window.location.reload();
-    } catch (error) {
-      useFirebaseError(error)
+    } catch (error: any) {
+      console.error(error)
+      toast({
+        title: global("toast.error", {
+          code: error.code,
+        }),
+        description: error.message,
+        variant: "destructive",
+      });
     }
 
   }
