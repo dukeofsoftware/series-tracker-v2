@@ -1,15 +1,8 @@
 "use client"
 
-import Link from "next/link"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
 import { signOut } from "firebase/auth"
-import {
-  AiFillHeart,
-  AiFillSetting,
-  AiOutlineLogout,
-  AiOutlineUnorderedList,
-} from "react-icons/ai"
-import { BiUser } from "react-icons/bi"
+
 
 import { useAuth } from "@/components/providers/context"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -23,8 +16,9 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useTranslations } from "next-intl"
 import { toast } from "../ui/use-toast"
-import { useUsernameStore } from "@/hooks/useUsername"
-import { useState } from "react"
+import {   useState } from "react"
+import { AiOutlineLogout } from "react-icons/ai"
+import DropdownMenuItems from "./DropdownMenuItems"
 
 const UserDropdown = ({ }) => {
   const { user } = useAuth()
@@ -32,74 +26,8 @@ const UserDropdown = ({ }) => {
   const t = useTranslations("navbar.accountDropdown")
   const global = useTranslations("global")
   if (!user) return null
-  const username = useUsernameStore(state => state.username)
-  const setUsername = useUsernameStore(state => state.setUsername)
-  const dropdownMenuArray = [
-    {
-      icon: <BiUser className="h-4 w-4 text-sky-500" />,
-      text: t("profile"),
-      link: `/profile/${username}`,
-    },
-    {
-      icon: <AiOutlineUnorderedList className="h-4 w-4" />,
-      text: t("myLists"),
-      link: "/profile",
-    },
-    {
-      icon: <AiFillHeart className="h-4 w-4 text-red-500" />,
-      text: t("favorites"),
-      link: `/profile/${username}/favorites`,
-    },
-    {
-      icon: <AiFillSetting className="text-grey-700 h-4 w-4" />,
-      text: t("settings"),
-      link: "/profile/settings",
-    },
-  ]
-  const DropdownMenuItems = () => {
-    {
-      return dropdownMenuArray.map((item) => {
 
-        if (!username) {
-          if (item.link === "/profile/settings") {
-            return <DropdownMenuItem className="p-0" key={item.text}>
-              <Link
-                href={item.link}
-                className="flex h-full w-full items-center gap-2   hover:bg-accent hover:text-accent-foreground rounded-md p-2"
-              >
-                {item.icon}
-                {item.text}
-              </Link>
-            </DropdownMenuItem>
-          }
-          return <DropdownMenuItem className="p-0" key={item.text}>
-            <button
-              onClick={() => {
-                toast({
-                  title: global("toast.firebase.usernameProvideTitle"),
-                  description: global("toast.firebase.usernameProvide"),
-                })
-              }}
-              className="flex h-full w-full items-center gap-2 line-through	 hover:bg-accent  hover:text-accent-foreground rounded-md p-2"
-            >
-              {item.icon}
-              {item.text}
-            </button>
-          </DropdownMenuItem>
-        }
 
-        return <DropdownMenuItem className="p-0" key={item.text}>
-          <Link
-            href={item.link}
-            className="flex h-full w-full items-center gap-2 	 hover:bg-accent  hover:text-accent-foreground rounded-md p-2"
-          >
-            {item.icon}
-            {item.text}
-          </Link>
-        </DropdownMenuItem>
-      })
-    }
-  }
 
 
   const { getFirebaseAuth } = useFirebaseAuth()
@@ -107,7 +35,7 @@ const UserDropdown = ({ }) => {
     try {
       setLoading(true)
       const auth = getFirebaseAuth();
-      setUsername(null)
+      
       await signOut(auth);
       await fetch("/api/logout", {
         method: "GET",

@@ -5,7 +5,6 @@ import AccountTab from "@/components/settings/AccountTab"
 import MailTab from "@/components/settings/MailTab"
 import PasswordTab from "@/components/settings/PasswordTab"
 import { getDictionary } from "@/lib/dictionary"
-import Warning from "@/components/settings/Warning"
 
 interface pageProps {
   params: {
@@ -21,7 +20,6 @@ const Page: FC<pageProps> = async ({ params }) => {
       <h1 className="my-2 text-center text-2xl font-bold">
         {lang.pages.settings.title}
       </h1>
-      <Warning />
       <AccountTab />
       <MailTab />
       <PasswordTab />

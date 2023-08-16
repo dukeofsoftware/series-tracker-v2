@@ -8,21 +8,36 @@ import { useForm } from 'react-hook-form'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { ChangeUsernameValidator, ChangeUsernameType } from '@/lib/validators/usernameEdit'
 import { useTranslations } from 'next-intl'
-import { addData, deleteData, getDocument } from '@/lib/firebase/firestore'
+import { addData, db, deleteData, getDocument } from '@/lib/firebase/firestore'
 import { useAuth } from '../providers/context'
 import { toast } from '../ui/use-toast'
-import { useUsernameStore } from '@/hooks/useUsername'
+import { useEffect, useState } from 'react'
+import { onAuthStateChanged } from 'firebase/auth'
+import { doc, onSnapshot } from 'firebase/firestore'
 
 const UpdateUsername = ({ }) => {
     const { user } = useAuth()
-    const setUsername = useUsernameStore(state => state.setUsername)
+
+    const [username, setUsername] = useState<string | null>(null)
+    useEffect(() => {
+        
+        const unsubscribe = onSnapshot(doc(db, `/users/${user?.uid}`), (doc) => {
+            const username = doc.data()?.username
+            if (username) {
+                setUsername(username)
+                return
+            }
+        })
+        return () => {
+            unsubscribe()
+        }
+    }, [])
     const t = useTranslations("pages.settings.accountTab.updateUsername")
     const global = useTranslations("global")
     const toastTranslate = useTranslations("global.toast")
     const form = useForm<ChangeUsernameType>({
         resolver: valibotResolver(ChangeUsernameValidator)
     })
-    const username = useUsernameStore(state => state.username)
 
     const handleUsernameSubmit = async (data: ChangeUsernameType) => {
         if (!user) return null
@@ -51,7 +66,6 @@ const UpdateUsername = ({ }) => {
             await addData(`users`, user?.uid, {
                 username: data.username
             })
-            setUsername(data.username)
 
             toast({
                 title: toastTranslate("success"),

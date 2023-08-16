@@ -18,7 +18,6 @@ const mapTokensToUser = ({ decodedToken }: Tokens): User => {
   } = decodedToken
 
   const customClaims = filterStandardClaims(decodedToken)
-
   return {
     uid,
     email: email ?? null,

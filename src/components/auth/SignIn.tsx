@@ -80,16 +80,14 @@ const SignIn = ({ }) => {
       }
 
       setHasLogged(true)
-      router.push(redirect || "/profile/settings")
+      
+      router.push("/")
       toast({
         title: global("success"),
         description: t("toastDescription"),
       })
 
-      toast({
-        title: global("success"),
-        description: global("firebase.usernameProvide"),
-      })
+    
       return
     } catch (error: any) {
       console.error(error)
