@@ -5,10 +5,13 @@ import {
   getDoc,
   getDocs,
   getFirestore,
+  onSnapshot,
   setDoc,
 } from "firebase/firestore"
 
 import { app } from "."
+import { useUsernameStore } from "./../../hooks/useUsername"
+import { auth } from "./auth"
 
 export const db = getFirestore(app)
 
@@ -54,3 +57,11 @@ export async function deleteData(collection: string, id: string) {
     throw new Error(e)
   }
 }
+onSnapshot(doc(db, `/users/${auth.currentUser?.uid}`), (doc) => {
+  const setUsername = useUsernameStore.getState().setUsername
+  const username = doc.data()?.username
+  if (username) {
+    setUsername(username)
+  }
+
+})

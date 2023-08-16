@@ -2,19 +2,24 @@
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
-import { CardContent, Card, CardHeader, CardTitle, CardDescription } from '../ui/card'
+import { CardContent, Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useForm } from 'react-hook-form'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { ChangeUsernameValidator, ChangeUsernameType } from '@/lib/validators/usernameEdit'
 import { useTranslations } from 'next-intl'
 import { addData } from '@/lib/firebase/firestore'
-import { useAuth } from '../providers/context'
-import { toast } from '../ui/use-toast'
+import { useAuth } from '@/components/providers/context'
+import { toast } from '@/components/ui/use-toast'
 import { useUsernameStore } from '@/hooks/useUsername'
+import { FC } from 'react'
+import { useRouter } from 'next/navigation'
 
-const UpdateUsername = ({ }) => {
+interface PageProps { }
+
+const Page: FC<PageProps> = ({ }) => {
     const { user } = useAuth()
+    const router = useRouter()
     const t = useTranslations("pages.settings.accountTab.updateUsername")
     const global = useTranslations("global")
     const toastTranslate = useTranslations("global.toast")
@@ -37,6 +42,10 @@ const UpdateUsername = ({ }) => {
                 title: toastTranslate("success"),
                 description: t("toastDescription"),
             })
+            if (!user.emailVerified) {
+                router.push("/verify-email")
+            }
+            router.push("/")
         } catch (error: any) {
             console.error(error)
             toast({
@@ -100,4 +109,4 @@ const UpdateUsername = ({ }) => {
     </Card >
 }
 
-export default UpdateUsername
+export default Page

@@ -6,6 +6,7 @@ import { Claims } from "next-firebase-auth-edge/lib/auth/claims"
 
 export interface User extends Omit<UserInfo, "providerId"> {
   emailVerified: boolean
+  username?: string
   customClaims: Claims
 }
 

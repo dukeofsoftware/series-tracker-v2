@@ -11,16 +11,20 @@ import {
 import { filterStandardClaims } from "next-firebase-auth-edge/lib/auth/claims"
 
 import { AuthContext, User } from "./context"
+import { getDocument } from "@/lib/firebase/firestore"
 
 export interface AuthProviderProps {
   defaultUser: User | null
   children: React.ReactNode
 }
 
-function toUser(user: FirebaseUser, idTokenResult: IdTokenResult): User {
+function toUser(user: FirebaseUser, idTokenResult: IdTokenResult, username?: string): User {
   return {
     ...user,
+
+    // custom claims    
     customClaims: filterStandardClaims(idTokenResult.claims),
+    username: username,
   }
 }
 
@@ -38,8 +42,8 @@ export const AuthProvider: React.FunctionComponent<AuthProviderProps> = ({
     }
 
     const idTokenResult = await firebaseUser.getIdTokenResult()
-
-    setUser(toUser(firebaseUser, idTokenResult))
+    const username = await getDocument("users", firebaseUser.uid).then((doc) => doc?.username)
+    setUser(toUser(firebaseUser, idTokenResult, username))
   }
 
   const registerChangeListener = async () => {

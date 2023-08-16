@@ -26,6 +26,7 @@ const VerifyMail = () => {
         title: t("toastTitle"),
         description: t("toastDescription")
       })
+      
     } catch (error: any) {
       console.error(error)
       toast({

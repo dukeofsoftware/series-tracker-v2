@@ -6,7 +6,6 @@ import { addData, getDocument } from '@/lib/firebase/firestore'
 import { Button } from './ui/button'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { toast } from './ui/use-toast'
-import { useFirebaseMailVerifyError } from '@/hooks/useFirebaseMailVerify'
 import { useTranslations } from 'next-intl'
 import { BiLoaderAlt } from 'react-icons/bi'
 import { FrontendSeriesResponse } from '@/types/series'
@@ -46,7 +45,12 @@ const AddToFavoriteSeries: FC<AddToFavoriteSeriesProps> = ({ result }) => {
 
     const handleFavorite = async () => {
         if (!user.emailVerified) {
-            useFirebaseMailVerifyError()
+            const t = useTranslations("global.toast")
+            toast({
+                title: t("error"),
+                description: t("firebase.emailVerify"),
+                variant: "destructive",
+            })
             return
         }
         setIsFavorite((prev) => !prev)
@@ -60,6 +64,7 @@ const AddToFavoriteSeries: FC<AddToFavoriteSeriesProps> = ({ result }) => {
                 date: result.first_air_date || result.last_air_date,
                 overview: result.overview,
             })
+            
             if (isFavorite) {
                 toast({
                     title: global("toast.success"),

@@ -1,8 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import {
@@ -10,7 +9,6 @@ import {
   sendEmailVerification,
 } from "firebase/auth"
 import { useForm } from "react-hook-form"
-import { useLoadingCallback } from "react-loading-hook"
 
 import { RegisterSchema, RegisterType } from "@/lib/validators/authSchema"
 import { Button } from "@/components/ui/button"
@@ -26,6 +24,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { useTranslations } from "next-intl"
+import { getDocument } from "@/lib/firebase/firestore"
+import { useUsernameStore } from "@/hooks/useUsername"
 
 
 const Register = ({ }) => {
@@ -33,17 +33,18 @@ const Register = ({ }) => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const global = useTranslations("global")
   const t = useTranslations("pages.auth.register")
+  const form = useForm<RegisterType>({
+    resolver: valibotResolver(RegisterSchema),
+  })
+  const setUsername = useUsernameStore((state) => state.setUsername)
 
-
-  const [hasLogged, setHasLogged] = useState(false)
-  const [registerWithEmailAndPassword, isRegisterLoading, error] =
-    useLoadingCallback(async ({ email, password }: RegisterType) => {
-      setHasLogged(false)
+  async function onSubmit(data: RegisterType) {
+    try {
       const auth = getFirebaseAuth()
       const credential = await createUserWithEmailAndPassword(
         auth,
-        email,
-        password
+        data.email,
+        data.password
       )
       await sendEmailVerification(credential.user)
       const idTokenResult = await credential.user.getIdTokenResult()
@@ -53,18 +54,19 @@ const Register = ({ }) => {
           Authorization: `Bearer ${idTokenResult.token}`,
         },
       })
-      setHasLogged(true)
-      router.push("/profile/settings")
-    })
+      const username = await getDocument("users", credential.user.uid).then((doc) => {
+        return doc?.username
+      })
 
 
-  const form = useForm<RegisterType>({
-    resolver: valibotResolver(RegisterSchema),
-  })
-
-  async function onSubmit(data: RegisterType) {
-    try {
-      await registerWithEmailAndPassword(data)
+      if (!username) {
+        toast({
+          title: global("toast.firebase.usernameProvideTitle"),
+          description: global("toast.firebase.usernameProvide"),
+        })
+        router.push("/provide-username")
+      }
+      setUsername(username)
       toast({
         title: global("toast.success"),
         description: t("toastSuccessDescription"),
@@ -89,68 +91,68 @@ const Register = ({ }) => {
 
 
 
-return (
-  <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 px-4">
-      <FormField
-        control={form.control}
-        name="email"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Email</FormLabel>
-            <FormControl>
-              <Input placeholder="shadcn@gmail.com" {...field} />
-            </FormControl>
-            <FormDescription>{t("emailInputDescription")}</FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name="password"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>{t("passwordLabel")}</FormLabel>
-            <FormControl>
-              <Input placeholder="********" type="password" {...field} />
-            </FormControl>
-            <FormDescription>
-              {t("passwordInputDescription")}
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name="confirmPassword"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
-            <FormControl>
-              <Input placeholder="********" type="password" {...field} />
-            </FormControl>
-            <FormDescription>{t("confirmPasswordInputDescription")}</FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <p>
-        {t("alreadyHaveAccount")}{" "}
-        <Link
-          href="/sign-in"
-          className="text-sky-500 hover:underline active:underline"
-        >
-          {t("login")}
-        </Link>
-      </p>
-      <Button type="submit" disabled={isRegisterLoading}>
-        {t("buttonLabel")}
-      </Button>
-    </form>
-  </Form>
-)
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 px-4">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn@gmail.com" {...field} />
+              </FormControl>
+              <FormDescription>{t("emailInputDescription")}</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("passwordLabel")}</FormLabel>
+              <FormControl>
+                <Input placeholder="********" type="password" {...field} />
+              </FormControl>
+              <FormDescription>
+                {t("passwordInputDescription")}
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
+              <FormControl>
+                <Input placeholder="********" type="password" {...field} />
+              </FormControl>
+              <FormDescription>{t("confirmPasswordInputDescription")}</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <p>
+          {t("alreadyHaveAccount")}{" "}
+          <Link
+            href="/sign-in"
+            className="text-sky-500 hover:underline active:underline"
+          >
+            {t("login")}
+          </Link>
+        </p>
+        <Button type="submit" >
+          {t("buttonLabel")}
+        </Button>
+      </form>
+    </Form>
+  )
 }
 
 export default Register

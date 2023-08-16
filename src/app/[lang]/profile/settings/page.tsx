@@ -1,30 +1,30 @@
-"use client"
-import { FC, useEffect } from "react"
+import { FC } from "react"
 
-import { formatLanguage } from "@/lib/utils"
+
 import AccountTab from "@/components/settings/AccountTab"
 import MailTab from "@/components/settings/MailTab"
 import PasswordTab from "@/components/settings/PasswordTab"
-import { useRouter } from "next/navigation"
-import { useAuth } from "@/components/providers/context"
-import {useTranslations} from 'next-intl';
+import { getDictionary } from "@/lib/dictionary"
+import Warning from "@/components/settings/Warning"
 
 interface pageProps {
   params: {
-    lang: string
+    lang: "tr-TR" | "en-US" | "de-DE"
   }
 }
 
 const Page: FC<pageProps> = async ({ params }) => {
+  const lang = await getDictionary(params.lang)
 
   return (
     <main className="container mt-6 flex flex-col gap-4">
       <h1 className="my-2 text-center text-2xl font-bold">
-
+        {lang.pages.settings.title}
       </h1>
-      <AccountTab  />
-      <MailTab  />
-      <PasswordTab  />
+      <Warning />
+      <AccountTab />
+      <MailTab />
+      <PasswordTab />
     </main>
   )
 }

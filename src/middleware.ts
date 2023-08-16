@@ -22,9 +22,9 @@ function getLocale(request: NextRequest): string | undefined {
   const locale = matchLocale(languages, locales, i18n.defaultLocale)
   return locale
 }
-
-
+const PUBLIC_PATHS = ["/login", "/register"]
 function redirectToHome(request: NextRequest) {
+  console.log("first")
   if (!PUBLIC_PATHS.includes(request.nextUrl.pathname)) {
     const defaultLocale =
       getLocale(request) || request.headers.get("x-default-locale") || "en"
@@ -47,7 +47,7 @@ function redirectToHome(request: NextRequest) {
   return NextResponse.redirect(url)
 }
 
-const PUBLIC_PATHS = ["/login", "/register"]
+
 
 function redirectToLogin(request: NextRequest) {
   const defaultLocale =
@@ -61,7 +61,10 @@ function redirectToLogin(request: NextRequest) {
     localeDetection: false,
   })
 
-  if (PUBLIC_PATHS.includes(request.nextUrl.pathname) || request.nextUrl.pathname === "/" ) {
+  if (
+    PUBLIC_PATHS.includes(request.nextUrl.pathname) ||
+    request.nextUrl.pathname === "/"
+  ) {
     const middlewareIntl = intlMiddleware(request)
 
     return middlewareIntl

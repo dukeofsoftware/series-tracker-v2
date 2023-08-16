@@ -5,7 +5,9 @@
       "error": "Hata {code}",
       "firebase": {
         "emailVerify": "Bu işlemi yapabilmek için e-posta adresinizi doğrulamanız gerekiyor",
-        "username": "Profilinizin herkese görünmesi için bir kullanıcı adınız olmalı."
+        "username": "Profilinizin herkese görünmesi için bir kullanıcı adınız olmalı.",
+        "usernameProvide":"Uygulamanın özelliklerini kullanabilmek için kullanıcı adınızı girmeniz gerekiyor",
+        "usernameProvideTitle":"Uyarı! Kullanıcı Adı Gerekli"
       }
     },
     "messages": {
@@ -36,6 +38,7 @@
     },
     "settings": {
       "title": "Ayarlar",
+      "description": "Uygulamanın özelliklerini kullanabilmek için kullanıcı adı girmeniz ve e-posta adresinizi doğrulamanız gerekiyor",
       "accountTab": {
         "updateProfilePhoto": {
           "title": "Profil Fotoğrafı",
@@ -56,7 +59,7 @@
           "toastDescription": "Kullanıcı adınız değiştirildi",
           "currentUsername": "Şuanki kullanıcı adınız {username}",
           "title": "Kullanıcı Adı",
-          "description": "Kullanıcı adınızı değiştirin",
+          "description": "Kullanıcı adınızı değiştirin şuanki kullanıcı adınız {username}",
           "inputLabel": "Yeni Kullanıcı Adı",
           "inputDescription": "Yeni kullanıcı adınızı girin",
           "buttonLabel": "Kullanıcı Adını Değiştir"

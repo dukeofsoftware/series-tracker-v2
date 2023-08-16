@@ -7,7 +7,6 @@ import { Button } from './ui/button'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { toast } from './ui/use-toast'
 import { MovieResponse } from '@/types/movies'
-import { useFirebaseMailVerifyError } from '@/hooks/useFirebaseMailVerify'
 import { useTranslations } from 'next-intl'
 import { BiLoaderAlt } from 'react-icons/bi'
 interface AddToFavoriteMovieProps {
@@ -46,7 +45,12 @@ const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
 
     const handleFavorite = async () => {
         if (!user.emailVerified) {
-            useFirebaseMailVerifyError()
+            const t = useTranslations("global.toast")
+            toast({
+                title: t("error"),
+                description: t("firebase.emailVerify"),
+                variant: "destructive",
+            })
             return
         }
         setIsFavorite((prev) => !prev)
@@ -80,12 +84,13 @@ const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
 
             console.error(error);
             toast({
-              title: global("toast.error", {
-                code: error.code,
-              }),
-              description: error.message,
-              variant: "destructive",
-            });        }
+                title: global("toast.error", {
+                    code: error.code,
+                }),
+                description: error.message,
+                variant: "destructive",
+            });
+        }
 
     }
     if (isLoading) return (

@@ -10,7 +10,7 @@ module.exports = withBundleAnalyzer({
   },
   poweredByHeader: false,
   images: {
-    domains: ["image.tmdb.org","api.themoviedb.org"],
+    domains: ["image.tmdb.org", "api.themoviedb.org", "firebasestorage.googleapis.com"],
   },
   basePath: '',
   // The starter code load resources from `public` folder with `router.basePath` in React components.
