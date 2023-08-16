@@ -24,8 +24,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { useTranslations } from "next-intl"
-import { getDocument } from "@/lib/firebase/firestore"
+import { addData, getDocument } from "@/lib/firebase/firestore"
 import { useUsernameStore } from "@/hooks/useUsername"
+import { autoUsername, randomUsername } from "@/lib/utils"
 
 
 const Register = ({ }) => {
@@ -60,11 +61,22 @@ const Register = ({ }) => {
 
 
       if (!username) {
-        toast({
-          title: global("toast.firebase.usernameProvideTitle"),
-          description: global("toast.firebase.usernameProvide"),
+        const username = await getDocument("users", credential.user.uid).then((doc) => {
+          return doc?.username
         })
-        router.push("/provide-username")
+
+
+        if (!username) {
+          const newUsername = autoUsername(credential.user.email || randomUsername()
+
+          )
+          await addData(`usernames`, newUsername, {
+            uid: credential.user.uid
+          })
+          await addData(`users`, credential.user.uid, {
+            username: newUsername
+          })
+        }
       }
       setUsername(username)
       toast({

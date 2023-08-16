@@ -25,7 +25,8 @@ import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { useTranslations } from "next-intl"
 import { useUsernameStore } from "@/hooks/useUsername"
-import { getDocument } from "@/lib/firebase/firestore"
+import { addData, getDocument } from "@/lib/firebase/firestore"
+import { autoUsername, randomUsername } from "@/lib/utils"
 
 const SignIn = ({ }) => {
   const { getFirebaseAuth } = useFirebaseAuth()
@@ -62,17 +63,21 @@ const SignIn = ({ }) => {
 
 
       if (!username) {
-        toast({
-          title: global("firebase.usernameProvideTitle"),
-          description: global("firebase.usernameProvide"),
+        const newUsername = autoUsername(credential.user.email || randomUsername()
+
+        )
+        await addData(`usernames`, newUsername, {
+          uid: credential.user.uid
         })
-        
-
-        router.push("/provide-username")
+        await addData(`users`, credential.user.uid, {
+          username: newUsername
+        })
       }
-
-  
       setUsername(username)
+      if (!credential.user.emailVerified) {
+        router.push("/verify-mail")
+        
+      }
 
       setHasLogged(true)
       router.push(redirect || "/profile/settings")

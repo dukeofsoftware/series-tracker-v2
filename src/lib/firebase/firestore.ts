@@ -62,6 +62,6 @@ onSnapshot(doc(db, `/users/${auth.currentUser?.uid}`), (doc) => {
   const username = doc.data()?.username
   if (username) {
     setUsername(username)
+    return
   }
-
 })
