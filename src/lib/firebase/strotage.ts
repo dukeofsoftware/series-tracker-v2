@@ -7,7 +7,11 @@ import { addData } from "./firestore"
 
 const strotage = getStorage(app)
 
-export async function uploadProfilePhoto(file: File, currentUser: User) {
+export async function uploadProfilePhoto(
+  file: File,
+  currentUser: User,
+  username?: string
+) {
   try {
     /* get file . */
     const fileType = file.type.split("/")[1]
@@ -20,6 +24,11 @@ export async function uploadProfilePhoto(file: File, currentUser: User) {
       photoURL,
     })
     await addData("users", currentUser.uid, { photoURL })
+    if (username) {
+      await addData(`usernames`, username, {
+        photoURL,
+      })
+    }
     toast({
       title: "Success",
       description: "Profile photo updated",

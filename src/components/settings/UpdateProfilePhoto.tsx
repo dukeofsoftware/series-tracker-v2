@@ -1,6 +1,6 @@
 'use client'
 
-import {  SyntheticEvent, useState } from 'react'
+import { SyntheticEvent, useEffect, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
     Card,
@@ -12,25 +12,43 @@ import {
 import { uploadProfilePhoto } from '@/lib/firebase/strotage'
 import { toast } from '@/components/ui/use-toast'
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
-import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { doc, onSnapshot } from 'firebase/firestore'
+import { db } from '@/lib/firebase/firestore'
 
-const UpdateProfilePhoto= ({ }) => {
+const UpdateProfilePhoto = ({ }) => {
     const [loading, setLoading] = useState<boolean>(false)
     const [photo, setPhoto] = useState<File | null>(null)
     const { getFirebaseAuth } = useFirebaseAuth()
     const user = getFirebaseAuth()
+
+    const [username, setUsername] = useState<string | null>(null)
+    useEffect(() => {
+
+        const unsubscribe = onSnapshot(doc(db, `/users/${user?.currentUser?.uid}`), (doc) => {
+            const username = doc.data()?.username
+            if (username) {
+                setUsername(username)
+                return
+            }
+        })
+        return () => {
+            unsubscribe()
+        }
+    }, [])
+
+
     const global = useTranslations("global.toast")
     const t = useTranslations("pages.settings.accountTab.updateProfilePhoto")
     async function onSubmit(e: SyntheticEvent<HTMLFormElement>) {
         e.preventDefault()
         try {
             if (!user) return null
-            if(!photo) return null
+            if (!photo) return null
             setLoading(true)
-            await uploadProfilePhoto(photo, user.currentUser!)
+            await uploadProfilePhoto(photo, user.currentUser!, username || "")
             setPhoto(null)
             setLoading(false)
             toast({
@@ -40,12 +58,13 @@ const UpdateProfilePhoto= ({ }) => {
         } catch (error: any) {
             console.error(error)
             toast({
-              title: global("error", {
-                  code: error.code,
-              }),
-              description: error.message,
-              variant: "destructive",
-          });}
+                title: global("error", {
+                    code: error.code,
+                }),
+                description: error.message,
+                variant: "destructive",
+            });
+        }
     }
     return <>
         <Card className="w-full md:grow">
