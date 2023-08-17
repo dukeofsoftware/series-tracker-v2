@@ -1,13 +1,16 @@
 {
   "global": {
+    "adult": "Yetişkin İçeriği",
+    "loading": "Yükleniyor...",
     "toast": {
       "success": "Başarılı",
       "error": "Hata {code}",
+      "errorDescription": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin",
       "firebase": {
         "emailVerify": "Bu işlemi yapabilmek için e-posta adresinizi doğrulamanız gerekiyor",
         "username": "Profilinizin herkese görünmesi için bir kullanıcı adınız olmalı.",
-        "usernameProvide":"Uygulamanın özelliklerini kullanabilmek için kullanıcı adınızı girmeniz gerekiyor",
-        "usernameProvideTitle":"Uyarı! Kullanıcı Adı Gerekli"
+        "usernameProvide": "Uygulamanın özelliklerini kullanabilmek için kullanıcı adınızı girmeniz gerekiyor",
+        "usernameProvideTitle": "Uyarı! Kullanıcı Adı Gerekli"
       }
     },
     "messages": {
@@ -15,8 +18,19 @@
     }
   },
   "favorites": {
+    "title":"Favoriler",
     "addToFavorites": "{title} favorilere eklendi",
     "removeFromFavorites": "{title} favorilerden kaldırıldı"
+  },
+  "status": {
+    "statusTitle": "Durum",
+    "deleteStatus": "Durumu Sil",
+    "notStarted": "Başlamadı",
+    "watching": "İzleniyor",
+    "completed": "İzlendi",
+    "onHold": "Beklemede",
+    "dropped": "Bırakıldı",
+    "planToWatch": "İzlenecek"
   },
   "navbar": {
     "themes": {
@@ -123,6 +137,8 @@
       }
     },
     "tmdb": {
+      "tags": "Etiketler:",
+
       "movies": {
         "movie": {
           "similarMovies": "Benzer Filmler"

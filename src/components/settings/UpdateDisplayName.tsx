@@ -29,11 +29,14 @@ import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { updateProfile } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
+import { addData } from "@/lib/firebase/firestore"
+import { useAuth } from "../providers/context"
 
 const UpdateDisplayName = ({ }) => {
     const router = useRouter()
     const { getFirebaseAuth } = useFirebaseAuth()
-    const user = getFirebaseAuth()
+    const authUser = getFirebaseAuth()
+    const { user } = useAuth()
     const global = useTranslations("global")
     const t = useTranslations("pages.settings.accountTab.updateDisplayName")
     const form = useForm<ChangeProfileNameType>({
@@ -43,14 +46,17 @@ const UpdateDisplayName = ({ }) => {
         if (!user) return null
 
         try {
-            await updateProfile(user.currentUser!, {
+            await updateProfile(authUser.currentUser!, {
                 displayName: data.profileName,
+            })
+            await addData("users", user.uid, {
+                displayName: data.profileName,
+
             })
             toast({
                 title: global("toast.success"),
                 description: t("toastDescription"),
             })
-            router.refresh()
         } catch (error: any) {
             console.error(error)
             toast({
@@ -72,10 +78,10 @@ const UpdateDisplayName = ({ }) => {
             </div>
             <CardDescription>
                 {t("description")}
-                {user.currentUser?.displayName && (
+                {authUser.currentUser?.displayName && (
                     <p>
                         {t("currentName", {
-                            name: user.currentUser.displayName
+                            name: authUser.currentUser.displayName
                         })}
                     </p>
                 )}

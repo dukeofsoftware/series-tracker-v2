@@ -22,19 +22,17 @@ const UpdateProfilePhoto= ({ }) => {
     const [photo, setPhoto] = useState<File | null>(null)
     const { getFirebaseAuth } = useFirebaseAuth()
     const user = getFirebaseAuth()
-    const router = useRouter()
     const global = useTranslations("global.toast")
     const t = useTranslations("pages.settings.accountTab.updateProfilePhoto")
     async function onSubmit(e: SyntheticEvent<HTMLFormElement>) {
-        e.preventDefault
+        e.preventDefault()
         try {
             if (!user) return null
+            if(!photo) return null
             setLoading(true)
-            if (!photo) return null
             await uploadProfilePhoto(photo, user.currentUser!)
             setPhoto(null)
             setLoading(false)
-            router.refresh()
             toast({
                 title: global("success"),
                 description: t("toastDescription"),
@@ -47,7 +45,7 @@ const UpdateProfilePhoto= ({ }) => {
               }),
               description: error.message,
               variant: "destructive",
-          });         }
+          });}
     }
     return <>
         <Card className="w-full md:grow">

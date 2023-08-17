@@ -6,20 +6,22 @@ import { Badge } from '@/components/ui/badge'
 import { formatMinutes } from '@/lib/utils'
 import { getDictionary } from '@/lib/dictionary'
 import AddToFavoriteSeries from '@/components/AddToFavoriteSeries'
+import StatusSelector from '@/components/StatusSelector'
+import TrendFeedCard from '@/components/feed/card/TrendFeedCard'
 interface PageProps {
   params: {
     seriesId: string
     lang: "en-US" | "tr-TR" | "de-DE"
   }
 }
-
+export const revalidate = 60 * 60
 const Page: FC<PageProps> = async (
   { params }
 ) => {
-  const { pages } = await getDictionary(params.lang)
+  const page = await getDictionary(params.lang)
 
   const data: FrontendSeriesResponse = await fetch(
-    `${process.env.SITE_URL}/api/tmdb/series/${params.seriesId}`
+    `${process.env.SITE_URL}/api/tmdb/series/${params.seriesId}?language=${params.lang}`
   ).then(async (res) => {
 
     return res.json()
@@ -38,8 +40,8 @@ const Page: FC<PageProps> = async (
       </AspectRatio>
     </div>
 
-    <div className='flex mt-4 ml-2 sm:ml-4'>
-      <div className='shrink-0	 flex relative sm:w-[200px] sm:min-h-[200px]  w-[150px] h-[225px] sm:h-[300px] rounded-md border-4 border-slate-800 items-center '>
+    <div className='flex flex-col sm:flex-row mt-4 ml-2 sm:ml-4'>
+      <div className='shrink-0 mx-auto sm:mx-0 mb-4	 flex relative sm:w-[200px] sm:min-h-[200px]  w-[340px] h-[510px] sm:h-[300px] rounded-md border-4 border-slate-800 items-center '>
         <Image
           src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
           alt={data.title}
@@ -52,11 +54,17 @@ const Page: FC<PageProps> = async (
       <div className=' mx-5  sm:container'>
 
         <div className='flex flex-wrap gap-3 justify-between items-center mb-2'>
-          <div className='flex gap-2 items-center'>
+          <div className='flex gap-2 items-center flex-wrap'>
             <h1 className='font-bold text-3xl  '>
               {data.title}
             </h1>
-            <AddToFavoriteSeries result={data} />
+            <div className=' flex gap-2 items-center'>
+              <AddToFavoriteSeries result={data} />
+              <StatusSelector
+                seriesResult={data}
+                type="series"
+              />
+            </div>
           </div>
           <div className='flex gap-2 flex-wrap'>
 
@@ -67,16 +75,16 @@ const Page: FC<PageProps> = async (
             <Badge className='bg-sky-600 
           active:bg-sky-700 hover:bg-sky-700 text-white'>
               {data.number_of_seasons}{" "}
-              sezon
+              {page.pages.tmdb.series.tv.season.season}
             </Badge>
             {data.adult && <Badge className='bg-red-600
           active:bg-red-700 hover:bg-red-700 text-white'>
-              Adult
+              {page.global.adult}
             </Badge>
 
             }
             <Badge>
-              {formatMinutes(data.runtime.reduce((a, b) => a + b, 0))}
+              {formatMinutes(data.runtime.reduce((a, b) => a + b, 0),params.lang)}
 
             </Badge>
 
@@ -88,8 +96,9 @@ const Page: FC<PageProps> = async (
         </p>
         <div className='flex'>
           <p className='font-semibold  text-xl'>
-            Tags:
-          </p>
+            {
+              page.pages.tmdb.tags
+            }          </p>
           <div className='flex flex-wrap items-center gap-1.5 mx-2'>
             {
               data.genres.map((genre) => (
@@ -102,6 +111,27 @@ const Page: FC<PageProps> = async (
         </div>
       </div>
     </div>
+    {data.similar.length > 0 && <>
+      <h2 className='font-bold text-2xl my-2 text-center mt-16'>
+        {page.pages.tmdb.series.tv.similarSeries}
+      </h2>
+
+      <ul className=" flex flex-wrap justify-center gap-5 px-20 mb-20">
+        {
+
+          data?.similar?.map((series, index) => (
+            <li key={index}>
+              <TrendFeedCard result={series} />
+            </li>
+
+          ))
+        }
+
+      </ul>
+    </>
+
+    }
+
 
   </div >
 

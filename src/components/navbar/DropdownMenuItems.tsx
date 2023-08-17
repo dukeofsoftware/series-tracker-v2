@@ -19,15 +19,14 @@ interface DropdownMenuItemsProps { }
 
 const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({ }) => {
     const { user } = useAuth()
-
+    
     const t = useTranslations("navbar.accountDropdown")
     const global = useTranslations("global")
-    const [localUsername, setLocalUsername] = useState<string | null>(null)
     const dropdownMenuArray = [
         {
             icon: <BiUser className="h-4 w-4 text-sky-500" />,
             text: t("profile"),
-            link: `/profile/${localUsername}`,
+            link: `/profile/${user?.uid}`,
         },
         {
             icon: <AiOutlineUnorderedList className="h-4 w-4" />,
@@ -37,7 +36,7 @@ const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({ }) => {
         {
             icon: <AiFillHeart className="h-4 w-4 text-red-500" />,
             text: t("favorites"),
-            link: `/profile/${localUsername}/favorites`,
+            link: `/profile/${user?.uid}/favorites`,
         },
         {
             icon: <AiFillSetting className="text-grey-700 h-4 w-4" />,
@@ -47,40 +46,14 @@ const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({ }) => {
     ]
 
 
-    useEffect(() => {
-        const getDataFB = async () => {
-            if (!user?.uid) return
-            const username = await getDocument(`/users`, user?.uid).then((doc) => {
-                const username = doc?.username
-                if (username) {
-                    setLocalUsername(username)
-                    return
-                }
-            }
-            )
-        }
-        getDataFB()
-    }, [])
 
-    useEffect(() => {
-        const unsubscribe = onSnapshot(doc(db, `/users/${user?.uid}`), (doc) => {
-            const username = doc.data()?.username
-            if (username) {
-                setLocalUsername(username)
-                return
-            }
-        })
-        return () => {
-            unsubscribe
-        }
-    }, [])
 
     return (
         <>
             {
                 dropdownMenuArray.map((item) => {
 
-                    if (!localUsername) {
+                    if (!user?.uid) {
                         if (item.link === "/profile/settings") {
                             return <DropdownMenuItem className="p-0" key={item.text}>
                                 <Link

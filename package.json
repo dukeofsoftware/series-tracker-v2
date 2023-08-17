@@ -48,7 +48,7 @@
     "framer-motion": "^10.15.0",
     "lucide-react": "^0.265.0",
     "negotiator": "^0.6.3",
-    "next": "13.4.16-canary.1",
+    "next": "13.4.17-canary.2",
     "next-firebase-auth-edge": "^0.8.2",
     "next-intl": "^2.19.1",
     "next-sitemap": "^4.1.8",

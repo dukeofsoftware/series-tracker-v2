@@ -3,6 +3,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage"
 
 import { toast } from "@/components/ui/use-toast"
 import { app } from "."
+import { addData } from "./firestore"
 
 const strotage = getStorage(app)
 
@@ -18,6 +19,7 @@ export async function uploadProfilePhoto(file: File, currentUser: User) {
     await updateProfile(currentUser, {
       photoURL,
     })
+    await addData("users", currentUser.uid, { photoURL })
     toast({
       title: "Success",
       description: "Profile photo updated",

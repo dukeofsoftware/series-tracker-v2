@@ -22,12 +22,13 @@ export async function GET(
       searchParams.get("language") ||
       cookies().get("NEXT_LOCALE")?.value ||
       "en-US"
+
     let result: MovieData = await fetch(
       `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=similar,images&language=${language}`,
       options
     ).then((response) => response.json())
     
-    if (
+    if (  
       
       result.images.backdrops.length === 0 ||
       result.images.logos.length === 0 ||

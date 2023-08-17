@@ -14,7 +14,6 @@ export async function GET(request: Request) {
     const adult = searchParams.get("adult") || "false"
     const query = searchParams.get("query") || ""
     const type = searchParams.get("type") || "all"
-    console.log("page: ",page)
     if (!query)
       return NextResponse.json({ error: "Query is required" }, { status: 400 })
     if (type === "all") {

@@ -7,29 +7,31 @@ import { formatMinutes } from '@/lib/utils'
 
 import MovieCard from '@/components/feed/card/MovieCard'
 import AddToFavoriteMovie from '@/components/AddToFavoriteMovie'
+import StatusSelector from '@/components/StatusSelector'
+import { getDictionary } from '@/lib/dictionary'
 interface pageProps {
   params: {
     movieId: string
+    lang: "en-US" | "tr-TR" | "de-DE"
   }
 }
 export const revalidate = 60 * 60
 const Page: FC<pageProps> = async ({ params }) => {
   const data: MovieResponse = await fetch(
-    `${process.env.SITE_URL}/api/tmdb/movies/${params.movieId}`
+    `${process.env.SITE_URL}/api/tmdb/movies/${params.movieId}?language=${params.lang}`
   ).then((res) => res.json())
+  const page = await getDictionary(params.lang)
   return <div className='container w-full px-0 relative '>
     <div className='max-h-[520px] relative -z-10'>
 
       <AspectRatio ratio={33 / 20} className='pb-0 max-h-[520px] '>
         <Image
           src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
-          alt={data.title} 
+          alt={data.title}
           fill
           className='object-cover '
         />
-        {/*       <div className='max-h-[520px] h-full w-full  top-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent from-50%  to-black absolute  '></div>
- */}
-
+      
       </AspectRatio>
     </div>
 
@@ -52,6 +54,10 @@ const Page: FC<pageProps> = async ({ params }) => {
               {data.title || data.original_title}
             </h1>
             <AddToFavoriteMovie result={data} />
+            <StatusSelector
+              movieResult={data}
+              type="movie"
+            />
           </div>
           <div className='flex gap-2 flex-wrap'>
             <Badge className="  bg-sky-500 hover:bg-sky-600 active:bg-sky-600 text-sm font-medium text-white ">
@@ -64,12 +70,12 @@ const Page: FC<pageProps> = async ({ params }) => {
             </Badge>
             {data.adult && <Badge className='bg-red-600
             active:bg-red-700 hover:bg-red-700 text-white'>
-              Adult
+              {page.global.adult}
             </Badge>
 
             }
             <Badge>
-              {formatMinutes(data.runtime)}
+              {formatMinutes(data.runtime, params.lang)}
             </Badge>
 
           </div>
@@ -80,7 +86,9 @@ const Page: FC<pageProps> = async ({ params }) => {
         </p>
         <div className='flex'>
           <p className='font-semibold  text-xl'>
-            Tags:
+            {
+              page.pages.tmdb.tags
+            }
           </p>
           <div className='flex flex-wrap items-center gap-1.5 mx-2'>
             {
@@ -94,20 +102,26 @@ const Page: FC<pageProps> = async ({ params }) => {
         </div>
       </div>
     </div>
-    <h2 className='font-bold text-2xl my-2 text-center mt-16'>Similar Movies</h2>
+    {data.similar.length > 0 && <>
+      <h2 className='font-bold text-2xl my-2 text-center mt-16'>
+        {page.pages.tmdb.movies.movie.similarMovies}
+      </h2>
 
-    <ul className=" flex flex-wrap justify-center gap-5 px-20 mb-20">
-      {
+      <ul className=" flex flex-wrap justify-center gap-5 px-20 mb-20">
+        {
 
-        data?.similar?.map((movie, index) => (
-          <li key={index}>
-            <MovieCard result={movie} />
-          </li>
+          data?.similar?.map((movie, index) => (
+            <li key={index}>
+              <MovieCard result={movie} />
+            </li>
 
-        ))
-      }
+          ))
+        }
 
-    </ul>
+      </ul>
+    </>
+
+    }
   </div >
 
 

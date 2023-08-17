@@ -16,18 +16,32 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useTranslations } from "next-intl"
 import { toast } from "../ui/use-toast"
-import {   useState } from "react"
+import { useEffect, useState } from "react"
 import { AiOutlineLogout } from "react-icons/ai"
 import DropdownMenuItems from "./DropdownMenuItems"
+import { doc, onSnapshot } from "firebase/firestore"
+import { db } from "@/lib/firebase/firestore"
 
 const UserDropdown = ({ }) => {
   const { user } = useAuth()
   const [loading, setLoading] = useState(false)
   const t = useTranslations("navbar.accountDropdown")
   const global = useTranslations("global")
+  const [profilePhoto, setProfilePhoto] = useState<string | null>(null)
   if (!user) return null
+  useEffect(() => {
 
-
+    const unsubscribe = onSnapshot(doc(db, `/users/${user?.uid}`), (doc) => {
+      const profilePhoto = doc.data()?.profilePhoto
+      if (profilePhoto) {
+        setProfilePhoto(profilePhoto)
+        return
+      }
+    })
+    return () => {
+      unsubscribe()
+    }
+  }, [])
 
 
   const { getFirebaseAuth } = useFirebaseAuth()
@@ -35,7 +49,7 @@ const UserDropdown = ({ }) => {
     try {
       setLoading(true)
       const auth = getFirebaseAuth();
-      
+
       await signOut(auth);
       await fetch("/api/logout", {
         method: "GET",
@@ -62,7 +76,7 @@ const UserDropdown = ({ }) => {
             <AvatarFallback>
               {user.displayName ? user?.displayName[0] : user?.email![0]}
             </AvatarFallback>
-            <AvatarImage src={user?.photoURL!} alt={user?.displayName!} />
+            <AvatarImage src={profilePhoto || user?.photoURL!} alt={user?.displayName!} />
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent>

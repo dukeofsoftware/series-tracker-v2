@@ -11,7 +11,6 @@ import { useTranslations } from 'next-intl'
 import { addData } from '@/lib/firebase/firestore'
 import { useAuth } from '@/components/providers/context'
 import { toast } from '@/components/ui/use-toast'
-import { useUsernameStore } from '@/hooks/useUsername'
 import { FC } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -20,13 +19,14 @@ interface PageProps { }
 const Page: FC<PageProps> = ({ }) => {
     const { user } = useAuth()
     const router = useRouter()
+    const username = user?.username
+    
     const t = useTranslations("pages.settings.accountTab.updateUsername")
     const global = useTranslations("global")
     const toastTranslate = useTranslations("global.toast")
     const form = useForm<ChangeUsernameType>({
         resolver: valibotResolver(ChangeUsernameValidator)
     })
-    const username = useUsernameStore(state => state.username)
 
     const handleUsernameSubmit = async (data: ChangeUsernameType) => {
         if (!user) return null

@@ -1,16 +1,35 @@
 {
   "global": {
+    "adult": "Adult Content",
+    "loading": "Loading...",
     "toast": {
-      "success": "Successful",
-      "error": "Error {code}"
+      "success": "Success",
+      "error": "Error {code}",
+      "errorDescription": "An error occurred. Please try again later.",
+      "firebase": {
+        "emailVerify": "You need to verify your email address to perform this action.",
+        "username": "You must have a username to make your profile visible to everyone.",
+        "usernameProvide": "You need to enter a username to use the app's features.",
+        "usernameProvideTitle": "Warning! Username Required"
+      }
     },
     "messages": {
       "notFound": "Data not found"
     }
   },
   "favorites": {
-    "addToFavorites": "{title} successfully added to favorites",
-    "removeFromFavorites": "{title} successfully removed from favorites"
+    "addToFavorites": "{title} added to favorites.",
+    "removeFromFavorites": "{title} removed from favorites."
+  },
+  "status": {
+    "statusTitle": "Status",
+    "deleteStatus": "Delete Status",
+    "notStarted": "Not Started",
+    "watching": "Watching",
+    "completed": "Completed",
+    "onHold": "On Hold",
+    "dropped": "Dropped",
+    "planToWatch": "Plan to Watch"
   },
   "navbar": {
     "themes": {
@@ -32,86 +51,107 @@
     },
     "settings": {
       "title": "Settings",
+      "description": "You need to enter a username and verify your email address to use the app's features.",
       "accountTab": {
         "updateProfilePhoto": {
           "title": "Profile Photo",
-          "description": "Change your profile photo",
+          "description": "Change your profile photo.",
           "buttonLabel": "Change Photo",
-          "toastDescription": "Your profile photo has been changed"
+          "toastDescription": "Your profile photo has been changed."
         },
         "updateDisplayName": {
-          "toastDescription": "Your profile name has been changed",
+          "toastDescription": "Your profile name has been changed.",
           "currentName": "Your current name is {name}",
           "title": "Profile Name",
-          "description": "Change your profile name",
+          "description": "Change your profile name.",
           "inputLabel": "New Name",
-          "inputDescription": "Enter your new profile name",
+          "inputDescription": "Enter your new profile name.",
           "buttonLabel": "Change Name"
         },
         "updateUsername": {
-          "toastDescription": "Your username has been changed",
+          "usernameTaken": "This username is already taken.",
+          "toastDescription": "Your username has been changed.",
           "currentUsername": "Your current username is {username}",
           "title": "Username",
-          "description": "Change your username",
+          "description": "Change your username. Your current username is {username}",
           "inputLabel": "New Username",
-          "inputDescription": "Enter your new username",
+          "inputDescription": "Enter your new username.",
           "buttonLabel": "Change Username"
         }
       },
       "emailTab": {
         "changeEmail": {
           "title": "Change Email",
-          "toastDescription": "Your email address has been changed",
-          "description": "Change your email address",
+          "toastDescription": "Your email address has been changed.",
+          "description": "Change your email address.",
           "inputLabel": "New Email",
           "confirmInputLabel": "Confirm New Email",
-          "confirmInputDescription": "Enter the new email again",
-          "inputDescription": "Enter your new email address",
+          "confirmInputDescription": "Enter the new email again.",
+          "inputDescription": "Enter your new email address.",
           "buttonLabel": "Change Email"
         },
         "verifyEmail": {
-          "toastDescription": "A verification email has been sent to your email address",
+          "toastDescription": "A verification email has been sent to your email address.",
           "toastTitle": "Email Verification",
-          "verifiedMail": "Your email address has been verified",
+          "verifiedMail": "Your email address is verified.",
           "verifyButtonLabel": "Verify Email",
           "title": "Email Verification",
-          "description": "You can verify your email address here",
+          "description": "You can verify your email address here.",
           "verified": "Verified"
         }
       },
       "passwordTab": {
         "title": "Change Password",
-        "description": "Change your account password",
+        "description": "Change your account password.",
         "inputLabel": "New Password",
-        "inputDescription": "Enter your new password",
+        "inputDescription": "Enter your new password.",
         "confirmInputLabel": "Confirm New Password",
-        "confirmInputDescription": "Enter the new password again",
+        "confirmInputDescription": "Enter the new password again.",
         "buttonLabel": "Change Password",
-        "toastDescription": "Your password has been changed"
+        "toastDescription": "Your password has been changed."
       }
     },
     "auth": {
       "login": {
-        "emailInputDescription": "We will not share your email address with anyone",
+        "emailInputDescription": "We will not share your email address with anyone.",
         "passwordLabel": "Password",
-        "passwordInputDescription": "We will not share your password with anyone",
+        "passwordInputDescription": "We will not share your password with anyone.",
         "dontHaveAccount": "Don't have an account?",
         "register": "Register",
         "buttonLabel": "Login",
-        "toastDescription": "You have successfully logged in"
+        "toastDescription": "You have successfully logged in."
       },
       "register": {
-        "toastSuccessDescription": "You have successfully registered",
-        "verifyToastTitle": "Check your emails",
-        "verifyToastDescription": "We have sent an email for verification",
-        "emailInputDescription": "We will not share your email address with anyone",
+        "toastSuccessDescription": "You have successfully registered.",
+        "verifyToastTitle": "Check your email",
+        "verifyToastDescription": "We have sent an email to verify your email address.",
+        "emailInputDescription": "We will not share your email address with anyone.",
         "passwordLabel": "Password",
-        "passwordInputDescription": "We will not share your password with anyone",
+        "passwordInputDescription": "We will not share your password with anyone.",
         "confirmPasswordLabel": "Confirm Password",
-        "confirmPasswordInputDescription": "Enter the password again",
+        "confirmPasswordInputDescription": "Enter your password again.",
         "alreadyHaveAccount": "Already have an account?",
         "login": "Login",
         "buttonLabel": "Register"
+      }
+    },
+    "tmdb": {
+      "tags": "Tags",
+
+      "movies": {
+        "movie": {
+          "similarMovies": "Similar Movies"
+        }
+      },
+      "series": {
+        "tv": {
+          "similarSeries": "Similar Series",
+          "season": {
+            "season": "Season ",
+            "episodes": "Episodes",
+            "episode": "Episode {episodeNumber}"
+          }
+        }
       }
     }
   }

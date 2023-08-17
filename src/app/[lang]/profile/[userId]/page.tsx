@@ -4,7 +4,7 @@ interface PageProps {}
 
 const Page: FC<PageProps> = ({}) => {
   return <>
-    Page
+    
   </>
 }
 

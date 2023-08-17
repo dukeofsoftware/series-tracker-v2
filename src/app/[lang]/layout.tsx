@@ -34,7 +34,7 @@ export default async function RootLayout({
   params: { lang: Locale }
 }) {
 
-  
+
   let messages;
   try {
     messages = (await import(`@/content/${formatLanguage(lang)}.json`)).default;
@@ -47,7 +47,7 @@ export default async function RootLayout({
     <html lang={formatLanguage(lang)}>
       <body
         className={`${inter.className} ${process.env.NODE_ENV !== "production" && "debug-screens"
-          }  `}
+          } dark:bg-slate-900 dark:text-slate-50 bg-slate-50 text-slate-900 `}
       >
         <NextIntlClientProvider locale={formatLanguage(lang)} messages={messages} >
 
