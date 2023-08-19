@@ -9,6 +9,7 @@ import MovieCard from '@/components/feed/card/MovieCard'
 import AddToFavoriteMovie from '@/components/AddToFavoriteMovie'
 import StatusSelector from '@/components/StatusSelector'
 import { getDictionary } from '@/lib/dictionary'
+import { notFound } from 'next/navigation'
 interface pageProps {
   params: {
     movieId: string
@@ -21,22 +22,24 @@ const Page: FC<pageProps> = async ({ params }) => {
     `${process.env.SITE_URL}/api/tmdb/movies/${params.movieId}?language=${params.lang}`
   ).then((res) => res.json())
   const page = await getDictionary(params.lang)
+  
+  if (!data || !params.movieId) return notFound()
   return <div className='container w-full px-0 relative '>
     <div className='max-h-[520px] relative -z-10'>
 
       <AspectRatio ratio={33 / 20} className='pb-0 max-h-[520px] '>
         <Image
-          src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
           alt={data.title}
           fill
           className='object-cover '
         />
-      
+
       </AspectRatio>
     </div>
 
-    <div className='flex mt-4 ml-2 sm:ml-4'>
-      <div className='shrink-0	 flex relative sm:w-[200px] sm:min-h-[200px]  w-[150px] h-[225px] sm:h-[300px] rounded-md border-4 border-slate-800 items-center '>
+    <div className='flex flex-col items-center md:flex-row mt-4 ml-2 sm:ml-4'>
+      <div className='shrink-0	 flex relative sm:w-[200px] sm:min-h-[200px]  sm:h-[300px] rounded-md border-4 border-slate-800 items-center w-[340px] h-[510px] '>
         <Image
           src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
           alt={data.title}
@@ -48,8 +51,8 @@ const Page: FC<pageProps> = async ({ params }) => {
       </div>
       <div className=' mx-5  sm:container'>
 
-        <div className='flex flex-wrap gap-3 justify-between items-center mb-2'>
-          <div className='flex gap-2 items-center'>
+        <div className='flex flex-wrap gap-3 justify-between items-center mb-2 mt-2'>
+          <div className='flex gap-2 items-center flex-wrap'>
             <h1 className='font-bold text-3xl  '>
               {data.title || data.original_title}
             </h1>
@@ -90,19 +93,23 @@ const Page: FC<pageProps> = async ({ params }) => {
               page.pages.tmdb.tags
             }
           </p>
-          <div className='flex flex-wrap items-center gap-1.5 mx-2'>
-            {
-              data.genres.map((genre) => (
-                <Badge key={genre.id}>
-                  {genre.name}
-                </Badge>
-              ))
-            }
-          </div>
+          {
+            data?.genres && (
+              <div className='flex flex-wrap items-center gap-1.5 mx-2'>
+                {
+                  data.genres.map((genre) => (
+                    <Badge key={genre.id}>
+                      {genre.name}
+                    </Badge>
+                  ))
+                }
+              </div>
+            )
+          }
         </div>
       </div>
     </div>
-    {data.similar.length > 0 && <>
+    {data?.similar?.length > 0 && <>
       <h2 className='font-bold text-2xl my-2 text-center mt-16'>
         {page.pages.tmdb.movies.movie.similarMovies}
       </h2>

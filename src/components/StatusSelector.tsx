@@ -15,11 +15,29 @@ import { FrontendSeriesResponse } from '@/types/series'
 import { toast } from './ui/use-toast'
 import { useTranslations } from 'next-intl'
 import { Button } from './ui/button'
-import { deleteField, doc, updateDoc } from 'firebase/firestore'
+import { deleteDoc,  doc, onSnapshot } from 'firebase/firestore'
 import { Separator } from './ui/separator'
+import { useRouter } from 'next/navigation'
+
 interface StatusSelectorProps {
-    movieResult?: MovieResponse
-    seriesResult?: FrontendSeriesResponse
+    movieResult?: MovieResponse | {
+        id: string
+        title: string
+        poster_path: string
+        release_date: string
+        original_title: string
+        overview: string
+
+    }
+    seriesResult?: FrontendSeriesResponse | {
+        id: string
+        title: string
+        poster_path: string
+        first_air_date?: string
+        last_air_date?: string
+        overview: string
+        
+    }
     type: string
 }
 
@@ -28,8 +46,24 @@ const StatusSelector: FC<StatusSelectorProps> = ({ movieResult, seriesResult, ty
     const [status, setStatus] = useState("Status")
     const global = useTranslations("global")
     const t = useTranslations("status")
+    const router = useRouter()
     const { user } = useAuth()
+    useEffect(() => {
+        const unsubscribe = onSnapshot(doc(db, `/users/${user?.uid}/${type === "series" ? "series" : "movies"
+            }/${type === "series" ? seriesResult?.id : movieResult?.id
+            }`), (doc) => {
+                const status = doc.data()?.status
+                if (status) {
+                    setStatus(status)
+                }
 
+
+
+            })
+
+        return () => unsubscribe()
+
+    }, [])
 
     const allStatus = [
         {
@@ -102,26 +136,40 @@ const StatusSelector: FC<StatusSelectorProps> = ({ movieResult, seriesResult, ty
 
             if (type === "series") {
                 if (!seriesResult) return
+
+                /* 
+                                const docRef = doc(db, `users/${user?.uid}/series`,
+                                    seriesResult?.id.toString())
+                
+                                const data = {
+                                    status: deleteField()
+                                };
+                                await updateDoc(docRef, data);
+                                setStatus("Status") */
                 const docRef = doc(db, `users/${user?.uid}/series`,
                     seriesResult?.id.toString())
-
-                const data = {
-                    status: deleteField()
-                };
-                await updateDoc(docRef, data);
+                await deleteDoc(docRef)
                 setStatus("Status")
+                window.location.reload()
+
                 return
             }
             if (type === "movie") {
                 if (!movieResult) return
+                /*   const docRef = doc(db, `users/${user?.uid}/movies`,
+                      movieResult?.id.toString())
+  
+                  const data = {
+                      status: deleteField()
+                  };
+                  await updateDoc(docRef, data);
+                  setStatus("Status") */
+
                 const docRef = doc(db, `users/${user?.uid}/movies`,
                     movieResult?.id.toString())
-
-                const data = {
-                    status: deleteField()
-                };
-                await updateDoc(docRef, data);
+                await deleteDoc(docRef)
                 setStatus("Status")
+                window.location.reload()
                 return
             }
         } catch (error: any) {

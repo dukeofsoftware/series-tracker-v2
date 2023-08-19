@@ -7,14 +7,18 @@ import dynamic from "next/dynamic"
 const ReactQueryDevtools = dynamic(() => import("@tanstack/react-query-devtools").then((mod) => mod.ReactQueryDevtools), { ssr: false })
 
 import { ThemeProvider } from "next-themes"
+import { NextIntlClientProvider } from "next-intl"
+import { formatLanguage } from "@/lib/utils"
 
 
 interface ProvidersProps {
   children: React.ReactNode
+  lang: string
+  messages: any
 }
 const queryClient = new QueryClient()
 
-const Providers: FC<ProvidersProps> = ({ children }) => {
+const Providers: FC<ProvidersProps> = ({ children, lang, messages }) => {
   const [isMounted, setIsMounted] = useState(false)
   useEffect(() => {
     setIsMounted(true)
@@ -22,15 +26,17 @@ const Providers: FC<ProvidersProps> = ({ children }) => {
   if (!isMounted) return null
   return (
     <>
+      <NextIntlClientProvider locale={formatLanguage(lang)} messages={messages} >
 
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" enableSystem >
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider attribute="class" enableSystem >
 
-          {children}
-          <ReactQueryDevtools initialIsOpen={false} />
-        </ThemeProvider>
+            {children}
+            <ReactQueryDevtools initialIsOpen={false} />
+          </ThemeProvider>
 
-      </QueryClientProvider>
+        </QueryClientProvider>
+      </NextIntlClientProvider>
 
     </>
   )

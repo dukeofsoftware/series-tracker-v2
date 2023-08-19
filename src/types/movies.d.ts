@@ -1,3 +1,4 @@
+import { MovieCardType } from '@/types/movies';
 interface Genre {
   id: number
   name: string
@@ -80,7 +81,7 @@ export interface MovieResponse {
   images: Images
 }
 
-export interface SimilarMovieType {
+export interface MovieCardType {
   id: number
   title: string
   poster_path: string

@@ -22,7 +22,7 @@ const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage }) => {
         : `/tmdb/series/${result.id}`
 
     }>
-      <Card className="group relative h-[420px] w-[280px] rounded-md">
+      <Card className="group relative   w-[200px] h-[300px] sm:h-[420px] sm:w-[280px] rounded-md">
 
         <Image
           src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}

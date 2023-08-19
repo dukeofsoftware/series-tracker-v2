@@ -57,11 +57,3 @@ export async function deleteData(collection: string, id: string) {
     throw new Error(e)
   }
 }
-onSnapshot(doc(db, `/users/${auth.currentUser?.uid}`), (doc) => {
-  const setUsername = useUsernameStore.getState().setUsername
-  const username = doc.data()?.username
-  if (username) {
-    setUsername(username)
-    return
-  }
-})

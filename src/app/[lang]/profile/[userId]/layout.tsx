@@ -32,6 +32,10 @@ export default function Layout({
 
     const tabs = [
         {
+            name: "All",
+            href: `/profile/${params.userId}`,
+        },
+        {
             name: "Favorites",
             href: `/profile/${params.userId}/favorites`,
 

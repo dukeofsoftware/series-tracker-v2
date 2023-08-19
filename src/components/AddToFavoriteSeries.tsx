@@ -8,10 +8,18 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { toast } from './ui/use-toast'
 import { useTranslations } from 'next-intl'
 import { BiLoaderAlt } from 'react-icons/bi'
-import { FrontendSeriesResponse } from '@/types/series'
 interface AddToFavoriteSeriesProps {
-    result: FrontendSeriesResponse
+    result: {
+        id: number
+        title: string
+        poster_path: string
+        first_air_date?: string
+        last_air_date?: string
+        overview: string
+
+    }
 }
+
 
 const AddToFavoriteSeries: FC<AddToFavoriteSeriesProps> = ({ result }) => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -54,6 +62,19 @@ const AddToFavoriteSeries: FC<AddToFavoriteSeriesProps> = ({ result }) => {
             return
         }
         setIsFavorite((prev) => !prev)
+        const dataFB = await getDocument(`users/${user.uid}/series`, result.id.toString())
+
+        if (!dataFB?.status) {
+
+            await addData(`users/${user.uid}/series`, result.id.toString(), {
+                id: result.id,
+                title: result.title,
+                poster_path: result.poster_path,
+                date: result.first_air_date || result.last_air_date,
+                overview: result.overview,
+                status: "not-started"
+            })
+        }
 
         try {
             await addData(`users/${user.uid}/series`, result.id.toString(), {
@@ -64,19 +85,37 @@ const AddToFavoriteSeries: FC<AddToFavoriteSeriesProps> = ({ result }) => {
                 date: result.first_air_date || result.last_air_date,
                 overview: result.overview,
             })
-            
-            if (isFavorite) {
-                toast({
-                    title: global("toast.success"),
-                    description: t('removeFromFavorites', { title: result.title })
+            if (isFavorite)
+                await addData(`users/${user.uid}/series`, result.id.toString(), {
+                    isFavorite: false,
+                    id: result.id,
+                    title: result.title,
+                    poster_path: result.poster_path,
+                    date: result.first_air_date || result.last_air_date,
+                    overview: result.overview,
                 })
-            } else {
-                toast({
-                    title: global("toast.success"),
-                    description: t('addToFavorites', { title: result.title })
-                })
-            }
+            toast({
+                title: global("toast.success"),
+                description: t('removeFromFavorites', { title: result.title  })
+            })
 
+            if (!isFavorite) {
+
+                await addData(`users/${user.uid}/series`, result.id.toString(), {
+                    isFavorite: true,
+                    id: result.id,
+                    title: result.title,
+                    poster_path: result.poster_path,
+                    date: result.first_air_date || result.last_air_date,
+                    overview: result.overview,
+                })
+                toast({
+                    title: global("toast.success"),
+                    description: t('addToFavorites')
+                })
+
+
+            }
 
         } catch (error: any) {
 

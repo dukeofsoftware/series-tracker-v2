@@ -1,8 +1,10 @@
 'use client'
+import dynamic from 'next/dynamic'
 
 import { FC, useEffect, useState } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import SearchBar from './SearchBar'
+
+const SearchBar = dynamic(() => import("./SearchBar").then((mod) => mod), { ssr: false })
 import { useDebounce } from 'use-debounce';
 import qs from "query-string"
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -19,11 +21,12 @@ import {
 interface SidebarProps { }
 
 const Sidebar: FC<SidebarProps> = ({ }) => {
+
     const params = useSearchParams()
 
-    const [text, setText] = useState(params.get("query") || "")
+    const [text, setText] = useState(params.get("query"))
 
-    const [type, setType] = useState(params.get("type") || "all")
+    const [type, setType] = useState(params.get("type"))
     const [adult, setAdult] = useState<boolean>(
         params.get("adult") === "true" ? true : false
     )
@@ -32,7 +35,7 @@ const Sidebar: FC<SidebarProps> = ({ }) => {
 
     const router = useRouter()
     useEffect(() => {
-        
+        if (!value) return
         /* check for spaces */
 
         let currentQuery = {}
@@ -53,7 +56,7 @@ const Sidebar: FC<SidebarProps> = ({ }) => {
         )
 
         router.push(url)
-    }, [value, params])
+    }, [value])
     useEffect(() => {
 
         let currentQuery = {}
@@ -75,7 +78,7 @@ const Sidebar: FC<SidebarProps> = ({ }) => {
         router.push(url)
     }, [type])
     useEffect(() => {
-
+        if (!adult) return
         let currentQuery = {}
         if (params) {
             currentQuery = qs.parse(params.toString())
@@ -97,9 +100,9 @@ const Sidebar: FC<SidebarProps> = ({ }) => {
 
     return <aside className=' fixed h-[91vh] w-72  bg-gray-900 py-2 rounded-md'>
         <ScrollArea className='flex flex-col mx-3 '>
-            <SearchBar text={text} setText={setText} />
-            <Select defaultValue={type} onValueChange={(e) => setType(e)}>
-                <SelectTrigger  className="w-full my-2">
+            <SearchBar text={text!} setText={setText} />
+            <Select defaultValue={type!} onValueChange={(e) => setType(e)}>
+                <SelectTrigger className="w-full my-2">
                     <SelectValue placeholder="Select type" />
                 </SelectTrigger>
                 <SelectContent>

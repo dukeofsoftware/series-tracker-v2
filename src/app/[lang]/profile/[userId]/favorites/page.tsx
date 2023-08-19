@@ -2,9 +2,9 @@
 
 import { FC, useEffect, useState } from 'react'
 import { getCollection } from "@/lib/firebase/firestore"
-import { SimilarMovieType } from '@/types/movies'
 import MovieCard from '@/components/feed/card/MovieCard'
 import { useTranslations } from 'next-intl'
+import { MovieCardType } from '@/types/movies'
 interface pageProps {
     params: {
         userId: string
@@ -41,7 +41,7 @@ const Page: FC<pageProps> = ({ params }) => {
         </h1>
         <ul className='flex flex-wrap gap-4 justify-center'>
             {
-                movies?.map((movie: SimilarMovieType) => (
+                movies?.map((movie: MovieCardType) => (
                     <li className='key={movie.id}'>
                         <MovieCard result={movie} />
                     </li>

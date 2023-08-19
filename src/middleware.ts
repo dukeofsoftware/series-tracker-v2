@@ -76,6 +76,7 @@ function redirectToLogin(request: NextRequest) {
 }
 
 export async function middleware(request: NextRequest) {
+  
   return authentication(request, {
     loginPath: "/api/login",
     logoutPath: "/api/logout",
@@ -103,6 +104,7 @@ export async function middleware(request: NextRequest) {
       return intlMiddleware(request)
     },
     handleInvalidToken: async () => {
+      
       return redirectToLogin(request)
     },
     handleError: async (error) => {

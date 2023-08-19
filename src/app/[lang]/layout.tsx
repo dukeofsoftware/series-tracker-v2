@@ -8,8 +8,6 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ServerAuthProvider } from "@/components/providers/server-auth-provider"
 import { Toaster } from "@/components/ui/toaster"
-import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
 import { formatLanguage } from "@/lib/utils"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -49,17 +47,15 @@ export default async function RootLayout({
         className={`${inter.className} ${process.env.NODE_ENV !== "production" && "debug-screens"
           } dark:bg-slate-900 dark:text-slate-50 bg-slate-50 text-slate-900 `}
       >
-        <NextIntlClientProvider locale={formatLanguage(lang)} messages={messages} >
 
-          <ServerAuthProvider>
+        <ServerAuthProvider>
 
-            <Providers>
-              <Navbar />
-              {children}
-              <Toaster />
-            </Providers>
-          </ServerAuthProvider>
-        </NextIntlClientProvider>
+          <Providers lang={lang} messages={messages}>
+            <Navbar />
+            {children}
+            <Toaster />
+          </Providers>
+        </ServerAuthProvider>
 
       </body>
     </html>

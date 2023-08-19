@@ -28,11 +28,7 @@ const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({ }) => {
             text: t("profile"),
             link: `/profile/${user?.uid}`,
         },
-        {
-            icon: <AiOutlineUnorderedList className="h-4 w-4" />,
-            text: t("myLists"),
-            link: "/profile",
-        },
+      
         {
             icon: <AiFillHeart className="h-4 w-4 text-red-500" />,
             text: t("favorites"),

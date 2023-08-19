@@ -2,15 +2,24 @@
 
 import { FC, useEffect, useState } from 'react'
 import { useAuth } from './providers/context'
-import { addData, getDocument } from '@/lib/firebase/firestore'
+import { addData, db, getDocument } from '@/lib/firebase/firestore'
 import { Button } from './ui/button'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { toast } from './ui/use-toast'
 import { MovieResponse } from '@/types/movies'
 import { useTranslations } from 'next-intl'
 import { BiLoaderAlt } from 'react-icons/bi'
+import { doc,  onSnapshot } from 'firebase/firestore'
 interface AddToFavoriteMovieProps {
-    result: MovieResponse
+    result: MovieResponse | {
+        id: string | number
+        title: string
+        poster_path: string
+        release_date: string
+        original_title: string
+        overview: string
+
+    }
 }
 
 const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
@@ -22,12 +31,23 @@ const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
 
     if (!user) return null
     useEffect(() => {
+        const unsubscribe = onSnapshot(doc(db, `/users/${user?.uid}/
+            movies/${result?.id}`), (doc) => {
+            
+
+        })
+
+        return () => unsubscribe()
+    }, [])
+
+    useEffect(() => {
         const getData = async () => {
 
             try {
                 const data = await getDocument(`users/${user.uid}/movies`, result.id.toString())
 
                 if (data) {
+                    console.log(data.isFavorite)
                     setIsFavorite(data.isFavorite)
                 }
                 else {
@@ -56,26 +76,54 @@ const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
         setIsFavorite((prev) => !prev)
 
         try {
+            const dataFB = await getDocument(`users/${user.uid}/movies`, result.id.toString())
 
-            await addData(`users/${user.uid}/movies`, result.id.toString(), {
-                isFavorite: !isFavorite,
-                id: result.id,
-                title: result.title,
-                poster_path: result.poster_path,
-                release_date: result.release_date,
-                original_title: result.original_title,
-                overview: result.overview,
-            })
-            if (isFavorite) {
-                toast({
-                    title: global("toast.success"),
-                    description: t('removeFromFavorites', { title: result.title || result.original_title })
+            if (!dataFB?.status) {
+
+                await addData(`users/${user.uid}/movies`, result.id.toString(), {
+                    isFavorite: !isFavorite,
+                    id: result.id,
+                    title: result.title,
+                    poster_path: result.poster_path,
+                    release_date: result.release_date,
+                    original_title: result.original_title,
+                    overview: result.overview,
+                    status: "not-started",
                 })
-            } else {
+            }
+
+            if (isFavorite)
+                await addData(`users/${user.uid}/movies`, result.id.toString(), {
+                    isFavorite: false,
+                    id: result.id,
+                    title: result.title,
+                    poster_path: result.poster_path,
+                    release_date: result.release_date,
+                    original_title: result.original_title,
+                    overview: result.overview,
+                })
+            toast({
+                title: global("toast.success"),
+                description: t('removeFromFavorites', { title: result.title || result.original_title })
+            })
+
+            if (!isFavorite) {
+
+                await addData(`users/${user.uid}/movies`, result.id.toString(), {
+                    isFavorite: true,
+                    id: result.id,
+                    title: result.title,
+                    poster_path: result.poster_path,
+                    release_date: result.release_date,
+                    original_title: result.original_title,
+                    overview: result.overview,
+                })
                 toast({
                     title: global("toast.success"),
                     description: t('addToFavorites', { title: result.title || result.original_title })
                 })
+
+
             }
 
 

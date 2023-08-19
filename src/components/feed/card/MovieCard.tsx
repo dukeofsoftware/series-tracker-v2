@@ -5,22 +5,22 @@ import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import dynamic from "next/dynamic"
 import Link from "next/link"
-import { SimilarMovieType } from "@/types/movies"
+import { MovieCardType } from "@/types/movies"
 const CardContent = dynamic(() => import("./CardContent"), { ssr: false })
 const AdultContent = dynamic(() => import("./AdultContent"), { ssr: false })
 const AirDate = dynamic(() => import("./AirDate"), { ssr: false })
 interface TrendFeedCardProps {
-  result: SimilarMovieType 
+  result: MovieCardType
   priorImage?: boolean
 }
 
 const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage }) => {
   return (
     <Link href={
-        `/tmdb/movies/${result.id}`
+      `/tmdb/movies/${result.id}`
 
     }>
-      <Card className="group relative h-[420px] w-[280px] rounded-md">
+      <Card className="group relative  w-[200px] h-[300px] sm:h-[420px] sm:w-[280px] rounded-md">
 
         <Image
           src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}
@@ -29,7 +29,7 @@ const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage }) => {
           priority={priorImage}
           className="absolute rounded-md "
         />
-        <AirDate release_date={result.release_date}  />
+        <AirDate release_date={result.release_date} />
         <CardContent
           title={result.title}
           original_title={result.original_title}
