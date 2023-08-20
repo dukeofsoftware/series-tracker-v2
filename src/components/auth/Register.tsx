@@ -3,13 +3,17 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
+import { useUsernameStore } from "@/hooks/useUsername"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth"
+import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 
+import { addData, getDocument } from "@/lib/firebase/firestore"
+import { autoUsername, randomUsername } from "@/lib/utils"
 import { RegisterSchema, RegisterType } from "@/lib/validators/authSchema"
 import { Button } from "@/components/ui/button"
 import {
@@ -23,13 +27,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
-import { useTranslations } from "next-intl"
-import { addData, getDocument } from "@/lib/firebase/firestore"
-import { useUsernameStore } from "@/hooks/useUsername"
-import { autoUsername, randomUsername } from "@/lib/utils"
 
-
-const Register = ({ }) => {
+const Register = ({}) => {
   const router = useRouter()
   const { getFirebaseAuth } = useFirebaseAuth()
   const global = useTranslations("global")
@@ -55,26 +54,28 @@ const Register = ({ }) => {
           Authorization: `Bearer ${idTokenResult.token}`,
         },
       })
-      const username = await getDocument("users", credential.user.uid).then((doc) => {
-        return doc?.username
-      })
-
+      const username = await getDocument("users", credential.user.uid).then(
+        (doc) => {
+          return doc?.username
+        }
+      )
 
       if (!username) {
-        const username = await getDocument("users", credential.user.uid).then((doc) => {
-          return doc?.username
-        })
-
+        const username = await getDocument("users", credential.user.uid).then(
+          (doc) => {
+            return doc?.username
+          }
+        )
 
         if (!username) {
-          const newUsername = autoUsername(credential.user.email || randomUsername()
-
+          const newUsername = autoUsername(
+            credential.user.email || randomUsername()
           )
           await addData(`usernames`, newUsername, {
-            uid: credential.user.uid
+            uid: credential.user.uid,
           })
           await addData(`users`, credential.user.uid, {
-            username: newUsername
+            username: newUsername,
           })
         }
       }
@@ -89,19 +90,16 @@ const Register = ({ }) => {
       })
       return
     } catch (error: any) {
-      console.error(error);
+      console.error(error)
       toast({
         title: global("toast.error", {
           code: error.code,
         }),
         description: error.message,
         variant: "destructive",
-      });
+      })
     }
-
   }
-
-
 
   return (
     <Form {...form}>
@@ -129,9 +127,7 @@ const Register = ({ }) => {
               <FormControl>
                 <Input placeholder="********" type="password" {...field} />
               </FormControl>
-              <FormDescription>
-                {t("passwordInputDescription")}
-              </FormDescription>
+              <FormDescription>{t("passwordInputDescription")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -145,7 +141,9 @@ const Register = ({ }) => {
               <FormControl>
                 <Input placeholder="********" type="password" {...field} />
               </FormControl>
-              <FormDescription>{t("confirmPasswordInputDescription")}</FormDescription>
+              <FormDescription>
+                {t("confirmPasswordInputDescription")}
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -159,9 +157,7 @@ const Register = ({ }) => {
             {t("login")}
           </Link>
         </p>
-        <Button type="submit" >
-          {t("buttonLabel")}
-        </Button>
+        <Button type="submit">{t("buttonLabel")}</Button>
       </form>
     </Form>
   )

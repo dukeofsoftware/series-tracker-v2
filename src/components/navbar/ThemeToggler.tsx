@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useTheme } from "next-themes"
 import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs"
 
@@ -11,12 +12,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useTranslations } from 'next-intl';
 
-const ThemeToggler = ({ }) => {
+const ThemeToggler = ({}) => {
   const { theme, setTheme } = useTheme()
-  const t = useTranslations('navbar.themes');
-
+  const t = useTranslations("navbar.themes")
 
   return (
     <DropdownMenu>

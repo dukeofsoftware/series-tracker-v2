@@ -86,4 +86,3 @@ export const loginWithProvider = async (
 
   return result.user
 }
-

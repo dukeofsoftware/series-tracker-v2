@@ -17,7 +17,6 @@ export const usePaginateSearch = () => {
     async ({}) => {
       if (!query) return
       if (query.length < 3) return
-      
 
       const responseQuery = `/api/tmdb/search?query=${query}&page=${page}
                 ${type ? `type=${type}&` : ""}

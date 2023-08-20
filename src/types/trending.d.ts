@@ -19,8 +19,6 @@ export type TrendingResult = {
   first_air_date?: string
 }
 
-
-
 export type TrendingPage = {
   page: number
   results: TrendingResult[]

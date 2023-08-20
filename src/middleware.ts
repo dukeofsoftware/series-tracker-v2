@@ -46,8 +46,6 @@ function redirectToHome(request: NextRequest) {
   return NextResponse.redirect(url)
 }
 
-
-
 function redirectToLogin(request: NextRequest) {
   const defaultLocale =
     getLocale(request) || request.headers.get("x-default-locale") || "en"
@@ -76,7 +74,6 @@ function redirectToLogin(request: NextRequest) {
 }
 
 export async function middleware(request: NextRequest) {
-  
   return authentication(request, {
     loginPath: "/api/login",
     logoutPath: "/api/logout",
@@ -104,7 +101,6 @@ export async function middleware(request: NextRequest) {
       return intlMiddleware(request)
     },
     handleInvalidToken: async () => {
-      
       return redirectToLogin(request)
     },
     handleError: async (error) => {

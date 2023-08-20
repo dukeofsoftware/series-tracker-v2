@@ -24,7 +24,7 @@ export async function uploadProfilePhoto(
       photoURL,
     })
     await addData("users", currentUser.uid, { photoURL })
-  
+
     if (username) {
       await addData(`usernames`, username, {
         photoURL,

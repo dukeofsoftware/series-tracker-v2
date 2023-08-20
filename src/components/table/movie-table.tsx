@@ -1,27 +1,27 @@
 "use client"
 
+import * as React from "react"
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
-  getPaginationRowModel,
-  SortingState,
-  ColumnFiltersState,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
   VisibilityState,
-
 } from "@tanstack/react-table"
-import { Input } from "@/components/ui/input"
+import { useTranslations } from "next-intl"
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import * as React from "react"
-
+import { Input } from "@/components/ui/input"
 import {
   Table,
   TableBody,
@@ -31,7 +31,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "../ui/button"
-import { useTranslations } from "next-intl"
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
@@ -51,7 +51,6 @@ export function MovieTable<TData, TValue>({
       id: false,
       date: false,
       status: false,
-
     })
   const table = useReactTable({
     data,
@@ -68,7 +67,6 @@ export function MovieTable<TData, TValue>({
       sorting,
       columnFilters,
       columnVisibility,
-
     },
   })
 
@@ -92,9 +90,7 @@ export function MovieTable<TData, TValue>({
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
-              .filter(
-                (column) => column.getCanHide()
-              )
+              .filter((column) => column.getCanHide())
               .map((column) => {
                 return (
                   <DropdownMenuCheckboxItem
@@ -123,9 +119,9 @@ export function MovieTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   )
                 })}
@@ -139,19 +135,22 @@ export function MovieTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
                     </TableCell>
                   ))}
-
                 </TableRow>
-
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   {t("noData")}
                 </TableCell>
               </TableRow>
@@ -178,6 +177,5 @@ export function MovieTable<TData, TValue>({
         </Button>
       </div>
     </div>
-
   )
 }

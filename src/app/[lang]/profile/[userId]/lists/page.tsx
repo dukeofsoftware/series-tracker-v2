@@ -1,13 +1,11 @@
-'use client'
+"use client"
 
-import { FC } from 'react'
+import { FC } from "react"
 
 interface PageProps {}
 
 const Page: FC<PageProps> = ({}) => {
-  return <>
-    Page
-  </>
+  return <>Page</>
 }
 
 export default Page

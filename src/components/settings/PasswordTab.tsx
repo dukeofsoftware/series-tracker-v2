@@ -4,6 +4,7 @@ import { FC } from "react"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { updatePassword } from "firebase/auth"
+import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 
 import {
@@ -11,6 +12,13 @@ import {
   resetPasswordValidator,
 } from "@/lib/validators/resetPassword"
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import {
   Form,
   FormControl,
@@ -22,15 +30,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { useTranslations } from "next-intl"
-
 
 const PasswordTab = () => {
   const { getFirebaseAuth } = useFirebaseAuth()
@@ -56,20 +55,15 @@ const PasswordTab = () => {
           }),
           description: error.message,
           variant: "destructive",
-        });
-
+        })
       })
   }
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>
-          {t("title")}
-        </CardTitle>
-        <CardDescription>
-          {t("description")}
-        </CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -79,9 +73,7 @@ const PasswordTab = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    {t("inputLabel")}
-                  </FormLabel>
+                  <FormLabel>{t("inputLabel")}</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="*********" {...field} />
                   </FormControl>
@@ -95,27 +87,19 @@ const PasswordTab = () => {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    {
-                      t("confirmInputLabel")
-                    }
-                  </FormLabel>
+                  <FormLabel>{t("confirmInputLabel")}</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="********" {...field} />
                   </FormControl>
                   <FormDescription>
-                    {
-                      t("confirmInputDescription")
-                    }
+                    {t("confirmInputDescription")}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            <Button type="submit">
-              {t("buttonLabel")}
-            </Button>
+            <Button type="submit">{t("buttonLabel")}</Button>
           </form>
         </Form>
       </CardContent>

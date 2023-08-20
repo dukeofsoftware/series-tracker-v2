@@ -4,10 +4,10 @@ import { FC, useEffect, useMemo } from "react"
 import { useSearchParams } from "next/navigation"
 import { usePaginateTrending } from "@/hooks/usePaginateTrending"
 import { TrendingPage, TrendingResult } from "@/types/trending"
+import { useTranslations } from "next-intl"
 
 import PaginationButtons from "../PaginationButtons"
 import TrendFeedCard, { TrendFeedCardSkeleton } from "./card/TrendFeedCard"
-import { useTranslations } from "next-intl"
 
 interface TrendingFeedProps {
   cachedData: TrendingPage
@@ -16,8 +16,8 @@ interface TrendingFeedProps {
 const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
   const params = useSearchParams()
   const page = useMemo(() => params.get("page")!, [params]) || "1"
-  const pageTranslation = useTranslations('pages.main');
-  const t = useTranslations('global.messages');
+  const pageTranslation = useTranslations("pages.main")
+  const t = useTranslations("global.messages")
 
   const { data, isLoading, refetch, isFetching } = usePaginateTrending(
     cachedData,
@@ -40,14 +40,18 @@ const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
             <ul className="mt-6 flex flex-wrap justify-center gap-5 px-20">
               {data ? (
                 data?.results?.map((result: TrendingResult, index: number) => {
-
                   if (index < 4) {
                     return (
-                      <li key={index}>   <TrendFeedCard result={result} priorImage={true} /></li>
-
+                      <li key={index}>
+                        {" "}
+                        <TrendFeedCard result={result} priorImage={true} />
+                      </li>
                     )
                   }
-                  return (<li key={index}><TrendFeedCard result={result} /></li>
+                  return (
+                    <li key={index}>
+                      <TrendFeedCard result={result} />
+                    </li>
                   )
                 })
               ) : (

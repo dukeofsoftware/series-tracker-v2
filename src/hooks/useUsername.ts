@@ -6,12 +6,10 @@ interface IStore {
 }
 
 export const useUsernameStore = create<IStore>()(
-    /* start */
-    (set, get) => ({
-      
-      username: null,
-      setUsername: (username: string | null) => set({ username }),
-    }),
-    /* end */
-  
+  /* start */
+  (set, get) => ({
+    username: null,
+    setUsername: (username: string | null) => set({ username }),
+  })
+  /* end */
 )

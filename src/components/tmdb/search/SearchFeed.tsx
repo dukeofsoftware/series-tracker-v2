@@ -1,25 +1,31 @@
-'use client'
+"use client"
 
-import PaginationButtons from '@/components/PaginationButtons'
-import TrendFeedCard, { TrendFeedCardSkeleton } from '@/components/feed/card/TrendFeedCard'
-import { usePaginateSearch } from '@/hooks/usePaginateSearch'
-import { FC } from 'react'
+import { FC } from "react"
+import { usePaginateSearch } from "@/hooks/usePaginateSearch"
 
-interface SearchFeedProps {
+import TrendFeedCard, {
+  TrendFeedCardSkeleton,
+} from "@/components/feed/card/TrendFeedCard"
+import PaginationButtons from "@/components/PaginationButtons"
 
-}
+interface SearchFeedProps {}
 
-const SearchFeed: FC<SearchFeedProps> = ({ }) => {
-    const { isFetching, isLoading, data } = usePaginateSearch()
-    return <div className='w-full'>
-        <div className='flex flex-wrap  gap-4 mx-4 min-h-screen w-full'>
-            {isLoading || isFetching ? <TrendFeedCardSkeleton /> :
-
-                data.results && data?.results.map((item: any, index: number) => <TrendFeedCard key={index} result={item} />)}
-
-
-        </div>
-        <PaginationButtons total_pages={data.total_pages} pageDB={data.page} />
+const SearchFeed: FC<SearchFeedProps> = ({}) => {
+  const { isFetching, isLoading, data } = usePaginateSearch()
+  return (
+    <div className="w-full">
+      <div className="mx-4 flex  min-h-screen w-full flex-wrap gap-4">
+        {isLoading || isFetching ? (
+          <TrendFeedCardSkeleton />
+        ) : (
+          data.results &&
+          data?.results.map((item: any, index: number) => (
+            <TrendFeedCard key={index} result={item} />
+          ))
+        )}
+      </div>
+      <PaginationButtons total_pages={data.total_pages} pageDB={data.page} />
     </div>
+  )
 }
 export default SearchFeed

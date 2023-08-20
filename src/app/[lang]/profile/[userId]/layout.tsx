@@ -1,121 +1,119 @@
 "use client"
-import { getDocument } from "@/lib/firebase/firestore"
-import { useEffect, useState } from "react"
 
+import { useEffect, useState } from "react"
 import Image from "next/image"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Link from "next/link"
 import { notFound, usePathname } from "next/navigation"
 import { useTheme } from "next-themes"
-import Link from "next/link"
-import FollowUser from "@/components/FollowUser"
+
+import { getDocument } from "@/lib/firebase/firestore"
 import FollowInformation from "@/components/FollowInformation"
+import FollowUser from "@/components/FollowUser"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function Layout({
-    children,
-    params,
+  children,
+  params,
 }: {
-    children: React.ReactNode
-    params: { userId: string }
+  children: React.ReactNode
+  params: { userId: string }
 }) {
-    const { theme } = useTheme()
-    const [user, setUser] = useState<any>(null)
-    const pathname = usePathname()
-    useEffect(() => {
-        const fetchUser = async () => {
-            const user = await getDocument("users", params.userId)
-            if (!user) return notFound()
-            setUser({
-                ...user,
-            })
-        }
-        fetchUser()
-    }, [params.userId])
+  const { theme } = useTheme()
+  const [user, setUser] = useState<any>(null)
+  const pathname = usePathname()
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getDocument("users", params.userId)
+      if (!user) return notFound()
+      setUser({
+        ...user,
+      })
+    }
+    fetchUser()
+  }, [params.userId])
 
-    const tabs = [
-        {
-            name: "All",
-            href: `/profile/${params.userId}`,
-        },
-        {
-            name: "Favorites",
-            href: `/profile/${params.userId}/favorites`,
-
-        },
-        {
-            name: "Lists",
-            href: `/profile/${params.userId}/lists`
-        },
-
-    ]
-    return (
-        <div className="container">
-            <div className='max-h-[520px] h-full relative  '>
-
-                <AspectRatio ratio={33 / 20} className='pb-0 -z-50 max-h-[520px] '>
-                    <Image
-                        src={
-                            theme === "dark" ?
-                                `/background.svg` :
-                                `/white-background.svg`}
-                        alt={"background"}
-                        fill
-                        className='object-cover -z-50'
-                    />
-
-                </AspectRatio>
-                <div className="flex gap-2 items-center z-30 absolute bottom-5 left-6">
-                    <Avatar className="sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] dark:bg-black border-2 dark:border-white bg-white border-black">
-                        <AvatarFallback>
-                            {user?.displayName ? user.displayName[0] : "U"}
-                        </AvatarFallback>
-                        <AvatarImage src={user?.photoURL} />
-                    </Avatar>
-                    <div className="flex flex-col gap-2">
-                        {user?.displayName && <h1 className="sm:text-3xl texlxl font-semibold">
-                            {user.displayName}</h1>}
-                        <p className="text-sm font-medium">
-                            {user?.username}
-                        </p>
-
-                    </div>
-                    <FollowUser pageUserId={params.userId}  />
-                    <FollowInformation userId={params.userId} />
-                </div>
-            </div>
-            <div className="flex items-center w-full z-30  ">
-                <ul className="flex border-2  w-full border-slate-950 dark:border-slate-50 rounded-md ">
-                    {tabs.map((tab) => {
-                        if (pathname === tab.href) {
-                            return (<li key={tab.name} className="grow w-full   bg-sky-400 hover:bg-sky-600">
-
-                                <Link href={tab.href} className=" p-2 flex items-center justify-center">
-                                    {tab.name}
-                                </Link>
-                            </li>)
-                        }
-                        else {
-                            return (
-                                <li key={tab.name} className="grow w-full   bg-sky-500 hover:bg-sky-600">
-
-                                    <Link href={tab.href} className=" h-full w-full p-2 flex items-center justify-center">
-                                        {tab.name}
-                                    </Link>
-                                </li>
-                            )
-                        }
-                    }
-
-                    )}
-                </ul>
-
-
-            </div>
-
-
-            {children}
-
+  const tabs = [
+    {
+      name: "All",
+      href: `/profile/${params.userId}`,
+    },
+    {
+      name: "Favorites",
+      href: `/profile/${params.userId}/favorites`,
+    },
+    {
+      name: "Lists",
+      href: `/profile/${params.userId}/lists`,
+    },
+  ]
+  return (
+    <div className="container">
+      <div className="relative h-full max-h-[520px]  ">
+        <AspectRatio ratio={33 / 20} className="-z-50 max-h-[520px] pb-0 ">
+          <Image
+            src={theme === "dark" ? `/background.svg` : `/white-background.svg`}
+            alt={"background"}
+            fill
+            className="-z-50 object-cover"
+          />
+        </AspectRatio>
+        <div className="absolute bottom-5 left-6 z-30 flex items-center gap-2">
+          <Avatar className="h-[60px] w-[60px] border-2 border-black bg-white dark:border-white dark:bg-black sm:h-[100px] sm:w-[100px]">
+            <AvatarFallback>
+              {user?.displayName ? user.displayName[0] : "U"}
+            </AvatarFallback>
+            <AvatarImage src={user?.photoURL} />
+          </Avatar>
+          <div className="flex flex-col gap-2">
+            {user?.displayName && (
+              <h1 className="texlxl font-semibold sm:text-3xl">
+                {user.displayName}
+              </h1>
+            )}
+            <p className="text-sm font-medium">{user?.username}</p>
+          </div>
+          <FollowUser pageUserId={params.userId} />
+          <FollowInformation userId={params.userId} />
         </div>
+      </div>
+      <div className="z-30 flex w-full items-center  ">
+        <ul className="flex w-full  rounded-md border-2 border-slate-950 dark:border-slate-50 ">
+          {tabs.map((tab) => {
+            if (pathname === tab.href) {
+              return (
+                <li
+                  key={tab.name}
+                  className="w-full grow   bg-sky-400 hover:bg-sky-600"
+                >
+                  <Link
+                    href={tab.href}
+                    className=" flex items-center justify-center p-2"
+                  >
+                    {tab.name}
+                  </Link>
+                </li>
+              )
+            } else {
+              return (
+                <li
+                  key={tab.name}
+                  className="w-full grow   bg-sky-500 hover:bg-sky-600"
+                >
+                  <Link
+                    href={tab.href}
+                    className=" flex h-full w-full items-center justify-center p-2"
+                  >
+                    {tab.name}
+                  </Link>
+                </li>
+              )
+            }
+          })}
+        </ul>
+      </div>
 
-    )
+      {children}
+    </div>
+  )
 }

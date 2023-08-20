@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { options } from "@/config/tmdb-config"
 
 export async function GET(request: NextRequest) {
- /*  const tokens = await getTokens(request.cookies, authConfig)
+  /*  const tokens = await getTokens(request.cookies, authConfig)
 
   if (!tokens) {
     throw new Error("Cannot update custom claims of unauthenticated user")

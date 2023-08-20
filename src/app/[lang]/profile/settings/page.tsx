@@ -1,10 +1,9 @@
 import { FC } from "react"
 
-
+import { getDictionary } from "@/lib/dictionary"
 import AccountTab from "@/components/settings/AccountTab"
 import MailTab from "@/components/settings/MailTab"
 import PasswordTab from "@/components/settings/PasswordTab"
-import { getDictionary } from "@/lib/dictionary"
 
 interface pageProps {
   params: {

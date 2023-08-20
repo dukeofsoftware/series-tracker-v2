@@ -1,6 +1,5 @@
 "use client"
-'use client'
-
+"use client"
 
 import axios from "axios"
 import { IoLanguage } from "react-icons/io5"
@@ -14,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-const LanguageSelector = ({ }) => {
+const LanguageSelector = ({}) => {
   const changeLanguage = async (lang: string) => {
     await axios.post("/api/locale", {
       language: lang,
@@ -49,7 +48,7 @@ const LanguageSelector = ({ }) => {
               {lang.name}
             </DropdownMenuItem>
           ))}
-         {/*  {
+          {/*  {
             languages.map((lang, i) => (
               <DropdownMenuItem
       asChild

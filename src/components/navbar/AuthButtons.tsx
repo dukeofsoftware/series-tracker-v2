@@ -1,12 +1,12 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 import { useAuth } from "@/components/providers/context"
 import { buttonVariants } from "@/components/ui/button"
-import { usePathname } from "next/navigation"
 
-const AuthButtons = ({ }) => {
+const AuthButtons = ({}) => {
   const { user } = useAuth()
   const pathname = usePathname()
 
@@ -15,16 +15,18 @@ const AuthButtons = ({ }) => {
     <>
       <div className="flex items-center justify-end gap-2">
         {pathname !== "/login" && (
-          <Link href="/login" className={buttonVariants({ variant: "outline" })}>
+          <Link
+            href="/login"
+            className={buttonVariants({ variant: "outline" })}
+          >
             Sign In
           </Link>
         )}
-        {
-          pathname !== "/register" && (<Link href="/register" className={buttonVariants()}>
+        {pathname !== "/register" && (
+          <Link href="/register" className={buttonVariants()}>
             Register
-          </Link>)
-        }
-
+          </Link>
+        )}
       </div>
     </>
   )

@@ -16,7 +16,11 @@ export async function GET(
 ) {
   try {
     const { movieId } = params
-    if(!movieId) return NextResponse.json({message:"Movie id is required"}, { status: 400 })
+    if (!movieId)
+      return NextResponse.json(
+        { message: "Movie id is required" },
+        { status: 400 }
+      )
     const { searchParams } = new URL(req.url)
     const language =
       searchParams.get("language") ||
@@ -27,9 +31,8 @@ export async function GET(
       `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=similar,images&language=${language}`,
       options
     ).then((response) => response.json())
-    
-    if (  
-      
+
+    if (
       result.images.backdrops.length === 0 ||
       result.images.logos.length === 0 ||
       result.images.posters.length === 0
@@ -57,7 +60,7 @@ export async function GET(
           return {
             id: movie.id,
             title: movie.title,
-            original_title:movie.original_title,
+            original_title: movie.original_title,
             overview: movie.overview,
             poster_path: movie.poster_path,
             release_date: movie.release_date,

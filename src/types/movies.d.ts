@@ -1,4 +1,5 @@
-import { MovieCardType } from '@/types/movies';
+import { MovieCardType } from "@/types/movies"
+
 interface Genre {
   id: number
   name: string

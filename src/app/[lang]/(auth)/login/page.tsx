@@ -1,11 +1,7 @@
 import SignIn from "@/components/auth/SignIn"
 
 const Page = () => {
-  return (
-    
-      <SignIn />
-    
-  )
+  return <SignIn />
 }
 
 export default Page

@@ -1,11 +1,9 @@
-import { FC } from 'react'
+import { FC } from "react"
 
-interface NotFoundProps { }
+interface NotFoundProps {}
 
-const NotFound: FC<NotFoundProps> = ({ }) => {
-    return <>
-        NotFound
-    </>
+const NotFound: FC<NotFoundProps> = ({}) => {
+  return <>NotFound</>
 }
 
 export default NotFound

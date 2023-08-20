@@ -5,13 +5,10 @@ import {
   getDoc,
   getDocs,
   getFirestore,
-  onSnapshot,
   setDoc,
 } from "firebase/firestore"
 
 import { app } from "."
-import { useUsernameStore } from "./../../hooks/useUsername"
-import { auth } from "./auth"
 
 export const db = getFirestore(app)
 

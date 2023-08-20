@@ -1,8 +1,10 @@
 "use client"
+
 import * as React from "react"
 import { FC } from "react"
 import Link from "next/link"
 
+import { cn } from "@/lib/utils"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,7 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { cn } from "@/lib/utils"
+
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a">
@@ -38,9 +40,9 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
-interface MiddleSectionProps { }
+interface MiddleSectionProps {}
 
-const MiddleSection: FC<MiddleSectionProps> = ({ }) => {
+const MiddleSection: FC<MiddleSectionProps> = ({}) => {
   const menuListArray = [
     {
       title: "Alert Dialog",
@@ -82,25 +84,20 @@ const MiddleSection: FC<MiddleSectionProps> = ({ }) => {
     <>
       <NavigationMenu>
         <NavigationMenuList>
-      
           <NavigationMenuItem>
-                  <Link href="/tmdb" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Tmdb
-                                          </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
+            <Link href="/tmdb" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Tmdb
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
           <NavigationMenuItem>
-                  <Link href="/search/profile" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Search User
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
+            <Link href="/search/profile" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Search User
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
     </>
@@ -108,4 +105,3 @@ const MiddleSection: FC<MiddleSectionProps> = ({ }) => {
 }
 
 export default MiddleSection
-

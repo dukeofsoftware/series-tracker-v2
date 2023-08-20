@@ -4,12 +4,16 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
+import { useUsernameStore } from "@/hooks/useUsername"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { signInWithEmailAndPassword } from "firebase/auth"
+import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { useLoadingCallback } from "react-loading-hook"
 
+import { addData, getDocument } from "@/lib/firebase/firestore"
+import { autoUsername, randomUsername } from "@/lib/utils"
 import { LoginSchema, LoginType } from "@/lib/validators/authSchema"
 import { Button } from "@/components/ui/button"
 import {
@@ -23,12 +27,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
-import { useTranslations } from "next-intl"
-import { useUsernameStore } from "@/hooks/useUsername"
-import { addData, getDocument } from "@/lib/firebase/firestore"
-import { autoUsername, randomUsername } from "@/lib/utils"
 
-const SignIn = ({ }) => {
+const SignIn = ({}) => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const auth = getFirebaseAuth()
 
@@ -41,14 +41,17 @@ const SignIn = ({ }) => {
   const t = useTranslations("pages.auth.login")
   const global = useTranslations("global.toast")
 
-
   const form = useForm<LoginType>({
     resolver: valibotResolver(LoginSchema),
   })
 
   async function onSubmit(data: LoginType) {
     try {
-      const credential = await signInWithEmailAndPassword(auth, data.email, data.password)
+      const credential = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      )
 
       const idTokenResult = await credential.user.getIdTokenResult()
       await fetch("/api/login", {
@@ -57,37 +60,36 @@ const SignIn = ({ }) => {
           Authorization: `Bearer ${idTokenResult.token}`,
         },
       })
-      const username = await getDocument("users", credential.user.uid).then((doc) => {
-        return doc?.username
-      })
-
+      const username = await getDocument("users", credential.user.uid).then(
+        (doc) => {
+          return doc?.username
+        }
+      )
 
       if (!username) {
-        const newUsername = autoUsername(credential.user.email || randomUsername()
-
+        const newUsername = autoUsername(
+          credential.user.email || randomUsername()
         )
         await addData(`usernames`, newUsername, {
-          uid: credential.user.uid
+          uid: credential.user.uid,
         })
         await addData(`users`, credential.user.uid, {
-          username: newUsername
+          username: newUsername,
         })
       }
       setUsername(username)
       if (!credential.user.emailVerified) {
         router.push("/verify-mail")
-        
       }
 
       setHasLogged(true)
-      
+
       router.push("/")
       toast({
         title: global("success"),
         description: t("toastDescription"),
       })
 
-    
       return
     } catch (error: any) {
       console.error(error)
@@ -97,12 +99,11 @@ const SignIn = ({ }) => {
         }),
         description: error.message,
         variant: "destructive",
-      });
-
+      })
     }
   }
   if (hasLogged) {
-    <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+    ;<div className="flex h-full w-full flex-col items-center justify-center gap-2">
       <span>
         Redirecting to <strong>{redirect || "/"}</strong>
       </span>
@@ -135,9 +136,7 @@ const SignIn = ({ }) => {
               <FormControl>
                 <Input placeholder="********" type="password" {...field} />
               </FormControl>
-              <FormDescription>
-                {t("passwordInputDescription")}
-              </FormDescription>
+              <FormDescription>{t("passwordInputDescription")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -152,9 +151,7 @@ const SignIn = ({ }) => {
           </Link>
         </p>
 
-        <Button type="submit">
-          {t("buttonLabel")}
-        </Button>
+        <Button type="submit">{t("buttonLabel")}</Button>
       </form>
     </Form>
   )

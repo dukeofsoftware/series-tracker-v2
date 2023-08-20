@@ -1,15 +1,20 @@
 "use client"
 
 import { FC, useEffect, useState } from "react"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-
 import dynamic from "next/dynamic"
-const ReactQueryDevtools = dynamic(() => import("@tanstack/react-query-devtools").then((mod) => mod.ReactQueryDevtools), { ssr: false })
-
-import { ThemeProvider } from "next-themes"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { NextIntlClientProvider } from "next-intl"
+import { ThemeProvider } from "next-themes"
+
 import { formatLanguage } from "@/lib/utils"
 
+const ReactQueryDevtools = dynamic(
+  () =>
+    import("@tanstack/react-query-devtools").then(
+      (mod) => mod.ReactQueryDevtools
+    ),
+  { ssr: false }
+)
 
 interface ProvidersProps {
   children: React.ReactNode
@@ -26,18 +31,14 @@ const Providers: FC<ProvidersProps> = ({ children, lang, messages }) => {
   if (!isMounted) return null
   return (
     <>
-      <NextIntlClientProvider locale={formatLanguage(lang)} messages={messages} >
-
+      <NextIntlClientProvider locale={formatLanguage(lang)} messages={messages}>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider attribute="class" enableSystem >
-
+          <ThemeProvider attribute="class" enableSystem>
             {children}
             <ReactQueryDevtools initialIsOpen={false} />
           </ThemeProvider>
-
         </QueryClientProvider>
       </NextIntlClientProvider>
-
     </>
   )
 }

@@ -1,10 +1,10 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 
 import { emailVerification } from "@/lib/firebase/auth"
 import { useAuth } from "@/components/providers/context"
 import { Button } from "@/components/ui/button"
-import { toast } from "@/components/ui/use-toast"
 import {
   Card,
   CardContent,
@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { useTranslations } from "next-intl"
+import { toast } from "@/components/ui/use-toast"
 
 const VerifyMail = () => {
   const { user } = useAuth()
@@ -24,18 +24,17 @@ const VerifyMail = () => {
       await emailVerification()
       toast({
         title: t("toastTitle"),
-        description: t("toastDescription")
+        description: t("toastDescription"),
       })
-      
     } catch (error: any) {
       console.error(error)
       toast({
         title: global("toast.error", {
-            code: error.code,
+          code: error.code,
         }),
         description: error.message,
         variant: "destructive",
-    }); 
+      })
     }
   }
 
@@ -43,12 +42,8 @@ const VerifyMail = () => {
     return (
       <Card className="w-full md:grow">
         <CardHeader>
-          <CardTitle>
-            {t("title")}
-          </CardTitle>
-          <CardDescription>
-            {t("description")}
-          </CardDescription>
+          <CardTitle>{t("title")}</CardTitle>
+          <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-xl font-semibold text-emerald-500">
@@ -56,25 +51,20 @@ const VerifyMail = () => {
           </p>
         </CardContent>
       </Card>
-
     )
   }
-  return (<Card className="w-full md:grow">
-    <CardHeader>
-      <CardTitle>
-        {t("title")}
-      </CardTitle>
-      <CardDescription>
-        {t("description")}
-      </CardDescription>
-    </CardHeader>
-    <CardContent>
-      <Button onClick={sendVerificationEmail}>
-        {t("verifyButtonLabel")}
-      </Button>
-    </CardContent>
-  </Card>
-
+  return (
+    <Card className="w-full md:grow">
+      <CardHeader>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Button onClick={sendVerificationEmail}>
+          {t("verifyButtonLabel")}
+        </Button>
+      </CardContent>
+    </Card>
   )
 }
 
