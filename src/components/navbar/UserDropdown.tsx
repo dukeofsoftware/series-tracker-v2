@@ -26,18 +26,8 @@ const UserDropdown = ({}) => {
   const [loading, setLoading] = useState(false)
   const t = useTranslations("navbar.accountDropdown")
   const global = useTranslations("global")
-  const [profilePhoto, setProfilePhoto] = useState<string | null>(null)
   if (!user) return null
-  useEffect(() => {
-    const unsubscribe = onSnapshot(doc(db, `/users/${user?.uid}`), (doc) => {
-      const profilePhoto = doc.data()?.profilePhoto
-      if (profilePhoto) {
-        setProfilePhoto(profilePhoto)
-        return
-      }
-    })
-    return () => unsubscribe()
-  }, [])
+
 
   const { getFirebaseAuth } = useFirebaseAuth()
   const handleLogOut = async () => {
@@ -63,7 +53,7 @@ const UserDropdown = ({}) => {
     }
   }
   return (
-    <>
+    
       <DropdownMenu>
         <DropdownMenuTrigger className="flex items-center gap-2 font-bold">
           <Avatar>
@@ -71,7 +61,7 @@ const UserDropdown = ({}) => {
               {user.displayName ? user?.displayName[0] : user?.email![0]}
             </AvatarFallback>
             <AvatarImage
-              src={profilePhoto || user?.photoURL!}
+              src={user?.photoURL!}
               alt={user?.displayName!}
             />
           </Avatar>
@@ -93,7 +83,7 @@ const UserDropdown = ({}) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </>
+    
   )
 }
 
