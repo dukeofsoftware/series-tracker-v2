@@ -50,7 +50,7 @@ export default function Layout({
   return (
     <div className="container">
       <div className="relative h-full max-h-[520px]  ">
-        <AspectRatio ratio={33 / 20} className="-z-50 max-h-[520px] pb-0 ">
+        <AspectRatio ratio={33 / 20} className=" max-h-[520px] pb-0 ">
           <Image
             src={theme === "dark" ? `/background.svg` : `/white-background.svg`}
             alt={"background"}
