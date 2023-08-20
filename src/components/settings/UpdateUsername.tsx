@@ -66,6 +66,7 @@ const UpdateUsername = ({ }) => {
             await addData(`users`, user?.uid, {
                 username: data.username
             })
+            
 
             toast({
                 title: toastTranslate("success"),

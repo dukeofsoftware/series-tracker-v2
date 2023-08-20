@@ -18,7 +18,7 @@
     }
   },
   "favorites": {
-    "title":"Favoriler",
+    "title": "Favoriler",
     "addToFavorites": "{title} favorilere eklendi",
     "removeFromFavorites": "{title} favorilerden kaldırıldı"
   },
@@ -49,6 +49,46 @@
   "pages": {
     "main": {
       "trendingTitle": "Trendler"
+    },
+    "profile": {
+      "tabs": {
+        "series": "Seriler",
+        "movies": "Filmler"
+      },
+      "tables": {
+        "movie": {
+          "title": "Başlık",
+          "overview": "Özet",
+          "favorite": "Favori",
+          "status": "Durum",
+          "score": "Puan",
+          "date": "Tarih",
+          "columns": "Sütunlar",
+          "actions": "İşlemler",
+          "viewDetails": "Detayları Gör",
+          "openMenu": "Menüyü Aç",
+          "noData": "Henüz hiç film eklenmemiş",
+          "previousPage": "Önceki Sayfa",
+          "nextPage": "Sonraki Sayfa",
+          "filterPlaceholder": "Başlığa Göre Filtrele..."
+        },
+        "series": {
+          "title": "Başlık",
+          "overview": "Özet",
+          "favorite": "Favori",
+          "status": "Durum",
+          "score": "Puan",
+          "date": "Tarih",
+          "columns": "Sütunlar",
+          "actions": "İşlemler",
+          "viewDetails": "Detayları Gör",
+          "openMenu": "Menüyü Aç",
+          "noData": "Henüz hiç seri eklenmemiş",
+          "previousPage": "Önceki Sayfa",
+          "nextPage": "Sonraki Sayfa",
+          "filterPlaceholder": "Başlığa Göre Filtrele..."
+        }
+      }
     },
     "settings": {
       "title": "Ayarlar",
@@ -138,7 +178,6 @@
     },
     "tmdb": {
       "tags": "Etiketler:",
-
       "movies": {
         "movie": {
           "similarMovies": "Benzer Filmler"

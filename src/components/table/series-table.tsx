@@ -31,6 +31,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Button } from "../ui/button"
+import { useTranslations } from "next-intl"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -41,6 +42,7 @@ export function SeriesTable<TData, TValue>({
     columns,
     data,
 }: DataTableProps<TData, TValue>) {
+    const t = useTranslations("pages.profile.tables.series")
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
@@ -74,10 +76,10 @@ export function SeriesTable<TData, TValue>({
 
     return (
         <div>
-         
+
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filter title..."
+                    placeholder={t("filterPlaceholder")}
                     value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         table.getColumn("title")?.setFilterValue(event.target.value)
@@ -87,7 +89,7 @@ export function SeriesTable<TData, TValue>({
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">
-                            Columns
+                            {t("columns")}
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -150,7 +152,7 @@ export function SeriesTable<TData, TValue>({
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
+                                    {t("noData")}
                                 </TableCell>
                             </TableRow>
                         )}
@@ -164,7 +166,7 @@ export function SeriesTable<TData, TValue>({
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                 >
-                    Previous
+                    {t("previousPage")}
                 </Button>
                 <Button
                     variant="outline"
@@ -172,7 +174,7 @@ export function SeriesTable<TData, TValue>({
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                 >
-                    Next
+                    {t("nextPage")}
                 </Button>
             </div>
         </div>

@@ -52,15 +52,22 @@ export const columns: ColumnDef<TMDB>[] = [
     },
     {
         accessorKey: "title",
-        header: "Title",
+        header: ({ column }) => {
+
+            const t = useTranslations("pages.profile.tables.movie")
+            return <div>
+                {t("title")}
+            </div>
+        }
     },
     {
         accessorKey: "overview",
         header: ({ column }) => {
+            const t = useTranslations("pages.profile.tables.movie")
 
             return (
                 <div className="hidden sm:block">
-                    Overview
+                    {t("overview")}
                 </div>
             )
         },
@@ -75,13 +82,15 @@ export const columns: ColumnDef<TMDB>[] = [
     {
         accessorKey: "status",
         header: ({ column }) => {
+            const t = useTranslations("pages.profile.tables.movie")
+
             return (
                 <Button
                     className="md:inline-flex hidden"
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Status
+                    {t("status")}
                     <LuArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
@@ -135,12 +144,13 @@ export const columns: ColumnDef<TMDB>[] = [
     {
         accessorKey: "isFavorite",
         header: ({ column }) => {
+            const t = useTranslations("pages.profile.tables.movie")
             return (
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Favorite
+                    {t("favorite")}
                     <LuArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
@@ -170,47 +180,37 @@ export const columns: ColumnDef<TMDB>[] = [
     {
         accessorKey: "date",
         header: ({ column }) => {
-            return null
-        }, cell: ({ row }) => {
-
-
-
-
-            return null
+            const t = useTranslations("pages.profile.tables.movie")
+            return <div>{t("date")}</div>
         },
     },
     {
         accessorKey: "id",
-        header: ({ column }) => {
-            return null
-        }, cell: ({ row }) => {
+        header: "id",
 
-
-
-
-            return null
-        },
     },
+
     {
         id: "actions",
+
         cell: ({ row }) => {
             const id = row.getValue("id")
+            const t = useTranslations("pages.profile.tables.movie")
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
+                            <span className="sr-only">{t("openMenu")}</span>
                             <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
                         <DropdownMenuItem>
                             <Link href={`/tmdb/movies/${id}`}>
-                                View Details
+                                {t("viewDetails")}
                             </Link>
                         </DropdownMenuItem>
-
                     </DropdownMenuContent>
                 </DropdownMenu>
             )

@@ -8,6 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { notFound, usePathname } from "next/navigation"
 import { useTheme } from "next-themes"
 import Link from "next/link"
+import FollowUser from "@/components/FollowUser"
+import FollowInformation from "@/components/FollowInformation"
 
 export default function Layout({
     children,
@@ -48,9 +50,9 @@ export default function Layout({
     ]
     return (
         <div className="container">
-            <div className='max-h-[520px] h-full relative -z-10'>
+            <div className='max-h-[520px] h-full relative  '>
 
-                <AspectRatio ratio={33 / 20} className='pb-0 max-h-[520px] '>
+                <AspectRatio ratio={33 / 20} className='pb-0 -z-50 max-h-[520px] '>
                     <Image
                         src={
                             theme === "dark" ?
@@ -58,11 +60,11 @@ export default function Layout({
                                 `/white-background.svg`}
                         alt={"background"}
                         fill
-                        className='object-cover'
+                        className='object-cover -z-50'
                     />
 
                 </AspectRatio>
-                <div className="flex gap-2 items-center z-10 absolute bottom-5 left-6">
+                <div className="flex gap-2 items-center z-30 absolute bottom-5 left-6">
                     <Avatar className="sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] dark:bg-black border-2 dark:border-white bg-white border-black">
                         <AvatarFallback>
                             {user?.displayName ? user.displayName[0] : "U"}
@@ -77,10 +79,11 @@ export default function Layout({
                         </p>
 
                     </div>
-
+                    <FollowUser pageUserId={params.userId}  />
+                    <FollowInformation userId={params.userId} />
                 </div>
             </div>
-            <div className="flex items-center w-full  ">
+            <div className="flex items-center w-full z-30  ">
                 <ul className="flex border-2  w-full border-slate-950 dark:border-slate-50 rounded-md ">
                     {tabs.map((tab) => {
                         if (pathname === tab.href) {

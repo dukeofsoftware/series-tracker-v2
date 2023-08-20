@@ -15,7 +15,7 @@ import { FrontendSeriesResponse } from '@/types/series'
 import { toast } from './ui/use-toast'
 import { useTranslations } from 'next-intl'
 import { Button } from './ui/button'
-import { deleteDoc,  doc, onSnapshot } from 'firebase/firestore'
+import { deleteDoc, doc, onSnapshot } from 'firebase/firestore'
 import { Separator } from './ui/separator'
 import { useRouter } from 'next/navigation'
 
@@ -36,7 +36,7 @@ interface StatusSelectorProps {
         first_air_date?: string
         last_air_date?: string
         overview: string
-        
+
     }
     type: string
 }
