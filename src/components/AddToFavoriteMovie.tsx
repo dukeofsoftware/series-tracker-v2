@@ -47,7 +47,6 @@ const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
                 const data = await getDocument(`users/${user.uid}/movies`, result.id.toString())
 
                 if (data) {
-                    console.log(data.isFavorite)
                     setIsFavorite(data.isFavorite)
                 }
                 else {

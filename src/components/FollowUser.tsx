@@ -27,7 +27,6 @@ const FollowUser: FC<FollowUserProps> = ({ pageUserId }) => {
                 setIsFollow(true)
             }
         } catch (error) {
-            console.log("FOLLOW: ", error)
         }
         finally {
             setIsLoading(false)
@@ -40,20 +39,18 @@ const FollowUser: FC<FollowUserProps> = ({ pageUserId }) => {
         try {
             if (!user) return
             if (isFollow) {
-                console.log("first")
                 await deleteData(`follow/${user?.uid}/followers`, pageUserId)
                 await deleteData(`follow/${pageUserId}/following`, user?.uid)
                 setIsFollow(false)
             }
             else {
-                console.log("ikinci")
                 await addData(`follow/${user?.uid}/followers`, pageUserId, { id: pageUserId })
                 await addData(`follow/${pageUserId}/following`, user?.uid, { id: user?.uid })
 
                 setIsFollow(true)
             }
         } catch (error) {
-            console.log("FOLLOW: ", error)
+            console.error("FOLLOW: ", error)
         }
 
     }

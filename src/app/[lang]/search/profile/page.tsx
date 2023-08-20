@@ -45,7 +45,6 @@ const Page: FC<PageProps> = ({ }) => {
         } else {
             setFilteredUsernames(usernames)
         }
-        console.log(filteredUsernames)
     }, [value])
     return <>
         <div className='my-2 container max-w-md'>

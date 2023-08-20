@@ -55,16 +55,12 @@ const FollowInformation: FC<FollowInformationProps> = ({ userId }) => {
             ))
 
             if (formattedFollowers.length === 0) {
-                console.log("first")
 
-                console.log(formattedFollowers)
                 setIsFollowers(null)
 
             }
             if (formattedFollowing.length === 0) {
-                console.log("second")
 
-                console.log(formattedFollowing)
                 setIsFollowing(null)
 
             } if (formattedFollowers.length !== 0) {
