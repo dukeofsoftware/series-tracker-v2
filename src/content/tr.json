@@ -54,8 +54,8 @@
     }
   },
   "follow": {
-    "followers": "Takipçiler",
-    "following": "Takip Edilenler"
+    "followers": "Takipçi",
+    "following": "Takip Edilen"
   },
   "searchUser": "Kullanıcı Ara",
   "pages": {
