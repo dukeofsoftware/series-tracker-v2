@@ -22,7 +22,10 @@ const ThemeToggler = ({}) => {
       <DropdownMenuTrigger
         role="button"
         aria-label="change theme"
-        className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
+        className={cn(
+          buttonVariants({ variant: "outline", size: "icon" }),
+          "hidden sm:flex"
+        )}
       >
         {theme === "dark" ? (
           <BsFillMoonFill className="h-4 w-4" />
@@ -33,7 +36,7 @@ const ThemeToggler = ({}) => {
           />
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="hidden sm:block">
         <DropdownMenuItem onClick={() => setTheme("light")}>
           <BsFillSunFill className="mr-2 h-4 w-4 text-yellow-500" />
           {t("lightMode")}

@@ -15,7 +15,7 @@ const Page: FC<pageProps> = async ({ params }) => {
   const lang = await getDictionary(params.lang)
 
   return (
-    <main className="container mt-6 flex flex-col gap-4">
+    <main className="mx-2 mt-2 flex flex-col gap-4 sm:container md:mt-6">
       <h1 className="my-2 text-center text-2xl font-bold">
         {lang.pages.settings.title}
       </h1>

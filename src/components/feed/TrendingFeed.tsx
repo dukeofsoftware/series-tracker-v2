@@ -37,7 +37,7 @@ const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
       ) : (
         <div>
           <div className="min-h-screen ">
-            <ul className="mt-6 flex flex-wrap justify-center gap-5 px-20">
+            <ul className="mt-6 flex flex-wrap justify-center gap-5  px-4 sm:px-12 md:px-16 lg:px-20">
               {data ? (
                 data?.results?.map((result: TrendingResult, index: number) => {
                   if (index < 4) {

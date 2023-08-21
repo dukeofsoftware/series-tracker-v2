@@ -1,5 +1,4 @@
 module.exports = {
-    siteUrl: 'https://example.com', // FIXME: Change to the production URL
-    generateRobotsTxt: true,
-    output: 'export',
-  };
+  siteUrl: 'https://series-tracker-v2.vercel.app/',
+  generateRobotsTxt: true,
+};

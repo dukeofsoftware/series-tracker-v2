@@ -14,7 +14,7 @@ const SearchFeed: FC<SearchFeedProps> = ({}) => {
   const { isFetching, isLoading, data } = usePaginateSearch()
   return (
     <div className="w-full">
-      <div className="mx-4 flex  min-h-screen w-full flex-wrap gap-4">
+      <div className="mx-4 flex min-h-screen  w-full flex-wrap justify-center gap-4">
         {isLoading || isFetching ? (
           <TrendFeedCardSkeleton />
         ) : (

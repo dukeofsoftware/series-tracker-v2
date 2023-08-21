@@ -28,27 +28,26 @@ const LanguageSelector = ({}) => {
   ]
 
   return (
-    <>
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          role="button"
-          aria-label="Language Selector"
-          className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
-        >
-          <IoLanguage />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          {languages.map((lang, i) => (
-            <DropdownMenuItem
-              onClick={() => {
-                changeLanguage(lang.code)
-              }}
-              key={i}
-            >
-              {lang.name}
-            </DropdownMenuItem>
-          ))}
-          {/*  {
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        role="button"
+        aria-label="Language Selector"
+        className={cn(buttonVariants({ variant: "outline", size: "icon" }), "")}
+      >
+        <IoLanguage />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="">
+        {languages.map((lang, i) => (
+          <DropdownMenuItem
+            onClick={() => {
+              changeLanguage(lang.code)
+            }}
+            key={i}
+          >
+            {lang.name}
+          </DropdownMenuItem>
+        ))}
+        {/*  {
             languages.map((lang, i) => (
               <DropdownMenuItem
       asChild
@@ -60,9 +59,8 @@ const LanguageSelector = ({}) => {
               </DropdownMenuItem>
             ))
           } */}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 

@@ -22,6 +22,14 @@
     "addToFavorites": "{title} favorilere eklendi",
     "removeFromFavorites": "{title} favorilerden kaldırıldı"
   },
+  "search": {
+    "title": "Ara",
+    "searchFor": "Film ve dizileri ara",
+    "adultContent": "Yetişkin İçeriği",
+    "all": "Hepsi",
+    "movie": "Film",
+    "series": "Dizi"
+  },
   "status": {
     "statusTitle": "Durum",
     "deleteStatus": "Durumu Sil",
@@ -41,11 +49,11 @@
       "dropdownTitle": "Hesabım",
       "logout": "Çıkış Yap",
       "favorites": "Favoriler",
-      "myLists": "Listelerim",
       "profile": "Profil",
       "settings": "Ayarlar"
     }
   },
+  "searchUser": "Kullanıcı Ara",
   "pages": {
     "main": {
       "trendingTitle": "Trendler"

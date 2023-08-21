@@ -12,23 +12,18 @@ const AuthButtons = ({}) => {
 
   if (user) return null
   return (
-    <>
-      <div className="flex items-center justify-end gap-2">
-        {pathname !== "/login" && (
-          <Link
-            href="/login"
-            className={buttonVariants({ variant: "outline" })}
-          >
-            Sign In
-          </Link>
-        )}
-        {pathname !== "/register" && (
-          <Link href="/register" className={buttonVariants()}>
-            Register
-          </Link>
-        )}
-      </div>
-    </>
+    <div className="hidden items-center justify-end gap-2 sm:flex">
+      {pathname !== "/login" && (
+        <Link href="/login" className={buttonVariants({ variant: "outline" })}>
+          Sign In
+        </Link>
+      )}
+      {pathname !== "/register" && (
+        <Link href="/register" className={buttonVariants()}>
+          Register
+        </Link>
+      )}
+    </div>
   )
 }
 

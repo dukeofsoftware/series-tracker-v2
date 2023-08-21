@@ -24,7 +24,7 @@ const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage }) => {
           : `/tmdb/series/${result.id}`
       }
     >
-      <Card className="group relative   h-[300px] w-[200px] rounded-md sm:h-[420px] sm:w-[280px]">
+      <Card className="group relative   h-[240px] w-[160px] rounded-md sm:h-[420px] sm:w-[280px]">
         <Image
           src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}
           alt={result.title || result.name || result.original_title}
@@ -56,7 +56,7 @@ export const TrendFeedCardSkeleton = () => {
     <ul className="mt-6 flex flex-wrap justify-center gap-5 px-20">
       {arr.map((_, i) => (
         <li key={i}>
-          <Skeleton className="relative h-[420px] w-[280px] rounded-md bg-black" />
+          <Skeleton className="relative h-[240px] w-[160px] rounded-md bg-black sm:h-[420px] sm:w-[280px]" />
         </li>
       ))}
     </ul>

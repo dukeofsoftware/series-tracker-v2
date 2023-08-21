@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import MiddleSection from "./MiddleSection"
+import MobileNavbar from "./MobileNavbar"
 import RightSection from "./RightSection"
 
 const Navbar = () => {
@@ -11,6 +12,7 @@ const Navbar = () => {
       </Link>
       <MiddleSection />
       <RightSection />
+      <MobileNavbar />
     </header>
   )
 }

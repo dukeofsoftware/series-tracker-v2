@@ -18,7 +18,7 @@ interface TrendFeedCardProps {
 const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage }) => {
   return (
     <Link href={`/tmdb/movies/${result.id}`}>
-      <Card className="group relative  h-[300px] w-[200px] rounded-md sm:h-[420px] sm:w-[280px]">
+      <Card className="group relative  h-[240px] w-[160px] rounded-md sm:h-[420px] sm:w-[280px]">
         <Image
           src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}
           alt={result.title || result.original_title}

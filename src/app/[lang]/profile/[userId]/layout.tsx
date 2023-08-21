@@ -19,7 +19,6 @@ export default function Layout({
   children: React.ReactNode
   params: { userId: string }
 }) {
-  const { theme } = useTheme()
   const [user, setUser] = useState<any>(null)
   const pathname = usePathname()
   useEffect(() => {
@@ -42,23 +41,19 @@ export default function Layout({
       name: "Favorites",
       href: `/profile/${params.userId}/favorites`,
     },
-    {
-      name: "Lists",
-      href: `/profile/${params.userId}/lists`,
-    },
   ]
   return (
     <div className="container">
-      <div className="relative h-full max-h-[520px]  ">
+      <div className="relative h-full max-h-[520px] text-slate-50 ">
         <AspectRatio ratio={33 / 20} className=" max-h-[520px] pb-0 ">
           <Image
-            src={theme === "dark" ? `/background.svg` : `/white-background.svg`}
+            src={`/background.svg`}
             alt={"background"}
             fill
-            className="-z-50 object-cover"
+            className=" object-cover"
           />
         </AspectRatio>
-        <div className="absolute bottom-5 left-6 z-30 flex items-center gap-2">
+        <div className="absolute bottom-5 left-6 z-30 flex flex-wrap items-center gap-2">
           <Avatar className="h-[60px] w-[60px] border-2 border-black bg-white dark:border-white dark:bg-black sm:h-[100px] sm:w-[100px]">
             <AvatarFallback>
               {user?.displayName ? user.displayName[0] : "U"}

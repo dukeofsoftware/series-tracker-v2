@@ -49,7 +49,7 @@ const Page: FC<PageProps> = ({}) => {
       <div className="container my-2 max-w-md">
         <SearchBar text={text} setText={setText} />
       </div>
-      <ul className="flex flex-wrap ">
+      <ul className="container flex flex-wrap ">
         {filteredUsernames && filteredUsernames?.length > 0 ? (
           filteredUsernames.map((username: any) => {
             return (

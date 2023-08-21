@@ -11,8 +11,8 @@ interface AirDateProps {
 
 const AirDate: FC<AirDateProps> = ({ release_date, first_air_date }) => {
   return (
-    <div className="absolute left-3 top-3 flex items-center gap-2">
-      <Badge className=" w-full bg-sky-500/20 text-sm font-medium text-white group-hover:bg-sky-500/80">
+    <div className="absolute left-2 top-2 flex items-center sm:left-3 sm:top-3 ">
+      <Badge className=" w-full bg-sky-500/20 text-xs font-medium text-white group-hover:bg-sky-500/80 sm:text-sm">
         {release_date || first_air_date}
       </Badge>
     </div>
