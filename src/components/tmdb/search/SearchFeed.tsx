@@ -8,9 +8,8 @@ import TrendFeedCard, {
 } from "@/components/feed/card/TrendFeedCard"
 import PaginationButtons from "@/components/PaginationButtons"
 
-interface SearchFeedProps {}
 
-const SearchFeed: FC<SearchFeedProps> = ({}) => {
+const SearchFeed = ({}) => {
   const { isFetching, isLoading, data } = usePaginateSearch()
   return (
     <div className="w-full">
