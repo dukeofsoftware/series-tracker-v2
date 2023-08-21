@@ -4,12 +4,10 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound, usePathname } from "next/navigation"
-import { useTheme } from "next-themes"
 
 import { getDocument } from "@/lib/firebase/firestore"
 import FollowInformation from "@/components/FollowInformation"
 import FollowUser from "@/components/FollowUser"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function Layout({
@@ -44,15 +42,13 @@ export default function Layout({
   ]
   return (
     <div className="container">
-      <div className="relative h-full max-h-[520px] text-slate-50 ">
-        <AspectRatio ratio={33 / 20} className=" max-h-[520px] pb-0 ">
+      <div className="relative h-[520px] text-slate-50 ">
           <Image
             src={`/background.svg`}
             alt={"background"}
             fill
             className=" object-cover"
           />
-        </AspectRatio>
         <div className="absolute bottom-5 left-6 z-30 flex flex-wrap items-center gap-2">
           <Avatar className="h-[60px] w-[60px] border-2 border-black bg-white dark:border-white dark:bg-black sm:h-[100px] sm:w-[100px]">
             <AvatarFallback>
