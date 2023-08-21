@@ -22,7 +22,14 @@ function getLocale(request: NextRequest): string | undefined {
   const locale = matchLocale(languages, locales, i18n.defaultLocale)
   return locale
 }
-const PUBLIC_PATHS = ["/login", "/register"]
+const PUBLIC_PATHS = [
+  "/login",
+  "/register",
+  "/profile",
+  "/search/profile",
+  "/tmdb",
+  
+]
 function redirectToHome(request: NextRequest) {
   if (!PUBLIC_PATHS.includes(request.nextUrl.pathname)) {
     const defaultLocale =
