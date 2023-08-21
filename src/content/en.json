@@ -8,8 +8,8 @@
       "errorDescription": "An error occurred. Please try again later.",
       "firebase": {
         "emailVerify": "You need to verify your email address to perform this action.",
-        "username": "You must have a username to make your profile visible to everyone.",
-        "usernameProvide": "You need to enter a username to use the app's features.",
+        "username": "You need a username for your profile to be visible to everyone.",
+        "usernameProvide": "You need to provide a username to use the app's features.",
         "usernameProvideTitle": "Warning! Username Required"
       }
     },
@@ -18,8 +18,17 @@
     }
   },
   "favorites": {
+    "title": "Favorites",
     "addToFavorites": "{title} added to favorites.",
     "removeFromFavorites": "{title} removed from favorites."
+  },
+  "search": {
+    "title": "Search",
+    "searchFor": "Search for movies and series",
+    "adultContent": "Adult Content",
+    "all": "All",
+    "movie": "Movie",
+    "series": "Series"
   },
   "status": {
     "statusTitle": "Status",
@@ -44,13 +53,58 @@
       "settings": "Settings"
     }
   },
+  "follow": {
+    "followers": "Followers",
+    "following": "Following"
+  },
+  "searchUser": "Search User",
   "pages": {
     "main": {
-      "trendingTitle": "Trending"
+      "trendingTitle": "Trends"
+    },
+    "profile": {
+      "tabs": {
+        "series": "Series",
+        "movies": "Movies"
+      },
+      "tables": {
+        "movie": {
+          "title": "Title",
+          "overview": "Overview",
+          "favorite": "Favorite",
+          "status": "Status",
+          "score": "Score",
+          "date": "Date",
+          "columns": "Columns",
+          "actions": "Actions",
+          "viewDetails": "View Details",
+          "openMenu": "Open Menu",
+          "noData": "No movies added yet",
+          "previousPage": "Previous Page",
+          "nextPage": "Next Page",
+          "filterPlaceholder": "Filter by Title..."
+        },
+        "series": {
+          "title": "Title",
+          "overview": "Overview",
+          "favorite": "Favorite",
+          "status": "Status",
+          "score": "Score",
+          "date": "Date",
+          "columns": "Columns",
+          "actions": "Actions",
+          "viewDetails": "View Details",
+          "openMenu": "Open Menu",
+          "noData": "No series added yet",
+          "previousPage": "Previous Page",
+          "nextPage": "Next Page",
+          "filterPlaceholder": "Filter by Title..."
+        }
+      }
     },
     "settings": {
       "title": "Settings",
-      "description": "You need to enter a username and verify your email address to use the app's features.",
+      "description": "You need to provide a username and verify your email address to use the app's features.",
       "accountTab": {
         "updateProfilePhoto": {
           "title": "Profile Photo",
@@ -60,7 +114,7 @@
         },
         "updateDisplayName": {
           "toastDescription": "Your profile name has been changed.",
-          "currentName": "Your current name is {name}",
+          "currentName": "Your current name is {name}.",
           "title": "Profile Name",
           "description": "Change your profile name.",
           "inputLabel": "New Name",
@@ -70,9 +124,9 @@
         "updateUsername": {
           "usernameTaken": "This username is already taken.",
           "toastDescription": "Your username has been changed.",
-          "currentUsername": "Your current username is {username}",
+          "currentUsername": "Your current username is {username}.",
           "title": "Username",
-          "description": "Change your username. Your current username is {username}",
+          "description": "Change your username. Your current username is {username}.",
           "inputLabel": "New Username",
           "inputDescription": "Enter your new username.",
           "buttonLabel": "Change Username"
@@ -85,14 +139,14 @@
           "description": "Change your email address.",
           "inputLabel": "New Email",
           "confirmInputLabel": "Confirm New Email",
-          "confirmInputDescription": "Enter the new email again.",
+          "confirmInputDescription": "Enter your new email again.",
           "inputDescription": "Enter your new email address.",
           "buttonLabel": "Change Email"
         },
         "verifyEmail": {
-          "toastDescription": "A verification email has been sent to your email address.",
+          "toastDescription": "A verification email has been sent to your address.",
           "toastTitle": "Email Verification",
-          "verifiedMail": "Your email address is verified.",
+          "verifiedMail": "Your email address has been verified.",
           "verifyButtonLabel": "Verify Email",
           "title": "Email Verification",
           "description": "You can verify your email address here.",
@@ -105,7 +159,7 @@
         "inputLabel": "New Password",
         "inputDescription": "Enter your new password.",
         "confirmInputLabel": "Confirm New Password",
-        "confirmInputDescription": "Enter the new password again.",
+        "confirmInputDescription": "Enter your new password again.",
         "buttonLabel": "Change Password",
         "toastDescription": "Your password has been changed."
       }
@@ -135,8 +189,7 @@
       }
     },
     "tmdb": {
-      "tags": "Tags",
-
+      "tags": "Tags:",
       "movies": {
         "movie": {
           "similarMovies": "Similar Movies"

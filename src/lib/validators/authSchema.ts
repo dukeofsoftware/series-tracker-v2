@@ -1,14 +1,12 @@
 import {
-  custom,
   email,
   minLength,
   object,
   string,
   ValiError,
   type Output,
-} from "valibot"
+} from "valibot" /*  */
 
-// 0.76 kB
 
 export const LoginSchema = object({
   email: string([email()]),
@@ -32,7 +30,7 @@ export const RegisterSchema = object(
       minLength(8, "You password must have 8 characters or more."),
     ]),
   },
-  [
+  [ /* check */
     (input) => {
       if (input.password !== input.confirmPassword) {
         throw new ValiError([

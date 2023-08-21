@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
 import { useUsernameStore } from "@/hooks/useUsername"
 import { valibotResolver } from "@hookform/resolvers/valibot"
@@ -29,7 +28,6 @@ import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 
 const Register = ({}) => {
-  const router = useRouter()
   const { getFirebaseAuth } = useFirebaseAuth()
   const global = useTranslations("global")
   const t = useTranslations("pages.auth.register")

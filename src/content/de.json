@@ -1,15 +1,15 @@
 {
   "global": {
-    "adult": "Erwachsene",
-    "loading": "Laden...",
+    "adult": "Erwachseneninhalt",
+    "loading": "Wird geladen...",
     "toast": {
       "success": "Erfolgreich",
       "error": "Fehler {code}",
-      "errorDescription": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
+      "errorDescription": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
       "firebase": {
-        "emailVerify": "Um diese Aktion auszuführen, müssen Sie Ihre E-Mail-Adresse bestätigen.",
-        "username": "Um Ihr Profil für alle sichtbar zu machen, benötigen Sie einen Benutzernamen.",
-        "usernameProvide": "Um die Funktionen der App nutzen zu können, müssen Sie Ihren Benutzernamen eingeben.",
+        "emailVerify": "Sie müssen Ihre E-Mail-Adresse verifizieren, um diese Aktion durchzuführen.",
+        "username": "Sie benötigen einen Benutzernamen, um Ihr Profil für alle sichtbar zu machen.",
+        "usernameProvide": "Um die Funktionen der Anwendung nutzen zu können, müssen Sie einen Benutzernamen angeben.",
         "usernameProvideTitle": "Warnung! Benutzername erforderlich"
       }
     },
@@ -18,15 +18,24 @@
     }
   },
   "favorites": {
+    "title": "Favoriten",
     "addToFavorites": "{title} wurde zu Favoriten hinzugefügt.",
     "removeFromFavorites": "{title} wurde aus Favoriten entfernt."
+  },
+  "search": {
+    "title": "Suchen",
+    "searchFor": "Filme und Serien suchen",
+    "adultContent": "Erwachseneninhalt",
+    "all": "Alle",
+    "movie": "Film",
+    "series": "Serie"
   },
   "status": {
     "statusTitle": "Status",
     "deleteStatus": "Status löschen",
     "notStarted": "Nicht begonnen",
     "watching": "Wird angesehen",
-    "completed": "Abgeschlossen",
+    "completed": "Abgeschlossen angesehen",
     "onHold": "In Wartestellung",
     "dropped": "Abgebrochen",
     "planToWatch": "Geplant anzusehen"
@@ -38,19 +47,64 @@
     },
     "accountDropdown": {
       "dropdownTitle": "Mein Konto",
-      "logout": "Ausloggen",
+      "logout": "Abmelden",
       "favorites": "Favoriten",
       "profile": "Profil",
       "settings": "Einstellungen"
     }
   },
+  "follow": {
+    "followers": "Follower",
+    "following": "Folge ich"
+  },
+  "searchUser": "Benutzer suchen",
   "pages": {
     "main": {
       "trendingTitle": "Trends"
     },
+    "profile": {
+      "tabs": {
+        "series": "Serien",
+        "movies": "Filme"
+      },
+      "tables": {
+        "movie": {
+          "title": "Titel",
+          "overview": "Übersicht",
+          "favorite": "Favorit",
+          "status": "Status",
+          "score": "Bewertung",
+          "date": "Datum",
+          "columns": "Spalten",
+          "actions": "Aktionen",
+          "viewDetails": "Details anzeigen",
+          "openMenu": "Menü öffnen",
+          "noData": "Es wurden noch keine Filme hinzugefügt.",
+          "previousPage": "Vorherige Seite",
+          "nextPage": "Nächste Seite",
+          "filterPlaceholder": "Nach Titel filtern..."
+        },
+        "series": {
+          "title": "Titel",
+          "overview": "Übersicht",
+          "favorite": "Favorit",
+          "status": "Status",
+          "score": "Bewertung",
+          "date": "Datum",
+          "columns": "Spalten",
+          "actions": "Aktionen",
+          "viewDetails": "Details anzeigen",
+          "openMenu": "Menü öffnen",
+          "noData": "Es wurden noch keine Serien hinzugefügt.",
+          "previousPage": "Vorherige Seite",
+          "nextPage": "Nächste Seite",
+          "filterPlaceholder": "Nach Titel filtern..."
+        }
+      }
+    },
     "settings": {
       "title": "Einstellungen",
-      "description": "Um die Funktionen der App nutzen zu können, müssen Sie einen Benutzernamen eingeben und Ihre E-Mail-Adresse bestätigen.",
+      "description": "Um die Funktionen der Anwendung nutzen zu können, müssen Sie einen Benutzernamen angeben und Ihre E-Mail-Adresse verifizieren.",
       "accountTab": {
         "updateProfilePhoto": {
           "title": "Profilfoto",
@@ -60,7 +114,7 @@
         },
         "updateDisplayName": {
           "toastDescription": "Ihr Profilname wurde geändert.",
-          "currentName": "Ihr aktueller Name ist {name}",
+          "currentName": "Ihr aktueller Name ist {name}.",
           "title": "Profilname",
           "description": "Ändern Sie Ihren Profilnamen.",
           "inputLabel": "Neuer Name",
@@ -70,9 +124,9 @@
         "updateUsername": {
           "usernameTaken": "Dieser Benutzername ist bereits vergeben.",
           "toastDescription": "Ihr Benutzername wurde geändert.",
-          "currentUsername": "Ihr aktueller Benutzername ist {username}",
+          "currentUsername": "Ihr aktueller Benutzername ist {username}.",
           "title": "Benutzername",
-          "description": "Ändern Sie Ihren Benutzernamen. Ihr aktueller Benutzername ist {username}",
+          "description": "Ändern Sie Ihren Benutzernamen. Ihr aktueller Benutzername ist {username}.",
           "inputLabel": "Neuer Benutzername",
           "inputDescription": "Geben Sie Ihren neuen Benutzernamen ein.",
           "buttonLabel": "Benutzernamen ändern"
@@ -84,13 +138,13 @@
           "toastDescription": "Ihre E-Mail-Adresse wurde geändert.",
           "description": "Ändern Sie Ihre E-Mail-Adresse.",
           "inputLabel": "Neue E-Mail",
-          "confirmInputLabel": "Neue E-Mail bestätigen",
-          "confirmInputDescription": "Geben Sie die neue E-Mail erneut ein.",
+          "confirmInputLabel": "Neue E-Mail erneut eingeben",
+          "confirmInputDescription": "Geben Sie Ihre neue E-Mail erneut ein.",
           "inputDescription": "Geben Sie Ihre neue E-Mail-Adresse ein.",
           "buttonLabel": "E-Mail ändern"
         },
         "verifyEmail": {
-          "toastDescription": "Eine Bestätigungs-E-Mail wurde an Ihre E-Mail-Adresse gesendet.",
+          "toastDescription": "Eine Bestätigungs-E-Mail wurde an Ihre Adresse gesendet.",
           "toastTitle": "E-Mail-Bestätigung",
           "verifiedMail": "Ihre E-Mail-Adresse wurde bestätigt.",
           "verifyButtonLabel": "E-Mail bestätigen",
@@ -104,38 +158,38 @@
         "description": "Ändern Sie Ihr Kontopasswort.",
         "inputLabel": "Neues Passwort",
         "inputDescription": "Geben Sie Ihr neues Passwort ein.",
-        "confirmInputLabel": "Neues Passwort bestätigen",
-        "confirmInputDescription": "Geben Sie das neue Passwort erneut ein.",
+        "confirmInputLabel": "Neues Passwort erneut eingeben",
+        "confirmInputDescription": "Geben Sie Ihr neues Passwort erneut ein.",
         "buttonLabel": "Passwort ändern",
         "toastDescription": "Ihr Passwort wurde geändert."
       }
     },
     "auth": {
       "login": {
-        "emailInputDescription": "Wir werden Ihre E-Mail-Adresse mit niemandem teilen.",
+        "emailInputDescription": "Wir werden Ihre E-Mail-Adresse nicht weitergeben.",
         "passwordLabel": "Passwort",
-        "passwordInputDescription": "Wir werden Ihr Passwort mit niemandem teilen.",
+        "passwordInputDescription": "Wir werden Ihr Passwort nicht weitergeben.",
         "dontHaveAccount": "Sie haben noch kein Konto?",
         "register": "Registrieren",
-        "buttonLabel": "Anmelden",
-        "toastDescription": "Sie haben sich erfolgreich angemeldet."
+        "buttonLabel": "Einloggen",
+        "toastDescription": "Sie haben sich erfolgreich eingeloggt."
       },
       "register": {
         "toastSuccessDescription": "Sie haben sich erfolgreich registriert.",
-        "verifyToastTitle": "Überprüfen Sie Ihre E-Mail",
-        "verifyToastDescription": "Wir haben eine E-Mail zur Bestätigung Ihrer E-Mail-Adresse gesendet.",
-        "emailInputDescription": "Wir werden Ihre E-Mail-Adresse mit niemandem teilen.",
+        "verifyToastTitle": "Überprüfen Sie Ihre E-Mails",
+        "verifyToastDescription": "Wir haben Ihnen eine E-Mail zur Bestätigung geschickt.",
+        "emailInputDescription": "Wir werden Ihre E-Mail-Adresse nicht weitergeben.",
         "passwordLabel": "Passwort",
-        "passwordInputDescription": "Wir werden Ihr Passwort mit niemandem teilen.",
+        "passwordInputDescription": "Wir werden Ihr Passwort nicht weitergeben.",
         "confirmPasswordLabel": "Passwort bestätigen",
         "confirmPasswordInputDescription": "Geben Sie Ihr Passwort erneut ein.",
         "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
-        "login": "Anmelden",
+        "login": "Einloggen",
         "buttonLabel": "Registrieren"
       }
     },
     "tmdb": {
-      "tags": "Tags",
+      "tags": "Tags:",
       "movies": {
         "movie": {
           "similarMovies": "Ähnliche Filme"
@@ -146,7 +200,7 @@
           "similarSeries": "Ähnliche Serien",
           "season": {
             "season": "Staffel ",
-            "episodes": "Episoden",
+            "episodes": "Folgen",
             "episode": "Folge {episodeNumber}"
           }
         }
