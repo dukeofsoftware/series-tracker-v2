@@ -112,7 +112,9 @@ const AddToFavoriteSeries: FC<AddToFavoriteSeriesProps> = ({ result }) => {
         })
         toast({
           title: global("toast.success"),
-          description: t("addToFavorites"),
+          description: t("addToFavorites", {
+            title: result.title,
+          }),
         })
       }
     } catch (error: any) {
