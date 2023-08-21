@@ -10,7 +10,6 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import { useLoadingCallback } from "react-loading-hook"
 
 import { addData, getDocument } from "@/lib/firebase/firestore"
 import { autoUsername, randomUsername } from "@/lib/utils"

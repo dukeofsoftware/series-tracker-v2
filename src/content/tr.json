@@ -53,6 +53,10 @@
       "settings": "Ayarlar"
     }
   },
+  "follow": {
+    "followers": "Takipçiler",
+    "following": "Takip Edilenler"
+  },
   "searchUser": "Kullanıcı Ara",
   "pages": {
     "main": {

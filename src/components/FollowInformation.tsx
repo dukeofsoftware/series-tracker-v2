@@ -15,14 +15,14 @@ import {
 import FollowUser from "./FollowUser"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { ScrollArea } from "./ui/scroll-area"
+import { useTranslations } from "next-intl"
 
 interface FollowInformationProps {
   userId: string
 }
 const FollowInformation: FC<FollowInformationProps> = ({ userId }) => {
-  const [isLoading, setIsLoading] = useState(false)
   const [following, setIsFollowing] = useState<null | any>(null)
-
+  const t = useTranslations("follow")
   const [followers, setIsFollowers] = useState<null | any>(null)
   const getFollow = async () => {
     try {
@@ -68,8 +68,6 @@ const FollowInformation: FC<FollowInformationProps> = ({ userId }) => {
       return
     } catch (error) {
       console.error(error)
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -81,11 +79,11 @@ const FollowInformation: FC<FollowInformationProps> = ({ userId }) => {
       {followers ? (
         <Dialog>
           <DialogTrigger className="text-sx italic underline">
-            {followers?.length} Followers
+            {followers?.length} {t("followers")}
           </DialogTrigger>
           <DialogContent className="">
             <DialogHeader>
-              <DialogTitle>Followers</DialogTitle>
+              <DialogTitle>{t("followers")}</DialogTitle>
             </DialogHeader>
             <ScrollArea className="flex h-[380px] flex-col gap-2">
               {followers?.map(
@@ -129,18 +127,18 @@ const FollowInformation: FC<FollowInformationProps> = ({ userId }) => {
         </Dialog>
       ) : (
         <p className="text-sx italic underline">
-          {followers?.length || 0} Followers
+          {followers?.length || 0} {t("followers")}
         </p>
       )}
       <pre></pre>
       {following ? (
         <Dialog>
           <DialogTrigger className="text-sx italic underline">
-            {following?.length || 0} Following
+            {following?.length || 0} {t("following")}
           </DialogTrigger>
           <DialogContent className="">
             <DialogHeader>
-              <DialogTitle>Following</DialogTitle>
+              <DialogTitle>{t("following")}</DialogTitle>
             </DialogHeader>
             <ScrollArea className="flex h-[380px] flex-col gap-2">
               {following?.map(
@@ -184,7 +182,7 @@ const FollowInformation: FC<FollowInformationProps> = ({ userId }) => {
         </Dialog>
       ) : (
         <p className="text-sx italic underline">
-          {following?.length || 0} Following
+          {following?.length || 0} {t("following")}
         </p>
       )}
     </div>
