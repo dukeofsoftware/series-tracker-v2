@@ -7,11 +7,9 @@
     }
   },
   "global": {
-    
     "adult": "Erwachseneninhalt",
     "loading": "Wird geladen...",
     "toast": {
-   
       "reauthenticateError": "Sie müssen sich erneut anmelden, um diese Aktion durchzuführen.",
       "success": "Erfolgreich",
       "error": "Fehler {code}",

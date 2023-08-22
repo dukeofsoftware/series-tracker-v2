@@ -27,7 +27,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 
-const Register = ({ }) => {
+const Register = ({}) => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const global = useTranslations("global")
   const t = useTranslations("pages.auth.register")

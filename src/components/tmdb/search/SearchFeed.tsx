@@ -7,7 +7,6 @@ import TrendFeedCard, {
 } from "@/components/feed/card/TrendFeedCard"
 import PaginationButtons from "@/components/PaginationButtons"
 
-
 const SearchFeed = ({}) => {
   const { isFetching, isLoading, data } = usePaginateSearch()
 

@@ -1,7 +1,10 @@
 import { FC } from "react"
+import type { Metadata } from "next"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { MovieResponse } from "@/types/movies"
+
+import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
 import { formatMinutes } from "@/lib/utils"
 import AddToFavoriteMovie from "@/components/AddToFavoriteMovie"
@@ -9,10 +12,6 @@ import MovieCard from "@/components/feed/card/MovieCard"
 import StatusSelector from "@/components/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
-
-
-import type { Metadata } from 'next'
-import { Locale } from "@/config/i18n.config"
 
 export async function generateMetadata({
   params,
@@ -30,7 +29,6 @@ export async function generateMetadata({
     title: data.title || data.original_title,
     description: data.overview,
     keywords: data.genres.map((genre) => genre.name).join(", "),
-  
   } as Metadata
 }
 

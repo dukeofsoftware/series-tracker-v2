@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
+import { TrendingPage } from "@/types/trending"
 
 import TrendingFeed from "@/components/feed/TrendingFeed"
-import { TrendingPage } from "@/types/trending"
 
 export default async function Page({ params }: { params: { lang: string } }) {
   if (!params.lang) return redirect(`/en-US`)

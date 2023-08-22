@@ -16,7 +16,11 @@ interface TrendFeedCardProps {
   priorImage?: boolean
 }
 
-const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage, date }) => {
+const TrendFeedCard: FC<TrendFeedCardProps> = ({
+  result,
+  priorImage,
+  date,
+}) => {
   return (
     <Link href={`/tmdb/movies/${result.id}`}>
       <Card className="group relative  h-[240px] w-[160px] rounded-md sm:h-[420px] sm:w-[280px]">

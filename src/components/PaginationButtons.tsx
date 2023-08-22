@@ -2,6 +2,7 @@
 
 import { FC } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import qs from "query-string"
 import {
   BsChevronBarLeft,
   BsChevronBarRight,
@@ -10,7 +11,6 @@ import {
   BsChevronLeft,
   BsChevronRight,
 } from "react-icons/bs"
-import qs from "query-string"
 
 import { Button } from "@/components/ui/button"
 
@@ -23,7 +23,6 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({
   total_pages,
   pageDB,
 }) => {
-
   const pathname = usePathname()
   const router = useRouter()
   const params = useSearchParams()
@@ -83,7 +82,6 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({
         size="icon"
         disabled={total_pages === pageDB || pageDB >= 500}
         onClick={() => pushPage(total_pages >= 500 ? 500 : total_pages)}
-
       >
         <BsChevronBarRight className="h-4 w-4" />
         <p className="sr-only">go to end</p>

@@ -1,7 +1,9 @@
 import { FC } from "react"
+import { Metadata } from "next"
 import Image from "next/image"
 import { FrontendSeriesResponse } from "@/types/series"
 
+import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
 import { formatMinutes } from "@/lib/utils"
 import AddToFavoriteSeries from "@/components/AddToFavoriteSeries"
@@ -9,8 +11,7 @@ import TrendFeedCard from "@/components/feed/card/TrendFeedCard"
 import StatusSelector from "@/components/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
-import { Locale } from "@/config/i18n.config"
-import { Metadata } from "next"
+
 export async function generateMetadata({
   params,
 }: {
@@ -29,7 +30,6 @@ export async function generateMetadata({
     title: data.title,
     description: data.overview,
     keywords: data.genres.map((genre) => genre.name).join(", "),
-
   } as Metadata
 }
 

@@ -2,6 +2,7 @@
 
 import { FC, useEffect, useState } from "react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 import { getCollection, getDocument } from "@/lib/firebase/firestore"
 import {
@@ -15,7 +16,6 @@ import {
 import FollowUser from "./FollowUser"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { ScrollArea } from "./ui/scroll-area"
-import { useTranslations } from "next-intl"
 
 interface FollowInformationProps {
   userId: string

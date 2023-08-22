@@ -33,7 +33,7 @@ import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { useAuth } from "../providers/context"
 
-const UpdateDisplayName = ({ }) => {
+const UpdateDisplayName = ({}) => {
   const router = useRouter()
   const { getFirebaseAuth } = useFirebaseAuth()
   const authUser = getFirebaseAuth()

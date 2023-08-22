@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server"
 import { options } from "@/config/tmdb-config"
 
 export async function GET(request: NextRequest) {
-
   try {
     const { searchParams } = new URL(request.url)
     const isAdult = searchParams.get("isAdult") || false

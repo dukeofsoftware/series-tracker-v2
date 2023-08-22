@@ -17,33 +17,41 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }))
 }
 
-export async function generateMetadata({ params }: {
+export async function generateMetadata({
+  params,
+}: {
   params: { lang: Locale }
 }): Promise<Metadata> {
-  const messages = (await import(`@/content/${formatLanguage(params.lang)}.json`)).default
+  const messages = (
+    await import(`@/content/${formatLanguage(params.lang)}.json`)
+  ).default
 
   return {
     title: {
       template: `%s | ${messages.seo.mainLayout.title}`,
-      default: messages.seo.title
+      default: messages.seo.title,
     },
     applicationName: messages.seo.title,
     description: messages.seo.description,
 
-
     keywords: messages.seo.keywords,
     "color-scheme": "dark light",
-    creator: 'Furkan Emre Kozan',
-    authors: [{ name: 'Furkan Emre Kozan', url: 'https://furkan-emre-kozan.vercel.app' }],
+    creator: "Furkan Emre Kozan",
+    authors: [
+      {
+        name: "Furkan Emre Kozan",
+        url: "https://furkan-emre-kozan.vercel.app",
+      },
+    ],
     alternates: {
-      canonical: '/',
+      canonical: "/",
       languages: {
-        'en-US': '/en-US',
-        'de-DE': '/de-DE',
-        'tr-TR': '/tr-TR',
+        "en-US": "/en-US",
+        "de-DE": "/de-DE",
+        "tr-TR": "/tr-TR",
       },
     },
-    publisher: 'vercel',
+    publisher: "vercel",
   } as Metadata
 }
 
@@ -64,8 +72,9 @@ export default async function RootLayout({
   return (
     <html lang={formatLanguage(lang)}>
       <body
-        className={`${inter.className} ${process.env.NODE_ENV !== "production" && "debug-screens"
-          } bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50 `}
+        className={`${inter.className} ${
+          process.env.NODE_ENV !== "production" && "debug-screens"
+        } bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50 `}
       >
         <ServerAuthProvider>
           <Providers lang={lang} messages={messages}>

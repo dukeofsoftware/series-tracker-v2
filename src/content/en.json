@@ -10,7 +10,6 @@
     "adult": "Adult Content",
     "loading": "Loading...",
     "toast": {
-   
       "reauthenticateError": "You need to log in recently to perform this action",
       "success": "Success",
       "error": "Error {code}",

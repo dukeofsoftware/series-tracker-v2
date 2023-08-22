@@ -31,7 +31,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 
-const UpdateEmail = ({ }) => {
+const UpdateEmail = ({}) => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const user = getFirebaseAuth().currentUser!
   const router = useRouter()

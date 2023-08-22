@@ -1,12 +1,11 @@
-
-import { db } from "@/lib/firebase/admin"
-
+import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+
+import { db } from "@/lib/firebase/admin"
 import FollowInformation from "@/components/FollowInformation"
 import FollowUser from "@/components/FollowUser"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Metadata } from "next"
 
 export async function generateMetadata({
   params,
@@ -22,8 +21,6 @@ export async function generateMetadata({
     description: "User profile",
   } as Metadata
 }
-
-  
 
 export default async function Layout({
   children,
@@ -74,7 +71,6 @@ export default async function Layout({
       <div className="z-30 flex w-full items-center  ">
         <ul className="flex w-full  rounded-md border-2 border-slate-950 dark:border-slate-50 ">
           {tabs.map((tab) => {
-
             return (
               <li
                 key={tab.name}
@@ -88,9 +84,7 @@ export default async function Layout({
                 </Link>
               </li>
             )
-          })
-          }
-
+          })}
         </ul>
       </div>
 
@@ -98,4 +92,3 @@ export default async function Layout({
     </div>
   )
 }
-
