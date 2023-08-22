@@ -77,6 +77,7 @@
       },
       "tables": {
         "movie": {
+          "exportData": "Daten exportieren",
           "title": "Titel",
           "overview": "Übersicht",
           "favorite": "Favorit",
@@ -93,6 +94,7 @@
           "filterPlaceholder": "Nach Titel filtern..."
         },
         "series": {
+          "exportData": "Daten exportieren",
           "title": "Titel",
           "overview": "Übersicht",
           "favorite": "Favorit",
@@ -117,8 +119,10 @@
         "updateProfilePhoto": {
           "title": "Profilfoto",
           "description": "Ändern Sie Ihr Profilfoto.",
+          "fileSizeExceeds": "Sie können eine Datei mit einer maximalen Größe von {mb} hochladen.",
           "buttonLabel": "Foto ändern",
-          "toastDescription": "Ihr Profilfoto wurde geändert."
+          "toastDescription": "Ihr Profilfoto wurde geändert.",
+          "invalidFormat": "Ungültiges Dateiformat. Nur .png, .jpeg, .jpg und .webp werden unterstützt"
         },
         "updateDisplayName": {
           "toastDescription": "Ihr Profilname wurde geändert.",

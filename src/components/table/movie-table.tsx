@@ -22,6 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
+import { CSVLink } from "react-csv";
 import {
   Table,
   TableBody,
@@ -30,7 +31,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "../ui/button"
+import { Button, buttonVariants } from "../ui/button"
+import { cn } from "@/lib/utils"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -69,10 +71,30 @@ export function MovieTable<TData, TValue>({
       columnVisibility,
     },
   })
+  const csvData = [
+    ["poster_path", "Title", "Overview", "Status", "isFavorite", "Date", "id"],
+    ...data.map(({
+      poster_path,
+      title,
+      overview,
+      status,
+      isFavorite,
+      release_date,
+      id,
+
+    }: any) => [
+        poster_path,
+        title,
+        overview.replace(/<[^>]*>/g, '').replace(/\n/g, ' ').replace(/"/g, "''").trim(),
+        status,
+        isFavorite,
+        release_date,
+        id,
+      ])]
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 flex-wrap justify-between gap-2">
         <Input
           placeholder={t("filterPlaceholder")}
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -81,32 +103,37 @@ export function MovieTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              {t("columns")}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className=" flex items-center gap-2 flex-wrap ">
+          <CSVLink className={cn(buttonVariants({ variant: "outline" }))} filename="movies.csv" data={csvData}>
+            {t("exportData")}
+          </CSVLink>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="">
+                {t("columns")}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  )
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -119,9 +146,9 @@ export function MovieTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}

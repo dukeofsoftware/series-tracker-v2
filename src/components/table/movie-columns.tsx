@@ -17,11 +17,10 @@ import {
 
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import AddToFavoriteMovie from "../AddToFavorites"
+import AddToFavorites from "../AddToFavorites"
 import { useAuth } from "../providers/context"
 import StatusSelector from "../StatusSelector"
 import { Button } from "../ui/button"
-import AddToFavorites from "../AddToFavorites"
 
 export type TMDB = {
   id: string
@@ -37,12 +36,12 @@ export const columns: ColumnDef<TMDB>[] = [
   {
     accessorKey: "poster_path",
     header: ({ column }) => {
-      return <div className="hidden sm:block">Poster</div>
+      return <div className="">Poster</div>
     },
     cell: ({ row }) => {
       return (
         <Image
-          className="hidden sm:block"
+          className=""
           src={`https://image.tmdb.org/t/p/w500${row.getValue("poster_path")}`}
           alt={row.getValue("title")}
           width={80}
@@ -63,7 +62,7 @@ export const columns: ColumnDef<TMDB>[] = [
     header: ({ column }) => {
       const t = useTranslations("pages.profile.tables.movie")
 
-      return <div className="hidden sm:block">{t("overview")}</div>
+      return <div className="">{t("overview")}</div>
     },
     cell: ({ row }) => {
       return (
@@ -85,7 +84,7 @@ export const columns: ColumnDef<TMDB>[] = [
 
       return (
         <Button
-          className="hidden md:inline-flex"
+          className=""
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
@@ -128,7 +127,7 @@ export const columns: ColumnDef<TMDB>[] = [
       const uid = pathname.split("/")[2]
       if (user?.uid === uid)
         return (
-          <div className="hidden place-items-center md:grid">
+          <div className="">
             <StatusSelector type="series" />
           </div>
         )

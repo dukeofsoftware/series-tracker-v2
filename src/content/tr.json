@@ -77,6 +77,7 @@
       },
       "tables": {
         "movie": {
+          "exportData": "Verileri Dışa Aktar",
           "title": "Başlık",
           "overview": "Özet",
           "favorite": "Favori",
@@ -93,6 +94,7 @@
           "filterPlaceholder": "Başlığa Göre Filtrele..."
         },
         "series": {
+          "exportData": "Verileri Dışa Aktar",
           "title": "Başlık",
           "overview": "Özet",
           "favorite": "Favori",
@@ -118,7 +120,9 @@
           "title": "Profil Fotoğrafı",
           "description": "Profil fotoğrafınızı değiştirin",
           "buttonLabel": "Fotoğrafı Değiştir",
-          "toastDescription": "Profil fotoğrafınız değiştirildi"
+          "toastDescription": "Profil fotoğrafınız değiştirildi",
+          "invalidFormat": "Geçersiz dosya formatı. Sadece .png, .jpeg, .jpg ve .webp formatları destekleniyor",
+          "fileSizeExceeds":"En fazla {mb} boyutunda bir dosya yükleyebilirsiniz"
         },
         "updateDisplayName": {
           "toastDescription": "Profil adınız değiştirildi",

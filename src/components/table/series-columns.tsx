@@ -34,12 +34,12 @@ export const columns: ColumnDef<TMDB>[] = [
   {
     accessorKey: "poster_path",
     header: () => {
-      return <div className="hidden sm:block">Poster</div>
+      return <div className=" sm:block">Poster</div>
     },
     cell: ({ row }) => {
       return (
         <Image
-          className="hidden sm:block"
+          className=" sm:block"
           src={`https://image.tmdb.org/t/p/w500${row.getValue("poster_path")}`}
           alt={row.getValue("title")}
           width={80}
@@ -59,11 +59,11 @@ export const columns: ColumnDef<TMDB>[] = [
     accessorKey: "overview",
     header: () => {
       const t = useTranslations("pages.profile.tables.series")
-      return <div className="hidden sm:block">{t("overview")}</div>
+      return <div className=" sm:block">{t("overview")}</div>
     },
     cell: ({ row }) => {
       return (
-        <div className=" hidden sm:line-clamp-5">
+        <div className="  sm:line-clamp-5">
           {row.getValue("overview")}
         </div>
       )
@@ -75,7 +75,7 @@ export const columns: ColumnDef<TMDB>[] = [
       const t = useTranslations("pages.profile.tables.series")
       return (
         <Button
-          className=" hidden p-0 md:inline-flex"
+          className="  p-0 "
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
@@ -118,7 +118,7 @@ export const columns: ColumnDef<TMDB>[] = [
       const uid = pathname.split("/")[2]
       if (user?.uid === uid)
         return (
-          <div className="hidden place-items-center  p-0 md:grid">
+          <div className="  ">
             <StatusSelector
               type="series"
               seriesResult={{
@@ -133,7 +133,7 @@ export const columns: ColumnDef<TMDB>[] = [
         )
 
       return (
-        <div className="hidden place-items-center md:grid">
+        <div className="  ">
           {allStatus.find((s) => s.value === status)?.label}
         </div>
       )

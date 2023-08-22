@@ -1,5 +1,5 @@
 "use client"
-
+import { CSVLink } from "react-csv";
 import * as React from "react"
 import {
   ColumnDef,
@@ -30,7 +30,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "../ui/button"
+import { Button, buttonVariants } from "../ui/button"
+import { cn } from "@/lib/utils"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -70,10 +71,30 @@ export function SeriesTable<TData, TValue>({
       columnVisibility,
     },
   })
+  const csvData = [
+    ["poster_path", "Title", "Overview", "Status", "isFavorite", "Date", "id"],
+    ...data.map(({
+      poster_path,
+      title,
+      overview,
+      status,
+      isFavorite,
+      date,
+      id,
 
+    }: any) => [
+        poster_path,
+        title,
+        /* format overview */
+        overview.replace(/<[^>]*>/g, '').replace(/\n/g, ' ').replace(/"/g, "''").trim(),
+        status,
+        isFavorite,
+        date,
+        id,
+      ])]
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 flex-wrap">
         <Input
           placeholder={t("filterPlaceholder")}
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -82,32 +103,37 @@ export function SeriesTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              {t("columns")}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="ml-auto flex items-center gap-2 ">
+          <CSVLink className={cn(buttonVariants({ variant: "outline" }))} filename="series.csv" data={csvData}>
+            {t("exportData")}
+          </CSVLink>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="ml-auto">
+                {t("columns")}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  )
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -120,9 +146,9 @@ export function SeriesTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}

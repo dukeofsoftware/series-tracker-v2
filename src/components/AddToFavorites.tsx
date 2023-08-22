@@ -44,40 +44,42 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({ movieResult, type, seriesResu
 
   useEffect(() => {
     const getData = async () => {
-      if (!movieResult || !seriesResult) return
-
       try {
         let data;
-        if (type === "movie") {
+        if (type === "movie" && movieResult) {
+
           data = await getDocument(
             `users/${user.uid}/movies`,
             movieResult.id.toString()
           )
         }
-        if (type === "series") {
+        if (type === "series" && seriesResult) {
           data = await getDocument(
             `users/${user.uid}/series`,
             seriesResult.id.toString()
           )
         }
-
         if (data) {
           setIsFavorite(data.isFavorite)
+          setIsLoading(false)
+
         } else {
           setIsFavorite(false)
+          setIsLoading(false)
+
         }
       } catch (error) {
         setIsFavorite(false)
-      } finally {
         setIsLoading(false)
+
       }
     }
+
     getData()
   }, [])
 
   const handleFavorite = async () => {
     if (!user) return
-    if (!movieResult || !seriesResult) return
 
     if (!user.emailVerified) {
       const t = useTranslations("global.toast")
@@ -91,7 +93,7 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({ movieResult, type, seriesResu
     setIsFavorite((prev) => !prev)
     let dataFB;
     try {
-      if (type === "movie") {
+      if (type === "movie" && movieResult) {
         dataFB = await getDocument(
           `users/${user.uid}/movies`,
           movieResult.id.toString()
@@ -144,8 +146,9 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({ movieResult, type, seriesResu
             }),
           })
         }
+        return
       }
-      if (type === "series") {
+      if (type === "series" && seriesResult) {
         dataFB = await getDocument(
           `users/${user.uid}/series`,
           seriesResult.id.toString()
@@ -191,7 +194,7 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({ movieResult, type, seriesResu
             }),
           })
         }
-
+        return
       }
 
 
