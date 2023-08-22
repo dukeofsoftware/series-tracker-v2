@@ -83,7 +83,7 @@ export function MovieTable<TData, TValue>({
       id,
 
     }: any) => [
-        poster_path,
+        `https://image.tmdb.org/t/p/w500${poster_path}`,
         title,
         overview.replace(/<[^>]*>/g, '').replace(/\n/g, ' ').replace(/"/g, "''").trim(),
         status,

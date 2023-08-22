@@ -83,7 +83,7 @@ export function SeriesTable<TData, TValue>({
       id,
 
     }: any) => [
-        poster_path,
+        `https://image.tmdb.org/t/p/w500${poster_path}`,
         title,
         /* format overview */
         overview.replace(/<[^>]*>/g, '').replace(/\n/g, ' ').replace(/"/g, "''").trim(),
