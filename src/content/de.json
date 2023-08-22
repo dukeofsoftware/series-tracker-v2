@@ -1,4 +1,11 @@
 {
+  "seo": {
+    "mainLayout": {
+      "title": "Verfolgung",
+      "description": "Verfolgen Sie Filme und Serien. Teilen Sie sie problemlos mit Ihren Freunden. Bleiben Sie sofort über neu veröffentlichte Serien und Filme informiert.",
+      "keywords": "Serie, Film, Verfolgung, Filmverfolgung, Serienverfolgung, Serienbewertung, beliebte Serien"
+    }
+  },
   "global": {
     "adult": "Erwachseneninhalt",
     "loading": "Wird geladen...",

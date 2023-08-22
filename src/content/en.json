@@ -1,4 +1,11 @@
 {
+  "seo": {
+    "mainLayout": {
+    "title": "Tracking",
+    "description": "Track movies and series. Share easily with your friends. Stay instantly informed about newly released TV shows and movies.",
+    "keywords": "series, film, tracking, movie tracking, series tracking, series rating, popular series"
+    }
+    },
   "global": {
     "adult": "Adult Content",
     "loading": "Loading...",

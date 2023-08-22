@@ -17,13 +17,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const user = (await db.collection("users").doc(params.userId).get()).data()
 
-
   return {
     title: user?.displayName || user?.username,
     description: "User profile",
-  
-
-
   } as Metadata
 }
 
