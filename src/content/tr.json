@@ -11,6 +11,7 @@
     "loading": "Yükleniyor...",
     "toast": {
       "success": "Başarılı",
+      "reauthenticateError": "Bu işlemi yapmak için yakın zamanda giriş yapmış olmanız gerekiyor",
       "error": "Hata {code}",
       "errorDescription": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin",
       "firebase": {
@@ -159,6 +160,13 @@
           "description": "E-posta adresinizi buradan doğrulayabilirsiniz",
           "verified": "Doğrulandı"
         }
+      },
+      "reauthenticate": {
+        "cardTitle": "Yeniden doğrulayın",
+        "passwordLabel": "Şifre",
+        "toastDescription": "Doğrulama başarılı",
+        "cardDescription": "Önemli ayarları değiştirmek için yakın zamanda giriş yapmış olmanız gerekir.",
+        "buttonLabel": "Yeniden doğrula"
       },
       "passwordTab": {
         "title": "Şifre Değiştirme",

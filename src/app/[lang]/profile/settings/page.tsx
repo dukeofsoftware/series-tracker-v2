@@ -4,6 +4,7 @@ import { getDictionary } from "@/lib/dictionary"
 import AccountTab from "@/components/settings/AccountTab"
 import MailTab from "@/components/settings/MailTab"
 import PasswordTab from "@/components/settings/PasswordTab"
+import Reauthenticate from "@/components/settings/Reauthenticate"
 
 interface pageProps {
   params: {
@@ -22,6 +23,7 @@ const Page: FC<pageProps> = async ({ params }) => {
       <AccountTab />
       <MailTab />
       <PasswordTab />
+      <Reauthenticate />
     </main>
   )
 }

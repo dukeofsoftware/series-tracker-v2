@@ -33,7 +33,7 @@ import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { useAuth } from "../providers/context"
 
-const UpdateDisplayName = ({}) => {
+const UpdateDisplayName = ({ }) => {
   const router = useRouter()
   const { getFirebaseAuth } = useFirebaseAuth()
   const authUser = getFirebaseAuth()
@@ -58,6 +58,14 @@ const UpdateDisplayName = ({}) => {
         description: t("toastDescription"),
       })
     } catch (error: any) {
+      if (error.code === "auth/requires-recent-login") {
+        toast({
+          title: global("toast.error", {
+            code: error.code,
+          }),
+          description: global("toast.reauthenticateError"),
+        })
+      }
       console.error(error)
       toast({
         title: global("toast.error", {

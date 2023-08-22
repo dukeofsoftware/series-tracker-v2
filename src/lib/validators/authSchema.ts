@@ -5,8 +5,15 @@ import {
   string,
   ValiError,
   type Output,
-} from "valibot" /*  */
+} from "valibot"
 
+/*  */
+
+export const reAuthSchema = object({
+  password: string([minLength(8)]),
+})
+
+export type ReAuthType = Output<typeof reAuthSchema>
 
 export const LoginSchema = object({
   email: string([email()]),
@@ -30,7 +37,8 @@ export const RegisterSchema = object(
       minLength(8, "You password must have 8 characters or more."),
     ]),
   },
-  [ /* check */
+  [
+    /* check */
     (input) => {
       if (input.password !== input.confirmPassword) {
         throw new ValiError([

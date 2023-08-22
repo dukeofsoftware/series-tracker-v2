@@ -3,15 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { options } from "@/config/tmdb-config"
 
 export async function GET(request: NextRequest) {
-  /*  const tokens = await getTokens(request.cookies, authConfig)
 
-  if (!tokens) {
-    throw new Error("Cannot update custom claims of unauthenticated user")
-  }
-  if (tokens) {
-    return NextResponse.json("user logged in")
-  }
- */
   try {
     const { searchParams } = new URL(request.url)
     const isAdult = searchParams.get("isAdult") || false

@@ -48,6 +48,15 @@ const PasswordTab = () => {
         })
       })
       .catch((error) => {
+        if (error.code === "auth/requires-recent-login") {
+          toast({
+            title: global("toast.error", {
+              code: error.code,
+            }),
+            description: global("toast.reauthenticateError"),
+          })
+          return
+        }
         console.error(error)
         toast({
           title: global("toast.error", {

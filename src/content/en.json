@@ -1,15 +1,17 @@
 {
   "seo": {
     "mainLayout": {
-    "title": "Tracking",
-    "description": "Track movies and series. Share easily with your friends. Stay instantly informed about newly released TV shows and movies.",
-    "keywords": "series, film, tracking, movie tracking, series tracking, series rating, popular series"
+      "title": "Tracking",
+      "description": "Track movies and series. Share easily with your friends. Stay instantly informed about newly released TV shows and movies.",
+      "keywords": "series, film, tracking, movie tracking, series tracking, series rating, popular series"
     }
-    },
+  },
   "global": {
     "adult": "Adult Content",
     "loading": "Loading...",
     "toast": {
+   
+      "reauthenticateError": "You need to log in recently to perform this action",
       "success": "Success",
       "error": "Error {code}",
       "errorDescription": "An error occurred. Please try again later.",

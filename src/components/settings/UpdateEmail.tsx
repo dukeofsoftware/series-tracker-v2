@@ -31,7 +31,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 
-const UpdateEmail = ({}) => {
+const UpdateEmail = ({ }) => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const user = getFirebaseAuth().currentUser!
   const router = useRouter()
@@ -52,6 +52,15 @@ const UpdateEmail = ({}) => {
       })
       .catch((error) => {
         console.error(error)
+        if (error.code === "auth/requires-recent-login") {
+          toast({
+            title: global("error", {
+              code: error.code,
+            }),
+            description: global("reauthenticateError"),
+          })
+          return
+        }
         toast({
           title: global("error", {
             code: error.code,
