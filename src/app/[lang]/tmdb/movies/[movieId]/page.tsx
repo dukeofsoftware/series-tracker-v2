@@ -11,7 +11,7 @@ import StatusSelector from "@/components/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
 import Similars from "@/components/Similars"
-import AddToFavorites from "@/components/AddToFavoriteMovie"
+import AddToFavorites from "@/components/AddToFavorites"
 
 export async function generateMetadata({
   params,

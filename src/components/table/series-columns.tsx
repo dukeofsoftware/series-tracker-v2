@@ -16,7 +16,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import AddToFavoriteSeries from "../AddToFavoriteSeries"
+import AddToFavoriteSeries from "../AddToFavorites"
 import { useAuth } from "../providers/context"
 import StatusSelector from "../StatusSelector"
 import { Button } from "../ui/button"
@@ -161,7 +161,8 @@ export const columns: ColumnDef<TMDB>[] = [
         return (
           <div className="grid place-items-center">
             <AddToFavoriteSeries
-              result={{
+              type="series"
+              seriesResult={{
                 id: row.getValue("id"),
                 title: row.getValue("title"),
                 poster_path: row.getValue("poster_path"),

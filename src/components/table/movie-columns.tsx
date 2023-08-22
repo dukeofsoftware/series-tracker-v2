@@ -12,21 +12,16 @@ import { LuArrowUpDown } from "react-icons/lu"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
+
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import AddToFavoriteMovie from "../AddToFavoriteMovie"
+import AddToFavoriteMovie from "../AddToFavorites"
 import { useAuth } from "../providers/context"
 import StatusSelector from "../StatusSelector"
 import { Button } from "../ui/button"
+import AddToFavorites from "../AddToFavorites"
 
 export type TMDB = {
   id: string
@@ -162,8 +157,9 @@ export const columns: ColumnDef<TMDB>[] = [
       if (user?.uid === uid)
         return (
           <div className="grid place-items-center">
-            <AddToFavoriteMovie
-              result={{
+            <AddToFavorites
+              type="movie"
+              movieResult={{
                 id: row.getValue("id"),
                 title: row.getValue("title"),
                 poster_path: row.getValue("poster_path"),
