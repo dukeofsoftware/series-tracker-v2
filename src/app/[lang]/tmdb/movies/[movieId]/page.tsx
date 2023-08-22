@@ -30,16 +30,7 @@ export async function generateMetadata({
     title: data.title || data.original_title,
     description: data.overview,
     keywords: data.genres.map((genre) => genre.name).join(", "),
-    "og:title": data.title || data.original_title,
-    "og:description": data.overview,
-    "twitter:title": data.title || data.original_title,
-    "twitter:description": data.overview,
-    "og:image": `https://image.tmdb.org/t/p/original${data.poster_path}`,
-    "twitter:image": `https://image.tmdb.org/t/p/original${data.poster_path}`,
-    "og:image:alt": data.title || data.original_title,
-    "twitter:image:alt": data.title || data.original_title,
-    "og:type": "website",
-    "twitter:card": "summary_large_image",
+  
   } as Metadata
 }
 

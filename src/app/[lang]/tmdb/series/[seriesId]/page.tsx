@@ -29,16 +29,7 @@ export async function generateMetadata({
     title: data.title,
     description: data.overview,
     keywords: data.genres.map((genre) => genre.name).join(", "),
-    "og:title": data.title,
-    "og:description": data.overview,
-    "twitter:title": data.title,
-    "twitter:description": data.overview,
-    "og:image": `https://image.tmdb.org/t/p/original${data.poster_path}`,
-    "twitter:image": `https://image.tmdb.org/t/p/original${data.poster_path}`,
-    "og:image:alt": data.title,
-    "twitter:image:alt": data.title,
-    "og:type": "website",
-    "twitter:card": "summary_large_image",
+
   } as Metadata
 }
 

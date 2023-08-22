@@ -29,15 +29,9 @@ export async function generateMetadata({ params }: {
     },
     applicationName: messages.seo.title,
     description: messages.seo.description,
-    "og:title": messages.seo.title,
-    "og:description": messages.seo.description,
-    "twitter:title": messages.seo.title,
-    "twitter:description": messages.seo.description,
+
+
     keywords: messages.seo.keywords,
-    "og:site_name": messages.seo.title,
-    "og:locale": formatLanguage(params.lang),
-    "og:locale:alternate": i18n.locales.filter((locale) => locale !== params.lang).map(formatLanguage),
-    "twitter:card": "summary",
     "color-scheme": "dark light",
     creator: 'Furkan Emre Kozan',
     authors: [{ name: 'Furkan Emre Kozan', url: 'https://furkan-emre-kozan.vercel.app' }],

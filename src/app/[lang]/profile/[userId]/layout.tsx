@@ -21,17 +21,7 @@ export async function generateMetadata({
   return {
     title: user?.displayName || user?.username,
     description: "User profile",
-    keywords: "User profile",
-    "og:title": user?.displayName || user?.username,
-    "og:description": "User profile",
-    "twitter:title": user?.displayName || user?.username,
-    "twitter:description": "User profile",
-    "og:image": user?.photoURL,
-    "twitter:image": user?.photoURL,
-    "og:image:alt": user?.displayName || user?.username,
-    "twitter:image:alt": user?.displayName || user?.username,
-    "og:type": "website",
-    "twitter:card": "summary_large_image",
+  
 
 
   } as Metadata
