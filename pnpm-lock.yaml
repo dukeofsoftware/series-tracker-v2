@@ -86,6 +86,9 @@ dependencies:
   '@types/negotiator':
     specifier: ^0.6.1
     version: 0.6.1
+  '@vercel/analytics':
+    specifier: ^1.0.2
+    version: 1.0.2
   axios:
     specifier: ^1.4.0
     version: 1.4.0
@@ -4577,6 +4580,10 @@ packages:
       '@typescript-eslint/types': 6.2.1
       eslint-visitor-keys: 3.4.2
     dev: true
+
+  /@vercel/analytics@1.0.2:
+    resolution: {integrity: sha512-BZFxVrv24VbNNl5xMxqUojQIegEeXMI6rX3rg1uVLYUEXsuKNBSAEQf4BWEcjQDp/8aYJOj6m8V4PUA3x/cxgg==}
+    dev: false
 
   /abort-controller@3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}

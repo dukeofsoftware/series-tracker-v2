@@ -5,6 +5,7 @@ import dynamic from "next/dynamic"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { NextIntlClientProvider } from "next-intl"
 import { ThemeProvider } from "next-themes"
+import { Analytics } from '@vercel/analytics/react';
 
 import { formatLanguage } from "@/lib/utils"
 
@@ -36,6 +37,10 @@ const Providers: FC<ProvidersProps> = ({ children, lang, messages }) => {
           <ThemeProvider attribute="class" enableSystem>
             {children}
             <ReactQueryDevtools initialIsOpen={false} />
+            <Analytics mode={process.env.NODE_ENV === "production" ? "production" : "development"}
+              debug={process.env.NODE_ENV !== "production"}
+            />;
+
           </ThemeProvider>
         </QueryClientProvider>
       </NextIntlClientProvider>
