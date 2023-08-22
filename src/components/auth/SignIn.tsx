@@ -10,6 +10,8 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
+import dynamic from "next/dynamic"
+const GoogleAuth = dynamic(() => import("../GoogleAuth"), { ssr: false })
 
 import { addData, getDocument } from "@/lib/firebase/firestore"
 import { autoUsername, randomUsername } from "@/lib/utils"
@@ -18,7 +20,6 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -26,8 +27,9 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 
-const SignIn = ({}) => {
+const SignIn = ({ }) => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const auth = getFirebaseAuth()
 
@@ -110,47 +112,65 @@ const SignIn = ({}) => {
     </div>
   }
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 px-4">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn@gmail.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("passwordLabel")}</FormLabel>
-              <FormControl>
-                <Input placeholder="********" type="password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <p>
-          {t("dontHaveAccount")}
-          <Link
-            href="/register"
-            className="text-sky-500 hover:underline active:underline"
-          >
-            {t("register")}
-          </Link>
-        </p>
+    <div className="grid place-items-center  mt-5">
+      <Card className="max-w-xl w-full">
+        <CardHeader>
+          <CardTitle className="text-center">
+            {t("title")}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="px-4" >
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 ">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn@gmail.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("passwordLabel")}</FormLabel>
+                    <FormControl>
+                      <Input placeholder="********" type="password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <p>
+                {t("dontHaveAccount")}
+                <Link
+                  href="/register"
+                  className="text-sky-500 hover:underline active:underline"
+                >{" "}
+                  {t("register")}
+                </Link>
+              </p>
+              <div className="flex justify-center w-full ">
 
-        <Button type="submit">{t("buttonLabel")}</Button>
-      </form>
-    </Form>
+                <Button type="submit" className="w-full max-w-xs">{t("buttonLabel")}</Button>
+              </div>
+
+            </form>
+          </Form>
+          <div className="flex justify-center w-full ">
+            <GoogleAuth className="mt-2 w-full max-w-xs" />
+
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
 

@@ -181,6 +181,8 @@
     },
     "auth": {
       "login": {
+        "title": "Giriş Yap",
+        "loginWithGoogle": "Google ile Giriş Yap",
         "emailInputDescription": "E-posta adresinizi kimseyle paylaşmayacağız",
         "passwordLabel": "Şifre",
         "passwordInputDescription": "Şifrenizi kimseyle paylaşmayacağız",
@@ -190,6 +192,8 @@
         "toastDescription": "Başarıyla giriş yaptınız"
       },
       "register": {
+        "title": "Kayıt Ol",
+        "registerWithGoogle": "Google ile Kayıt Ol",
         "toastSuccessDescription": "Başarıyla kayıt oldunuz",
         "verifyToastTitle": "E-postanızı kontrol edin",
         "verifyToastDescription": "E-postanızı doğrulamak için bir e-posta gönderdik",

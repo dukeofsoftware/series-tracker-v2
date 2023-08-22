@@ -161,6 +161,13 @@
           "verified": "Bestätigt"
         }
       },
+      "reauthenticate": {
+        "cardTitle": "Erneut authentifizieren",
+        "passwordLabel": "Passwort",
+        "toastDescription": "Authentifizierung erfolgreich",
+        "cardDescription": "Um wichtige Einstellungen zu ändern, müssen Sie sich kürzlich angemeldet haben.",
+        "buttonLabel": "Erneut authentifizieren"
+      },
       "passwordTab": {
         "title": "Passwort ändern",
         "description": "Ändern Sie Ihr Kontopasswort.",
@@ -174,6 +181,8 @@
     },
     "auth": {
       "login": {
+        "title": "Einloggen",
+        "loginWithGoogle": "Mit Google einloggen",
         "emailInputDescription": "Wir werden Ihre E-Mail-Adresse nicht weitergeben.",
         "passwordLabel": "Passwort",
         "passwordInputDescription": "Wir werden Ihr Passwort nicht weitergeben.",
@@ -183,6 +192,8 @@
         "toastDescription": "Sie haben sich erfolgreich eingeloggt."
       },
       "register": {
+        "title": "Registrieren",
+        "registerWithGoogle": "Mit Google registrieren",
         "toastSuccessDescription": "Sie haben sich erfolgreich registriert.",
         "verifyToastTitle": "Überprüfen Sie Ihre E-Mails",
         "verifyToastDescription": "Wir haben Ihnen eine E-Mail zur Bestätigung geschickt.",
