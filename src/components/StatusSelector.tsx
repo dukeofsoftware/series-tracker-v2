@@ -143,15 +143,6 @@ const StatusSelector: FC<StatusSelectorProps> = ({
       if (type === "series") {
         if (!seriesResult) return
 
-        /* 
-                                const docRef = doc(db, `users/${user?.uid}/series`,
-                                    seriesResult?.id.toString())
-                
-                                const data = {
-                                    status: deleteField()
-                                };
-                                await updateDoc(docRef, data);
-                                setStatus("Status") */
         const docRef = doc(
           db,
           `users/${user?.uid}/series`,
@@ -165,14 +156,7 @@ const StatusSelector: FC<StatusSelectorProps> = ({
       }
       if (type === "movie") {
         if (!movieResult) return
-        /*   const docRef = doc(db, `users/${user?.uid}/movies`,
-                      movieResult?.id.toString())
-  
-                  const data = {
-                      status: deleteField()
-                  };
-                  await updateDoc(docRef, data);
-                  setStatus("Status") */
+      
 
         const docRef = doc(
           db,

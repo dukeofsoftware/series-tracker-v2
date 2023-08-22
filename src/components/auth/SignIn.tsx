@@ -102,7 +102,7 @@ const SignIn = ({}) => {
     }
   }
   if (hasLogged) {
-    ;<div className="flex h-full w-full flex-col items-center justify-center gap-2">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2">
       <span>
         Redirecting to <strong>{redirect || "/"}</strong>
       </span>
