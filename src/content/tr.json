@@ -1,4 +1,11 @@
 {
+  "seo": {
+    "mainLayout": {
+      "title": "Takip",
+      "description": "Film ve dizileri takip edin. Arkadaşlarınızla kolayca paylaşın. Yeni çıkan dizi ve filmlerden anında haberdar olun.",
+      "keywords": "dizi, film, takip, film takip, dizi takip, dizi puanlama, popüler diziler"
+    }
+  },
   "global": {
     "adult": "Yetişkin İçeriği",
     "loading": "Yükleniyor...",

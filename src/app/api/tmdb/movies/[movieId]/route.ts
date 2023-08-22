@@ -3,7 +3,12 @@ import { NextRequest, NextResponse } from "next/server"
 import { MovieData } from "@/types/movies"
 
 import { options } from "@/config/tmdb-config"
+import { RateLimiter, RateLimiterError } from "@/lib/rate-limit"
 
+const limiter = new RateLimiter({
+  maxRequests: 12,
+  interval: 5 * 1000 /* 5 seconds */,
+})
 export async function GET(
   req: NextRequest,
   {
@@ -15,6 +20,7 @@ export async function GET(
   }
 ) {
   try {
+    await limiter.limit()
     const { movieId } = params
     if (!movieId)
       return NextResponse.json(
@@ -88,9 +94,17 @@ export async function GET(
       }
       return NextResponse.json(formattedResult, { status: 200 })
     }
-  } catch (e) {
-    console.error("MOVİES ID API", e)
-    return NextResponse.json(e, {
+  } catch (error) {
+    if (error instanceof RateLimiterError) {
+      return new Response(`Too many requests. Please try again later.`, {
+        status: 429,
+        headers: {
+          "Retry-After": `${Math.ceil(error.retryAfter / 1000)}`,
+        },
+      })
+    }
+    console.error("MOVİES ID API", error)
+    return NextResponse.json(error, {
       status: 500,
     })
   }

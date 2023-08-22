@@ -12,10 +12,11 @@ const AdultContent = dynamic(() => import("./AdultContent"), { ssr: false })
 const AirDate = dynamic(() => import("./AirDate"), { ssr: false })
 interface TrendFeedCardProps {
   result: MovieCardType
+  date?: string
   priorImage?: boolean
 }
 
-const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage }) => {
+const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage, date }) => {
   return (
     <Link href={`/tmdb/movies/${result.id}`}>
       <Card className="group relative  h-[240px] w-[160px] rounded-md sm:h-[420px] sm:w-[280px]">
@@ -26,7 +27,7 @@ const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage }) => {
           priority={priorImage}
           className="absolute rounded-md "
         />
-        <AirDate release_date={result.release_date} />
+        <AirDate release_date={result.release_date || date} />
         <CardContent
           title={result.title}
           original_title={result.original_title}

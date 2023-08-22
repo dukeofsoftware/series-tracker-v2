@@ -2,9 +2,15 @@ import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 
 import { options } from "@/config/tmdb-config"
+import { RateLimiter, RateLimiterError } from "@/lib/rate-limit"
 
+const limiter = new RateLimiter({
+  maxRequests: 12,
+  interval: 5 * 1000 /* 60 seconds */,
+})
 export async function GET(request: NextRequest) {
   try {
+    await limiter.limit()
     const { searchParams } = new URL(request.url)
     const language =
       searchParams.get("language") ||
@@ -23,6 +29,14 @@ export async function GET(request: NextRequest) {
       status: 200,
     })
   } catch (error) {
+    if (error instanceof RateLimiterError) {
+      return new Response(`Too many requests. Please try again later.`, {
+        status: 429,
+        headers: {
+          "Retry-After": `${Math.ceil(error.retryAfter / 1000)}`,
+        },
+      })
+    }
     console.error("TMDB TRENDİNG ERROR: ", error)
     return NextResponse.json(error, {
       status: 500,

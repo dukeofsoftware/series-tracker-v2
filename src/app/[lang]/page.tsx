@@ -1,11 +1,12 @@
 import { redirect } from "next/navigation"
 
 import TrendingFeed from "@/components/feed/TrendingFeed"
+import { TrendingPage } from "@/types/trending"
 
 export default async function Page({ params }: { params: { lang: string } }) {
   if (!params.lang) return redirect(`/en-US`)
 
-  const cachedData = await fetch(
+  const cachedData: TrendingPage = await fetch(
     `${process.env.SITE_URL}/api/tmdb/trending?language=${params.lang}`
   ).then((res) => res.json())
   return (

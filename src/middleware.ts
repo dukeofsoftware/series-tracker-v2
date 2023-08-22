@@ -22,11 +22,7 @@ function getLocale(request: NextRequest): string | undefined {
   const locale = matchLocale(languages, locales, i18n.defaultLocale)
   return locale
 }
-const PUBLIC_PATHS = [
-  "/login",
-  "/register",
-
-]
+const PUBLIC_PATHS = ["/login", "/register"]
 function redirectToHome(request: NextRequest) {
   if (!PUBLIC_PATHS.includes(request.nextUrl.pathname)) {
     const defaultLocale =
@@ -77,6 +73,7 @@ function redirectToLogin(request: NextRequest) {
   return NextResponse.redirect(url)
 }
 
+
 export async function middleware(request: NextRequest) {
   return authentication(request, {
     loginPath: "/api/login",
@@ -101,7 +98,7 @@ export async function middleware(request: NextRequest) {
       if (PUBLIC_PATHS.includes(request.nextUrl.pathname)) {
         return redirectToHome(request)
       }
-
+    
       return intlMiddleware(request)
     },
     handleInvalidToken: async () => {

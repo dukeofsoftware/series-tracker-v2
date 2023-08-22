@@ -9,6 +9,38 @@ import TrendFeedCard from "@/components/feed/card/TrendFeedCard"
 import StatusSelector from "@/components/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
+import { Locale } from "@/config/i18n.config"
+import { Metadata } from "next"
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    seriesId: string
+    lang: Locale
+  }
+}): Promise<Metadata> {
+  const data: FrontendSeriesResponse = await fetch(
+    `${process.env.SITE_URL}/api/tmdb/series/${params.seriesId}?language=${params.lang}`
+  ).then(async (res) => {
+    return res.json()
+  })
+
+  return {
+    title: data.title,
+    description: data.overview,
+    keywords: data.genres.map((genre) => genre.name).join(", "),
+    "og:title": data.title,
+    "og:description": data.overview,
+    "twitter:title": data.title,
+    "twitter:description": data.overview,
+    "og:image": `https://image.tmdb.org/t/p/original${data.poster_path}`,
+    "twitter:image": `https://image.tmdb.org/t/p/original${data.poster_path}`,
+    "og:image:alt": data.title,
+    "twitter:image:alt": data.title,
+    "og:type": "website",
+    "twitter:card": "summary_large_image",
+  } as Metadata
+}
 
 interface PageProps {
   params: {
@@ -43,12 +75,12 @@ const Page: FC<PageProps> = async ({ params }) => {
           <Image
             src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
             alt={data.title}
-            className="rounded-md   object-cover  "
+            className="rounded-md object-cover"
             fill
           />
-          <div className="absolute top-0 h-full  max-h-[520px] w-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent  from-60% to-black  "></div>
+          <div className="absolute top-0 h-full max-h-[520px] w-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent  from-60% to-black  "></div>
         </div>
-        <div className=" mx-5  sm:container">
+        <div className=" mx-5 sm:container">
           <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-3xl font-bold  ">{data.title}</h1>
@@ -89,7 +121,7 @@ const Page: FC<PageProps> = async ({ params }) => {
           </div>
           <p className="mb-2">{data.overview}</p>
           <div className="flex">
-            <p className="text-xl  font-semibold">{page.pages.tmdb.tags} </p>
+            <p className="text-xl font-semibold">{page.pages.tmdb.tags} </p>
             <div className="mx-2 flex flex-wrap items-center gap-1.5">
               {data.genres.map((genre) => (
                 <Badge key={genre.id}>{genre.name}</Badge>

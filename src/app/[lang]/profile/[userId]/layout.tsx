@@ -1,35 +1,52 @@
-"use client"
 
-import { useEffect, useState } from "react"
+import { db } from "@/lib/firebase/admin"
+
 import Image from "next/image"
 import Link from "next/link"
-import { notFound, usePathname } from "next/navigation"
-
-import { getDocument } from "@/lib/firebase/firestore"
 import FollowInformation from "@/components/FollowInformation"
 import FollowUser from "@/components/FollowUser"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Metadata } from "next"
 
-export default function Layout({
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    userId: string
+  }
+}): Promise<Metadata> {
+  const user = (await db.collection("users").doc(params.userId).get()).data()
+
+
+  return {
+    title: user?.displayName || user?.username,
+    description: "User profile",
+    keywords: "User profile",
+    "og:title": user?.displayName || user?.username,
+    "og:description": "User profile",
+    "twitter:title": user?.displayName || user?.username,
+    "twitter:description": "User profile",
+    "og:image": user?.photoURL,
+    "twitter:image": user?.photoURL,
+    "og:image:alt": user?.displayName || user?.username,
+    "twitter:image:alt": user?.displayName || user?.username,
+    "og:type": "website",
+    "twitter:card": "summary_large_image",
+
+
+  } as Metadata
+}
+
+  
+
+export default async function Layout({
   children,
   params,
 }: {
   children: React.ReactNode
   params: { userId: string }
 }) {
-  const [user, setUser] = useState<any>(null)
-  const pathname = usePathname()
-  useEffect(() => {
-    const fetchUser = async () => {
-      const user = await getDocument("users", params.userId)
-      if (!user) return notFound()
-      setUser({
-        ...user,
-      })
-    }
-    fetchUser()
-  }, [params.userId])
-
+  const user = (await db.collection("users").doc(params.userId).get()).data()
   const tabs = [
     {
       name: "All",
@@ -43,12 +60,12 @@ export default function Layout({
   return (
     <div className="container">
       <div className="relative h-[520px] text-slate-50 ">
-          <Image
-            src={`/background.svg`}
-            alt={"background"}
-            fill
-            className=" object-cover"
-          />
+        <Image
+          src={`/background.svg`}
+          alt={"background"}
+          fill
+          className=" object-cover"
+        />
         <div className="absolute bottom-5 left-6 z-30 flex flex-wrap items-center gap-2">
           <Avatar className="h-[60px] w-[60px] border-2 border-black bg-white dark:border-white dark:bg-black sm:h-[100px] sm:w-[100px]">
             <AvatarFallback>
@@ -71,36 +88,23 @@ export default function Layout({
       <div className="z-30 flex w-full items-center  ">
         <ul className="flex w-full  rounded-md border-2 border-slate-950 dark:border-slate-50 ">
           {tabs.map((tab) => {
-            if (pathname === tab.href) {
-              return (
-                <li
-                  key={tab.name}
-                  className="w-full grow   bg-sky-400 hover:bg-sky-600"
+
+            return (
+              <li
+                key={tab.name}
+                className="w-full grow   bg-sky-500 hover:bg-sky-600"
+              >
+                <Link
+                  href={tab.href}
+                  className=" flex h-full w-full items-center justify-center p-2"
                 >
-                  <Link
-                    href={tab.href}
-                    className=" flex items-center justify-center p-2"
-                  >
-                    {tab.name}
-                  </Link>
-                </li>
-              )
-            } else {
-              return (
-                <li
-                  key={tab.name}
-                  className="w-full grow   bg-sky-500 hover:bg-sky-600"
-                >
-                  <Link
-                    href={tab.href}
-                    className=" flex h-full w-full items-center justify-center p-2"
-                  >
-                    {tab.name}
-                  </Link>
-                </li>
-              )
-            }
-          })}
+                  {tab.name}
+                </Link>
+              </li>
+            )
+          })
+          }
+
         </ul>
       </div>
 
@@ -108,3 +112,4 @@ export default function Layout({
     </div>
   )
 }
+

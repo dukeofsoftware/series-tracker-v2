@@ -1,6 +1,7 @@
 import admin, { firestore } from "firebase-admin"
 
 import { authConfig } from "@/config/server-config"
+import { getFirestore } from "firebase-admin/firestore"
 
 const initializeApp = () => {
   return admin.initializeApp({
@@ -23,3 +24,4 @@ export const getFirebaseAdminAuth = () => {
 export const getFirebaseAdminFirestore = () => {
   return getFirebaseAdminApp().firestore()
 }
+export const db = getFirestore(getFirebaseAdminApp());

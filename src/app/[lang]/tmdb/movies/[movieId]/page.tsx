@@ -2,7 +2,6 @@ import { FC } from "react"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { MovieResponse } from "@/types/movies"
-
 import { getDictionary } from "@/lib/dictionary"
 import { formatMinutes } from "@/lib/utils"
 import AddToFavoriteMovie from "@/components/AddToFavoriteMovie"
@@ -11,10 +10,43 @@ import StatusSelector from "@/components/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
 
+
+import type { Metadata } from 'next'
+import { Locale } from "@/config/i18n.config"
+
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    movieId: string
+    lang: Locale
+  }
+}): Promise<Metadata> {
+  const data: MovieResponse = await fetch(
+    `${process.env.SITE_URL}/api/tmdb/movies/${params.movieId}?language=${params.lang}`
+  ).then((res) => res.json())
+
+  return {
+    title: data.title || data.original_title,
+    description: data.overview,
+    keywords: data.genres.map((genre) => genre.name).join(", "),
+    "og:title": data.title || data.original_title,
+    "og:description": data.overview,
+    "twitter:title": data.title || data.original_title,
+    "twitter:description": data.overview,
+    "og:image": `https://image.tmdb.org/t/p/original${data.poster_path}`,
+    "twitter:image": `https://image.tmdb.org/t/p/original${data.poster_path}`,
+    "og:image:alt": data.title || data.original_title,
+    "twitter:image:alt": data.title || data.original_title,
+    "og:type": "website",
+    "twitter:card": "summary_large_image",
+  } as Metadata
+}
+
 interface pageProps {
   params: {
     movieId: string
-    lang: "en-US" | "tr-TR" | "de-DE"
+    lang: Locale
   }
 }
 export const revalidate = 60 * 60
