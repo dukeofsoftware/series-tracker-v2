@@ -6,11 +6,11 @@ import { FrontendSeriesResponse } from "@/types/series"
 import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
 import { formatMinutes } from "@/lib/utils"
-import AddToFavoriteSeries from "@/components/AddToFavoriteSeries"
-import TrendFeedCard from "@/components/feed/card/TrendFeedCard"
 import StatusSelector from "@/components/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
+import Similars from "@/components/Similars"
+import AddToFavorites from "@/components/AddToFavoriteMovie"
 
 export async function generateMetadata({
   params,
@@ -76,7 +76,7 @@ const Page: FC<PageProps> = async ({ params }) => {
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-3xl font-bold  ">{data.title}</h1>
               <div className=" flex items-center gap-2">
-                <AddToFavoriteSeries result={data} />
+                <AddToFavorites type={"series"} seriesResult={data} />
                 <StatusSelector seriesResult={data} type="series" />
               </div>
             </div>
@@ -121,21 +121,7 @@ const Page: FC<PageProps> = async ({ params }) => {
           </div>
         </div>
       </div>
-      {data.similar.length > 0 && (
-        <>
-          <h2 className="my-2 mt-16 text-center text-2xl font-bold">
-            {page.pages.tmdb.series.tv.similarSeries}
-          </h2>
-
-          <ul className=" mb-20 flex flex-wrap justify-center gap-5 px-20">
-            {data?.similar?.map((series, index) => (
-              <li key={index}>
-                <TrendFeedCard result={series} />
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+      <Similars title={page.pages.tmdb.series.tv.similarSeries} similar={data.similar} />
     </div>
   )
 }

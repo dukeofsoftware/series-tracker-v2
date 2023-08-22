@@ -121,7 +121,6 @@ const SignIn = ({}) => {
               <FormControl>
                 <Input placeholder="shadcn@gmail.com" {...field} />
               </FormControl>
-              <FormDescription>{t("emailInputDescription")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -135,7 +134,6 @@ const SignIn = ({}) => {
               <FormControl>
                 <Input placeholder="********" type="password" {...field} />
               </FormControl>
-              <FormDescription>{t("passwordInputDescription")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}

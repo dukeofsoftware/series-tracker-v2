@@ -125,7 +125,7 @@ const Register = ({}) => {
               <FormControl>
                 <Input placeholder="********" type="password" {...field} />
               </FormControl>
-              <FormDescription>{t("passwordInputDescription")}</FormDescription>
+             
               <FormMessage />
             </FormItem>
           )}
@@ -139,9 +139,7 @@ const Register = ({}) => {
               <FormControl>
                 <Input placeholder="********" type="password" {...field} />
               </FormControl>
-              <FormDescription>
-                {t("confirmPasswordInputDescription")}
-              </FormDescription>
+            
               <FormMessage />
             </FormItem>
           )}

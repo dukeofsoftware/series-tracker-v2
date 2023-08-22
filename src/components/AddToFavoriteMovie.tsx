@@ -11,20 +11,29 @@ import { useAuth } from "./providers/context"
 import { Button } from "./ui/button"
 import { toast } from "./ui/use-toast"
 
-interface AddToFavoriteMovieProps {
-  result:
-    | MovieResponse
-    | {
-        id: string | number
-        title: string
-        poster_path: string
-        release_date: string
-        original_title: string
-        overview: string
-      }
+interface AddToFavoritesProps {
+  movieResult?:
+  | MovieResponse
+  | {
+    id: string | number
+    title: string
+    poster_path: string
+    release_date: string
+    original_title: string
+    overview: string
+  }
+  seriesResult?: {
+    id: number
+    title: string
+    poster_path: string
+    first_air_date?: string
+    last_air_date?: string
+    overview: string
+  }
+  type: "movie" | "series"
 }
 
-const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
+const AddToFavorites: FC<AddToFavoritesProps> = ({ movieResult, type, seriesResult }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const { user } = useAuth()
   const t = useTranslations("favorites")
@@ -35,11 +44,22 @@ const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
 
   useEffect(() => {
     const getData = async () => {
+      if (!movieResult || !seriesResult) return
+
       try {
-        const data = await getDocument(
-          `users/${user.uid}/movies`,
-          result.id.toString()
-        )
+        let data;
+        if (type === "movie") {
+          data = await getDocument(
+            `users/${user.uid}/movies`,
+            movieResult.id.toString()
+          )
+        }
+        if (type === "series") {
+          data = await getDocument(
+            `users/${user.uid}/series`,
+            seriesResult.id.toString()
+          )
+        }
 
         if (data) {
           setIsFavorite(data.isFavorite)
@@ -56,6 +76,9 @@ const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
   }, [])
 
   const handleFavorite = async () => {
+    if (!user) return
+    if (!movieResult || !seriesResult) return
+
     if (!user.emailVerified) {
       const t = useTranslations("global.toast")
       toast({
@@ -66,60 +89,114 @@ const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
       return
     }
     setIsFavorite((prev) => !prev)
-
+    let dataFB;
     try {
-      const dataFB = await getDocument(
-        `users/${user.uid}/movies`,
-        result.id.toString()
-      )
+      if (type === "movie") {
+        dataFB = await getDocument(
+          `users/${user.uid}/movies`,
+          movieResult.id.toString()
+        )
+        if (!dataFB?.status) {
+          await addData(`users/${user.uid}/movies`, movieResult.id.toString(), {
+            isFavorite: !isFavorite,
+            id: movieResult.id,
+            title: movieResult.title,
+            poster_path: movieResult.poster_path,
+            release_date: movieResult.release_date,
+            original_title: movieResult.original_title,
+            overview: movieResult.overview,
+            status: "not-started",
+          })
+        }
+        if (isFavorite) {
+          await addData(`users/${user.uid}/movies`, movieResult.id.toString(), {
+            isFavorite: false,
+            id: movieResult.id,
+            title: movieResult.title,
+            poster_path: movieResult.poster_path,
+            release_date: movieResult.release_date,
+            original_title: movieResult.original_title,
+            overview: movieResult.overview,
+          })
+          toast({
+            title: global("toast.success"),
+            description: t("removeFromFavorites", {
+              title: movieResult.title || movieResult.original_title,
+            }),
+          })
+        }
 
-      if (!dataFB?.status) {
-        await addData(`users/${user.uid}/movies`, result.id.toString(), {
-          isFavorite: !isFavorite,
-          id: result.id,
-          title: result.title,
-          poster_path: result.poster_path,
-          release_date: result.release_date,
-          original_title: result.original_title,
-          overview: result.overview,
-          status: "not-started",
-        })
+
+        if (!isFavorite) {
+          await addData(`users/${user.uid}/movies`, movieResult.id.toString(), {
+            isFavorite: true,
+            id: movieResult.id,
+            title: movieResult.title,
+            poster_path: movieResult.poster_path,
+            release_date: movieResult.release_date,
+            original_title: movieResult.original_title,
+            overview: movieResult.overview,
+          })
+          toast({
+            title: global("toast.success"),
+            description: t("addToFavorites", {
+              title: movieResult.title || movieResult.original_title,
+            }),
+          })
+        }
       }
+      if (type === "series") {
+        dataFB = await getDocument(
+          `users/${user.uid}/series`,
+          seriesResult.id.toString()
+        )
 
-      if (isFavorite)
-        await addData(`users/${user.uid}/movies`, result.id.toString(), {
-          isFavorite: false,
-          id: result.id,
-          title: result.title,
-          poster_path: result.poster_path,
-          release_date: result.release_date,
-          original_title: result.original_title,
-          overview: result.overview,
-        })
-      toast({
-        title: global("toast.success"),
-        description: t("removeFromFavorites", {
-          title: result.title || result.original_title,
-        }),
-      })
-
-      if (!isFavorite) {
-        await addData(`users/${user.uid}/movies`, result.id.toString(), {
-          isFavorite: true,
-          id: result.id,
-          title: result.title,
-          poster_path: result.poster_path,
-          release_date: result.release_date,
-          original_title: result.original_title,
-          overview: result.overview,
-        })
+        if (!dataFB?.status) {
+          await addData(`users/${user.uid}/series`, seriesResult.id.toString(), {
+            id: seriesResult.id,
+            title: seriesResult.title,
+            poster_path: seriesResult.poster_path,
+            date: seriesResult.first_air_date || seriesResult.last_air_date,
+            overview: seriesResult.overview,
+            status: "not-started",
+          })
+        }
+        if (isFavorite)
+          await addData(`users/${user.uid}/series`, seriesResult.id.toString(), {
+            isFavorite: false,
+            id: seriesResult.id,
+            title: seriesResult.title,
+            poster_path: seriesResult.poster_path,
+            date: seriesResult.first_air_date || seriesResult.last_air_date,
+            overview: seriesResult.overview,
+          })
         toast({
           title: global("toast.success"),
-          description: t("addToFavorites", {
-            title: result.title || result.original_title,
-          }),
+          description: t("removeFromFavorites", { title: seriesResult.title }),
         })
+
+        if (!isFavorite) {
+          await addData(`users/${user.uid}/series`, seriesResult.id.toString(), {
+            isFavorite: true,
+            id: seriesResult.id,
+            title: seriesResult.title,
+            poster_path: seriesResult.poster_path,
+            date: seriesResult.first_air_date || seriesResult.last_air_date,
+            overview: seriesResult.overview,
+          })
+          toast({
+            title: global("toast.success"),
+            description: t("addToFavorites", {
+              title: seriesResult.title,
+            }),
+          })
+        }
+
       }
+
+
+
+
     } catch (error: any) {
       setIsFavorite((prev) => !prev)
 
@@ -146,4 +223,4 @@ const AddToFavoriteMovie: FC<AddToFavoriteMovieProps> = ({ result }) => {
   )
 }
 
-export default AddToFavoriteMovie
+export default AddToFavorites

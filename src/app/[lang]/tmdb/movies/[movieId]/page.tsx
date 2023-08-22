@@ -7,11 +7,11 @@ import { MovieResponse } from "@/types/movies"
 import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
 import { formatMinutes } from "@/lib/utils"
-import AddToFavoriteMovie from "@/components/AddToFavoriteMovie"
-import MovieCard from "@/components/feed/card/MovieCard"
 import StatusSelector from "@/components/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
+import Similars from "@/components/Similars"
+import AddToFavorites from "@/components/AddToFavoriteMovie"
 
 export async function generateMetadata({
   params,
@@ -75,7 +75,7 @@ const Page: FC<pageProps> = async ({ params }) => {
               <h1 className="text-3xl font-bold  ">
                 {data.title || data.original_title}
               </h1>
-              <AddToFavoriteMovie result={data} />
+              <AddToFavorites type={"movie"} movieResult={data} />
               <StatusSelector movieResult={data} type="movie" />
             </div>
             <div className="flex flex-wrap gap-2">
@@ -113,21 +113,8 @@ const Page: FC<pageProps> = async ({ params }) => {
           </div>
         </div>
       </div>
-      {data?.similar?.length > 0 && (
-        <>
-          <h2 className="my-2 mt-16 text-center text-2xl font-bold">
-            {page.pages.tmdb.movies.movie.similarMovies}
-          </h2>
+      <Similars similar={data.similar} title={page.pages.tmdb.movies.movie.similarMovies} />
 
-          <ul className=" mb-20 flex flex-wrap justify-center gap-5 px-20">
-            {data?.similar?.map((movie, index) => (
-              <li key={index}>
-                <MovieCard result={movie} />
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
     </div>
   )
 }
