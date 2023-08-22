@@ -14,7 +14,7 @@ export const usePaginateSearch = () => {
 
   const response = useQuery(
     ["search-pagination"],
-    async ({}) => {
+    async () => {
       if (!query) return
       if (query.length < 3) return
 

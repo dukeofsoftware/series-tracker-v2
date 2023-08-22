@@ -1,6 +1,5 @@
 "use client"
 
-import { FC } from "react"
 import { usePaginateSearch } from "@/hooks/usePaginateSearch"
 
 import TrendFeedCard, {
@@ -11,6 +10,7 @@ import PaginationButtons from "@/components/PaginationButtons"
 
 const SearchFeed = ({}) => {
   const { isFetching, isLoading, data } = usePaginateSearch()
+
   return (
     <div className="w-full">
       <div className="mx-4 flex min-h-screen  w-full flex-wrap justify-center gap-4">

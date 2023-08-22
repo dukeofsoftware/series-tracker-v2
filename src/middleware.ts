@@ -25,10 +25,7 @@ function getLocale(request: NextRequest): string | undefined {
 const PUBLIC_PATHS = [
   "/login",
   "/register",
-  "/profile",
-  "/search/profile",
-  "/tmdb",
-  
+
 ]
 function redirectToHome(request: NextRequest) {
   if (!PUBLIC_PATHS.includes(request.nextUrl.pathname)) {
