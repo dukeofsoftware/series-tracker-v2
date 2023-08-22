@@ -6,7 +6,7 @@ import { RateLimiter, RateLimiterError } from "@/lib/rate-limit"
 
 const limiter = new RateLimiter({
   maxRequests: 12,
-  interval: 5 * 1000 /* 60 seconds */,
+  interval: 3 * 1000 /* 3 seconds */,
 })
 export async function GET(request: NextRequest) {
   try {
