@@ -53,6 +53,8 @@ While preparing the project, I encountered many challenges. One of the biggest w
 ![Ekran Görüntüsü - 2023-08-23 14-14-36](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/992bc261-4795-4f40-a017-c0abf097bf1e)
 ![Ekran Görüntüsü - 2023-08-23 14-14-18](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/c4c71cb7-36b6-4131-b7cc-047f5af67baf)
 ![Ekran Görüntüsü - 2023-08-23 14-13-28](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/31179e16-4aa4-46bf-86ca-a208b56938ac)
+![Ekran Görüntüsü - 2023-08-23 14-13-50](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/ca084fbf-d105-4e9a-97bc-97ef93da3a02)
+
 
 
 ## Optimization
