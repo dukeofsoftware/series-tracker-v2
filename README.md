@@ -67,12 +67,7 @@ Projeyi hazırlarken birçok sorunla karşılaştım. En büyüğü muhtemelen �
 
 ## Ekran Görüntüleri
 
-![image](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/a9288cd5-ac86-4bec-9910-601191174a84)
-![image](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/7cee04a8-7f45-4dbb-afdf-a8200031989e)
-![image](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/898cbcc0-9199-47fe-a27e-2300f267b3be)
-![image](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/721f2528-fe82-4c66-a607-e60ea976c2f7)
-![image](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/d777f9ff-38c5-4deb-9226-6ea96f6f2e70)
-![image](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/068b76ea-a1a6-4829-a392-56e2f955d82a)
+![Ekran Görüntüsü - 2023-08-23 10-35-00](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/9dab7201-fb1d-40d3-a8ef-b5f4f549199b)
 
   
 ## Optimizasyon
@@ -85,6 +80,7 @@ Projeyi hazırlarken birçok sorunla karşılaştım. En büyüğü muhtemelen �
 #### Soru 1
 
 Cevap 1
+
 
 #### Soru 2
 
