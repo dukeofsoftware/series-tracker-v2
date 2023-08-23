@@ -1,126 +1,105 @@
-
 # Tracker v2
 
-Projenin amacı dizi, filmleri ve belkide ileride daha birçok şeyin takibini kolaylaştırmak. Normalde izlediklerimi tutmak için notion kullanıyordum ama manual olarak yapması çok zahmetli oluyordu. Buna benzer uygulamalar olsada sorunları vardı. İsteğimi karşılamaya yetmiyorlardı. Bende böyle bir uygulama geliştirmek istedim.
+The aim of the project is to facilitate the tracking of TV series, movies, and perhaps many other things in the future. I used to use Notion to keep track of what I've watched, but doing it manually was quite cumbersome. Although there were similar applications, they had their issues. They didn't suffice to meet my needs. So, I wanted to develop an application like this.
 
-
-
-## Yol haritası
+## Roadmap
 
 - Footer
-
-- Sıkça Sorulan Sorular
-
-- Yakın zamanda gelicekler
-
-- Puanlama sistemi
-
-- Listeler oluşturma
-
-- Yorum yapma
-
+- Frequently Asked Questions
+- Coming Soon
+- Rating system
+- Creating lists
+- Commenting
 - Blog
-
-- Ödeme sistemi(supabase, stripe)
-
-- Arkadaşlarla real time chat
-
-- Bildirim sistemi
-
+- Payment system (supabase, stripe)
+- Real-time chat with friends
+- Notification system
 - Support
+- Contact
 
-- İletişim
+## Basic Technologies Used
 
+**Client:** React, Firebase, Zustand, TailwindCSS, Shadcn-ui, Valibot, React Hook Form, React CSV, Next Themes, Query String
 
+**Server:** Next.js, next-firebase-auth-edge, Firebase Admin
 
-## Kullanılan Temel Teknolojiler
+## Lessons Learned
 
-**İstemci:** React, firebase, zustand, TailwindCSS, Shadcn-ui, valibot, react-hook-form, react-csv, next-themes, query-string
+While preparing the project, I encountered many challenges. One of the biggest was likely the multi-language support. Setting up both user authentication and multi-language interface took 5 days. The user login/logout system and Firebase Admin setup were challenging.
 
-**Sunucu:** Next.js, next-firebase-auth-edge, firebase-admin
+## Features
 
-  
-## Çıkarılan Dersler
+- Dark/light mode switch with `next-themes`
+- Real-time data changes with `firebase`
+- Pagination with `@tanstack/react-query`
+- Full control over the profile with `firebase` (adding profile picture, username, display name, changing password, changing email)
+- Mobile responsive
+- Multi-language support (tr, en, de) with `next-intl`
+- Secure authentication with `next-firebase-auth-edge`
+- Data export with `react-csv`
+- Table functionality with `@tanstack/react-table`
+- User following
+- Adding to favorites, rating, adding status
+- SEO support
+- Accessible components with Shadcn-ui
+- Form validation with `react-hook-form` and `valibot`
+- Rate limiting
+- `react-icons`
+- Debouncing with `use-debounce`
 
-Projeyi hazırlarken birçok sorunla karşılaştım. En büyüğü muhtemelen çoklu arayazılımdı. Hem kullanıcıların kimlik doğrulaması hemde çoklu dil arayazılımını ayarlamak 5 gün sürdü. Kullanıcı giriş çıkış sistemi ve firebase admin kurulumu zorladı.
+## Screenshots
 
-  
-## Özellikler
-
-- `next-themes` ile açık/koyu mod geçişi
-- `firebase` Gerçek zamanlı veri değişimi
-- `@tanstack/react-query` ile Sayfalandırma
-- `firebase` profil üzerinde tam kontrol(profil fotoğrafı ekleme, kullanıcı adı ekleme, görünen adı ekleme, şifre değiştirme, email değiştirme)
-- Mobil Uyumlu
-- `next-intl` ile çoklu dil desteği(tr,en,de)
-- `next-firebase-auth-edge` ile güvenli doğrulama
-- `react-csv` ile veri aktarımı
-- `@tanstack/react-table` ile tablo
-- Kullanıcı takip etme.
-- Favorilere ekleme, puanlandırma, durum ekleme,
-- Seo desteği
-- Shadcn-ui ile erişilebilir componentler
-- `react-hook-form` ve `valibot` ile form validasyonu
-- rate-limiting
-- `react-icons` 
-- `use-debounce` ile debounce
-
-## Ekran Görüntüleri
-
-![Ekran Görüntüsü - 2023-08-23 10-35-00](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/9dab7201-fb1d-40d3-a8ef-b5f4f549199b)
-
-  
-## Optimizasyon
-
-`next/dynamic` ile import, ssr, react-query
-
-  
-## Sık Sorulan Sorular
-
-#### Soru 1
-
-Cevap 1
+![Ekran Görüntüsü - 2023-08-23 14-14-52](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/d97b9cfc-7054-4663-ae6b-f049ecac34ff)
+![Ekran Görüntüsü - 2023-08-23 14-14-36](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/992bc261-4795-4f40-a017-c0abf097bf1e)
+![Ekran Görüntüsü - 2023-08-23 14-14-18](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/c4c71cb7-36b6-4131-b7cc-047f5af67baf)
+![Ekran Görüntüsü - 2023-08-23 14-13-28](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/31179e16-4aa4-46bf-86ca-a208b56938ac)
 
 
-#### Soru 2
+## Optimization
 
-Cevap 2
+Using `next/dynamic` for import, server-side rendering (SSR), and react-query
 
-  
-## Bilgisayarınızda Çalıştırın
+## Frequently Asked Questions
 
-Projeyi klonlayın
+**Q1:** Question 1  
+**A1:** Answer 1
+
+**Q2:** Question 2  
+**A2:** Answer 2
+
+## Running on Your Computer
+
+Clone the project:
 
 ```bash
-  git clone git@github.com:dukeofsoftware/series-tracker-v2.git
+git clone git@github.com:dukeofsoftware/series-tracker-v2.git
 ```
 
-Proje dizinine gidin
+Navigate to the project directory:
 
 ```bash
-  cd series-tracker-v2
+cd series-tracker-v2
 ```
 
-Gerekli paketleri yükleyin ve .env dosyasına gerekli şeyleri ekleyin.
+Install the necessary packages and add required values to the `.env` file:
 
 ```bash
-  pnpm install
+pnpm install
 ```
 
-Sunucuyu çalıştırın
+Run the server:
 
 ```bash
-  pnpm serve
+pnpm serve
 ```
 
-  
-## Ortam Değişkenleri
+## Environment Variables
 
-Bu projeyi çalıştırmak için aşağıdaki ortam değişkenlerini .env dosyanıza eklemeniz gerekecek. .env.example dosyasında bulabilirsiniz.
+To run this project, you'll need to add the following environment variables to your `.env` file. You can find them in the `.env.example` file.
 
 `ANALYZE=`false
 
-#### server firebase  
+#### Server Firebase
 
 `FIREBASE_PROJECT_ID=`
 
@@ -132,7 +111,7 @@ Bu projeyi çalıştırmak için aşağıdaki ortam değişkenlerini .env dosyan
 
 -----END PRIVATE KEY-----\n"
 
- #### client firebase  
+#### Client Firebase
 
 `NEXT_PUBLIC_FIREBASE_API_KEY=`
 
@@ -154,24 +133,19 @@ Bu projeyi çalıştırmak için aşağıdaki ortam değişkenlerini .env dosyan
 
 `USE_SECURE_COOKIES=`false // set true if https
 
-
-#### api keys  
+#### API Keys
 
 `TMDB_TOKEN=`
 
 `SITE_URL=`
 
-  
-## İlişkili Projeler
+## Related Projects
 
-İşte bazı ilgili projeler
+Here are some related projects:
 
-[Tracker v1](https://github.com/dukeofsoftware/series-tracker)
+- [Tracker v1](https://github.com/dukeofsoftware/series-tracker)
+- [TMDB](https://www.themoviedb.org/)
 
-[TMDB](https://www.themoviedb.org/)
-  
-## Geri Bildirim
+## Feedback
 
-Herhangi bir geri bildiriminiz varsa, lütfen kozanfurkanemre@gmail.com adresinden bize ulaşın.
-
-  
+If you have any feedback, please contact us at kozanfurkanemre@gmail.com.
