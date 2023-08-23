@@ -13,6 +13,8 @@ module.exports = withBundleAnalyzer({
     domains: ["image.tmdb.org", "api.themoviedb.org", "firebasestorage.googleapis.com"],
   },
   basePath: '',
-
+  images: {
+    unoptimized: true,
+  },
 });
 

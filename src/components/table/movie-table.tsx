@@ -33,6 +33,8 @@ import {
 } from "@/components/ui/table"
 import { Button, buttonVariants } from "../ui/button"
 import { cn } from "@/lib/utils"
+import { useAuth } from "../providers/context"
+import { usePathname } from "next/navigation"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -71,6 +73,10 @@ export function MovieTable<TData, TValue>({
       columnVisibility,
     },
   })
+  const { user } = useAuth()
+  const pathname = usePathname()
+  const pathId = pathname.split("/")[2]
+
   const csvData = [
     ["poster_path", "Title", "Overview", "Status", "isFavorite", "Date", "id"],
     ...data.map(({
@@ -104,9 +110,10 @@ export function MovieTable<TData, TValue>({
           className="max-w-sm"
         />
         <div className=" flex items-center gap-2 flex-wrap ">
-          <CSVLink className={cn(buttonVariants({ variant: "outline" }))} filename="movies.csv" data={csvData}>
+          {pathId === user?.uid && <CSVLink className={cn(buttonVariants({ variant: "outline" }))} filename="movies.csv" data={csvData}>
             {t("exportData")}
           </CSVLink>
+          }
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="">

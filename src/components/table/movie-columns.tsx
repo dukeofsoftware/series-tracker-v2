@@ -54,7 +54,13 @@ export const columns: ColumnDef<TMDB>[] = [
     accessorKey: "title",
     header: ({ column }) => {
       const t = useTranslations("pages.profile.tables.movie")
-      return <div>{t("title")}</div>
+      return <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        {t("title")}
+        <LuArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
     },
   },
   {
