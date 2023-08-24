@@ -78,6 +78,7 @@
       },
       "tables": {
         "movie": {
+          "rating": "Rating",
           "exportData": "Export Data",
           "title": "Title",
           "overview": "Overview",
@@ -95,6 +96,7 @@
           "filterPlaceholder": "Filter by Title..."
         },
         "series": {
+          "rating": "Rating",
           "exportData": "Export Data",
           "title": "Title",
           "overview": "Overview",

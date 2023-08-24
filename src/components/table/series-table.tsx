@@ -54,6 +54,7 @@ export function SeriesTable<TData, TValue>({
       id: false,
       date: false,
       status: false,
+      rating: false,
     })
 
   const table = useReactTable({
@@ -84,6 +85,7 @@ export function SeriesTable<TData, TValue>({
       title,
       overview,
       status,
+      rating,
       isFavorite,
       date,
       id,
@@ -93,8 +95,9 @@ export function SeriesTable<TData, TValue>({
         title,
         /* format overview */
         overview.replace(/<[^>]*>/g, '').replace(/\n/g, ' ').replace(/"/g, "''").trim(),
+        rating ? rating : 0,
         status,
-        isFavorite,
+        isFavorite ? true : false,
         date,
         id,
       ])]

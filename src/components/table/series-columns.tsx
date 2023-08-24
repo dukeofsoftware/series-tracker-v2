@@ -20,6 +20,7 @@ import AddToFavoriteSeries from "../AddToFavorites"
 import { useAuth } from "../providers/context"
 import StatusSelector from "../StatusSelector"
 import { Button } from "../ui/button"
+import Rating from "../Rating"
 
 export type TMDB = {
   id: string
@@ -75,6 +76,7 @@ export const columns: ColumnDef<TMDB>[] = [
       )
     },
   },
+
   {
     accessorKey: "status",
     header: ({ column }) => {
@@ -144,6 +146,49 @@ export const columns: ColumnDef<TMDB>[] = [
         </div>
       )
     },
+  },
+  {
+    accessorKey: "rating",
+    header: ({ column }) => {
+      const t = useTranslations("pages.profile.tables.series")
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {t("rating")}
+          <LuArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+    cell: ({ row }) => {
+      const { user } = useAuth()
+      const pathname = usePathname()
+      const uid = pathname.split("/")[2]
+      if (user?.uid === uid) {
+        return (
+          <div className="grid place-items-center">
+            <Rating
+              type="series"
+              seriesResult={{
+                id: row.getValue("id"),
+                title: row.getValue("title"),
+                poster_path: row.getValue("poster_path"),
+                last_air_date: row.getValue("date"),
+                overview: row.getValue("overview"),
+              }}
+            />
+          </div>
+        )
+      }
+
+      return (
+        <div className="grid place-items-center">
+          {row.getValue("rating") ? row.getValue("rating") : 0}
+        </div>
+      )
+
+    }
   },
   {
     accessorKey: "isFavorite",

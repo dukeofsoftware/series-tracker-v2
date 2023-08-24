@@ -31,7 +31,6 @@
     "removeFromFavorites": "{title} favorilerden kaldırıldı"
   },
   "starDescription": "{title} başarıyla puanlandı",
-  
   "search": {
     "title": "Ara",
     "searchFor": "Film ve dizileri ara",
@@ -80,6 +79,7 @@
       "tables": {
         "movie": {
           "exportData": "Verileri Dışa Aktar",
+          "rating": "Puan",
           "title": "Başlık",
           "overview": "Özet",
           "favorite": "Favori",
@@ -96,6 +96,7 @@
           "filterPlaceholder": "Başlığa Göre Filtrele..."
         },
         "series": {
+          "rating":"Puan",
           "exportData": "Verileri Dışa Aktar",
           "title": "Başlık",
           "overview": "Özet",

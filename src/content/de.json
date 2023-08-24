@@ -78,6 +78,7 @@
       },
       "tables": {
         "movie": {
+          "rating": "Bewertung",
           "exportData": "Daten exportieren",
           "title": "Titel",
           "overview": "Übersicht",
@@ -95,6 +96,7 @@
           "filterPlaceholder": "Nach Titel filtern..."
         },
         "series": {
+          "rating": "Bewertung",
           "exportData": "Daten exportieren",
           "title": "Titel",
           "overview": "Übersicht",

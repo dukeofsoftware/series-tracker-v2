@@ -85,6 +85,7 @@ export function MovieTable<TData, TValue>({
       overview,
       status,
       isFavorite,
+      rating,
       release_date,
       id,
 
@@ -93,7 +94,8 @@ export function MovieTable<TData, TValue>({
         title,
         overview.replace(/<[^>]*>/g, '').replace(/\n/g, ' ').replace(/"/g, "''").trim(),
         status,
-        isFavorite,
+        rating ? rating : 0,
+        isFavorite ? true : false,
         release_date,
         id,
       ])]
