@@ -29,12 +29,12 @@ export async function generateMetadata({
   return {
     title: {
       template: `%s | ${messages.seo.mainLayout.title}`,
-      default: messages.seo.title,
+      default: messages.seo.mainLayout.title,
     },
     applicationName: messages.seo.title,
-    description: messages.seo.description,
+    description: messages.seo.mainLayout.description,
 
-    keywords: messages.seo.keywords,
+    keywords: messages.seo.mainLayout.keywords,
     "color-scheme": "dark light",
     creator: "Furkan Emre Kozan",
     authors: [
@@ -72,9 +72,8 @@ export default async function RootLayout({
   return (
     <html lang={formatLanguage(lang)}>
       <body
-        className={`${inter.className} ${
-          process.env.NODE_ENV !== "production" && "debug-screens"
-        } bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50 `}
+        className={`${inter.className} ${process.env.NODE_ENV !== "production" && "debug-screens"
+          } bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50 `}
       >
         <ServerAuthProvider>
           <Providers lang={lang} messages={messages}>
