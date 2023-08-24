@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 nodejs.html
-
+settings.json
 # testing
 /coverage
 
