@@ -1,220 +1,125 @@
-"use client"
-
-import { FC, useEffect, useState } from "react"
-import { MovieResponse } from "@/types/movies"
-import { useTranslations } from "next-intl"
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
-import { BiLoaderAlt } from "react-icons/bi"
-
-import { addData, getDocument } from "@/lib/firebase/firestore"
-import { useAuth } from "./providers/context"
-import { Button } from "./ui/button"
-import { toast } from "./ui/use-toast"
+import React, { FC, useEffect, useState } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { BiLoaderAlt } from "react-icons/bi";
+import { useTranslations } from "next-intl";
+import { addData, getDocument } from "@/lib/firebase/firestore";
+import { useAuth } from "./providers/context";
+import { Button } from "./ui/button";
+import { toast } from "./ui/use-toast";
+import { MovieResponse } from "@/types/movies";
 
 interface AddToFavoritesProps {
-  movieResult?:
-  | MovieResponse
-  | {
-    id: string | number
-    title: string
-    poster_path: string
-    release_date: string
-    original_title: string
-    overview: string
-  }
+  movieResult?: MovieResponse | {
+    id: string | number;
+    title: string;
+    poster_path: string;
+    release_date: string;
+    original_title: string;
+    overview: string;
+  };
   seriesResult?: {
-    id: number
-    title: string
-    poster_path: string
-    first_air_date?: string
-    last_air_date?: string
-    overview: string
-  }
-  type: "movie" | "series"
+    id: number;
+    title: string;
+    poster_path: string;
+    first_air_date?: string;
+    last_air_date?: string;
+    overview: string;
+  };
+  type: "movie" | "series";
 }
 
 const AddToFavorites: FC<AddToFavoritesProps> = ({ movieResult, type, seriesResult }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const { user } = useAuth()
-  const t = useTranslations("favorites")
-  const global = useTranslations("global")
-  const [isFavorite, setIsFavorite] = useState<boolean | null>(null)
-
-  if (!user) return null
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { user } = useAuth();
+  const t = useTranslations("favorites");
+  const global = useTranslations("global");
+  const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
 
   useEffect(() => {
     const getData = async () => {
+      if (!user) return;
       try {
         let data;
-        if (type === "movie" && movieResult) {
-
-          data = await getDocument(
-            `users/${user.uid}/movies`,
-            movieResult.id.toString()
-          )
+        if ((type === "movie" && movieResult) || (type === "series" && seriesResult)) {
+          const path = `users/${user.uid}/${type === "movie" ? "movies" : "series"}`;
+          data = await getDocument(path, String(movieResult?.id || seriesResult?.id));
         }
-        if (type === "series" && seriesResult) {
-          data = await getDocument(
-            `users/${user.uid}/series`,
-            seriesResult.id.toString()
-          )
-        }
-        if (data) {
-          setIsFavorite(data.isFavorite)
-          setIsLoading(false)
-
-        } else {
-          setIsFavorite(false)
-          setIsLoading(false)
-
-        }
+        setIsFavorite(data?.isFavorite || false);
       } catch (error) {
-        setIsFavorite(false)
-        setIsLoading(false)
-
+        setIsFavorite(false);
+      } finally {
+        setIsLoading(false);
       }
-    }
+    };
 
-    getData()
-  }, [])
+    if (user) {
+      getData();
+    }
+  }, [user, movieResult, seriesResult, type]);
 
   const handleFavorite = async () => {
-    if (!user) return
+    if (!user) return;
 
     if (!user.emailVerified) {
-      const t = useTranslations("global.toast")
+      const tGlobalToast = useTranslations("global.toast");
       toast({
-        title: t("error"),
-        description: t("firebase.emailVerify"),
+        title: tGlobalToast("error"),
+        description: tGlobalToast("firebase.emailVerify"),
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
-    setIsFavorite((prev) => !prev)
-    let dataFB;
+
+    setIsFavorite((prev) => !prev);
+    const dataFB = {
+      isFavorite: !isFavorite,
+      id: movieResult?.id || seriesResult?.id,
+      title: movieResult?.title || seriesResult?.title,
+      poster_path: movieResult?.poster_path || seriesResult?.poster_path,
+      release_date: movieResult?.release_date || "",
+      original_title: movieResult?.original_title || "",
+      overview: movieResult?.overview || seriesResult?.overview,
+      status: "not-started",
+    };
+
     try {
-      if (type === "movie" && movieResult) {
-        dataFB = await getDocument(
-          `users/${user.uid}/movies`,
-          movieResult.id.toString()
-        )
-        if (!dataFB?.status) {
-          await addData(`users/${user.uid}/movies`, movieResult.id.toString(), {
-            isFavorite: !isFavorite,
-            id: movieResult.id,
-            title: movieResult.title,
-            poster_path: movieResult.poster_path,
-            release_date: movieResult.release_date,
-            original_title: movieResult.original_title,
-            overview: movieResult.overview,
-            status: "not-started",
-          })
-        }
-        if (isFavorite) {
-          await addData(`users/${user.uid}/movies`, movieResult.id.toString(), {
-            isFavorite: false,
-            id: movieResult.id,
-            title: movieResult.title,
-            poster_path: movieResult.poster_path,
-            release_date: movieResult.release_date,
-            original_title: movieResult.original_title,
-            overview: movieResult.overview,
-          })
-          toast({
-            title: global("toast.success"),
-            description: t("removeFromFavorites", {
-              title: movieResult.title || movieResult.original_title,
-            }),
-          })
-        }
+      const path = `users/${user.uid}/${type}s`;
+      const existingData = await getDocument(path, String(dataFB.id));
 
-
-        if (!isFavorite) {
-          await addData(`users/${user.uid}/movies`, movieResult.id.toString(), {
-            isFavorite: true,
-            id: movieResult.id,
-            title: movieResult.title,
-            poster_path: movieResult.poster_path,
-            release_date: movieResult.release_date,
-            original_title: movieResult.original_title,
-            overview: movieResult.overview,
-          })
-          toast({
-            title: global("toast.success"),
-            description: t("addToFavorites", {
-              title: movieResult.title || movieResult.original_title,
-            }),
-          })
-        }
-        return
+      if (!existingData?.status) {
+        await addData(path, String(dataFB.id), dataFB);
       }
-      if (type === "series" && seriesResult) {
-        dataFB = await getDocument(
-          `users/${user.uid}/series`,
-          seriesResult.id.toString()
-        )
 
-        if (!dataFB?.status) {
-          await addData(`users/${user.uid}/series`, seriesResult.id.toString(), {
-            id: seriesResult.id,
-            title: seriesResult.title,
-            poster_path: seriesResult.poster_path,
-            date: seriesResult.first_air_date || seriesResult.last_air_date,
-            overview: seriesResult.overview,
-            status: "not-started",
-          })
-        }
-        if (isFavorite)
-          await addData(`users/${user.uid}/series`, seriesResult.id.toString(), {
-            isFavorite: false,
-            id: seriesResult.id,
-            title: seriesResult.title,
-            poster_path: seriesResult.poster_path,
-            date: seriesResult.first_air_date || seriesResult.last_air_date,
-            overview: seriesResult.overview,
-          })
+      const tFavorites = useTranslations("favorites");
+
+      if (isFavorite) {
+        await addData(path, String(dataFB.id), { ...dataFB, isFavorite: false });
         toast({
           title: global("toast.success"),
-          description: t("removeFromFavorites", { title: seriesResult.title }),
-        })
-
-        if (!isFavorite) {
-          await addData(`users/${user.uid}/series`, seriesResult.id.toString(), {
-            isFavorite: true,
-            id: seriesResult.id,
-            title: seriesResult.title,
-            poster_path: seriesResult.poster_path,
-            date: seriesResult.first_air_date || seriesResult.last_air_date,
-            overview: seriesResult.overview,
-          })
-          toast({
-            title: global("toast.success"),
-            description: t("addToFavorites", {
-              title: seriesResult.title,
-            }),
-          })
-        }
-        return
+          description: tFavorites("removeFromFavorites", { title: dataFB.title }),
+        });
+      } else {
+        await addData(path, String(dataFB.id), { ...dataFB, isFavorite: true });
+        toast({
+          title: global("toast.success"),
+          description: tFavorites("addToFavorites", { title: dataFB.title }),
+        });
       }
-
-
-
-
     } catch (error: any) {
-      setIsFavorite((prev) => !prev)
-
-      console.error(error)
+      setIsFavorite((prev) => !prev);
+      console.error(error);
       toast({
-        title: global("toast.error", {
-          code: error.code,
-        }),
+        title: global("toast.error", { code: error.code }),
         description: error.message,
         variant: "destructive",
-      })
+      });
     }
+  };
+
+  if (isLoading) {
+    return <BiLoaderAlt className="h-5 w-5 animate-spin text-sky-500" />;
   }
-  if (isLoading)
-    return <BiLoaderAlt className="h-5 w-5 animate-spin text-sky-500" />
+
   return (
     <Button variant={"ghost"} size={"icon"} onClick={handleFavorite}>
       {isFavorite ? (
@@ -223,7 +128,7 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({ movieResult, type, seriesResu
         <AiOutlineHeart className="h-4 w-4" />
       )}
     </Button>
-  )
-}
+  );
+};
 
-export default AddToFavorites
+export default AddToFavorites;

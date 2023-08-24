@@ -52,7 +52,7 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
             const result = type === 'movie' ? movieResult : seriesResult;
 
             if (result) {
-                const docPath = `users/${user.uid}/${type}s`;
+                const docPath = `users/${user.uid}/${type === 'movie' ? 'movies' : 'series'}`;
 
                 const exist = await getDocument(docPath, result.id.toString());
 
@@ -120,21 +120,21 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
 
     return (
         <div className="flex">
-        {Array.from(Array(5).keys()).map((i) => (
-          <div
-            className="cursor-pointer"
-            onMouseEnter={() => setHoverRating(i + 1)}
-            onMouseLeave={() => setHoverRating(null)}
-            onClick={() => changeRating(i + 1)}
-          >
-            {rating >= 0 && (i + 1 <= (hoverRating || rating)) ? (
-              <AiFillStar className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
-            ) : (
-              <AiOutlineStar className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
-            )}
-          </div>
-        ))}
-      </div>
+            {Array.from(Array(5).keys()).map((i) => (
+                <div
+                    className="cursor-pointer"
+                    onMouseEnter={() => setHoverRating(i + 1)}
+                    onMouseLeave={() => setHoverRating(null)}
+                    onClick={() => changeRating(i + 1)}
+                >
+                    {rating >= 0 && (i + 1 <= (hoverRating || rating)) ? (
+                        <AiFillStar className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
+                    ) : (
+                        <AiOutlineStar className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
+                    )}
+                </div>
+            ))}
+        </div>
     );
 };
 
