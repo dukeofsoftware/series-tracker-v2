@@ -80,7 +80,7 @@ export default async function RootLayout({
           <Providers lang={lang} messages={messages}>
             <div className="h-full flex flex-col w-full">
               <Navbar />
-              <div className="grow">
+              <div className="grow min-h-screen">
                 {children}
 
               </div>

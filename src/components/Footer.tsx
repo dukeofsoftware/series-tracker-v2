@@ -40,7 +40,7 @@ const Footer: FC<FooterProps> = ({ messages }) => {
             url: "/about",
         }
     ]
-    return <footer className='w-full h-72 bg-gray-950 p-8 grid grid-cols-2'>
+    return <footer className='mt-8 w-full h-72 bg-gray-950 p-8 grid grid-cols-2'>
 
         <div className='flex flex-col flex-wrap gap-2  items-center'>
             <h3 className='font-bold text-center'>

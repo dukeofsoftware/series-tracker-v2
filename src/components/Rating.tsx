@@ -52,6 +52,8 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
             const result = type === 'movie' ? movieResult : seriesResult;
 
             if (result) {
+                setRating(newRating);
+
                 const docPath = `users/${user.uid}/${type === 'movie' ? 'movies' : 'series'}`;
 
                 const exist = await getDocument(docPath, result.id.toString());
@@ -75,7 +77,6 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
                     rating: newRating,
                 });
 
-                setRating(newRating);
 
                 toast({
                     title: global('success'),
