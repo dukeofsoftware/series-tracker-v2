@@ -10,6 +10,7 @@ import { i18n, Locale } from "@/config/i18n.config"
 import { formatLanguage } from "@/lib/utils"
 import { ServerAuthProvider } from "@/components/providers/server-auth-provider"
 import { Toaster } from "@/components/ui/toaster"
+import Footer from "@/components/Footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -77,8 +78,14 @@ export default async function RootLayout({
       >
         <ServerAuthProvider>
           <Providers lang={lang} messages={messages}>
-            <Navbar />
-            {children}
+            <div className="h-full flex flex-col w-full">
+              <Navbar />
+              <div className="grow">
+                {children}
+
+              </div>
+              <Footer messages={messages}/>
+            </div>
             <Toaster />
           </Providers>
         </ServerAuthProvider>

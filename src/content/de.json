@@ -232,5 +232,12 @@
         }
       }
     }
+  },
+  "footer": {
+    "links": "Links",
+    "social": "Soziale Medien",
+    "sss": "Häufig gestellte Fragen",
+    "contact": "Kontakt",
+    "about": "Über uns"
   }
 }

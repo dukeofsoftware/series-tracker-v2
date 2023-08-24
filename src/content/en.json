@@ -232,5 +232,12 @@
         }
       }
     }
+  },
+  "footer": {
+    "links": "Links",
+    "social": "Social",
+    "sss": "Frequently Asked Questions",
+    "contact": "Contact",
+    "about": "About"
   }
 }

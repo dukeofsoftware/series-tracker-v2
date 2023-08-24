@@ -4,10 +4,8 @@ Projenin amacı, TV dizileri, filmler ve belki de gelecekte birçok farklı şey
 
 ## Yol Haritası
 
-- Altbilgi
 - Sıkça Sorulan Sorular
 - Yakında Gelecekler
-- Derecelendirme Sistemi
 - Listeler Oluşturma
 - Yorum Yapma
 - Blog

@@ -96,7 +96,7 @@
           "filterPlaceholder": "Başlığa Göre Filtrele..."
         },
         "series": {
-          "rating":"Puan",
+          "rating": "Puan",
           "exportData": "Verileri Dışa Aktar",
           "title": "Başlık",
           "overview": "Özet",
@@ -232,5 +232,12 @@
         }
       }
     }
+  },
+  "footer": {
+    "links": "Bağlantılar",
+    "social": "Sosyal Medya",
+    "sss": "Sıkça Sorulan Sorular",
+    "contact": "İletişim",
+    "about": "Hakkında"
   }
 }
