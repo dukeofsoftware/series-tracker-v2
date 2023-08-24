@@ -30,7 +30,7 @@ interface RatingProps {
 const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
     const { user } = useAuth();
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [rating, setRating] = useState<number | null>(null);
+    const [rating, setRating] = useState<number>(0);
     const [hoverRating, setHoverRating] = useState<number | null>(null);
 
     if (!user) return null;
@@ -104,6 +104,7 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
                     setRating(0);
                 }
             }
+
         } catch (error) {
             console.error('RATING ERROR:', error);
         } finally {
@@ -119,23 +120,21 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
 
     return (
         <div className="flex">
-            {Array.from(Array(5).keys()).map((i) => (
-                <div
-                    key={i}
-                    className="cursor-pointer"
-                    onMouseEnter={() => setHoverRating(i + 1)}
-                    onMouseLeave={() => setHoverRating(null)}
-                    onClick={() => changeRating(i + 1)}
-                >
-                    {rating && i + 1 <= (hoverRating || rating) ? (
-                        <AiFillStar className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
-                    ) : (
-                        <AiOutlineStar className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
-                    )}
-                        
-                </div>
-            ))}
-        </div>
+        {Array.from(Array(5).keys()).map((i) => (
+          <div
+            className="cursor-pointer"
+            onMouseEnter={() => setHoverRating(i + 1)}
+            onMouseLeave={() => setHoverRating(null)}
+            onClick={() => changeRating(i + 1)}
+          >
+            {rating >= 0 && (i + 1 <= (hoverRating || rating)) ? (
+              <AiFillStar className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
+            ) : (
+              <AiOutlineStar className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
+            )}
+          </div>
+        ))}
+      </div>
     );
 };
 
