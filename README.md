@@ -7,7 +7,6 @@ The aim of the project is to facilitate the tracking of TV series, movies, and p
 - Footer
 - Frequently Asked Questions
 - Coming Soon
-- Rating system
 - Creating lists
 - Commenting
 - Blog
