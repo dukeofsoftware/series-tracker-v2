@@ -85,7 +85,7 @@ const GoogleAuth: FC<GoogleAuthProps> = ({ className }) => {
                 description: error.message
             })
         } finally {
-            setIsLoading(true)
+            setIsLoading(false)
         }
 
     }
