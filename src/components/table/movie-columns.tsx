@@ -188,7 +188,7 @@ export const columns: ColumnDef<TMDB>[] = [
     },
   },
   {
-    accessorKey: "date",
+    accessorKey: "release_date",
     header: ({ column }) => {
       const t = useTranslations("pages.profile.tables.movie")
       return <div>{t("date")}</div>
