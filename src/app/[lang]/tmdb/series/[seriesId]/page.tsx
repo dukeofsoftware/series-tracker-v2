@@ -11,6 +11,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
 import Similars from "@/components/Similars"
 import AddToFavorites from "@/components/AddToFavorites"
+import Rating from "@/components/Rating"
 
 export async function generateMetadata({
   params,
@@ -77,6 +78,7 @@ const Page: FC<PageProps> = async ({ params }) => {
               <h1 className="text-3xl font-bold  ">{data.title}</h1>
               <div className=" flex items-center gap-2">
                 <AddToFavorites type={"series"} seriesResult={data} />
+                <Rating type="series" seriesResult={data} />
                 <StatusSelector seriesResult={data} type="series" />
               </div>
             </div>

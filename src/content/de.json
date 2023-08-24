@@ -48,6 +48,7 @@
     "dropped": "Abgebrochen",
     "planToWatch": "Geplant anzusehen"
   },
+  "starDescription": "{title} wurde erfolgreich bewertet.",
   "navbar": {
     "themes": {
       "darkMode": "Dunkler Modus",

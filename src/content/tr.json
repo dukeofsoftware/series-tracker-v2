@@ -30,6 +30,8 @@
     "addToFavorites": "{title} favorilere eklendi",
     "removeFromFavorites": "{title} favorilerden kaldırıldı"
   },
+  "starDescription": "{title} başarıyla puanlandı",
+  
   "search": {
     "title": "Ara",
     "searchFor": "Film ve dizileri ara",
@@ -122,7 +124,7 @@
           "buttonLabel": "Fotoğrafı Değiştir",
           "toastDescription": "Profil fotoğrafınız değiştirildi",
           "invalidFormat": "Geçersiz dosya formatı. Sadece .png, .jpeg, .jpg ve .webp formatları destekleniyor",
-          "fileSizeExceeds":"En fazla {mb} boyutunda bir dosya yükleyebilirsiniz"
+          "fileSizeExceeds": "En fazla {mb} boyutunda bir dosya yükleyebilirsiniz"
         },
         "updateDisplayName": {
           "toastDescription": "Profil adınız değiştirildi",

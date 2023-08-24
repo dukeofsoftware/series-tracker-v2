@@ -12,6 +12,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
 import Similars from "@/components/Similars"
 import AddToFavorites from "@/components/AddToFavorites"
+import Rating from "@/components/Rating"
 
 export async function generateMetadata({
   params,
@@ -76,6 +77,7 @@ const Page: FC<pageProps> = async ({ params }) => {
                 {data.title || data.original_title}
               </h1>
               <AddToFavorites type={"movie"} movieResult={data} />
+              <Rating type="movie" movieResult={data} />
               <StatusSelector movieResult={data} type="movie" />
             </div>
             <div className="flex flex-wrap gap-2">

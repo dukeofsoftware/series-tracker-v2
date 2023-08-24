@@ -6,6 +6,7 @@
       "keywords": "series, film, tracking, movie tracking, series tracking, series rating, popular series"
     }
   },
+  "starDescription": " {title} successfully rated",
   "global": {
     "adult": "Adult Content",
     "loading": "Loading...",
