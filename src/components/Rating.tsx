@@ -95,10 +95,9 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
             const result = type === 'movie' ? movieResult : seriesResult;
 
             if (result) {
-                const docPath = `users/${user.uid}/${type}s`;
+                const docPath = `users/${user.uid}/${type === 'movie' ? 'movies' : 'series'}`;
 
                 const data = await getDocument(docPath, result.id.toString());
-
                 if (data?.rating) {
                     setRating(data.rating);
                 } else {
@@ -121,8 +120,12 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
 
     return (
         <div className="flex">
+            <pre>
+                {rating}
+            </pre>
             {Array.from(Array(5).keys()).map((i) => (
                 <div
+                    key={i}
                     className="cursor-pointer"
                     onMouseEnter={() => setHoverRating(i + 1)}
                     onMouseLeave={() => setHoverRating(null)}

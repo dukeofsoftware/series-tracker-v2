@@ -79,6 +79,7 @@
       "tables": {
         "movie": {
           "exportData": "Verileri Dışa Aktar",
+          "originalTitle": "Orijinal Başlık",
           "rating": "Puan",
           "title": "Başlık",
           "overview": "Özet",

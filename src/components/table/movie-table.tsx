@@ -53,8 +53,9 @@ export function MovieTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({
       id: false,
-      date: false,
+      release_date: false,
       status: false,
+      original_title: false,
     })
   const table = useReactTable({
     data,

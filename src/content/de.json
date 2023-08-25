@@ -78,6 +78,7 @@
       },
       "tables": {
         "movie": {
+          "originalTitle": "Originaltitel",
           "rating": "Bewertung",
           "exportData": "Daten exportieren",
           "title": "Titel",
