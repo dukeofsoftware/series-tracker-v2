@@ -18,7 +18,7 @@ export const useFirebaseAuth = () => {
     const auth = getAuth(getFirebaseApp(clientConfig))
 
     if (process.env.NEXT_PUBLIC_EMULATOR_HOST) {
-      (auth as unknown as any)._canInitEmulator = true
+      ;(auth as unknown as any)._canInitEmulator = true
       connectAuthEmulator(auth, process.env.NEXT_PUBLIC_EMULATOR_HOST, {
         disableWarnings: true,
       })

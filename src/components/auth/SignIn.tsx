@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth"
@@ -10,8 +11,6 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import dynamic from "next/dynamic"
-const GoogleAuth = dynamic(() => import("../GoogleAuth"), { ssr: false })
 
 import { addData, getDocument } from "@/lib/firebase/firestore"
 import { autoUsername, randomUsername } from "@/lib/utils"
@@ -29,7 +28,9 @@ import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 
-const SignIn = ({ }) => {
+const GoogleAuth = dynamic(() => import("../GoogleAuth"), { ssr: false })
+
+const SignIn = ({}) => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const auth = getFirebaseAuth()
 
@@ -104,7 +105,7 @@ const SignIn = ({ }) => {
     }
   }
   if (hasLogged) {
-    <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+    ;<div className="flex h-full w-full flex-col items-center justify-center gap-2">
       <span>
         Redirecting to <strong>{redirect || "/"}</strong>
       </span>
@@ -112,14 +113,12 @@ const SignIn = ({ }) => {
     </div>
   }
   return (
-    <div className="grid place-items-center  mt-5">
-      <Card className="max-w-xl w-full">
+    <div className="mt-5 grid  place-items-center">
+      <Card className="w-full max-w-xl">
         <CardHeader>
-          <CardTitle className="text-center">
-            {t("title")}
-          </CardTitle>
+          <CardTitle className="text-center">{t("title")}</CardTitle>
         </CardHeader>
-        <CardContent className="px-4" >
+        <CardContent className="px-4">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 ">
               <FormField
@@ -142,7 +141,11 @@ const SignIn = ({ }) => {
                   <FormItem>
                     <FormLabel>{t("passwordLabel")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="********" type="password" {...field} />
+                      <Input
+                        placeholder="********"
+                        type="password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -153,20 +156,20 @@ const SignIn = ({ }) => {
                 <Link
                   href="/register"
                   className="text-sky-500 hover:underline active:underline"
-                >{" "}
+                >
+                  {" "}
                   {t("register")}
                 </Link>
               </p>
-              <div className="flex justify-center w-full ">
-
-                <Button type="submit" className="w-full max-w-xs">{t("buttonLabel")}</Button>
+              <div className="flex w-full justify-center ">
+                <Button type="submit" className="w-full max-w-xs">
+                  {t("buttonLabel")}
+                </Button>
               </div>
-
             </form>
           </Form>
-          <div className="flex justify-center w-full ">
+          <div className="flex w-full justify-center ">
             <GoogleAuth className="mt-2 w-full max-w-xs" />
-
           </div>
         </CardContent>
       </Card>

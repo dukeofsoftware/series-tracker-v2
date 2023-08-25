@@ -7,12 +7,12 @@ import { MovieResponse } from "@/types/movies"
 import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
 import { formatMinutes } from "@/lib/utils"
+import AddToFavorites from "@/components/AddToFavorites"
+import Rating from "@/components/Rating"
+import Similars from "@/components/Similars"
 import StatusSelector from "@/components/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
-import Similars from "@/components/Similars"
-import AddToFavorites from "@/components/AddToFavorites"
-import Rating from "@/components/Rating"
 
 export async function generateMetadata({
   params,
@@ -115,8 +115,10 @@ const Page: FC<pageProps> = async ({ params }) => {
           </div>
         </div>
       </div>
-      <Similars similar={data.similar} title={page.pages.tmdb.movies.movie.similarMovies} />
-
+      <Similars
+        similar={data.similar}
+        title={page.pages.tmdb.movies.movie.similarMovies}
+      />
     </div>
   )
 }

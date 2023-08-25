@@ -18,9 +18,9 @@ import {
 } from "@/components/ui/dropdown-menu"
 import AddToFavoriteSeries from "../AddToFavorites"
 import { useAuth } from "../providers/context"
+import Rating from "../Rating"
 import StatusSelector from "../StatusSelector"
 import { Button } from "../ui/button"
-import Rating from "../Rating"
 
 export type TMDB = {
   id: string
@@ -53,13 +53,15 @@ export const columns: ColumnDef<TMDB>[] = [
     accessorKey: "title",
     header: ({ column }) => {
       const t = useTranslations("pages.profile.tables.series")
-      return <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        {t("title")}
-        <LuArrowUpDown className="ml-2 h-4 w-4" />
-      </Button>
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {t("title")}
+          <LuArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
     },
   },
   {
@@ -69,11 +71,7 @@ export const columns: ColumnDef<TMDB>[] = [
       return <div className=" sm:block">{t("overview")}</div>
     },
     cell: ({ row }) => {
-      return (
-        <div className="  sm:line-clamp-5">
-          {row.getValue("overview")}
-        </div>
-      )
+      return <div className="  sm:line-clamp-5">{row.getValue("overview")}</div>
     },
   },
 
@@ -187,8 +185,7 @@ export const columns: ColumnDef<TMDB>[] = [
           {row.getValue("rating") ? row.getValue("rating") : 0}
         </div>
       )
-
-    }
+    },
   },
   {
     accessorKey: "isFavorite",

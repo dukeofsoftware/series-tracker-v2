@@ -6,12 +6,12 @@ import { FrontendSeriesResponse } from "@/types/series"
 import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
 import { formatMinutes } from "@/lib/utils"
+import AddToFavorites from "@/components/AddToFavorites"
+import Rating from "@/components/Rating"
+import Similars from "@/components/Similars"
 import StatusSelector from "@/components/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
-import Similars from "@/components/Similars"
-import AddToFavorites from "@/components/AddToFavorites"
-import Rating from "@/components/Rating"
 
 export async function generateMetadata({
   params,
@@ -123,7 +123,10 @@ const Page: FC<PageProps> = async ({ params }) => {
           </div>
         </div>
       </div>
-      <Similars title={page.pages.tmdb.series.tv.similarSeries} similar={data.similar} />
+      <Similars
+        title={page.pages.tmdb.series.tv.similarSeries}
+        similar={data.similar}
+      />
     </div>
   )
 }

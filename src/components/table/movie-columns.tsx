@@ -14,14 +14,13 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import AddToFavorites from "../AddToFavorites"
 import { useAuth } from "../providers/context"
+import Rating from "../Rating"
 import StatusSelector from "../StatusSelector"
 import { Button } from "../ui/button"
-import Rating from "../Rating"
 
 export type TMDB = {
   id: string
@@ -55,13 +54,15 @@ export const columns: ColumnDef<TMDB>[] = [
     accessorKey: "title",
     header: ({ column }) => {
       const t = useTranslations("pages.profile.tables.movie")
-      return <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        {t("title")}
-        <LuArrowUpDown className="ml-2 h-4 w-4" />
-      </Button>
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {t("title")}
+          <LuArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
     },
   },
   {
@@ -168,7 +169,8 @@ export const columns: ColumnDef<TMDB>[] = [
               movieResult={{
                 id: row.getValue("id"),
                 title: row.getValue("title") || row.getValue("original_title"),
-                original_title: row.getValue("original_title") || row.getValue("title"),
+                original_title:
+                  row.getValue("original_title") || row.getValue("title"),
                 poster_path: row.getValue("poster_path"),
                 release_date: row.getValue("release_date"),
                 overview: row.getValue("overview"),
@@ -183,8 +185,7 @@ export const columns: ColumnDef<TMDB>[] = [
           {row.getValue("rating") ? row.getValue("rating") : 0}
         </div>
       )
-
-    }
+    },
   },
   {
     accessorKey: "isFavorite",
@@ -215,7 +216,8 @@ export const columns: ColumnDef<TMDB>[] = [
                 poster_path: row.getValue("poster_path"),
                 release_date: row.getValue("date"),
                 overview: row.getValue("overview"),
-                original_title: row.getValue("original_title") || row.getValue("title"),
+                original_title:
+                  row.getValue("original_title") || row.getValue("title"),
               }}
             />
           </div>
@@ -237,7 +239,7 @@ export const columns: ColumnDef<TMDB>[] = [
     header: ({ column }) => {
       const t = useTranslations("pages.profile.tables.movie")
       return <div>{t("originalTitle")}</div>
-    }
+    },
   },
   {
     accessorKey: "release_date",

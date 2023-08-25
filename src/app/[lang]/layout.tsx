@@ -8,9 +8,9 @@ import { Inter } from "next/font/google"
 
 import { i18n, Locale } from "@/config/i18n.config"
 import { formatLanguage } from "@/lib/utils"
+import Footer from "@/components/Footer"
 import { ServerAuthProvider } from "@/components/providers/server-auth-provider"
 import { Toaster } from "@/components/ui/toaster"
-import Footer from "@/components/Footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -73,18 +73,16 @@ export default async function RootLayout({
   return (
     <html lang={formatLanguage(lang)}>
       <body
-        className={`${inter.className} ${process.env.NODE_ENV !== "production" && "debug-screens"
-          } bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50 `}
+        className={`${inter.className} ${
+          process.env.NODE_ENV !== "production" && "debug-screens"
+        } bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50 `}
       >
         <ServerAuthProvider>
           <Providers lang={lang} messages={messages}>
-            <div className="h-full flex flex-col w-full">
+            <div className="flex h-full w-full flex-col">
               <Navbar />
-              <div className="grow min-h-screen">
-                {children}
-
-              </div>
-              <Footer messages={messages}/>
+              <div className="min-h-screen grow">{children}</div>
+              <Footer messages={messages} />
             </div>
             <Toaster />
           </Providers>

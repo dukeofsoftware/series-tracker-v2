@@ -1,40 +1,46 @@
 "use client"
-import { FC, useEffect, useState } from "react";
-import { MovieResponse } from "@/types/movies";
-import { FrontendSeriesResponse } from "@/types/series";
-import { deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { useTranslations } from "next-intl";
-import { addData, db, getDocument } from "@/lib/firebase/firestore";
+
+import { FC, useEffect, useState } from "react"
+import { MovieResponse } from "@/types/movies"
+import { FrontendSeriesResponse } from "@/types/series"
+import { deleteDoc, doc, onSnapshot } from "firebase/firestore"
+import { useTranslations } from "next-intl"
+
+import { addData, db, getDocument } from "@/lib/firebase/firestore"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useAuth } from "./providers/context";
-import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
-import { toast } from "./ui/use-toast";
+} from "@/components/ui/select"
+import { useAuth } from "./providers/context"
+import { Button } from "./ui/button"
+import { Separator } from "./ui/separator"
+import { toast } from "./ui/use-toast"
 
 interface StatusSelectorProps {
-  movieResult?: MovieResponse | {
-    id: string;
-    title: string;
-    poster_path: string;
-    release_date: string;
-    original_title: string;
-    overview: string;
-  };
-  seriesResult?: FrontendSeriesResponse | {
-    id: string;
-    title: string;
-    poster_path: string;
-    first_air_date?: string;
-    last_air_date?: string;
-    overview: string;
-  };
-  type: string;
+  movieResult?:
+    | MovieResponse
+    | {
+        id: string
+        title: string
+        poster_path: string
+        release_date: string
+        original_title: string
+        overview: string
+      }
+  seriesResult?:
+    | FrontendSeriesResponse
+    | {
+        id: string
+        title: string
+        poster_path: string
+        first_air_date?: string
+        last_air_date?: string
+        overview: string
+      }
+  type: string
 }
 
 const StatusSelector: FC<StatusSelectorProps> = ({
@@ -42,123 +48,124 @@ const StatusSelector: FC<StatusSelectorProps> = ({
   seriesResult,
   type,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [status, setStatus] = useState("Status");
-  const global = useTranslations("global");
-  const t = useTranslations("status");
-  const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(false)
+  const [status, setStatus] = useState("Status")
+  const global = useTranslations("global")
+  const t = useTranslations("status")
+  const { user } = useAuth()
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
       doc(
         db,
-        `/users/${user?.uid}/${type === "series" ? "series" : "movies"}/${type === "series" ? seriesResult?.id : movieResult?.id
+        `/users/${user?.uid}/${type === "series" ? "series" : "movies"}/${
+          type === "series" ? seriesResult?.id : movieResult?.id
         }`
       ),
       (doc) => {
-        const status = doc.data()?.status;
+        const status = doc.data()?.status
         if (status) {
-          setStatus(status);
+          setStatus(status)
         }
       }
-    );
+    )
 
-    return () => unsubscribe();
-  }, []);
+    return () => unsubscribe()
+  }, [])
 
   useEffect(() => {
     const getStatus = async () => {
       try {
-        setIsLoading(true);
+        setIsLoading(true)
 
         if (type === "series") {
-          if (!seriesResult) return;
+          if (!seriesResult) return
 
           const firebaseStatus = await getDocument(
             `users/${user?.uid}/series`,
             seriesResult?.id.toString()
-          ).then((res) => res?.status);
+          ).then((res) => res?.status)
           if (firebaseStatus) {
-            setStatus(firebaseStatus);
-            return;
+            setStatus(firebaseStatus)
+            return
           }
-          setStatus("Status");
-          return;
+          setStatus("Status")
+          return
         }
         if (type === "movie") {
-          if (!movieResult) return;
+          if (!movieResult) return
           const firebaseStatus = await getDocument(
             `users/${user?.uid}/movies`,
             movieResult?.id.toString()
-          ).then((res) => res?.status);
+          ).then((res) => res?.status)
           if (firebaseStatus) {
-            setStatus(firebaseStatus);
-            return;
+            setStatus(firebaseStatus)
+            return
           }
-          setStatus("Status");
-          return;
+          setStatus("Status")
+          return
         }
       } catch (error: any) {
-        console.error(error);
+        console.error(error)
         toast({
           title: global("toast.error", {
             code: error.code,
           }),
           description: error.message,
           variant: "destructive",
-        });
+        })
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
+    }
 
-    getStatus();
-  }, []);
+    getStatus()
+  }, [])
 
   const deleteHandle = async () => {
     try {
       if (type === "series") {
-        if (!seriesResult) return;
+        if (!seriesResult) return
 
         const docRef = doc(
           db,
           `users/${user?.uid}/series`,
           seriesResult?.id.toString()
-        );
-        await deleteDoc(docRef);
-        setStatus("Status");
-        window.location.reload();
+        )
+        await deleteDoc(docRef)
+        setStatus("Status")
+        window.location.reload()
 
-        return;
+        return
       }
       if (type === "movie") {
-        if (!movieResult) return;
+        if (!movieResult) return
 
         const docRef = doc(
           db,
           `users/${user?.uid}/movies`,
           movieResult?.id.toString()
-        );
-        await deleteDoc(docRef);
-        setStatus("Status");
-        window.location.reload();
-        return;
+        )
+        await deleteDoc(docRef)
+        setStatus("Status")
+        window.location.reload()
+        return
       }
     } catch (error: any) {
-      console.error(error);
+      console.error(error)
       toast({
         title: global("toast.error", {
           code: error.code,
         }),
         description: error.message,
         variant: "destructive",
-      });
+      })
     }
-  };
+  }
 
   const handleStatusChange = async (e: string) => {
     try {
-      setStatus(e);
+      setStatus(e)
       if (type === "series") {
         if (!seriesResult) {
           toast({
@@ -167,8 +174,8 @@ const StatusSelector: FC<StatusSelectorProps> = ({
             }),
             description: global("toast.errorDescription"),
             variant: "destructive",
-          });
-          return;
+          })
+          return
         }
 
         await addData(`users/${user?.uid}/series`, seriesResult.id.toString(), {
@@ -178,8 +185,8 @@ const StatusSelector: FC<StatusSelectorProps> = ({
           poster_path: seriesResult.poster_path,
           date: seriesResult.first_air_date || seriesResult.last_air_date,
           overview: seriesResult.overview,
-        });
-        return;
+        })
+        return
       }
       if (type === "movie") {
         if (!movieResult) {
@@ -189,8 +196,8 @@ const StatusSelector: FC<StatusSelectorProps> = ({
             }),
             description: global("toast.errorDescription"),
             variant: "destructive",
-          });
-          return;
+          })
+          return
         }
         await addData(`users/${user?.uid}/movies`, movieResult.id.toString(), {
           status: e,
@@ -200,20 +207,20 @@ const StatusSelector: FC<StatusSelectorProps> = ({
           release_date: movieResult.release_date,
           original_title: movieResult.original_title || movieResult.title,
           overview: movieResult.overview,
-        });
-        return;
+        })
+        return
       }
     } catch (error: any) {
-      console.error(error);
+      console.error(error)
       toast({
         title: global("toast.error", {
           code: error.code,
         }),
         description: error.message,
         variant: "destructive",
-      });
+      })
     }
-  };
+  }
 
   const allStatus = [
     {
@@ -240,7 +247,7 @@ const StatusSelector: FC<StatusSelectorProps> = ({
       value: "plan-to-watch",
       label: t("planToWatch"),
     },
-  ];
+  ]
 
   return (
     <Select
@@ -277,7 +284,7 @@ const StatusSelector: FC<StatusSelectorProps> = ({
         ))}
       </SelectContent>
     </Select>
-  );
-};
+  )
+}
 
-export default StatusSelector;
+export default StatusSelector

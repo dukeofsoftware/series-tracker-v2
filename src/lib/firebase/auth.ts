@@ -62,7 +62,6 @@ export const logout = async (auth: Auth): Promise<void> => {
   return signOut(auth)
 }
 
-
 export const loginWithProvider = async (
   auth: Auth,
   provider: AuthProvider
@@ -77,13 +76,13 @@ export const loginWithProvider = async (
 }
 
 export const getGoogleProvider = (auth: Auth) => {
-  const provider = new GoogleAuthProvider();
-  provider.addScope("profile");
-  provider.addScope("email");
-  useDeviceLanguage(auth);
+  const provider = new GoogleAuthProvider()
+  provider.addScope("profile")
+  provider.addScope("email")
+  useDeviceLanguage(auth)
   provider.setCustomParameters({
     display: "popup",
-  });
+  })
 
-  return provider;
-};
+  return provider
+}

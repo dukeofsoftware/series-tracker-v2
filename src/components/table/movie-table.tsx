@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { usePathname } from "next/navigation"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,7 +15,9 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 import { useTranslations } from "next-intl"
+import { CSVLink } from "react-csv"
 
+import { cn } from "@/lib/utils"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -22,7 +25,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { CSVLink } from "react-csv";
 import {
   Table,
   TableBody,
@@ -31,10 +33,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button, buttonVariants } from "../ui/button"
-import { cn } from "@/lib/utils"
 import { useAuth } from "../providers/context"
-import { usePathname } from "next/navigation"
+import { Button, buttonVariants } from "../ui/button"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -53,8 +53,8 @@ export function MovieTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({
       id: false,
+      overview: false,
       release_date: false,
-      status: false,
       original_title: false,
     })
   const table = useReactTable({
@@ -80,30 +80,36 @@ export function MovieTable<TData, TValue>({
 
   const csvData = [
     ["poster_path", "Title", "Overview", "Status", "isFavorite", "Date", "id"],
-    ...data.map(({
-      poster_path,
-      title,
-      overview,
-      status,
-      isFavorite,
-      rating,
-      release_date,
-      id,
-
-    }: any) => [
+    ...data.map(
+      ({
+        poster_path,
+        title,
+        overview,
+        status,
+        isFavorite,
+        rating,
+        release_date,
+        id,
+      }: any) => [
         `https://image.tmdb.org/t/p/w500${poster_path}`,
         title,
-        overview.replace(/<[^>]*>/g, '').replace(/\n/g, ' ').replace(/"/g, "''").trim(),
+        overview
+          .replace(/<[^>]*>/g, "")
+          .replace(/\n/g, " ")
+          .replace(/"/g, "''")
+          .trim(),
         status,
         rating ? rating : 0,
         isFavorite ? true : false,
         release_date,
         id,
-      ])]
+      ]
+    ),
+  ]
 
   return (
     <div>
-      <div className="flex items-center py-4 flex-wrap justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 py-4">
         <Input
           placeholder={t("filterPlaceholder")}
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -112,11 +118,16 @@ export function MovieTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <div className=" flex items-center gap-2 flex-wrap ">
-          {pathId === user?.uid && <CSVLink className={cn(buttonVariants({ variant: "outline" }))} filename="movies.csv" data={csvData}>
-            {t("exportData")}
-          </CSVLink>
-          }
+        <div className=" flex flex-wrap items-center gap-2 ">
+          {pathId === user?.uid && (
+            <CSVLink
+              className={cn(buttonVariants({ variant: "outline" }))}
+              filename="movies.csv"
+              data={csvData}
+            >
+              {t("exportData")}
+            </CSVLink>
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="">
@@ -156,9 +167,9 @@ export function MovieTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   )
                 })}

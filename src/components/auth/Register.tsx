@@ -26,10 +26,10 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import GoogleAuth from "../GoogleAuth"
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 
-const Register = ({ }) => {
+const Register = ({}) => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const global = useTranslations("global")
   const t = useTranslations("pages.auth.register")
@@ -102,80 +102,85 @@ const Register = ({ }) => {
   }
 
   return (
-  <div className="grid place-items-center mt-5">
+    <div className="mt-5 grid place-items-center">
       <Card className="w-full max-w-xl">
-      <CardHeader>
-        <CardTitle>
-          {t("title")}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="px-4">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 ">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="shadcn@gmail.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("passwordLabel")}</FormLabel>
-                  <FormControl>
-                    <Input placeholder="********" type="password" {...field} />
-                  </FormControl>
+        <CardHeader>
+          <CardTitle>{t("title")}</CardTitle>
+        </CardHeader>
+        <CardContent className="px-4">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 ">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn@gmail.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("passwordLabel")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="********"
+                        type="password"
+                        {...field}
+                      />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
-                  <FormControl>
-                    <Input placeholder="********" type="password" {...field} />
-                  </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="********"
+                        type="password"
+                        {...field}
+                      />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <p>
-              {t("alreadyHaveAccount")}{" "}
-              <Link
-                href="/login"
-                className="text-sky-500 hover:underline active:underline"
-              >
-                {t("login")}
-              </Link>
-            </p>
-            <div className="flex justify-center w-full ">
-
-              <Button type="submit" className="w-full max-w-xs">{t("buttonLabel")}</Button>
-            </div>
-
-          </form>
-        </Form>
-        <div className="flex justify-center w-full ">
-          <GoogleAuth className="mt-2 w-full max-w-xs" />
-
-        </div>
-      </CardContent>
-    </Card>
-  </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <p>
+                {t("alreadyHaveAccount")}{" "}
+                <Link
+                  href="/login"
+                  className="text-sky-500 hover:underline active:underline"
+                >
+                  {t("login")}
+                </Link>
+              </p>
+              <div className="flex w-full justify-center ">
+                <Button type="submit" className="w-full max-w-xs">
+                  {t("buttonLabel")}
+                </Button>
+              </div>
+            </form>
+          </Form>
+          <div className="flex w-full justify-center ">
+            <GoogleAuth className="mt-2 w-full max-w-xs" />
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
 

@@ -1,6 +1,7 @@
 "use client"
-import { CSVLink } from "react-csv";
+
 import * as React from "react"
+import { usePathname } from "next/navigation"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,7 +15,9 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 import { useTranslations } from "next-intl"
+import { CSVLink } from "react-csv"
 
+import { cn } from "@/lib/utils"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -30,10 +33,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { useAuth } from "../providers/context"
 import { Button, buttonVariants } from "../ui/button"
-import { cn } from "@/lib/utils"
-import { useAuth } from "../providers/context";
-import { usePathname } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -52,9 +53,8 @@ export function SeriesTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({
       id: false,
+      overview: false,
       date: false,
-      status: false,
-      rating: false,
     })
 
   const table = useReactTable({
@@ -80,30 +80,36 @@ export function SeriesTable<TData, TValue>({
 
   const csvData = [
     ["poster_path", "Title", "Overview", "Status", "isFavorite", "Date", "id"],
-    ...data.map(({
-      poster_path,
-      title,
-      overview,
-      status,
-      rating,
-      isFavorite,
-      date,
-      id,
-
-    }: any) => [
+    ...data.map(
+      ({
+        poster_path,
+        title,
+        overview,
+        status,
+        rating,
+        isFavorite,
+        date,
+        id,
+      }: any) => [
         `https://image.tmdb.org/t/p/w500${poster_path}`,
         title,
         /* format overview */
-        overview.replace(/<[^>]*>/g, '').replace(/\n/g, ' ').replace(/"/g, "''").trim(),
+        overview
+          .replace(/<[^>]*>/g, "")
+          .replace(/\n/g, " ")
+          .replace(/"/g, "''")
+          .trim(),
         rating ? rating : 0,
         status,
         isFavorite ? true : false,
         date,
         id,
-      ])]
+      ]
+    ),
+  ]
   return (
     <div>
-      <div className="flex items-center py-4 flex-wrap">
+      <div className="flex flex-wrap items-center py-4">
         <Input
           placeholder={t("filterPlaceholder")}
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -114,12 +120,14 @@ export function SeriesTable<TData, TValue>({
         />
         <div className="ml-auto flex items-center gap-2 ">
           {user?.uid === pathId && (
-            <CSVLink className={cn(buttonVariants({ variant: "outline" }))} filename="series.csv" data={csvData}>
+            <CSVLink
+              className={cn(buttonVariants({ variant: "outline" }))}
+              filename="series.csv"
+              data={csvData}
+            >
               {t("exportData")}
             </CSVLink>
-          )
-
-          }
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
@@ -159,9 +167,9 @@ export function SeriesTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   )
                 })}

@@ -45,7 +45,6 @@ const Providers: FC<ProvidersProps> = ({ children, lang, messages }) => {
               }
               debug={process.env.NODE_ENV !== "production"}
             />
-            
           </ThemeProvider>
         </QueryClientProvider>
       </NextIntlClientProvider>
