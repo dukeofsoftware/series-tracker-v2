@@ -70,7 +70,7 @@ export default async function Layout({
       </div>
       <div className="z-30 flex w-full items-center  ">
         <ul className="flex w-full  rounded-md border-2 border-slate-950 dark:border-slate-50 ">
-          {tabs.map((tab) => {
+          {tabs.map((tab,index) => {
             return (
               <li
                 key={tab.name}

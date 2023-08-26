@@ -47,18 +47,7 @@ const LanguageSelector = ({}) => {
             {lang.name}
           </DropdownMenuItem>
         ))}
-        {/*  {
-            languages.map((lang, i) => (
-              <DropdownMenuItem
-      asChild
-              >
-                <Link href={pathname} locale={lang.code} className="w-full">
-                {lang.name}
-
-                </Link>
-              </DropdownMenuItem>
-            ))
-          } */}
+       
       </DropdownMenuContent>
     </DropdownMenu>
   )

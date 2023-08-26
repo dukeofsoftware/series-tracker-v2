@@ -48,6 +48,7 @@ const Footer: FC<FooterProps> = ({ messages }) => {
         <Separator className="max-w-[180px]" />
         {fastLinks.map(({ name, url }) => (
           <Link
+            key={name}
             href={url}
             className={cn(
               buttonVariants({ variant: "ghost" }),
@@ -63,6 +64,7 @@ const Footer: FC<FooterProps> = ({ messages }) => {
         <Separator className="max-w-[180px]" />
         {socialLinks.map(({ name, url, icon }) => (
           <a
+            key={name}
             href={url}
             className={cn(
               buttonVariants({ variant: "ghost" }),
