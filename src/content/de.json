@@ -7,6 +7,7 @@
     }
   },
   "global": {
+    "rateLimitError": " Sie haben das Limit erreicht. Bitte versuchen Sie es später erneut.",
     "adult": "Erwachseneninhalt",
     "loading": "Wird geladen...",
     "toast": {

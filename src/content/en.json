@@ -8,6 +8,7 @@
   },
   "starDescription": " {title} successfully rated",
   "global": {
+    "rateLimitError": "You have reached the rate limit. Please try again later.",
     "adult": "Adult Content",
     "loading": "Loading...",
     "toast": {
