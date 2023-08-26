@@ -68,6 +68,44 @@
   },
   "searchUser": "Kullanıcı Ara",
   "pages": {
+    "faqs": {
+      "title": "Sıkça Sorulan Sorular",
+      "description": "Sıkça sorulan sorulara buradan ulaşabilirsiniz",
+      "questions": [
+        {
+          "question": "Tracker v2 nedir?",
+          "answer": "Tracker v2, TV dizileri, filmler ve gelecekte başka şeyleri takip etmeyi kolaylaştırmayı amaçlayan bir uygulamadır. İzlediklerinizi takip etmek için Notion gibi araçları manuel olarak kullanmanın zorluğunu aşmak için geliştirilmiştir. Uygulama, listeler oluşturma, yorum yapma, bir blog, ödeme entegrasyonu, arkadaşlarla gerçek zamanlı sohbet, bildirimler gibi özellikler sunar."
+        },
+        {
+          "question": "Tracker v2 neden oluşturuldu?",
+          "answer": "Benzer uygulamaların ihtiyaçlarımı karşılamadığını fark ettiğim için Tracker v2'yi geliştirdim. İzlediğim içerikleri manuel olarak Notion gibi araçlarla takip etmek yerine daha verimli bir yol istedim. Tracker v2, bu amaçla kapsamlı ve kullanıcı dostu bir çözüm sunmayı hedefliyor."
+        },
+        {
+          "question": "Tracker v2'de hangi teknolojiler kullanıldı?",
+          "answer": "Tracker v2, bir dizi teknoloji kullanıyor. İstemci tarafında, kullanıcı arayüzü için React, gerçek zamanlı veri işleme için Firebase, durum yönetimi için Zustand, stil için TailwindCSS ve form doğrulama için Valibot ve React Hook Form gibi kütüphaneler kullanılıyor. Sunucu tarafında ise Next.js, Firebase Admin ve güvenli kimlik doğrulama için next-firebase-auth-edge kullanılıyor."
+        },
+        {
+          "question": "Tracker v2 mobil uyumlu mu?",
+          "answer": "Evet, Tracker v2 masaüstü ve mobil cihazlarda sorunsuz bir deneyim sunacak şekilde tasarlanmıştır."
+        },
+        {
+          "question": "Tracker v2'ye nasıl katkıda bulunabilirim?",
+          "answer": "Katkılarınızı bekliyoruz! Projeyi forklayabilir, iyileştirmeler veya düzeltmeler yapabilir ve ardından bir pull isteği oluşturabilirsiniz. Katkı yapma konusundaki kuralları projenin rehberine uyarak takip etmeyi unutmayın."
+        },
+        {
+          "question": "Tracker v2 çoklu dilleri destekliyor mu?",
+          "answer": "Evet, Tracker v2, next-intl kütüphanesini kullanarak Türkçe (tr), İngilizce (en) ve Almanca (de) gibi dillerde çoklu dil desteği sunar."
+        },
+        {
+          "question": "Tracker v2 ile ilgili daha fazla bilgi nerede bulunabilir?",
+          "answer": "Github reposunda bulabilirsiniz."
+        },
+        {
+          "question": "Tracker v2 hakkında geri bildirim nasıl sağlanabilir?",
+          "answer": "Görüşlerinizi iletişim sayfasından yada kozanfurkanemre@gmail.com adresine mail atarak iletebilirsiniz. Görüşleriniz değerlidir ve uygulamayı geliştirmek için kullanılacaktır."
+        }
+      ]
+    },
     "main": {
       "trendingTitle": "Trendler"
     },

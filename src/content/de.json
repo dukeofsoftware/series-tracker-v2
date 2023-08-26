@@ -68,6 +68,44 @@
   },
   "searchUser": "Benutzer suchen",
   "pages": {
+    "faqs": {
+      "title": "Häufig gestellte Fragen",
+      "description": "Hier finden Sie Antworten auf häufig gestellte Fragen.",
+      "questions": [
+        {
+          "question": "Was ist Tracker v2?",
+          "answer": "Tracker v2 ist eine Anwendung, die darauf abzielt, das Verfolgen von TV-Serien, Filmen und möglicherweise anderen Dingen in der Zukunft zu erleichtern. Ich habe früher Notion verwendet, um zu verfolgen, was ich gesehen habe, aber die manuelle Durchführung war recht umständlich. Obwohl es ähnliche Anwendungen gab, hatten sie ihre Probleme. Sie reichten nicht aus, um meinen Anforderungen gerecht zu werden. Deshalb wollte ich eine solche Anwendung entwickeln."
+        },
+        {
+          "question": "Warum habe ich Tracker v2 erstellt?",
+          "answer": "Ich habe Tracker v2 entwickelt, weil ich festgestellt habe, dass bestehende Lösungen meine Anforderungen nicht erfüllen konnten. Ich wollte eine effizientere Möglichkeit finden, meine gesehenen Inhalte zu verfolgen, als dies manuell mit Tools wie Notion zu tun. Tracker v2 soll eine umfassende und benutzerfreundliche Lösung für diesen Zweck bieten."
+        },
+        {
+          "question": "Welche Technologien wurden in Tracker v2 verwendet?",
+          "answer": "Tracker v2 nutzt eine Vielzahl von Technologien. Auf der Client-Seite verwendet es React für die Benutzeroberfläche, Firebase für die Echtzeit-Datenverarbeitung, Zustand für das Zustandsmanagement, TailwindCSS für das Styling sowie andere Bibliotheken wie Valibot und React Hook Form für die Formularvalidierung. Auf der Server-Seite werden Next.js, Firebase Admin und next-firebase-auth-edge für die sichere Authentifizierung verwendet."
+        },
+        {
+          "question": "Ist Tracker v2 mobilfreundlich?",
+          "answer": "Ja, Tracker v2 ist so konzipiert, dass es auf Desktop- und Mobilgeräten eine nahtlose Erfahrung bietet."
+        },
+        {
+          "question": "Wie kann ich zu Tracker v2 beitragen?",
+          "answer": "Beiträge sind willkommen! Sie können das Repository forken, Verbesserungen oder Fehlerkorrekturen vornehmen und Pull-Anfragen erstellen. Bitte beachten Sie die Richtlinien des Projekts für Beiträge."
+        },
+        {
+          "question": "Unterstützt Tracker v2 mehrere Sprachen?",
+          "answer": "Ja, Tracker v2 bietet mit Hilfe der next-intl-Bibliothek Mehrsprachenunterstützung für Sprachen wie Türkisch (tr), Englisch (en) und Deutsch (de)."
+        },
+        {
+          "question": "Wo finde ich weitere Informationen zu verwandten Projekten?",
+          "answer": "Weitere Informationen zu verwandten Projekten wie Tracker v1 und der TMDB-API finden Sie im GitHub-Repository des Projekts."
+        },
+        {
+          "question": "Wie kann ich Feedback zu Tracker v2 geben?",
+          "answer": "Sie können Ihr Feedback an kozanfurkanemre@gmail.com senden. Wir schätzen Ihre Rückmeldungen und werden sie verwenden, um die Anwendung zu verbessern."
+        }
+      ]
+    },
     "main": {
       "trendingTitle": "Trends"
     },

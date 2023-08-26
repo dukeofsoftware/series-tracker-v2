@@ -68,6 +68,44 @@
   },
   "searchUser": "Search User",
   "pages": {
+    "faqs": {
+      "title": "Frequently Asked Questions",
+      "description": "Find answers to frequently asked questions here.",
+      "questions": [
+        {
+          "question": "What is Tracker v2?",
+          "answer": "Tracker v2 is an application designed to make it easier to track TV series, movies, and possibly other things in the future. I used to use Notion to keep track of what I've watched, but doing it manually was quite cumbersome. Although there were similar applications, they had their issues. They didn't suffice to meet my needs. So, I wanted to develop an application like this."
+        },
+        {
+          "question": "Why did I create Tracker v2?",
+          "answer": "I developed Tracker v2 because I found existing solutions lacking in meeting my needs. I wanted a more efficient way to track my watched content than manually using tools like Notion. Tracker v2 aims to provide a comprehensive and user-friendly solution for this purpose."
+        },
+        {
+          "question": "What technologies were used in Tracker v2?",
+          "answer": "Tracker v2 employs a variety of technologies. On the client side, it utilizes React for the user interface, Firebase for real-time data handling, Zustand for state management, TailwindCSS for styling, and other libraries such as Valibot and React Hook Form for form validation. On the server side, it uses Next.js, Firebase Admin, and next-firebase-auth-edge for secure authentication."
+        },
+        {
+          "question": "Is Tracker v2 mobile-friendly?",
+          "answer": "Yes, Tracker v2 is designed to provide a seamless experience on both desktop and mobile devices."
+        },
+        {
+          "question": "How can I contribute to Tracker v2?",
+          "answer": "Contributions are welcome! You can fork the repository, make improvements or fixes, and create pull requests. Please follow the project's guidelines for contributing."
+        },
+        {
+          "question": "Does Tracker v2 support multiple languages?",
+          "answer": "Yes, Tracker v2 offers multi-language support with languages like Turkish (tr), English (en), and German (de) using the next-intl library."
+        },
+        {
+          "question": "Where can I find more information about related projects?",
+          "answer": "You can find information about related projects like Tracker v1 and the TMDB API in the project's GitHub repository."
+        },
+        {
+          "question": "How can I provide feedback about Tracker v2?",
+          "answer": "You can send your feedback to kozanfurkanemre@gmail.com. We value your input and will use it to improve the application."
+        }
+      ]
+    },
     "main": {
       "trendingTitle": "Trends"
     },
