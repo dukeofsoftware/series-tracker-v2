@@ -127,7 +127,6 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
 
   return (
     <div className="flex">
-      <pre>{rating}</pre>
       {Array.from(Array(5).keys()).map((i) => (
         <div
           key={i}
