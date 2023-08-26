@@ -4,7 +4,6 @@ The aim of the project is to facilitate the tracking of TV series, movies, and p
 
 ## Roadmap
 
-- Frequently Asked Questions
 - Coming Soon
 - Creating lists
 - Commenting
@@ -13,7 +12,6 @@ The aim of the project is to facilitate the tracking of TV series, movies, and p
 - Real-time chat with friends
 - Notification system
 - Support
-- Contact
 
 ## Basic Technologies Used
 
