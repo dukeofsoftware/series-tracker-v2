@@ -47,13 +47,13 @@ const Page: FC<pageProps> = ({}) => {
   async function onSubmit(values: ContactType) {
     try {
       setLoading(true)
-      const data = await axios.post("/api/contact", values)
+      
+      await axios.post("/api/contact", values)
       toast({
         title: global("toast.success"),
         description: t("toastDescription"),
       })
     } catch (error: any) {
-      console.log(error.response?.status === 429)
       if (error.response?.status === 429) {
         toast({
           title: global("toast.error", {
