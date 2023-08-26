@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, useEffect, useState } from "react"
+import { FC, useEffect, useMemo, useState } from "react"
 import { MovieResponse } from "@/types/movies"
 import { useTranslations } from "next-intl"
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
@@ -13,15 +13,15 @@ import { toast } from "./ui/use-toast"
 
 interface AddToFavoritesProps {
   movieResult?:
-    | MovieResponse
-    | {
-        id?: string | number
-        title?: string
-        poster_path?: string
-        release_date?: string
-        original_title?: string
-        overview?: string
-      }
+  | MovieResponse
+  | {
+    id?: string | number
+    title?: string
+    poster_path?: string
+    release_date?: string
+    original_title?: string
+    overview?: string
+  }
   seriesResult?: {
     id?: number
     title?: string
@@ -43,14 +43,20 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({
   const global = useTranslations("global")
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null)
-
+  const dataType = useMemo(() => {
+    if (type === "movie") {
+      return "movies"
+    } else {
+      return "series"
+    }
+  }, [type])
   useEffect(() => {
     const getData = async () => {
       try {
         const id = movieResult?.id || seriesResult?.id
         if (!id) return
         const data = await getDocument(
-          `users/${user?.uid}/${type}s`,
+          `users/${user?.uid}/${type}`,
           id.toString()
         )
         setIsFavorite(data?.isFavorite ?? false)
@@ -78,18 +84,18 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({
     if (!id) return
     try {
       const data = await getDocument(
-        `users/${user.uid}/${type}s`,
+        `users/${user.uid}/${type}`,
         id.toString()
       )
       if (!data?.status) {
-        await addData(`users/${user.uid}/${type}s`, id.toString(), {
+        await addData(`users/${user.uid}/${type}`, id.toString(), {
           ...movieResult,
           ...seriesResult,
           isFavorite: !isFavorite,
           status: "not-started",
         })
       } else {
-        await addData(`users/${user.uid}/${type}s`, id.toString(), {
+        await addData(`users/${user.uid}/${type}`, id.toString(), {
           isFavorite: !isFavorite,
         })
       }
