@@ -21,26 +21,26 @@ import { toast } from "./ui/use-toast"
 
 interface StatusSelectorProps {
   movieResult?:
-    | MovieResponse
-    | {
-        id: string
-        title: string
-        poster_path: string
-        release_date: string
-        original_title: string
-        overview: string
-      }
+  | MovieResponse
+  | {
+    id:  string | number
+    title: string
+    poster_path: string
+    release_date: string
+    original_title: string
+    overview: string
+  }
   seriesResult?:
-    | FrontendSeriesResponse
-    | {
-        id: string
-        title: string
-        poster_path: string
-        first_air_date?: string
-        last_air_date?: string
-        overview: string
-      }
-  type: string
+  | FrontendSeriesResponse
+  | {
+    id: string | number
+    title: string
+    poster_path: string
+    first_air_date?: string
+    last_air_date?: string
+    overview: string
+  }
+  type: "movie" | "series"
 }
 
 const StatusSelector: FC<StatusSelectorProps> = ({
@@ -58,8 +58,7 @@ const StatusSelector: FC<StatusSelectorProps> = ({
     const unsubscribe = onSnapshot(
       doc(
         db,
-        `/users/${user?.uid}/${type === "series" ? "series" : "movies"}/${
-          type === "series" ? seriesResult?.id : movieResult?.id
+        `/users/${user?.uid}/${type === "series" ? "series" : "movies"}/${type === "series" ? seriesResult?.id : movieResult?.id
         }`
       ),
       (doc) => {

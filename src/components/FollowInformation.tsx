@@ -106,15 +106,14 @@ const FollowInformation: FC<FollowInformationProps> = ({ userId }) => {
   return (
     <div className="flex flex-col items-center justify-center">
       {Array.isArray(followers) ? (
-        renderFollowList(followers, "followers")
-      ) : (
-        <p className="text-sx italic underline">0 {t("followers")}</p>
-      )}
-      <pre></pre>
-      {Array.isArray(following) ? (
-        renderFollowList(following, "following")
+        renderFollowList(followers, "following")
       ) : (
         <p className="text-sx italic underline">0 {t("following")}</p>
+      )}
+      {Array.isArray(following) ? (
+        renderFollowList(following, "followers")
+      ) : (
+        <p className="text-sx italic underline">0 {t("followers")}</p>
       )}
     </div>
   )
