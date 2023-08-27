@@ -18,28 +18,11 @@ import { useAuth } from "./providers/context"
 import { Button } from "./ui/button"
 import { Separator } from "./ui/separator"
 import { toast } from "./ui/use-toast"
+import { serverClient } from "@/lib/trpc/serverClient"
 
 interface StatusSelectorProps {
-  movieResult?:
-  | MovieResponse
-  | {
-    id:  string | number
-    title: string
-    poster_path: string
-    release_date: string
-    original_title: string
-    overview: string
-  }
-  seriesResult?:
-  | FrontendSeriesResponse
-  | {
-    id: string | number
-    title: string
-    poster_path: string
-    first_air_date?: string
-    last_air_date?: string
-    overview: string
-  }
+  movieResult?:Awaited<ReturnType<(typeof serverClient)["useGetTmdbMovie"]>>;
+  seriesResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbTv"]>>;
   type: "movie" | "series"
 }
 

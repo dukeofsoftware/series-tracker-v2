@@ -12,10 +12,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { trpc } from "@/lib/trpc/client"
+import { Locale } from "@/config/i18n.config"
 
-const LanguageSelector = ({}) => {
-  const changeLanguage = async (lang: string) => {
-    await axios.post("/api/locale", {
+const LanguageSelector = ({ }) => {
+  const { mutateAsync } = trpc.useChangeLocaleMutation.useMutation({
+
+  })
+
+
+
+  const changeLanguage = async (lang: Locale) => {
+    await mutateAsync({
       language: lang,
     })
     window.location.reload()
@@ -40,14 +48,14 @@ const LanguageSelector = ({}) => {
         {languages.map((lang, i) => (
           <DropdownMenuItem
             onClick={() => {
-              changeLanguage(lang.code)
+              changeLanguage(lang.code as Locale)
             }}
             key={i}
           >
             {lang.name}
           </DropdownMenuItem>
         ))}
-       
+
       </DropdownMenuContent>
     </DropdownMenu>
   )

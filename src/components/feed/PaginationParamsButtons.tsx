@@ -19,7 +19,7 @@ interface PaginationButtonsProps {
   pageDB: number
 }
 
-const PaginationButtons: FC<PaginationButtonsProps> = ({
+const PaginationParamsButtons: FC<PaginationButtonsProps> = ({
   total_pages,
   pageDB,
 }) => {
@@ -108,4 +108,4 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({
   )
 }
 
-export default PaginationButtons
+export default PaginationParamsButtons

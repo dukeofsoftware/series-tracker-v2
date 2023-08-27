@@ -1,9 +1,8 @@
 "use client"
 
-import { FC, useState } from "react"
+import { useState } from "react"
 import { redirect } from "next/navigation"
 import { valibotResolver } from "@hookform/resolvers/valibot"
-import axios, { AxiosError } from "axios"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 
@@ -29,35 +28,23 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
+import { trpc } from "@/lib/trpc/client"
 
-interface pageProps {}
 
-const Page: FC<pageProps> = ({}) => {
+const Page = ({ }) => {
   const [loading, setLoading] = useState(false)
   const { user } = useAuth()
   if (!user) redirect("/login")
   const t = useTranslations("pages.contact")
   const global = useTranslations("global")
-  const form = useForm<ContactType>({
-    resolver: valibotResolver(ContactValidator),
-    defaultValues: {
-      email: user?.email!,
-    },
-  })
-  async function onSubmit(values: ContactType) {
-    try {
-      setLoading(true)
-      
-      await axios.post("/api/contact", values)
-      toast({
-        title: global("toast.success"),
-        description: t("toastDescription"),
-      })
-    } catch (error: any) {
-      if (error.response?.status === 429) {
+  const { mutateAsync } = trpc.useSendMailMutation.useMutation({
+    onError: (error) => {
+      console.error(error)
+      setLoading(false)
+      if (error.data?.code === "TOO_MANY_REQUESTS") {
         toast({
           title: global("toast.error", {
-            code: error.response?.status || "500",
+            code: error.data?.code || "500",
           }),
           description: global("rateLimitError"),
           variant: "destructive",
@@ -72,9 +59,45 @@ const Page: FC<pageProps> = ({}) => {
         description: t("toastErrorDescription"),
         variant: "destructive",
       })
-    } finally {
+    },
+    onSuccess: (e: any) => {
+      if (e?.code === "TOO_MANY_REQUESTS") {
+        toast({
+          title: global("toast.error", {
+            code: e?.code || "500",
+          }),
+          description: global("rateLimitError"),
+          variant: "destructive",
+        })
+        return
+      }
       setLoading(false)
-    }
+      toast({
+        title: global("toast.success"),
+        description: t("toastDescription"),
+      })
+    },
+    onMutate: () => {
+      setLoading(true)
+    },
+    onSettled: () => {
+      setLoading(false)
+    },
+
+
+  })
+  const form = useForm<ContactType>({
+    resolver: valibotResolver(ContactValidator),
+    defaultValues: {
+      email: user?.email!,
+    },
+  })
+  async function onSubmit(values: ContactType) {
+
+
+    await mutateAsync(values)
+
+
   }
 
   return (

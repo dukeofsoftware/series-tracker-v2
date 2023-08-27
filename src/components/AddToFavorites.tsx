@@ -10,26 +10,12 @@ import { addData, getDocument } from "@/lib/firebase/firestore"
 import { useAuth } from "./providers/context"
 import { Button } from "./ui/button"
 import { toast } from "./ui/use-toast"
+import { serverClient } from "@/lib/trpc/serverClient"
 
 interface AddToFavoritesProps {
-  movieResult?:
-  | MovieResponse
-  | {
-    id?: string | number
-    title?: string
-    poster_path?: string
-    release_date?: string
-    original_title?: string
-    overview?: string
-  }
-  seriesResult?: {
-    id?: number
-    title?: string
-    poster_path?: string
-    first_air_date?: string
-    last_air_date?: string
-    overview?: string
-  }
+  movieResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbMovie"]>>;
+ 
+  seriesResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbTv"]>>;
   type: "movie" | "series"
 }
 

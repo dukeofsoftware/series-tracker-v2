@@ -12,6 +12,8 @@ import Similars from "@/components/Similars"
 import StatusSelector from "@/components/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
+import { serverClient } from "@/lib/trpc/serverClient"
+import { notFound } from "next/navigation"
 
 export async function generateMetadata({
   params,
@@ -21,16 +23,18 @@ export async function generateMetadata({
     lang: Locale
   }
 }): Promise<Metadata> {
-  const data: FrontendSeriesResponse = await fetch(
-    `${process.env.SITE_URL}/api/tmdb/series/${params.seriesId}?language=${params.lang}`
-  ).then(async (res) => {
-    return res.json()
+  const data = await serverClient.useGetTmdbTv({
+    id: params.seriesId,
+    lang: params.lang,
   })
 
   return {
     title: data.title,
     description: data.overview,
-    keywords: data.genres.map((genre) => genre.name).join(", "),
+    keywords: data.genres.map((genre: {
+      name: string
+      id: number
+    }) => genre.name).join(", "),
   } as Metadata
 }
 
@@ -43,12 +47,11 @@ interface PageProps {
 export const revalidate = 60 * 60
 const Page: FC<PageProps> = async ({ params }) => {
   const page = await getDictionary(params.lang)
-
-  const data: FrontendSeriesResponse = await fetch(
-    `${process.env.SITE_URL}/api/tmdb/series/${params.seriesId}?language=${params.lang}`
-  ).then(async (res) => {
-    return res.json()
+  const data = await serverClient.useGetTmdbTv({
+    id: params.seriesId,
+    lang: params.lang,
   })
+  if (!data) return notFound()
   return (
     <div className="container relative w-full px-0 ">
       <div className="relative -z-10 max-h-[520px]">
@@ -106,9 +109,9 @@ const Page: FC<PageProps> = async ({ params }) => {
               )}
               <Badge>
                 {formatMinutes(
-                  data.runtime.reduce((a, b) => a + b, 0),
+                  data?.runtime?.reduce((a: number, b: number) => a + b, 0),
                   params.lang
-                )}
+                ) || data.last_episode_to_air.runtime}
               </Badge>
             </div>
           </div>
@@ -116,17 +119,17 @@ const Page: FC<PageProps> = async ({ params }) => {
           <div className="flex">
             <p className="text-xl font-semibold">{page.pages.tmdb.tags} </p>
             <div className="mx-2 flex flex-wrap items-center gap-1.5">
-              {data.genres.map((genre) => (
+              {data.genres.map((genre: {
+                name: string
+                id: number
+              }) => (
                 <Badge key={genre.id}>{genre.name}</Badge>
               ))}
             </div>
           </div>
         </div>
       </div>
-      <Similars
-        title={page.pages.tmdb.series.tv.similarSeries}
-        similar={data.similar}
-      />
+      <Similars similars={data.similar} title={page.pages.tmdb.series.tv.similarSeries} />
     </div>
   )
 }
