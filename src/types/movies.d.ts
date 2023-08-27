@@ -86,7 +86,9 @@ export interface MovieCardType {
   id: number
   title: string
   poster_path: string
-  release_date: string
+  date: string
   original_title: string
   overview: string
+  adult: boolean
+  media_type: "movie" | "tv"
 }
