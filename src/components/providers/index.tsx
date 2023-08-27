@@ -2,27 +2,20 @@
 
 import { FC, useEffect, useState } from "react"
 import dynamic from "next/dynamic"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Analytics } from "@vercel/analytics/react"
 import { NextIntlClientProvider } from "next-intl"
 import { ThemeProvider } from "next-themes"
 
 import { formatLanguage } from "@/lib/utils"
+import TrpcProvider from "./TrpcProvider"
 
-const ReactQueryDevtools = dynamic(
-  () =>
-    import("@tanstack/react-query-devtools").then(
-      (mod) => mod.ReactQueryDevtools
-    ),
-  { ssr: false }
-)
+
 
 interface ProvidersProps {
   children: React.ReactNode
   lang: string
   messages: any
 }
-const queryClient = new QueryClient()
 
 const Providers: FC<ProvidersProps> = ({ children, lang, messages }) => {
   const [isMounted, setIsMounted] = useState(false)
@@ -33,10 +26,10 @@ const Providers: FC<ProvidersProps> = ({ children, lang, messages }) => {
   return (
     <>
       <NextIntlClientProvider locale={formatLanguage(lang)} messages={messages}>
-        <QueryClientProvider client={queryClient}>
+        <TrpcProvider>
+
           <ThemeProvider attribute="class" enableSystem>
             {children}
-            <ReactQueryDevtools initialIsOpen={false} />
             <Analytics
               mode={
                 process.env.NODE_ENV === "production"
@@ -46,7 +39,8 @@ const Providers: FC<ProvidersProps> = ({ children, lang, messages }) => {
               debug={process.env.NODE_ENV !== "production"}
             />
           </ThemeProvider>
-        </QueryClientProvider>
+        </TrpcProvider>
+
       </NextIntlClientProvider>
     </>
   )

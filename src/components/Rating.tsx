@@ -8,27 +8,12 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 import { addData, getDocument } from "@/lib/firebase/firestore"
 import { useAuth } from "./providers/context"
 import { toast } from "./ui/use-toast"
+import { serverClient } from "@/lib/trpc/serverClient"
 
 interface RatingProps {
   type: "movie" | "series"
-  movieResult?:
-    | MovieResponse
-    | {
-        id: string | number
-        title: string
-        poster_path: string
-        release_date: string
-        original_title: string
-        overview: string
-      }
-  seriesResult?: {
-    id: number
-    title: string
-    poster_path: string
-    first_air_date?: string
-    last_air_date?: string
-    overview: string
-  }
+  movieResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbMovie"]>>
+  seriesResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbTv"]>>
 }
 
 const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
@@ -58,9 +43,8 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
       if (result) {
         setRating(newRating)
 
-        const docPath = `users/${user.uid}/${
-          type === "movie" ? "movies" : "series"
-        }`
+        const docPath = `users/${user.uid}/${type === "movie" ? "movies" : "series"
+          }`
 
         const exist = await getDocument(docPath, result.id.toString())
 
@@ -101,9 +85,8 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
       const result = type === "movie" ? movieResult : seriesResult
 
       if (result) {
-        const docPath = `users/${user.uid}/${
-          type === "movie" ? "movies" : "series"
-        }`
+        const docPath = `users/${user.uid}/${type === "movie" ? "movies" : "series"
+          }`
 
         const data = await getDocument(docPath, result.id.toString())
         if (data?.rating) {

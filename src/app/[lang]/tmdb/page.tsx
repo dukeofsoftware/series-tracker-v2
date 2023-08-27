@@ -1,7 +1,5 @@
-import { FC } from "react"
-
 import Sidebar from "@/components/Sidebar"
-import SearchFeed from "@/components/tmdb/search/SearchFeed"
+import SearchFeed from "@/components/tmdb/SearchFeed"
 
 const Page = async ({}) => {
   return (
