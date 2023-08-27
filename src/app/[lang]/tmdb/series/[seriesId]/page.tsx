@@ -1,7 +1,6 @@
 import { FC } from "react"
 import { Metadata } from "next"
 import Image from "next/image"
-import { FrontendSeriesResponse } from "@/types/series"
 
 import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
@@ -51,6 +50,7 @@ const Page: FC<PageProps> = async ({ params }) => {
     id: params.seriesId,
     lang: params.lang,
   })
+  
   if (!data) return notFound()
   return (
     <div className="container relative w-full px-0 ">

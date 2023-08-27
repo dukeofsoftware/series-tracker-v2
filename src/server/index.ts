@@ -336,6 +336,7 @@ export const appRouter = router({
             options
           ).then((response) => response.json())
           return {
+            ...data,
             first_air_date: data.first_air_date,
             adult: data.adult,
             backdrop_path: data.backdrop_path,
