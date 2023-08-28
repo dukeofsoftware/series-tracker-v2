@@ -40,6 +40,7 @@ Proje hazırlanırken birçok zorlukla karşılaştım. Muhtemelen en büyük zo
 - Hız sınırlama (rate limiting)
 - `react-icons`
 - `use-debounce` ile geciktirme
+- Firebase ile gerçek zamanlı mesajlaşma sistemi
 
 ## Ekran Görüntüleri
 
