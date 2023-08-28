@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl"
 import { useTheme } from "next-themes"
 import {
   AiFillHeart,
+  AiFillMessage,
   AiFillSetting,
   AiOutlineCloseCircle,
   AiOutlineLogout,
@@ -56,6 +57,12 @@ const MobileNavbar = () => {
       text: t("favorites"),
       link: `/profile/${user?.uid}/favorites`,
     },
+    {
+      icon:<AiFillMessage className="h-6 w-6 text-green-500" />,
+      text: t("chat"),
+      link: `/profile/chat`,
+    },
+          
     {
       icon: <AiFillSetting className="text-grey-700 h-6 w-6" />,
       text: t("settings"),

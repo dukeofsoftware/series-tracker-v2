@@ -62,7 +62,6 @@ const UpdateProfilePhoto = ({}) => {
         setPhoto(null)
         return
       }
-      console.log("first")
 
       if (photo.size > 4 * 1024 * 1024) {
         toast({
