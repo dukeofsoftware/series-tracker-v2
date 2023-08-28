@@ -1,6 +1,6 @@
 "use client"
 
-import { FC } from "react"
+import { FC } from 'react'
 
 interface layoutProps {
   children: React.ReactNode
