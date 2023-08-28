@@ -55,7 +55,8 @@ const Messages: FC<MessagesProps> = ({ serverMessages, roomId, user }) => {
   }, [])
 
   return (
-    <div className="relative mt-4 ">
+    <div className="relative mt-4 flex flex-col
+    gap-2 ">
       {messages.map((message) => {
         return <Message message={message} user={user} />
       })}
