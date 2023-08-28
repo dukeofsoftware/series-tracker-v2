@@ -1,8 +1,6 @@
 "use client"
 
 import { FC, useEffect, useState } from "react"
-import { MovieResponse } from "@/types/movies"
-import { FrontendSeriesResponse } from "@/types/series"
 import { deleteDoc, doc, onSnapshot } from "firebase/firestore"
 import { useTranslations } from "next-intl"
 

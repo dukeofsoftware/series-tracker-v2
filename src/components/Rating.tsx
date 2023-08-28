@@ -1,7 +1,6 @@
 "use client"
 
 import React, { FC, useEffect, useState } from "react"
-import { MovieResponse } from "@/types/movies"
 import { useTranslations } from "next-intl"
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 

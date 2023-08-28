@@ -1,7 +1,6 @@
 "use client"
 
 import { FC, useEffect, useMemo, useState } from "react"
-import { MovieResponse } from "@/types/movies"
 import { useTranslations } from "next-intl"
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 import { BiLoaderAlt } from "react-icons/bi"

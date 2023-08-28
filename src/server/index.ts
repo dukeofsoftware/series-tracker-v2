@@ -13,6 +13,7 @@ import {
   TrpcTmdbPaginateSearchInput,
 } from "@/lib/trpc/types"
 import { publicProcedure, router } from "./trpc"
+import { Context } from "./context"
 
 const limiter = new RateLimiter({
   maxRequests: 12,

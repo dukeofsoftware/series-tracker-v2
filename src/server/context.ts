@@ -4,7 +4,7 @@ import { getTokens } from "next-firebase-auth-edge/lib/next/tokens"
 
 import { authConfig } from "@/config/server-config"
 
-export function createContext({
+export async function createContext({
   req,
   resHeaders,
 }: FetchCreateContextFnOptions) {
@@ -13,7 +13,7 @@ export function createContext({
     const tokens = await getTokens(req.cookies as any, authConfig)
     return tokens
   }
-  const user = getUser()
+  const user = await getUser()
 
   return { user }
 }
