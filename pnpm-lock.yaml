@@ -179,6 +179,9 @@ dependencies:
   use-debounce:
     specifier: ^9.0.4
     version: 9.0.4(react@18.2.0)
+  uuid:
+    specifier: ^9.0.0
+    version: 9.0.0
   valibot:
     specifier: ^0.12.0
     version: 0.12.0
@@ -205,6 +208,9 @@ devDependencies:
   '@types/react-dom':
     specifier: ^18.2.7
     version: 18.2.7
+  '@types/uuid':
+    specifier: ^9.0.2
+    version: 9.0.2
   autoprefixer:
     specifier: ^10.4.15
     version: 10.4.15(postcss@8.4.28)
@@ -4607,6 +4613,10 @@ packages:
   /@types/stack-utils@2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
     dev: false
+
+  /@types/uuid@9.0.2:
+    resolution: {integrity: sha512-kNnC1GFBLuhImSnV7w4njQkUiJi0ZXUycu1rUaouPqiKlXkh77JKgdRnTAp1x5eBwcIwbtI+3otwzuIDEuDoxQ==}
+    dev: true
 
   /@types/yargs-parser@21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}

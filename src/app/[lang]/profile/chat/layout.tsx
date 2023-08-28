@@ -1,5 +1,6 @@
 'use client'
 
+import ChatSidebar from '@/components/chat/ChatSidebar'
 import { FC } from 'react'
 
 interface layoutProps {
@@ -10,9 +11,10 @@ interface layoutProps {
 }
 
 const Layout: FC<layoutProps> = ({ children }) => {
-    return <>
-        {children}
-    </>
+    return <div className='relative container flex min-h-screen'>
+        
+           {children}
+    </div >
 }
 
 export default Layout

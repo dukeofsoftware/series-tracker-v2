@@ -70,6 +70,11 @@
   },
   "searchUser": "Kullanıcı Ara",
   "pages": {
+    "chat": {
+      "empty": "Mesaj yazmaya başlamak için kenar çubuğundan bir kullanıcı seçin",
+      "createRoom": "Bir kullanıcı ile sohbet odası oluşturun",
+      "searchUser": "Bir kullanıcı arayın"
+    },
     "contact": {
       "title": "İletişim",
       "description": "Bize ulaşın",
