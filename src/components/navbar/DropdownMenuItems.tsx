@@ -3,16 +3,17 @@
 import { FC } from "react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
-import { AiFillHeart, AiFillSetting } from "react-icons/ai"
+import { AiFillHeart, AiFillMessage, AiFillSetting } from "react-icons/ai"
 import { BiUser } from "react-icons/bi"
 
 import { useAuth } from "../providers/context"
 import { DropdownMenuItem } from "../ui/dropdown-menu"
 import { toast } from "../ui/use-toast"
+import { link } from "fs"
 
-interface DropdownMenuItemsProps {}
+interface DropdownMenuItemsProps { }
 
-const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({}) => {
+const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({ }) => {
   const { user } = useAuth()
 
   const t = useTranslations("navbar.accountDropdown")
@@ -23,12 +24,20 @@ const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({}) => {
       text: t("profile"),
       link: `/profile/${user?.uid}`,
     },
-
     {
       icon: <AiFillHeart className="h-4 w-4 text-red-500" />,
       text: t("favorites"),
       link: `/profile/${user?.uid}/favorites`,
     },
+    {
+      icon: <AiFillMessage className="h-4 w-4 text-green-500" />,
+      text: t("chat"),
+      link: "/profile/chat",
+
+    }
+
+    ,
+
     {
       icon: <AiFillSetting className="text-grey-700 h-4 w-4" />,
       text: t("settings"),

@@ -58,6 +58,7 @@
     "accountDropdown": {
       "dropdownTitle": "Mein Konto",
       "logout": "Abmelden",
+      "chat": "Chat",
       "favorites": "Favoriten",
       "profile": "Profil",
       "settings": "Einstellungen"
