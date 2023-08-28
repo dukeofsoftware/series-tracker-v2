@@ -10,10 +10,11 @@ import { BiUser } from "react-icons/bi"
 import { useAuth } from "../providers/context"
 import { DropdownMenuItem } from "../ui/dropdown-menu"
 import { toast } from "../ui/use-toast"
+import { link } from "fs"
 
-interface DropdownMenuItemsProps {}
+interface DropdownMenuItemsProps { }
 
-const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({}) => {
+const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({ }) => {
   const { user } = useAuth()
 
   const t = useTranslations("navbar.accountDropdown")
