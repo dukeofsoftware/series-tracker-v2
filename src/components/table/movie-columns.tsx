@@ -136,7 +136,8 @@ export const columns: ColumnDef<TMDB>[] = [
       if (user?.uid === uid)
         return (
           <div className="">
-            <StatusSelector type="movie"
+            <StatusSelector
+              type="movie"
               movieResult={{
                 id: row.getValue("id"),
                 title: row.getValue("title") || row.getValue("original_title"),
@@ -146,7 +147,6 @@ export const columns: ColumnDef<TMDB>[] = [
                 original_title:
                   row.getValue("original_title") || row.getValue("title"),
               }}
-
             />
           </div>
         )

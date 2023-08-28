@@ -71,7 +71,7 @@ const UserLayout: FC<UserLayoutProps> = ({ params, children }) => {
       </div>
       <div className="z-30 flex w-full items-center  ">
         <ul className="flex w-full  rounded-md border-2 border-slate-950 dark:border-slate-50 ">
-          {tabs.map((tab,index) => {
+          {tabs.map((tab, index) => {
             if (pathname === tab.href) {
               return (
                 <li

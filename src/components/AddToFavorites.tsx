@@ -68,10 +68,7 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({
     const id = movieResult?.id || seriesResult?.id
     if (!id) return
     try {
-      const data = await getDocument(
-        `users/${user.uid}/${type}`,
-        id.toString()
-      )
+      const data = await getDocument(`users/${user.uid}/${type}`, id.toString())
       if (!data?.status) {
         await addData(`users/${user.uid}/${type}`, id.toString(), {
           ...movieResult,

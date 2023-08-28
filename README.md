@@ -9,8 +9,6 @@ The aim of the project is to facilitate the tracking of TV series, movies, and p
 - Commenting
 - Blog
 - Payment system (supabase, stripe)
-- Real-time chat with friends
-- Notification system
 - Support
 
 ## Basic Technologies Used

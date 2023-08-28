@@ -39,7 +39,8 @@ const StatusSelector: FC<StatusSelectorProps> = ({
     const unsubscribe = onSnapshot(
       doc(
         db,
-        `/users/${user?.uid}/${type === "series" ? "series" : "movies"}/${type === "series" ? seriesResult?.id : movieResult?.id
+        `/users/${user?.uid}/${type === "series" ? "series" : "movies"}/${
+          type === "series" ? seriesResult?.id : movieResult?.id
         }`
       ),
       (doc) => {

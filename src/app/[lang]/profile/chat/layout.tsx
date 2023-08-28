@@ -1,20 +1,18 @@
-'use client'
+"use client"
 
-import ChatSidebar from '@/components/chat/ChatSidebar'
-import { FC } from 'react'
+import { FC } from "react"
+
+import ChatSidebar from "@/components/chat/ChatSidebar"
 
 interface layoutProps {
-    children: React.ReactNode
-    params: {
-        lang: string
-    }
+  children: React.ReactNode
+  params: {
+    lang: string
+  }
 }
 
 const Layout: FC<layoutProps> = ({ children }) => {
-    return <div className='relative container flex min-h-screen'>
-        
-           {children}
-    </div >
+  return <div className="container relative flex min-h-screen">{children}</div>
 }
 
 export default Layout
