@@ -4,16 +4,12 @@ Projenin amacı, TV dizileri, filmler ve belki de gelecekte birçok farklı şey
 
 ## Yol Haritası
 
-- Sıkça Sorulan Sorular
 - Yakında Gelecekler
 - Listeler Oluşturma
 - Yorum Yapma
 - Blog
 - Ödeme Sistemi (supabase, stripe)
-- Arkadaşlarla Gerçek Zamanlı Sohbet
-- Bildirim Sistemi
 - Destek
-- İletişim
 
 ## Temel Kullanılan Teknolojiler
 
