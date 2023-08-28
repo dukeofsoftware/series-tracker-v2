@@ -2,6 +2,8 @@
 
 import { FC } from 'react'
 
+import ChatSidebar from "@/components/chat/ChatSidebar"
+
 interface layoutProps {
   children: React.ReactNode
   params: {

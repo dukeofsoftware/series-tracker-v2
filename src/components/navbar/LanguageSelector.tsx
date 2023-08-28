@@ -55,7 +55,6 @@ const LanguageSelector = ({ }) => {
             {lang.name}
           </DropdownMenuItem>
         ))}
-
       </DropdownMenuContent>
     </DropdownMenu>
   )
