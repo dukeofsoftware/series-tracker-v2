@@ -70,13 +70,12 @@
   },
   "searchUser": "Search User",
   "pages": {
-
-    "chat":{
+    "chat": {
       "empty": "Select a user from the sidebar to start writing a message",
-      "createRoom":"Create a chat room with a user",
-      "searchUser":"Search for a user"
+      "createRoom": "Create a chat room with a user",
+      "searchUser": "Search for a user"
     },
-    
+
     "faqs": {
       "title": "Frequently Asked Questions",
       "description": "Find answers to frequently asked questions here.",

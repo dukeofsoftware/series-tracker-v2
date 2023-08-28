@@ -47,7 +47,7 @@ const Page: FC<pageProps> = ({}) => {
   async function onSubmit(values: ContactType) {
     try {
       setLoading(true)
-      
+
       await axios.post("/api/contact", values)
       toast({
         title: global("toast.success"),

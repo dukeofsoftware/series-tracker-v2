@@ -1,5 +1,6 @@
 "use client"
 
+import { link } from "fs"
 import { FC } from "react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
@@ -9,11 +10,10 @@ import { BiUser } from "react-icons/bi"
 import { useAuth } from "../providers/context"
 import { DropdownMenuItem } from "../ui/dropdown-menu"
 import { toast } from "../ui/use-toast"
-import { link } from "fs"
 
-interface DropdownMenuItemsProps { }
+interface DropdownMenuItemsProps {}
 
-const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({ }) => {
+const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({}) => {
   const { user } = useAuth()
 
   const t = useTranslations("navbar.accountDropdown")
@@ -33,10 +33,7 @@ const DropdownMenuItems: FC<DropdownMenuItemsProps> = ({ }) => {
       icon: <AiFillMessage className="h-4 w-4 text-green-500" />,
       text: t("chat"),
       link: "/profile/chat",
-
-    }
-
-    ,
+    },
 
     {
       icon: <AiFillSetting className="text-grey-700 h-4 w-4" />,

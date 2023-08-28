@@ -1,8 +1,10 @@
 "use client"
+
 import { FC } from "react"
 import Link from "next/link"
-import { AiFillGithub, AiFillLinkedin } from "react-icons/ai"
 import { usePathname } from "next/navigation"
+import { AiFillGithub, AiFillLinkedin } from "react-icons/ai"
+
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "./ui/button"
 import { Separator } from "./ui/separator"
@@ -43,7 +45,7 @@ const Footer: FC<FooterProps> = ({ messages }) => {
       url: "/about",
     },
   ]
-  if(pathname.startsWith("/profile/chat")) return null
+  if (pathname.startsWith("/profile/chat")) return null
   return (
     <footer className="mt-8 grid h-72 w-full grid-cols-2 bg-gray-950 p-8">
       <div className="flex flex-col flex-wrap items-center  gap-2">

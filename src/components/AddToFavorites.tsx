@@ -13,15 +13,15 @@ import { toast } from "./ui/use-toast"
 
 interface AddToFavoritesProps {
   movieResult?:
-  | MovieResponse
-  | {
-    id?: string | number
-    title?: string
-    poster_path?: string
-    release_date?: string
-    original_title?: string
-    overview?: string
-  }
+    | MovieResponse
+    | {
+        id?: string | number
+        title?: string
+        poster_path?: string
+        release_date?: string
+        original_title?: string
+        overview?: string
+      }
   seriesResult?: {
     id?: number
     title?: string
@@ -83,10 +83,7 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({
     const id = movieResult?.id || seriesResult?.id
     if (!id) return
     try {
-      const data = await getDocument(
-        `users/${user.uid}/${type}`,
-        id.toString()
-      )
+      const data = await getDocument(`users/${user.uid}/${type}`, id.toString())
       if (!data?.status) {
         await addData(`users/${user.uid}/${type}`, id.toString(), {
           ...movieResult,
