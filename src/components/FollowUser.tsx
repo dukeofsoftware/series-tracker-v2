@@ -49,9 +49,11 @@ const FollowUser: FC<FollowUserProps> = ({ pageUserId }) => {
       } else {
         await addData(`follow/${user?.uid}/followers`, pageUserId, {
           id: pageUserId,
+          create_at: new Date().toISOString(),
         })
         await addData(`follow/${pageUserId}/following`, user?.uid, {
           id: user?.uid,
+          create_at: new Date().toISOString(),
         })
 
         setIsFollow(true)
