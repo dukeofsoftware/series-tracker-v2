@@ -71,219 +71,220 @@
   "searchUser": "Benutzer suchen",
   "pages": {
     "chat": {
+
       "createRoom": "Erstellen Sie einen Chat-Raum mit einem Benutzer",
       "searchUser": "Suchen Sie nach einem Benutzer",
       "empty": "Wählen Sie einen Benutzer aus der Seitenleiste aus, um mit dem Chatten zu beginnen"
     },
-    "faqs": {
-      "title": "Häufig gestellte Fragen",
-      "description": "Hier finden Sie Antworten auf häufig gestellte Fragen.",
-      "questions": [
-        {
-          "question": "Was ist Tracker v2?",
-          "answer": "Tracker v2 ist eine Anwendung, die darauf abzielt, das Verfolgen von TV-Serien, Filmen und möglicherweise anderen Dingen in der Zukunft zu erleichtern. Ich habe früher Notion verwendet, um zu verfolgen, was ich gesehen habe, aber die manuelle Durchführung war recht umständlich. Obwohl es ähnliche Anwendungen gab, hatten sie ihre Probleme. Sie reichten nicht aus, um meinen Anforderungen gerecht zu werden. Deshalb wollte ich eine solche Anwendung entwickeln."
-        },
-        {
-          "question": "Warum habe ich Tracker v2 erstellt?",
-          "answer": "Ich habe Tracker v2 entwickelt, weil ich festgestellt habe, dass bestehende Lösungen meine Anforderungen nicht erfüllen konnten. Ich wollte eine effizientere Möglichkeit finden, meine gesehenen Inhalte zu verfolgen, als dies manuell mit Tools wie Notion zu tun. Tracker v2 soll eine umfassende und benutzerfreundliche Lösung für diesen Zweck bieten."
-        },
-        {
-          "question": "Welche Technologien wurden in Tracker v2 verwendet?",
-          "answer": "Tracker v2 nutzt eine Vielzahl von Technologien. Auf der Client-Seite verwendet es React für die Benutzeroberfläche, Firebase für die Echtzeit-Datenverarbeitung, Zustand für das Zustandsmanagement, TailwindCSS für das Styling sowie andere Bibliotheken wie Valibot und React Hook Form für die Formularvalidierung. Auf der Server-Seite werden Next.js, Firebase Admin und next-firebase-auth-edge für die sichere Authentifizierung verwendet."
-        },
-        {
-          "question": "Ist Tracker v2 mobilfreundlich?",
-          "answer": "Ja, Tracker v2 ist so konzipiert, dass es auf Desktop- und Mobilgeräten eine nahtlose Erfahrung bietet."
-        },
-        {
-          "question": "Wie kann ich zu Tracker v2 beitragen?",
-          "answer": "Beiträge sind willkommen! Sie können das Repository forken, Verbesserungen oder Fehlerkorrekturen vornehmen und Pull-Anfragen erstellen. Bitte beachten Sie die Richtlinien des Projekts für Beiträge."
-        },
-        {
-          "question": "Unterstützt Tracker v2 mehrere Sprachen?",
-          "answer": "Ja, Tracker v2 bietet mit Hilfe der next-intl-Bibliothek Mehrsprachenunterstützung für Sprachen wie Türkisch (tr), Englisch (en) und Deutsch (de)."
-        },
-        {
-          "question": "Wo finde ich weitere Informationen zu verwandten Projekten?",
-          "answer": "Weitere Informationen zu verwandten Projekten wie Tracker v1 und der TMDB-API finden Sie im GitHub-Repository des Projekts."
-        },
-        {
-          "question": "Wie kann ich Feedback zu Tracker v2 geben?",
-          "answer": "Sie können Ihr Feedback an kozanfurkanemre@gmail.com senden. Wir schätzen Ihre Rückmeldungen und werden sie verwenden, um die Anwendung zu verbessern."
-        }
-      ]
-    },
-    "main": {
-      "trendingTitle": "Trends"
-    },
-    "profile": {
-      "tabs": {
-        "series": "Serien",
-        "movies": "Filme"
+  "faqs": {
+    "title": "Häufig gestellte Fragen",
+    "description": "Hier finden Sie Antworten auf häufig gestellte Fragen.",
+    "questions": [
+      {
+        "question": "Was ist Tracker v2?",
+        "answer": "Tracker v2 ist eine Anwendung, die darauf abzielt, das Verfolgen von TV-Serien, Filmen und möglicherweise anderen Dingen in der Zukunft zu erleichtern. Ich habe früher Notion verwendet, um zu verfolgen, was ich gesehen habe, aber die manuelle Durchführung war recht umständlich. Obwohl es ähnliche Anwendungen gab, hatten sie ihre Probleme. Sie reichten nicht aus, um meinen Anforderungen gerecht zu werden. Deshalb wollte ich eine solche Anwendung entwickeln."
       },
-      "tables": {
-        "movie": {
-          "originalTitle": "Originaltitel",
-          "rating": "Bewertung",
-          "exportData": "Daten exportieren",
-          "title": "Titel",
-          "overview": "Übersicht",
-          "favorite": "Favorit",
-          "status": "Status",
-          "score": "Bewertung",
-          "date": "Datum",
-          "columns": "Spalten",
-          "actions": "Aktionen",
-          "viewDetails": "Details anzeigen",
-          "openMenu": "Menü öffnen",
-          "noData": "Es wurden noch keine Filme hinzugefügt.",
-          "previousPage": "Vorherige Seite",
-          "nextPage": "Nächste Seite",
-          "filterPlaceholder": "Nach Titel filtern..."
-        },
-        "series": {
-          "rating": "Bewertung",
-          "exportData": "Daten exportieren",
-          "title": "Titel",
-          "overview": "Übersicht",
-          "favorite": "Favorit",
-          "status": "Status",
-          "score": "Bewertung",
-          "date": "Datum",
-          "columns": "Spalten",
-          "actions": "Aktionen",
-          "viewDetails": "Details anzeigen",
-          "openMenu": "Menü öffnen",
-          "noData": "Es wurden noch keine Serien hinzugefügt.",
-          "previousPage": "Vorherige Seite",
-          "nextPage": "Nächste Seite",
-          "filterPlaceholder": "Nach Titel filtern..."
-        }
+      {
+        "question": "Warum habe ich Tracker v2 erstellt?",
+        "answer": "Ich habe Tracker v2 entwickelt, weil ich festgestellt habe, dass bestehende Lösungen meine Anforderungen nicht erfüllen konnten. Ich wollte eine effizientere Möglichkeit finden, meine gesehenen Inhalte zu verfolgen, als dies manuell mit Tools wie Notion zu tun. Tracker v2 soll eine umfassende und benutzerfreundliche Lösung für diesen Zweck bieten."
+      },
+      {
+        "question": "Welche Technologien wurden in Tracker v2 verwendet?",
+        "answer": "Tracker v2 nutzt eine Vielzahl von Technologien. Auf der Client-Seite verwendet es React für die Benutzeroberfläche, Firebase für die Echtzeit-Datenverarbeitung, Zustand für das Zustandsmanagement, TailwindCSS für das Styling sowie andere Bibliotheken wie Valibot und React Hook Form für die Formularvalidierung. Auf der Server-Seite werden Next.js, Firebase Admin und next-firebase-auth-edge für die sichere Authentifizierung verwendet."
+      },
+      {
+        "question": "Ist Tracker v2 mobilfreundlich?",
+        "answer": "Ja, Tracker v2 ist so konzipiert, dass es auf Desktop- und Mobilgeräten eine nahtlose Erfahrung bietet."
+      },
+      {
+        "question": "Wie kann ich zu Tracker v2 beitragen?",
+        "answer": "Beiträge sind willkommen! Sie können das Repository forken, Verbesserungen oder Fehlerkorrekturen vornehmen und Pull-Anfragen erstellen. Bitte beachten Sie die Richtlinien des Projekts für Beiträge."
+      },
+      {
+        "question": "Unterstützt Tracker v2 mehrere Sprachen?",
+        "answer": "Ja, Tracker v2 bietet mit Hilfe der next-intl-Bibliothek Mehrsprachenunterstützung für Sprachen wie Türkisch (tr), Englisch (en) und Deutsch (de)."
+      },
+      {
+        "question": "Wo finde ich weitere Informationen zu verwandten Projekten?",
+        "answer": "Weitere Informationen zu verwandten Projekten wie Tracker v1 und der TMDB-API finden Sie im GitHub-Repository des Projekts."
+      },
+      {
+        "question": "Wie kann ich Feedback zu Tracker v2 geben?",
+        "answer": "Sie können Ihr Feedback an kozanfurkanemre@gmail.com senden. Wir schätzen Ihre Rückmeldungen und werden sie verwenden, um die Anwendung zu verbessern."
       }
+    ]
+  },
+  "main": {
+    "trendingTitle": "Trends"
+  },
+  "profile": {
+    "tabs": {
+      "series": "Serien",
+      "movies": "Filme"
     },
-    "settings": {
-      "title": "Einstellungen",
-      "description": "Um die Funktionen der Anwendung nutzen zu können, müssen Sie einen Benutzernamen angeben und Ihre E-Mail-Adresse verifizieren.",
-      "accountTab": {
-        "updateProfilePhoto": {
-          "title": "Profilfoto",
-          "description": "Ändern Sie Ihr Profilfoto.",
-          "fileSizeExceeds": "Sie können eine Datei mit einer maximalen Größe von {mb} hochladen.",
-          "buttonLabel": "Foto ändern",
-          "toastDescription": "Ihr Profilfoto wurde geändert.",
-          "invalidFormat": "Ungültiges Dateiformat. Nur .png, .jpeg, .jpg und .webp werden unterstützt"
-        },
-        "updateDisplayName": {
-          "toastDescription": "Ihr Profilname wurde geändert.",
-          "currentName": "Ihr aktueller Name ist {name}.",
-          "title": "Profilname",
-          "description": "Ändern Sie Ihren Profilnamen.",
-          "inputLabel": "Neuer Name",
-          "inputDescription": "Geben Sie Ihren neuen Profilnamen ein.",
-          "buttonLabel": "Namen ändern"
-        },
-        "updateUsername": {
-          "usernameTaken": "Dieser Benutzername ist bereits vergeben.",
-          "toastDescription": "Ihr Benutzername wurde geändert.",
-          "currentUsername": "Ihr aktueller Benutzername ist {username}.",
-          "title": "Benutzername",
-          "description": "Ändern Sie Ihren Benutzernamen. Ihr aktueller Benutzername ist {username}.",
-          "inputLabel": "Neuer Benutzername",
-          "inputDescription": "Geben Sie Ihren neuen Benutzernamen ein.",
-          "buttonLabel": "Benutzernamen ändern"
-        }
-      },
-      "emailTab": {
-        "changeEmail": {
-          "title": "E-Mail ändern",
-          "toastDescription": "Ihre E-Mail-Adresse wurde geändert.",
-          "description": "Ändern Sie Ihre E-Mail-Adresse.",
-          "inputLabel": "Neue E-Mail",
-          "confirmInputLabel": "Neue E-Mail erneut eingeben",
-          "confirmInputDescription": "Geben Sie Ihre neue E-Mail erneut ein.",
-          "inputDescription": "Geben Sie Ihre neue E-Mail-Adresse ein.",
-          "buttonLabel": "E-Mail ändern"
-        },
-        "verifyEmail": {
-          "toastDescription": "Eine Bestätigungs-E-Mail wurde an Ihre Adresse gesendet.",
-          "toastTitle": "E-Mail-Bestätigung",
-          "verifiedMail": "Ihre E-Mail-Adresse wurde bestätigt.",
-          "verifyButtonLabel": "E-Mail bestätigen",
-          "title": "E-Mail-Bestätigung",
-          "description": "Hier können Sie Ihre E-Mail-Adresse bestätigen.",
-          "verified": "Bestätigt"
-        }
-      },
-      "reauthenticate": {
-        "cardTitle": "Erneut authentifizieren",
-        "passwordLabel": "Passwort",
-        "toastDescription": "Authentifizierung erfolgreich",
-        "cardDescription": "Um wichtige Einstellungen zu ändern, müssen Sie sich kürzlich angemeldet haben.",
-        "buttonLabel": "Erneut authentifizieren"
-      },
-      "passwordTab": {
-        "title": "Passwort ändern",
-        "description": "Ändern Sie Ihr Kontopasswort.",
-        "inputLabel": "Neues Passwort",
-        "inputDescription": "Geben Sie Ihr neues Passwort ein.",
-        "confirmInputLabel": "Neues Passwort erneut eingeben",
-        "confirmInputDescription": "Geben Sie Ihr neues Passwort erneut ein.",
-        "buttonLabel": "Passwort ändern",
-        "toastDescription": "Ihr Passwort wurde geändert."
-      }
-    },
-    "auth": {
-      "login": {
-        "title": "Einloggen",
-        "loginWithGoogle": "Mit Google einloggen",
-        "emailInputDescription": "Wir werden Ihre E-Mail-Adresse nicht weitergeben.",
-        "passwordLabel": "Passwort",
-        "passwordInputDescription": "Wir werden Ihr Passwort nicht weitergeben.",
-        "dontHaveAccount": "Sie haben noch kein Konto?",
-        "register": "Registrieren",
-        "buttonLabel": "Einloggen",
-        "toastDescription": "Sie haben sich erfolgreich eingeloggt."
-      },
-      "register": {
-        "title": "Registrieren",
-        "registerWithGoogle": "Mit Google registrieren",
-        "toastSuccessDescription": "Sie haben sich erfolgreich registriert.",
-        "verifyToastTitle": "Überprüfen Sie Ihre E-Mails",
-        "verifyToastDescription": "Wir haben Ihnen eine E-Mail zur Bestätigung geschickt.",
-        "emailInputDescription": "Wir werden Ihre E-Mail-Adresse nicht weitergeben.",
-        "passwordLabel": "Passwort",
-        "passwordInputDescription": "Wir werden Ihr Passwort nicht weitergeben.",
-        "confirmPasswordLabel": "Passwort bestätigen",
-        "confirmPasswordInputDescription": "Geben Sie Ihr Passwort erneut ein.",
-        "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
-        "login": "Einloggen",
-        "buttonLabel": "Registrieren"
-      }
-    },
-    "tmdb": {
-      "tags": "Tags:",
-      "movies": {
-        "movie": {
-          "similarMovies": "Ähnliche Filme"
-        }
+    "tables": {
+      "movie": {
+        "originalTitle": "Originaltitel",
+        "rating": "Bewertung",
+        "exportData": "Daten exportieren",
+        "title": "Titel",
+        "overview": "Übersicht",
+        "favorite": "Favorit",
+        "status": "Status",
+        "score": "Bewertung",
+        "date": "Datum",
+        "columns": "Spalten",
+        "actions": "Aktionen",
+        "viewDetails": "Details anzeigen",
+        "openMenu": "Menü öffnen",
+        "noData": "Es wurden noch keine Filme hinzugefügt.",
+        "previousPage": "Vorherige Seite",
+        "nextPage": "Nächste Seite",
+        "filterPlaceholder": "Nach Titel filtern..."
       },
       "series": {
-        "tv": {
-          "similarSeries": "Ähnliche Serien",
-          "season": {
-            "season": "Staffel ",
-            "episodes": "Folgen",
-            "episode": "Folge {episodeNumber}"
-          }
-        }
+        "rating": "Bewertung",
+        "exportData": "Daten exportieren",
+        "title": "Titel",
+        "overview": "Übersicht",
+        "favorite": "Favorit",
+        "status": "Status",
+        "score": "Bewertung",
+        "date": "Datum",
+        "columns": "Spalten",
+        "actions": "Aktionen",
+        "viewDetails": "Details anzeigen",
+        "openMenu": "Menü öffnen",
+        "noData": "Es wurden noch keine Serien hinzugefügt.",
+        "previousPage": "Vorherige Seite",
+        "nextPage": "Nächste Seite",
+        "filterPlaceholder": "Nach Titel filtern..."
       }
     }
   },
-  "footer": {
-    "links": "Links",
-    "social": "Soziale Medien",
-    "sss": "Häufig gestellte Fragen",
-    "contact": "Kontakt",
-    "about": "Über uns"
+  "settings": {
+    "title": "Einstellungen",
+    "description": "Um die Funktionen der Anwendung nutzen zu können, müssen Sie einen Benutzernamen angeben und Ihre E-Mail-Adresse verifizieren.",
+    "accountTab": {
+      "updateProfilePhoto": {
+        "title": "Profilfoto",
+        "description": "Ändern Sie Ihr Profilfoto.",
+        "fileSizeExceeds": "Sie können eine Datei mit einer maximalen Größe von {mb} hochladen.",
+        "buttonLabel": "Foto ändern",
+        "toastDescription": "Ihr Profilfoto wurde geändert.",
+        "invalidFormat": "Ungültiges Dateiformat. Nur .png, .jpeg, .jpg und .webp werden unterstützt"
+      },
+      "updateDisplayName": {
+        "toastDescription": "Ihr Profilname wurde geändert.",
+        "currentName": "Ihr aktueller Name ist {name}.",
+        "title": "Profilname",
+        "description": "Ändern Sie Ihren Profilnamen.",
+        "inputLabel": "Neuer Name",
+        "inputDescription": "Geben Sie Ihren neuen Profilnamen ein.",
+        "buttonLabel": "Namen ändern"
+      },
+      "updateUsername": {
+        "usernameTaken": "Dieser Benutzername ist bereits vergeben.",
+        "toastDescription": "Ihr Benutzername wurde geändert.",
+        "currentUsername": "Ihr aktueller Benutzername ist {username}.",
+        "title": "Benutzername",
+        "description": "Ändern Sie Ihren Benutzernamen. Ihr aktueller Benutzername ist {username}.",
+        "inputLabel": "Neuer Benutzername",
+        "inputDescription": "Geben Sie Ihren neuen Benutzernamen ein.",
+        "buttonLabel": "Benutzernamen ändern"
+      }
+    },
+    "emailTab": {
+      "changeEmail": {
+        "title": "E-Mail ändern",
+        "toastDescription": "Ihre E-Mail-Adresse wurde geändert.",
+        "description": "Ändern Sie Ihre E-Mail-Adresse.",
+        "inputLabel": "Neue E-Mail",
+        "confirmInputLabel": "Neue E-Mail erneut eingeben",
+        "confirmInputDescription": "Geben Sie Ihre neue E-Mail erneut ein.",
+        "inputDescription": "Geben Sie Ihre neue E-Mail-Adresse ein.",
+        "buttonLabel": "E-Mail ändern"
+      },
+      "verifyEmail": {
+        "toastDescription": "Eine Bestätigungs-E-Mail wurde an Ihre Adresse gesendet.",
+        "toastTitle": "E-Mail-Bestätigung",
+        "verifiedMail": "Ihre E-Mail-Adresse wurde bestätigt.",
+        "verifyButtonLabel": "E-Mail bestätigen",
+        "title": "E-Mail-Bestätigung",
+        "description": "Hier können Sie Ihre E-Mail-Adresse bestätigen.",
+        "verified": "Bestätigt"
+      }
+    },
+    "reauthenticate": {
+      "cardTitle": "Erneut authentifizieren",
+      "passwordLabel": "Passwort",
+      "toastDescription": "Authentifizierung erfolgreich",
+      "cardDescription": "Um wichtige Einstellungen zu ändern, müssen Sie sich kürzlich angemeldet haben.",
+      "buttonLabel": "Erneut authentifizieren"
+    },
+    "passwordTab": {
+      "title": "Passwort ändern",
+      "description": "Ändern Sie Ihr Kontopasswort.",
+      "inputLabel": "Neues Passwort",
+      "inputDescription": "Geben Sie Ihr neues Passwort ein.",
+      "confirmInputLabel": "Neues Passwort erneut eingeben",
+      "confirmInputDescription": "Geben Sie Ihr neues Passwort erneut ein.",
+      "buttonLabel": "Passwort ändern",
+      "toastDescription": "Ihr Passwort wurde geändert."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Einloggen",
+      "loginWithGoogle": "Mit Google einloggen",
+      "emailInputDescription": "Wir werden Ihre E-Mail-Adresse nicht weitergeben.",
+      "passwordLabel": "Passwort",
+      "passwordInputDescription": "Wir werden Ihr Passwort nicht weitergeben.",
+      "dontHaveAccount": "Sie haben noch kein Konto?",
+      "register": "Registrieren",
+      "buttonLabel": "Einloggen",
+      "toastDescription": "Sie haben sich erfolgreich eingeloggt."
+    },
+    "register": {
+      "title": "Registrieren",
+      "registerWithGoogle": "Mit Google registrieren",
+      "toastSuccessDescription": "Sie haben sich erfolgreich registriert.",
+      "verifyToastTitle": "Überprüfen Sie Ihre E-Mails",
+      "verifyToastDescription": "Wir haben Ihnen eine E-Mail zur Bestätigung geschickt.",
+      "emailInputDescription": "Wir werden Ihre E-Mail-Adresse nicht weitergeben.",
+      "passwordLabel": "Passwort",
+      "passwordInputDescription": "Wir werden Ihr Passwort nicht weitergeben.",
+      "confirmPasswordLabel": "Passwort bestätigen",
+      "confirmPasswordInputDescription": "Geben Sie Ihr Passwort erneut ein.",
+      "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+      "login": "Einloggen",
+      "buttonLabel": "Registrieren"
+    }
+  },
+  "tmdb": {
+    "tags": "Tags:",
+    "movies": {
+      "movie": {
+        "similarMovies": "Ähnliche Filme"
+      }
+    },
+    "series": {
+      "tv": {
+        "similarSeries": "Ähnliche Serien",
+        "season": {
+          "season": "Staffel ",
+          "episodes": "Folgen",
+          "episode": "Folge {episodeNumber}"
+        }
+      }
+    }
   }
+},
+"footer": {
+  "links": "Links",
+  "social": "Soziale Medien",
+  "sss": "Häufig gestellte Fragen",
+  "contact": "Kontakt",
+  "about": "Über uns"
+}
 }
