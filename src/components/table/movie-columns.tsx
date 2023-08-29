@@ -21,11 +21,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import AddToFavorites from "@/components/tmdb/AddToFavorites"
-import { useAuth } from "@/components/providers/context"
-import Rating from "@/components/tmdb/Rating"
-import StatusSelector from "@/components/tmdb/StatusSelector"
-import { Button } from "@/components/ui/button"
 
 export type TMDB = {
   id: string
