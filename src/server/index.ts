@@ -13,7 +13,6 @@ import {
   TrpcTmdbPaginateSearchInput,
 } from "@/lib/trpc/types"
 import { publicProcedure, router } from "./trpc"
-import { Context } from "./context"
 
 const limiter = new RateLimiter({
   maxRequests: 12,
@@ -554,70 +553,7 @@ export const appRouter = router({
       cookies().set("NEXT_LOCALE", language)
       return { message: "success", status: 200 }
     }),
-  useSendMailMutation: publicProcedure
-    .input(TrpcSendMailInput)
-    .mutation(async (opts) => {
-      const limiter = new RateLimiter({
-        maxRequests: 1,
-        /* 1 hour */
-        interval: 60 * 60 * 1000,
-      })
-      if (!opts.ctx.user) {
-        return new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You are not authorized to do this",
-          cause: "You are not authorized to do this",
-        })
-      }
-      try {
-        await sendMailLimiter.limit()
-        const transporter = nodemailer.createTransport({
-          port: 465,
-          service: "gmail",
-          host: "smtp.gmail.com",
-          auth: {
-            user: process.env.MAILER_EMAIL,
-            pass: process.env.MAILER_PASSWORD,
-          },
-          secure: true,
-        })
-        const email = opts.input.email
-        const name = opts.input.name
-        const message = opts.input.message
-        const mailData = {
-          from: email,
-          to: process.env.MAILER_EMAIL,
-          subject: `Message From ${email}, ${name}`,
-          text: message,
-          html: `<div>${message}</div>`,
-        }
-        await transporter.sendMail(mailData, function (err, info) {
-          if (err) {
-            console.error(err)
-            return new TRPCError({
-              code: "INTERNAL_SERVER_ERROR",
-              message: "Something went wrong",
-              cause: err,
-            })
-          }
-        })
-        return { message: "Message sent successfully" }
-      } catch (error) {
-        if (error instanceof RateLimiterError) {
-          return new TRPCError({
-            code: "TOO_MANY_REQUESTS",
-            message: "Too many requests. Please try again later.",
-            cause: error,
-          })
-        }
-        console.error(error)
-        return new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Something went wrong",
-          cause: error,
-        })
-      }
-    }),
+
 })
 
 export type AppRouter = typeof appRouter
