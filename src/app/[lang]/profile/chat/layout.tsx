@@ -1,6 +1,7 @@
 "use client"
 
 import { FC } from "react"
+
 interface layoutProps {
   children: React.ReactNode
   params: {
