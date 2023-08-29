@@ -10,6 +10,9 @@ import { v4 as uuidv4 } from "uuid"
 
 import { addData, db, getDocument } from "@/lib/firebase/firestore"
 import { cn } from "@/lib/utils"
+import { useAuth } from "@/components/providers/context"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Card } from "@/components/ui/card"
 import {
   Dialog,
   DialogContent,
@@ -17,12 +20,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { useAuth } from "@/components/providers/context"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import {  buttonVariants } from "../ui/button"
-import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { buttonVariants } from "../ui/button"
 
 interface CreateChatButtonProps {}
 
@@ -90,60 +90,60 @@ const CreateChatButton: FC<CreateChatButtonProps> = ({}) => {
     }
   }
 
-  return (<Dialog>
-        <DialogTrigger
-          className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
-        >
-          {" "}
-          <IoIosCreate className="h-5 w-5" />
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{t("createRoom")}</DialogTitle>
-          </DialogHeader>
-          <Input
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder={t("searchUser")}
-          />
-          <ScrollArea className="flex h-[380px] flex-col gap-2">
-            <ul>
-              {filteredUsernames && filteredUsernames?.length > 0 ? (
-                filteredUsernames.map((username: any) => {
-                  if (username.uid === user?.uid) {
-                    return
-                  }
+  return (
+    <Dialog>
+      <DialogTrigger
+        className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
+      >
+        {" "}
+        <IoIosCreate className="h-5 w-5" />
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{t("createRoom")}</DialogTitle>
+        </DialogHeader>
+        <Input
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder={t("searchUser")}
+        />
+        <ScrollArea className="flex h-[380px] flex-col gap-2">
+          <ul>
+            {filteredUsernames && filteredUsernames?.length > 0 ? (
+              filteredUsernames.map((username: any) => {
+                if (username.uid === user?.uid) {
+                  return
+                }
 
-                  return (
-                    <li key={username.username}>
-                      <button
-                        onClick={() => handleCreateChat(username.uid)}
-                        className="w-full pr-5"
-                      >
-                        <Card className="m-2 flex w-full items-center gap-2  p-2 ">
-                          <Avatar>
-                            <AvatarFallback>
-                              {username.username[0]}
-                            </AvatarFallback>
-                            <AvatarImage
-                              src={username.photoURL || "/male.png"}
-                              alt={username.username}
-                            />
-                          </Avatar>
-                          {username.username}
-                        </Card>
-                      </button>
-                    </li>
-                  )
-                })
-              ) : (
-                <div>No results</div>
-              )}
-            </ul>
-          </ScrollArea>
-        </DialogContent>
-      </Dialog>
-    
+                return (
+                  <li key={username.username}>
+                    <button
+                      onClick={() => handleCreateChat(username.uid)}
+                      className="w-full pr-5"
+                    >
+                      <Card className="m-2 flex w-full items-center gap-2  p-2 ">
+                        <Avatar>
+                          <AvatarFallback>
+                            {username.username[0]}
+                          </AvatarFallback>
+                          <AvatarImage
+                            src={username.photoURL || "/male.png"}
+                            alt={username.username}
+                          />
+                        </Avatar>
+                        {username.username}
+                      </Card>
+                    </button>
+                  </li>
+                )
+              })
+            ) : (
+              <div>No results</div>
+            )}
+          </ul>
+        </ScrollArea>
+      </DialogContent>
+    </Dialog>
   )
 }
 
