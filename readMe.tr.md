@@ -7,9 +7,7 @@ Projenin amacı, TV dizileri, filmler ve belki de gelecekte birçok farklı şey
 - Yakında Gelecekler
 - Listeler Oluşturma
 - Yorum Yapma
-- Blog
-- Ödeme Sistemi (supabase, stripe)
-- Destek
+
 
 ## Temel Kullanılan Teknolojiler
 
