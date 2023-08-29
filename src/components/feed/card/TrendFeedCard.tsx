@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import AdultContent from "./AdultContent"
 import AirDate from "./AirDate"
 import CardContent from "./CardContent"
+import { TmdbCardType } from "@/lib/trpc/types"
 
 interface TrendFeedCardProps {
   result: TmdbCardType
