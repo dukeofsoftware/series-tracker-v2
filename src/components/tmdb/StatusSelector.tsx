@@ -13,10 +13,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useAuth } from "../providers/context"
-import { Button } from "../ui/button"
-import { Separator } from "../ui/separator"
-import { toast } from "../ui/use-toast"
+import { useAuth } from "@/components/providers/context"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { toast } from "@/components/ui/use-toast"
+import { serverClient } from "@/lib/trpc/serverClient"
 
 interface StatusSelectorProps {
   movieResult?:Awaited<ReturnType<(typeof serverClient)["useGetTmdbMovie"]>>;
