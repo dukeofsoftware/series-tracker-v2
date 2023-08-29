@@ -5,11 +5,9 @@ import Link from "next/link"
 
 import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-import { TmdbCardType } from "@/lib/trpc/types"
-
-const CardContent = dynamic(() => import("./CardContent"), { ssr: false })
-const AdultContent = dynamic(() => import("./AdultContent"), { ssr: false })
-const AirDate = dynamic(() => import("./AirDate"), { ssr: false })
+import  CardContent  from "./CardContent"
+import AdultContent from "./AdultContent"
+import AirDate from "./AirDate"
 interface TrendFeedCardProps {
   result: TmdbCardType
 }

@@ -1,5 +1,3 @@
-"use client"
-
 import { FC } from "react"
 
 import { CardContent as Content } from "@/components/ui/card"

@@ -16,11 +16,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import AddToFavorites from "../AddToFavorites"
-import { useAuth } from "../providers/context"
-import Rating from "../Rating"
-import StatusSelector from "../StatusSelector"
-import { Button } from "../ui/button"
+import AddToFavorites from "@/components/tmdb/AddToFavorites"
+import { useAuth } from "@/components/providers/context"
+import Rating from "@/components/tmdb/Rating"
+import StatusSelector from "@/components/tmdb/StatusSelector"
+import { Button } from "@/components/ui/button"
 
 export type TMDB = {
   id: string
@@ -35,7 +35,7 @@ export type TMDB = {
 export const columns: ColumnDef<TMDB>[] = [
   {
     accessorKey: "poster_path",
-    header: ({ column }) => {
+    header: () => {
       return <div className="">Poster</div>
     },
     cell: ({ row }) => {
@@ -67,7 +67,7 @@ export const columns: ColumnDef<TMDB>[] = [
   },
   {
     accessorKey: "overview",
-    header: ({ column }) => {
+    header: () => {
       const t = useTranslations("pages.profile.tables.movie")
 
       return <div className="">{t("overview")}</div>
@@ -247,14 +247,14 @@ export const columns: ColumnDef<TMDB>[] = [
   },
   {
     accessorKey: "original_title",
-    header: ({ column }) => {
+    header: () => {
       const t = useTranslations("pages.profile.tables.movie")
       return <div>{t("originalTitle")}</div>
     },
   },
   {
     accessorKey: "release_date",
-    header: ({ column }) => {
+    header: () => {
       const t = useTranslations("pages.profile.tables.movie")
       return <div>{t("date")}</div>
     },

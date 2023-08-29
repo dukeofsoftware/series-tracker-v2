@@ -6,9 +6,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 import { BiLoaderAlt } from "react-icons/bi"
 
 import { addData, getDocument } from "@/lib/firebase/firestore"
-import { useAuth } from "./providers/context"
-import { Button } from "./ui/button"
-import { toast } from "./ui/use-toast"
+import { Button } from "@/components/ui/button"
 import { serverClient } from "@/lib/trpc/serverClient"
 
 interface AddToFavoritesProps {

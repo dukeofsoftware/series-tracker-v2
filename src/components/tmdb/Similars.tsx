@@ -1,6 +1,6 @@
 import { FC } from "react"
 
-import TrendFeedCard from "./feed/card/TrendFeedCard"
+import TrendFeedCard from "@/components/feed/card/TrendFeedCard"
 
 interface SimilarsProps {
   title: string
