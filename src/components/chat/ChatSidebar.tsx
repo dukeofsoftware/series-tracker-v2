@@ -10,8 +10,7 @@ import { Card } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import CreateChatButton from "./CreateChatButton"
 
-
-const ChatSidebar = ({ }) => {
+const ChatSidebar = ({}) => {
   const [users, setUsers] = useState<any[]>([])
 
   const { user } = useAuth()
@@ -79,7 +78,6 @@ const ChatSidebar = ({ }) => {
         </ScrollArea>
       </Card>
     </aside>
-
   )
 }
 

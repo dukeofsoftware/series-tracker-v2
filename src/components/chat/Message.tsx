@@ -59,7 +59,7 @@ const Message: FC<MessageProps> = ({ message, user }) => {
               />
             </Avatar>
             <div
-              className={`flex min-w-[75px] max-w-md flex-col gap-1 sm:gap-2 rounded-md text-sm sm:text-base bg-slate-200 p-2 sm:p-4 text-black dark:bg-black dark:text-white`}
+              className={`flex min-w-[75px] max-w-md flex-col gap-1 rounded-md bg-slate-200 p-2 text-sm text-black dark:bg-black dark:text-white sm:gap-2 sm:p-4 sm:text-base`}
             >
               <p className=" ">{message.message}</p>
               <p className="text-xs ">
