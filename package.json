@@ -8,7 +8,9 @@
     "start": "next start",
     "serve": "next build && next start ",
     "format": "prettier --write ./src",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
+
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.0",

@@ -5,8 +5,8 @@ import Link from "next/link"
 import { BsChevronDoubleLeft } from "react-icons/bs"
 
 import { cn } from "@/lib/utils"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
-import { buttonVariants } from "../ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { buttonVariants } from "@/components/ui/button"
 
 interface TopbarProps {
   user: {

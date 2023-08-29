@@ -7,9 +7,9 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 import { BiLoaderAlt } from "react-icons/bi"
 
 import { addData, getDocument } from "@/lib/firebase/firestore"
-import { useAuth } from "./providers/context"
-import { Button } from "./ui/button"
-import { toast } from "./ui/use-toast"
+import { useAuth } from "@/components/providers/context"
+import { Button } from "@/components/ui/button"
+import { toast } from "@/components/ui/use-toast"
 
 interface AddToFavoritesProps {
   movieResult?:

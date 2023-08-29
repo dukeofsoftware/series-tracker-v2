@@ -6,10 +6,9 @@ import { TrendingResult } from "@/types/trending"
 
 import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-
-const CardContent = dynamic(() => import("./CardContent"), { ssr: false })
-const AdultContent = dynamic(() => import("./AdultContent"), { ssr: false })
-const AirDate = dynamic(() => import("./AirDate"), { ssr: false })
+import  CardContent  from "./CardContent"
+import AdultContent from "./AdultContent"
+import AirDate from "./AirDate"
 interface TrendFeedCardProps {
   result: TrendingResult
   priorImage?: boolean

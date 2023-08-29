@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
@@ -26,9 +26,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Switch } from "@/components/ui/switch"
-import { buttonVariants } from "./ui/button"
+import { buttonVariants } from "../ui/button"
 
-const SearchBar = dynamic(() => import("./SearchBar").then((mod) => mod), {
+const SearchBar = dynamic(() => import("../SearchBar").then((mod) => mod), {
   ssr: false,
 })
 

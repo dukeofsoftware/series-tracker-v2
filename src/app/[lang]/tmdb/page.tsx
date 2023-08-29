@@ -1,6 +1,4 @@
-import { FC } from "react"
-
-import Sidebar from "@/components/Sidebar"
+import Sidebar from "@/components/tmdb/Sidebar"
 import SearchFeed from "@/components/tmdb/search/SearchFeed"
 
 const Page = async ({}) => {

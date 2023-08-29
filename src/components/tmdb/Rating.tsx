@@ -6,8 +6,8 @@ import { useTranslations } from "next-intl"
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 
 import { addData, getDocument } from "@/lib/firebase/firestore"
-import { useAuth } from "./providers/context"
-import { toast } from "./ui/use-toast"
+import { useAuth } from "@/components/providers/context"
+import { toast } from "@/components/ui/use-toast"
 
 interface RatingProps {
   type: "movie" | "series"
