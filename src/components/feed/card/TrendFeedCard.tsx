@@ -5,10 +5,9 @@ import Link from "next/link"
 
 import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
+import  CardContent  from "./CardContent"
 import AdultContent from "./AdultContent"
 import AirDate from "./AirDate"
-import CardContent from "./CardContent"
-
 interface TrendFeedCardProps {
   result: TmdbCardType
 }

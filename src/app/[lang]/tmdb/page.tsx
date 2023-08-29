@@ -1,3 +1,4 @@
+import Sidebar from "@/components/tmdb/Sidebar"
 import SearchFeed from "@/components/tmdb/search/SearchFeed"
 import Sidebar from "@/components/tmdb/Sidebar"
 
