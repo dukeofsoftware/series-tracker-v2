@@ -1,4 +1,4 @@
-import SearchFeed from "@/components/tmdb/search/SearchFeed"
+import SearchFeed from "@/components/tmdb/SearchFeed"
 import Sidebar from "@/components/tmdb/Sidebar"
 
 const Page = async ({}) => {
