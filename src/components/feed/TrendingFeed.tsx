@@ -4,9 +4,9 @@ import { FC, useEffect, useRef, useState } from "react"
 import { useTranslations } from "next-intl"
 
 import TrendFeedCard, { TrendFeedCardSkeleton } from "./card/TrendFeedCard"
+import PaginationStateButtons from "./PaginationStateButtons"
 import { serverClient } from "@/lib/trpc/serverClient"
 import { trpc } from "@/lib/trpc/client"
-import PaginationStateButtons from "./PaginationStateButtons"
 import { TmdbCardType } from "@/lib/trpc/types"
 
 interface TrendingFeedProps {

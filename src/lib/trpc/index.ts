@@ -9,9 +9,8 @@ import {
   TrpcGetTmdbPageWithIdInput,
   TrpcLocaleInput,
   TrpcSearchInput,
-  TrpcSendMailInput,
   TrpcTmdbPaginateSearchInput,
-} from "@/lib/trpc/types"
+} from "./types"
 import { publicProcedure, router } from "./trpc"
 
 const limiter = new RateLimiter({
