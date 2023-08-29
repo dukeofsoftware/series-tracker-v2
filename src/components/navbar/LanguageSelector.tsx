@@ -1,7 +1,6 @@
 "use client"
 "use client"
 
-import axios from "axios"
 import { IoLanguage } from "react-icons/io5"
 
 import { cn } from "@/lib/utils"
@@ -12,8 +11,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { trpc } from "@/lib/trpc/client"
 import { Locale } from "@/config/i18n.config"
+import { trpc } from "@/lib/trpc/client"
 
 const LanguageSelector = ({ }) => {
   const { mutateAsync } = trpc.useChangeLocaleMutation.useMutation({

@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import React, { useState } from "react";
 
-import { trpc } from "@/lib/trpc/client";
 import dynamic from "next/dynamic";
+import { trpc } from "@/lib/trpc/client";
 const ReactQueryDevtools = dynamic(
     () =>
         import("@tanstack/react-query-devtools").then(
@@ -18,7 +18,7 @@ export default function TrpcProvider({ children }: { children: React.ReactNode }
         trpc.createClient({
             links: [
                 httpBatchLink({
-                    url: "http://localhost:3000/api/trpc",
+                    url: "https://tracker-v2-1.vercel.app/api/trpc",
                 }),
             ],
         })

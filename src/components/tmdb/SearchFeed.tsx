@@ -4,10 +4,10 @@
 import TrendFeedCard, {
   TrendFeedCardSkeleton,
 } from "@/components/feed/card/TrendFeedCard"
-import { trpc } from "@/lib/trpc/client"
 import { useSearchParams } from "next/navigation"
 import PaginationParamsButtons from "@/components/feed/PaginationParamsButtons"
 import { useEffect } from "react"
+import { trpc } from "@/lib/trpc/client"
 
 const SearchFeed = ({ }) => {
   const params = useSearchParams()
