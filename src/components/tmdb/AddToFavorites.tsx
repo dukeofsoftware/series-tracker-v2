@@ -1,6 +1,7 @@
 "use client"
 
 import { FC, useEffect, useMemo, useState } from "react"
+
 import { useTranslations } from "next-intl"
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 import { BiLoaderAlt } from "react-icons/bi"
@@ -15,6 +16,7 @@ interface AddToFavoritesProps {
   movieResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbMovie"]>>;
  
   seriesResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbTv"]>>;
+
   type: "movie" | "series"
 }
 

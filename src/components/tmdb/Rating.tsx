@@ -1,6 +1,7 @@
 "use client"
 
 import React, { FC, useEffect, useState } from "react"
+
 import { useTranslations } from "next-intl"
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 
@@ -13,6 +14,7 @@ interface RatingProps {
   type: "movie" | "series"
   movieResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbMovie"]>>
   seriesResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbTv"]>>
+
 }
 
 const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
@@ -44,6 +46,7 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
 
         const docPath = `users/${user.uid}/${type === "movie" ? "movies" : "series"
           }`
+
 
         const exist = await getDocument(docPath, result.id.toString())
 
@@ -84,8 +87,10 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
       const result = type === "movie" ? movieResult : seriesResult
 
       if (result) {
-        const docPath = `users/${user.uid}/${type === "movie" ? "movies" : "series"
-          }`
+
+        const docPath = `users/${user.uid}/${
+          type === "movie" ? "movies" : "series"
+        }`
 
         const data = await getDocument(docPath, result.id.toString())
         if (data?.rating) {

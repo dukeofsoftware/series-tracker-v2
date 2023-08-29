@@ -1,6 +1,7 @@
 "use client"
 
 import { FC, useEffect, useState } from "react"
+
 import { deleteDoc, doc, onSnapshot } from "firebase/firestore"
 import { useTranslations } from "next-intl"
 
@@ -20,6 +21,7 @@ import { toast } from "../ui/use-toast"
 interface StatusSelectorProps {
   movieResult?:Awaited<ReturnType<(typeof serverClient)["useGetTmdbMovie"]>>;
   seriesResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbTv"]>>;
+
   type: "movie" | "series"
 }
 
