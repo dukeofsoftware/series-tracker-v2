@@ -199,7 +199,7 @@ export interface FrontendSeriesResponse {
   status: string
   tagline: string
   title: string
-  similar: any[] // Bu kısmın türünü tam olarak bilemiyorum, bu yüzden any olarak bıraktım
+  similar: any[]
   images: Images
   in_production: boolean
   last_air_date: string

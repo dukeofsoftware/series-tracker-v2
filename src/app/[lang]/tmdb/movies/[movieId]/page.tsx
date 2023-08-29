@@ -13,6 +13,7 @@ import Similars from "@/components/tmdb/Similars"
 import StatusSelector from "@/components/tmdb/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
+import { serverClient } from "@/lib/trpc/serverClient"
 
 export async function generateMetadata({
   params,
@@ -22,14 +23,18 @@ export async function generateMetadata({
     lang: Locale
   }
 }): Promise<Metadata> {
-  const data: MovieResponse = await fetch(
-    `${process.env.SITE_URL}/api/tmdb/movies/${params.movieId}?language=${params.lang}`
-  ).then((res) => res.json())
+  const data = await serverClient.useGetTmdbMovie({
+    id: params.movieId,
+    lang: params.lang,
+  })
 
   return {
     title: data.title || data.original_title,
     description: data.overview,
-    keywords: data.genres.map((genre) => genre.name).join(", "),
+    keywords: data.genres.map((genre: {
+      name: string
+      id: number
+    }) => genre.name).join(", "),
   } as Metadata
 }
 
@@ -41,9 +46,10 @@ interface pageProps {
 }
 export const revalidate = 60 * 60
 const Page: FC<pageProps> = async ({ params }) => {
-  const data: MovieResponse = await fetch(
-    `${process.env.SITE_URL}/api/tmdb/movies/${params.movieId}?language=${params.lang}`
-  ).then((res) => res.json())
+  const data = await serverClient.useGetTmdbMovie({
+    id: params.movieId,
+    lang: params.lang,
+  })
   const page = await getDictionary(params.lang)
 
   if (!data || !params.movieId) return notFound()
@@ -107,7 +113,10 @@ const Page: FC<pageProps> = async ({ params }) => {
             <p className="text-xl  font-semibold">{page.pages.tmdb.tags}</p>
             {data?.genres && (
               <div className="mx-2 flex flex-wrap items-center gap-1.5">
-                {data.genres.map((genre) => (
+                {data.genres.map((genre: {
+                  name: string
+                  id: number
+                }) => (
                   <Badge key={genre.id}>{genre.name}</Badge>
                 ))}
               </div>
@@ -116,7 +125,7 @@ const Page: FC<pageProps> = async ({ params }) => {
         </div>
       </div>
       <Similars
-        similar={data.similar}
+        similars={data.similar}
         title={page.pages.tmdb.movies.movie.similarMovies}
       />
     </div>

@@ -2,7 +2,6 @@ import { FC } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
-import { TrendingResult } from "@/types/trending"
 
 import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -11,11 +10,10 @@ import AirDate from "./AirDate"
 import CardContent from "./CardContent"
 
 interface TrendFeedCardProps {
-  result: TrendingResult
-  priorImage?: boolean
+  result: TmdbCardType
 }
 
-const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage }) => {
+const TrendFeedCard: FC<TrendFeedCardProps> = ({ result }) => {
   return (
     <Link
       href={
@@ -27,19 +25,16 @@ const TrendFeedCard: FC<TrendFeedCardProps> = ({ result, priorImage }) => {
       <Card className="group relative   h-[240px] w-[160px] rounded-md sm:h-[420px] sm:w-[280px]">
         <Image
           src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}
-          alt={result.title || result.name || result.original_title}
+          alt={result.title || result.original_title}
           fill
-          priority={priorImage}
           className="absolute rounded-md "
         />
         {result.adult && <AdultContent />}
         <AirDate
-          release_date={result.release_date}
-          first_air_date={result.first_air_date}
+          date={result.date}
         />
         <CardContent
           title={result.title}
-          name={result.name}
           original_title={result.original_title}
           overview={result.overview}
         />
