@@ -7,9 +7,7 @@ The aim of the project is to facilitate the tracking of TV series, movies, and p
 - Coming Soon
 - Creating lists
 - Commenting
-- Blog
-- Payment system (supabase, stripe)
-- Support
+
 
 ## Basic Technologies Used
 
