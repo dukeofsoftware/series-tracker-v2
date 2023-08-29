@@ -11,8 +11,8 @@ import Similars from "@/components/tmdb/Similars"
 import StatusSelector from "@/components/tmdb/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
-import { serverClient } from "@/lib/trpc/serverClient"
 import { notFound } from "next/navigation"
+import { serverClient } from "@/lib/trpc/serverClient"
 
 export async function generateMetadata({
   params,
