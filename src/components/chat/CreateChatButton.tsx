@@ -13,17 +13,16 @@ import { cn } from "@/lib/utils"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { useAuth } from "../providers/context"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
-import { Button, buttonVariants } from "../ui/button"
-import { Card } from "../ui/card"
-import { Input } from "../ui/input"
-import { ScrollArea } from "../ui/scroll-area"
+import { useAuth } from "@/components/providers/context"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {  buttonVariants } from "../ui/button"
+import { Card } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface CreateChatButtonProps {}
 
@@ -91,9 +90,7 @@ const CreateChatButton: FC<CreateChatButtonProps> = ({}) => {
     }
   }
 
-  return (
-    <>
-      <Dialog>
+  return (<Dialog>
         <DialogTrigger
           className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
         >
@@ -146,7 +143,7 @@ const CreateChatButton: FC<CreateChatButtonProps> = ({}) => {
           </ScrollArea>
         </DialogContent>
       </Dialog>
-    </>
+    
   )
 }
 

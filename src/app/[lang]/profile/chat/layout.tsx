@@ -1,9 +1,6 @@
 "use client"
 
-import { FC } from 'react'
-
-import ChatSidebar from "@/components/chat/ChatSidebar"
-
+import { FC } from "react"
 interface layoutProps {
   children: React.ReactNode
   params: {
