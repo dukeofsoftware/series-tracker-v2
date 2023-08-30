@@ -1,6 +1,6 @@
 "use client"
 
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, memo, useEffect, useMemo, useState } from "react"
 
 import { useTranslations } from "next-intl"
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
@@ -8,12 +8,12 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 import { addData, getDocument } from "@/lib/firebase/firestore"
 import { useAuth } from "@/components/providers/context"
 import { toast } from "@/components/ui/use-toast"
-import { serverClient } from "@/lib/trpc/serverClient"
+import { trpcCaller } from "@/trpc/trpc-caller"
 
 interface RatingProps {
   type: "movie" | "series"
-  movieResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbMovie"]>>
-  seriesResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbTv"]>>
+  movieResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbMovie"]>>
+  seriesResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbTv"]>>
 
 }
 
@@ -24,7 +24,13 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
   const [hoverRating, setHoverRating] = useState<number | null>(null)
 
   if (!user) return null
-
+  const dataType = useMemo(() => {
+    if (type === "movie") {
+      return "movies"
+    } else {
+      return "series"
+    }
+  }, [type])
   const global = useTranslations("global.toast")
   const t = useTranslations()
 
@@ -44,8 +50,7 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
       if (result) {
         setRating(newRating)
 
-        const docPath = `users/${user.uid}/${type === "movie" ? "movies" : "series"
-          }`
+        const docPath = `users/${user.uid}/${dataType}`
 
 
         const exist = await getDocument(docPath, result.id.toString())
@@ -88,9 +93,7 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
 
       if (result) {
 
-        const docPath = `users/${user.uid}/${
-          type === "movie" ? "movies" : "series"
-        }`
+        const docPath = `users/${user.uid}/${dataType}`
 
         const data = await getDocument(docPath, result.id.toString())
         if (data?.rating) {
@@ -133,4 +136,4 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
   )
 }
 
-export default Rating
+export default memo(Rating)

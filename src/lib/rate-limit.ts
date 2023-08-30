@@ -28,6 +28,7 @@ export class RateLimiter {
       (timestamp) => timestamp > now - this.interval
     )
     if (this.requests.length >= this.maxRequests) {
+      /* @ts-expect-error */
       const timeToWait = this.interval - (now - this.requests[0])
       throw new RateLimiterError(
         `Rate limit exceeded. Try again later.`,

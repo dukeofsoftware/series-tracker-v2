@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, memo } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import AdultContent from "./AdultContent"
 import AirDate from "./AirDate"
 import CardContent from "./CardContent"
-import { TmdbCardType } from "@/lib/trpc/types"
+import { TmdbCardType } from "@/trpc/routes/types"
 
 interface TrendFeedCardProps {
   result: TmdbCardType
@@ -44,9 +44,9 @@ const TrendFeedCard: FC<TrendFeedCardProps> = ({ result }) => {
   )
 }
 
-export default TrendFeedCard
+export default memo(TrendFeedCard)
 
-export const TrendFeedCardSkeleton = () => {
+const TrendFeedCardSkeleton = memo(() => {
   const arr = Array.from({ length: 20 }, (_, i) => i)
   return (
     <ul className="mt-6 flex flex-wrap justify-center gap-5 px-20">
@@ -57,4 +57,6 @@ export const TrendFeedCardSkeleton = () => {
       ))}
     </ul>
   )
-}
+})
+
+export { TrendFeedCardSkeleton }

@@ -1,8 +1,7 @@
 "use client"
 
 import { FC } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import qs from "query-string"
+import { usePathname} from "next/navigation"
 import {
     BsChevronBarLeft,
     BsChevronBarRight,

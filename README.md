@@ -23,6 +23,9 @@ While preparing the project, I encountered many challenges. One of the biggest w
 
 - Dark/light mode switch with `next-themes`
 - Real-time data changes with `firebase`
+- Type safe api with `trpc`
+- PWA export with `next-pwa`
+- Mail sender with `node-mailer`
 - Pagination with `@tanstack/react-query`
 - Full control over the profile with `firebase` (adding profile picture, username, display name, changing password, changing email)
 - Mobile responsive
@@ -36,9 +39,10 @@ While preparing the project, I encountered many challenges. One of the biggest w
 - Accessible components with Shadcn-ui
 - Form validation with `react-hook-form` and `valibot`
 - Rate limiting
-- `react-icons`
+- icons with `react-icons`
 - Debouncing with `use-debounce`
 - Real time messaging with firebase
+
 ## Screenshots
 
 ![Ekran Görüntüsü - 2023-08-23 10-35-00](https://github.com/dukeofsoftware/series-tracker-v2/assets/89215036/da96ca30-fabd-47d6-b72c-4af34718b816)

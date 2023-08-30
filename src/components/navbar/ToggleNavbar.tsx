@@ -3,7 +3,7 @@
 import { useNavbarStore } from "@/hooks/use-navbar"
 import { RxHamburgerMenu } from "react-icons/rx"
 
-import { Button } from "../ui/button"
+import { Button } from "@/components/ui/button"
 
 const ToggleNavbar = ({}) => {
   const toggleNavbar = useNavbarStore((state) => state.toggleNavbar)

@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, useEffect, useState } from "react"
+import { FC } from "react"
 import { BsSearch } from "react-icons/bs"
 
 import { Input } from "./ui/input"
@@ -11,10 +11,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: FC<SearchBarProps> = ({ text, setText }) => {
-  const [mount, setMount] = useState(false)
-  useEffect(() => {
-    setMount(true)
-  }, [])
+
 
   return (
     <div className=" relative flex w-full items-center">

@@ -7,7 +7,7 @@ import TrendFeedCard, {
 import { useSearchParams } from "next/navigation"
 import PaginationParamsButtons from "@/components/feed/PaginationParamsButtons"
 import { useEffect } from "react"
-import { trpc } from "@/lib/trpc/client"
+import { trpcReact } from "@/trpc/trpc-react"
 
 const SearchFeed = ({ }) => {
   const params = useSearchParams()
@@ -16,7 +16,7 @@ const SearchFeed = ({ }) => {
   const year = params.get("year")
   const adult = params.get("adult")
   const page = params.get("page") || "1"
-  const { isFetching, data, refetch } = trpc.usePaginateTmdbSearch.useQuery({
+  const { isFetching, data, refetch } = trpcReact.usePaginateTmdbSearch.useQuery({
     page: page,
     query: query as string,
     type: type || "multi",

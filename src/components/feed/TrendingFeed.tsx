@@ -5,12 +5,13 @@ import { useTranslations } from "next-intl"
 
 import TrendFeedCard, { TrendFeedCardSkeleton } from "./card/TrendFeedCard"
 import PaginationStateButtons from "./PaginationStateButtons"
-import { serverClient } from "@/lib/trpc/serverClient"
-import { trpc } from "@/lib/trpc/client"
-import { TmdbCardType } from "@/lib/trpc/types"
+import { trpcCaller } from "@/trpc/trpc-caller"
+import { trpcReact } from "@/trpc/trpc-react"
+import { TmdbCardType } from "@/trpc/routes/types"
+
 
 interface TrendingFeedProps {
-  cachedData: Awaited<ReturnType<(typeof serverClient)["usePaginateTmdbTrending"]>>
+  cachedData: Awaited<ReturnType<(typeof trpcCaller)["usePaginateTmdbTrending"]>>
 }
 
 const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
@@ -18,13 +19,13 @@ const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
   const pageTranslation = useTranslations("pages.main")
   const t = useTranslations("global.messages")
   const ref = useRef<HTMLHeadingElement>(null)
-  const { data, isLoading, refetch, isFetching } = trpc.usePaginateTmdbTrending.useQuery({
+  const { data, isLoading, refetch, isFetching } = trpcReact.usePaginateTmdbTrending.useQuery({
     page: page.toString(),
 
   }, {
     initialData: {
       pages: [
-        cachedData.results, 
+        cachedData.results,
       ],
       pageParams: [1],
     },

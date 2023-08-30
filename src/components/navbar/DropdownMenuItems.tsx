@@ -1,15 +1,14 @@
 "use client"
 
-import { link } from "fs"
 import { FC } from "react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { AiFillHeart, AiFillMessage, AiFillSetting } from "react-icons/ai"
 import { BiUser } from "react-icons/bi"
 
-import { useAuth } from "../providers/context"
-import { DropdownMenuItem } from "../ui/dropdown-menu"
-import { toast } from "../ui/use-toast"
+import { useAuth } from "@/components/providers/context"
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
+import { toast } from "@/components/ui/use-toast"
 
 interface DropdownMenuItemsProps {}
 

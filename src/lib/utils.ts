@@ -1,3 +1,4 @@
+import { env } from "@/env.mjs"
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -37,4 +38,7 @@ export const randomUsername = () => {
   const adjective = adjectives[Math.floor(Math.random() * adjectives.length)]
   const noun = nouns[Math.floor(Math.random() * nouns.length)]
   return `${adjective}-${noun}`
+}
+export function absoluteUrl(path: string) {
+  return `${env.NEXT_PUBLIC_SITE_URL}${path}`
 }

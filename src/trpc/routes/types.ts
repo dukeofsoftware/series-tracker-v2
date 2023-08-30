@@ -36,12 +36,7 @@ import {
   export type TrpcGetTmdbPageWithIdInputType = Output<
     typeof TrpcGetTmdbPageWithIdInput
   >
-  /* return data as {
-    page: number
-    results: TmdbCardType[]
-    total_pages: number
-    total_results: number
-  } */
+
   
   export const TmdbCard = object({
     id: number(),

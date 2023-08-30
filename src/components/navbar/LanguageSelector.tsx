@@ -12,12 +12,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Locale } from "@/config/i18n.config"
-import { trpc } from "@/lib/trpc/client"
+import { trpcReact } from "@/trpc/trpc-react"
 
 const LanguageSelector = ({ }) => {
-  const { mutateAsync } = trpc.useChangeLocaleMutation.useMutation({
-
-  })
+  const { mutateAsync } = trpcReact.useChangeLocaleMutation.useMutation({
+    })
 
 
 

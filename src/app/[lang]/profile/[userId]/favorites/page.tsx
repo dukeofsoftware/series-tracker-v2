@@ -4,7 +4,7 @@ import { MovieCardType } from "@/types/movies"
 import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
 import TrendFeedCard from "@/components/feed/card/TrendFeedCard"
-
+import { env } from "@/env.mjs"
 interface pageProps {
   params: {
     userId: string
@@ -15,10 +15,10 @@ interface pageProps {
 
 const Page: FC<pageProps> = async ({ params }) => {
   const favorites = await fetch(
-    `${process.env.SITE_URL}/api/firebase/${params.userId}/favorites`
+    `${env.NEXT_PUBLIC_SITE_URL}/api/firebase/${params.userId}/favorites`
   ).then((res) => res.json())
   const t = await getDictionary(params.lang)
-  
+
   return (
     <div className="mt-3 min-h-screen">
       <h1 className="my-4 text-center text-3xl font-bold">
@@ -30,12 +30,12 @@ const Page: FC<pageProps> = async ({ params }) => {
 
           <li key={item.id}>
             <TrendFeedCard
-            result={{
-              ...item,
-              media_type: item.media_type,
-              date: item.date,
+              result={{
+                ...item,
+                media_type: item.media_type,
+                date: item.date,
 
-            }}
+              }}
             />
           </li>
         )

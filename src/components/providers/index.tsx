@@ -7,7 +7,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { ThemeProvider } from "next-themes"
 
 import { formatLanguage } from "@/lib/utils"
-import TrpcProvider from "./TrpcProvider"
+import { TrpcProvider } from "./TrpcProvider"
 
 
 

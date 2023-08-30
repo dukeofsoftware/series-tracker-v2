@@ -2,8 +2,10 @@
   
   "compilerOptions": {
     "strictNullChecks": true,
-    "target": "es5",
+    "target": "ES2017", 
     "lib": ["dom", "dom.iterable", "esnext"],
+    "noUncheckedIndexedAccess": true, // Increases type-safety
+
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -25,6 +27,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/lib/validators/resetPassword.tsX"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts",  "**/*.mjs"],
   "exclude": ["node_modules"]
 }

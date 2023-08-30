@@ -29,7 +29,7 @@ import { toast } from "@/components/ui/use-toast"
 import GoogleAuth from "../GoogleAuth"
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 
-const Register = ({}) => {
+const Register = ({ }) => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const global = useTranslations("global")
   const t = useTranslations("pages.auth.register")
@@ -71,7 +71,7 @@ const Register = ({}) => {
           const newUsername = autoUsername(
             credential.user.email || randomUsername()
           )
-          await addData(`usernames`, newUsername, {
+          await addData(`usernames`, newUsername as string, {
             uid: credential.user.uid,
           })
           await addData(`users`, credential.user.uid, {

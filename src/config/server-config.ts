@@ -1,10 +1,12 @@
+import { env } from "@/env.mjs"
+
 export const serverConfig = {
-  useSecureCookies: process.env.USE_SECURE_COOKIES === "true",
-  firebaseApiKey: process.env.FIREBASE_API_KEY!,
+  useSecureCookies: env.USE_SECURE_COOKIES === "true",
+  firebaseApiKey: env.FIREBASE_API_KEY!,
   serviceAccount: {
-    projectId: process.env.FIREBASE_PROJECT_ID!,
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, "\n"),
+    projectId: env.FIREBASE_PROJECT_ID!,
+    clientEmail: env.FIREBASE_CLIENT_EMAIL!,
+    privateKey: env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, "\n"),
   },
 }
 

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { env } from "@/env.mjs"
 import { getTokens } from "next-firebase-auth-edge/lib/next/tokens"
 import nodemailer from "nodemailer"
 import { parse } from "valibot"
@@ -30,14 +31,14 @@ export async function POST(request: NextRequest) {
       service: "gmail",
       host: "smtp.gmail.com",
       auth: {
-        user: process.env.MAILER_EMAIL,
-        pass: process.env.MAILER_PASSWORD,
+        user: env.MAILER_EMAIL,
+        pass: env.MAILER_PASSWORD,
       },
       secure: true,
     })
     const mailData = {
       from: email,
-      to: process.env.MAILER_EMAIL,
+      to: env.MAILER_EMAIL,
       subject: `Message From ${email}, ${name}`,
       text: message,
       html: `<div>${message}</div>`,

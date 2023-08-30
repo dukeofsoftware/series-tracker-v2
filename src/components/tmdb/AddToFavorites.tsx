@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, useEffect, useMemo, useState } from "react"
+import { FC, memo, useEffect, useMemo, useState } from "react"
 
 import { useTranslations } from "next-intl"
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
@@ -10,12 +10,12 @@ import { addData, getDocument } from "@/lib/firebase/firestore"
 import { useAuth } from "@/components/providers/context"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
-import { serverClient } from "@/lib/trpc/serverClient"
+import { trpcCaller } from "@/trpc/trpc-caller"
 
 interface AddToFavoritesProps {
-  movieResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbMovie"]>>;
- 
-  seriesResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbTv"]>>;
+  movieResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbMovie"]>>;
+
+  seriesResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbTv"]>>;
 
   type: "movie" | "series"
 }
@@ -43,7 +43,7 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({
         const id = movieResult?.id || seriesResult?.id
         if (!id) return
         const data = await getDocument(
-          `users/${user?.uid}/${type}`,
+          `users/${user?.uid}/${dataType}`,
           id.toString()
         )
         setIsFavorite(data?.isFavorite ?? false)
@@ -54,7 +54,7 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({
       }
     }
     getData()
-  }, [movieResult?.id, seriesResult?.id, type, user?.uid])
+  }, [movieResult?.id, seriesResult?.id, dataType, user?.uid])
 
   const handleFavorite = async () => {
     if (!user) return
@@ -70,16 +70,16 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({
     const id = movieResult?.id || seriesResult?.id
     if (!id) return
     try {
-      const data = await getDocument(`users/${user.uid}/${type}`, id.toString())
+      const data = await getDocument(`users/${user.uid}/${dataType}`, id.toString())
       if (!data?.status) {
-        await addData(`users/${user.uid}/${type}`, id.toString(), {
+        await addData(`users/${user.uid}/${dataType}`, id.toString(), {
           ...movieResult,
           ...seriesResult,
           isFavorite: !isFavorite,
           status: "not-started",
         })
       } else {
-        await addData(`users/${user.uid}/${type}`, id.toString(), {
+        await addData(`users/${user.uid}/${dataType}`, id.toString(), {
           isFavorite: !isFavorite,
         })
       }
@@ -120,4 +120,4 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({
   )
 }
 
-export default AddToFavorites
+export default memo(AddToFavorites)

@@ -6,7 +6,7 @@ import {
   initializeApp,
 } from "firebase/app"
 import { connectAuthEmulator, getAuth } from "firebase/auth"
-
+import { env } from "@/env.mjs"
 import { clientConfig } from "@/config/client-config"
 
 const getFirebaseApp = (options: FirebaseOptions) => {
@@ -17,12 +17,12 @@ export const useFirebaseAuth = () => {
   const getFirebaseAuth = () => {
     const auth = getAuth(getFirebaseApp(clientConfig))
 
-    if (process.env.NEXT_PUBLIC_EMULATOR_HOST) {
+    /* if (env.NEXT_PUBLIC_EMULATOR_HOST) {
       ;(auth as unknown as any)._canInitEmulator = true
-      connectAuthEmulator(auth, process.env.NEXT_PUBLIC_EMULATOR_HOST, {
+      connectAuthEmulator(auth, env.NEXT_PUBLIC_EMULATOR_HOST, {
         disableWarnings: true,
       })
-    }
+    } */
 
     return auth
   }

@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, useEffect, useState } from "react"
+import { FC, memo, useEffect, useState } from "react"
 
 import { deleteDoc, doc, onSnapshot } from "firebase/firestore"
 import { useTranslations } from "next-intl"
@@ -17,11 +17,11 @@ import { useAuth } from "@/components/providers/context"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { toast } from "@/components/ui/use-toast"
-import { serverClient } from "@/lib/trpc/serverClient"
+import { trpcCaller } from "@/trpc/trpc-caller"
 
 interface StatusSelectorProps {
-  movieResult?:Awaited<ReturnType<(typeof serverClient)["useGetTmdbMovie"]>>;
-  seriesResult?: Awaited<ReturnType<(typeof serverClient)["useGetTmdbTv"]>>;
+  movieResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbMovie"]>>;
+  seriesResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbTv"]>>;
 
   type: "movie" | "series"
 }
@@ -41,8 +41,7 @@ const StatusSelector: FC<StatusSelectorProps> = ({
     const unsubscribe = onSnapshot(
       doc(
         db,
-        `/users/${user?.uid}/${type === "series" ? "series" : "movies"}/${
-          type === "series" ? seriesResult?.id : movieResult?.id
+        `/users/${user?.uid}/${type === "series" ? "series" : "movies"}/${type === "series" ? seriesResult?.id : movieResult?.id
         }`
       ),
       (doc) => {
@@ -270,4 +269,4 @@ const StatusSelector: FC<StatusSelectorProps> = ({
   )
 }
 
-export default StatusSelector
+export default memo(StatusSelector)
