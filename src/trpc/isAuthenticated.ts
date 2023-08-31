@@ -1,6 +1,4 @@
-import { cookies } from "next/headers"
 
-import { Locale } from "@/config/i18n.config"
 import { t } from "./init"
 
 export const isAuthenticated = t.middleware(({ ctx, next }) => {

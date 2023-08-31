@@ -5,6 +5,8 @@ import { TRPCError } from "@trpc/server"
 
 import { options } from "@/config/tmdb-config"
 import { RateLimiterError } from "@/lib/rate-limit"
+import { Locale } from "@/config/i18n.config"
+import { cookies } from "next/headers"
 
 export const usePaginateTmdbSearch = publicProcedure
   .input(TrpcSearchInput)
@@ -12,7 +14,7 @@ export const usePaginateTmdbSearch = publicProcedure
     try {
       await limiter.limit()
 
-      const language = opts.input.lang || opts.ctx.language
+      const language = opts.input.lang ||  cookies().get("NEXT_LOCALE")?.value as Locale || "en-US"
 
       const page = opts.input.page || "1"
       const adult = opts.input.adult || "false"

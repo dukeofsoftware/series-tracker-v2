@@ -4,13 +4,15 @@ import { TRPCError } from "@trpc/server"
 
 import { options } from "@/config/tmdb-config"
 import { RateLimiterError } from "@/lib/rate-limit"
+import { cookies } from "next/headers"
+import { Locale } from "@/config/i18n.config"
 
 export const usePaginateTmdbAirTodayTv = publicProcedure
   .input(TrpcTmdbPaginateSearchInput)
   .query(async (opts) => {
     try {
       const page = opts.input.page || "1"
-      const language = opts.input.lang || opts.ctx.language
+      const language = opts.input.lang ||  cookies().get("NEXT_LOCALE")?.value as Locale || "en-US"
 
       const url = `https://api.themoviedb.org/3/tv/airing_today?language=${language}&page=${page}`
       const data = await fetch(url, options).then((response) => response.json())

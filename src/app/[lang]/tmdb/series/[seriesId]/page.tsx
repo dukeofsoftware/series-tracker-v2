@@ -12,8 +12,7 @@ import StatusSelector from "@/components/tmdb/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
 import { notFound } from "next/navigation"
-import { serverClient } from "@/lib/trpc/serverClient"
-
+import { trpcCaller } from "@/trpc/trpc-caller"
 export async function generateMetadata({
   params,
 }: {
@@ -22,7 +21,7 @@ export async function generateMetadata({
     lang: Locale
   }
 }): Promise<Metadata> {
-  const data = await serverClient.useGetTmdbTv({
+  const data = await trpcCaller.useGetTmdbTv({
     id: params.seriesId,
     lang: params.lang,
   })
@@ -46,7 +45,7 @@ interface PageProps {
 export const revalidate = 60 * 60
 const Page: FC<PageProps> = async ({ params }) => {
   const page = await getDictionary(params.lang)
-  const data = await serverClient.useGetTmdbTv({
+  const data = await trpcCaller.useGetTmdbTv({
     id: params.seriesId,
     lang: params.lang,
   })

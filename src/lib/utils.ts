@@ -40,5 +40,6 @@ export const randomUsername = () => {
   return `${adjective}-${noun}`
 }
 export function absoluteUrl(path: string) {
+  if (!path) return env.NEXT_PUBLIC_SITE_URL
   return `${env.NEXT_PUBLIC_SITE_URL}${path}`
 }
