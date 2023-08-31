@@ -41,7 +41,7 @@ export const columns: ColumnDef<TMDB>[] = [
       return (
         <Image
           className=" sm:block"
-          src={`https://image.tmdb.org/t/p/w500${row.getValue("poster_path")}`}
+          src={`https://image.tmdb.org/t/p/w92${row.getValue("poster_path")}`}
           alt={row.getValue("title")}
           width={80}
           height={120}

@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { toast } from "@/components/ui/use-toast"
 import { trpcCaller } from "@/trpc/trpc-caller"
+import { usePathname } from "next/navigation"
 
 interface StatusSelectorProps {
   movieResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbMovie"]>>;
@@ -36,8 +37,9 @@ const StatusSelector: FC<StatusSelectorProps> = ({
   const global = useTranslations("global")
   const t = useTranslations("status")
   const { user } = useAuth()
-
-  useEffect(() => {
+  const pathname = usePathname()
+  if (!user && !pathname.startsWith("/profile")) return null
+    useEffect(() => {
     const unsubscribe = onSnapshot(
       doc(
         db,

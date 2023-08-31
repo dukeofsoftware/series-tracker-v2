@@ -11,6 +11,7 @@ import { useAuth } from "@/components/providers/context"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 import { trpcCaller } from "@/trpc/trpc-caller"
+import { usePathname } from "next/navigation"
 
 interface AddToFavoritesProps {
   movieResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbMovie"]>>;
@@ -30,6 +31,8 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({
   const global = useTranslations("global")
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null)
+  const pathname = usePathname()
+  if (!user && !pathname.startsWith("/profile")) return null
   const dataType = useMemo(() => {
     if (type === "movie") {
       return "movies"
