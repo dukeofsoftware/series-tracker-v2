@@ -108,7 +108,7 @@ export function MovieTable<TData, TValue>({
   ]
 
   return (
-    <div>
+    <div className="">
       <div className="flex flex-wrap items-center justify-between gap-2 py-4">
         <Input
           placeholder={t("filterPlaceholder")}

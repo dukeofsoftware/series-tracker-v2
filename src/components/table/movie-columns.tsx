@@ -39,14 +39,17 @@ export const columns: ColumnDef<TMDB>[] = [
       return <div className="">Poster</div>
     },
     cell: ({ row }) => {
+      const id = row.getValue("id")
       return (
-        <Image
-          className=""
-          src={`https://image.tmdb.org/t/p/w92${row.getValue("poster_path")}`}
-          alt={row.getValue("title")}
-          width={80}
-          height={120}
-        />
+        <Link href={`/tmdb/movies/${id}`}>
+          <Image
+            className=""
+            src={`https://image.tmdb.org/t/p/w92${row.getValue("poster_path")}`}
+            alt={row.getValue("title")}
+            width={80}
+            height={120}
+          />
+        </Link>
       )
     },
   },
@@ -264,28 +267,4 @@ export const columns: ColumnDef<TMDB>[] = [
     header: "id",
   },
 
-  {
-    id: "actions",
-
-    cell: ({ row }) => {
-      const id = row.getValue("id")
-      const t = useTranslations("pages.profile.tables.movie")
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">{t("openMenu")}</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
-            <DropdownMenuItem>
-              <Link href={`/tmdb/movies/${id}`}>{t("viewDetails")}</Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
-  },
 ]

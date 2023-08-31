@@ -42,7 +42,7 @@ const UserLayout: FC<UserLayoutProps> = ({ params, children }) => {
     },
   ]
   return (
-    <div className="container">
+    <div className="container max-w-screen">
       <div className="relative h-[520px] text-slate-50 ">
         <Image
           src={`/background.svg`}

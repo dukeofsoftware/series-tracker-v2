@@ -1,10 +1,8 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 import { LuArrowUpDown } from "react-icons/lu"
@@ -14,13 +12,8 @@ import AddToFavoriteSeries from "@/components/tmdb/AddToFavorites"
 import Rating from "@/components/tmdb/Rating"
 import StatusSelector from "@/components/tmdb/StatusSelector"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import Link from "next/link"
+
 
 export type TMDB = {
   id: string
@@ -38,14 +31,19 @@ export const columns: ColumnDef<TMDB>[] = [
       return <div className=" sm:block">Poster</div>
     },
     cell: ({ row }) => {
+      const id = row.getValue("id")
       return (
-        <Image
-          className=" sm:block"
-          src={`https://image.tmdb.org/t/p/w92${row.getValue("poster_path")}`}
-          alt={row.getValue("title")}
-          width={80}
-          height={120}
-        />
+        <Link href={`/tmdb/series/${id}`}>
+
+          <Image
+            className=" sm:block"
+            src={`https://image.tmdb.org/t/p/w92${row.getValue("poster_path")}`}
+            alt={row.getValue("title")}
+            width={80}
+            height={120}
+          />
+        </Link>
+
       )
     },
   },
@@ -244,27 +242,5 @@ export const columns: ColumnDef<TMDB>[] = [
     header: "id",
   },
 
-  {
-    id: "actions",
-    cell: ({ row }) => {
-      const id = row.getValue("id")
-      const t = useTranslations("pages.profile.tables.series")
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">{t("openMenu")}</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
-            <DropdownMenuItem>
-              <Link href={`/tmdb/series/${id}`}>{t("viewDetails")}</Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
-  },
+
 ]
