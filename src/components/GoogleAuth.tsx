@@ -49,7 +49,8 @@ const GoogleAuth: FC<GoogleAuthProps> = ({ className }) => {
 
       if (!username) {
         const newUsername = autoUsername(user.email || randomUsername())
-        await addData(`usernames`, newUsername, {
+        await addData(`usernames`, newUsername as string, {
+          photoURL: user.photoURL,
           uid: user.uid,
         })
         await addData(`users`, user.uid, {
@@ -57,6 +58,9 @@ const GoogleAuth: FC<GoogleAuthProps> = ({ className }) => {
         })
       }
       setUsername(username)
+
+
+
       if (!user.emailVerified) {
         router.push("/verify-mail")
       }

@@ -28,6 +28,7 @@ function redirectToLogin(request: NextRequest) {
 
 export async function middleware(request: NextRequest) {
   const shouldRedirectToLoginOrHome =
+    request.nextUrl.pathname==="/" ||
     request.nextUrl.pathname.startsWith("/tmdb") ||
     (request.nextUrl.pathname.startsWith("/profile") &&
       !request.nextUrl.pathname.startsWith("/profile/chat") &&

@@ -52,7 +52,7 @@
     "date-fns": "^2.30.0",
     "firebase": "^10.2.0",
     "firebase-admin": "^11.10.1",
-    "framer-motion": "^10.16.0",
+    "framer-motion": "^10.16.2",
     "lucide-react": "^0.268.0",
     "negotiator": "^0.6.3",
     "next": "13.4.19",

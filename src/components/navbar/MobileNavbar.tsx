@@ -69,6 +69,18 @@ const MobileNavbar = () => {
       link: "/profile/settings",
     },
   ]
+  const accessNavbar = [{
+
+    icon: <AiOutlineSearch className=" h-6 w-6" />,
+    text: global("searchUser"),
+    link: "/search/profile",
+  },
+  {
+    icon: <BsListUl className=" h-6 w-6" />,
+    text: "Tmdb",
+    link: "/tmdb",
+  },
+  ]
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -197,24 +209,26 @@ const MobileNavbar = () => {
         <ul className="flex flex-col ">
           {user?.uid ? (
             <>
-              {navbarConfig.map((item, index) => (
-                <motion.div key={index} variants={animationItem}>
-                  <li className="w-full py-5">
-                    <Link
-                      href={item.link}
-                      key={index}
-                      className={cn(
-                        buttonVariants({ variant: "link" }),
-                        "flex items-center justify-center gap-1 py-3  text-lg font-semibold "
-                      )}
-                    >
-                      {item.icon}
-                      {item.text}
-                    </Link>
-                  </li>
-                  <Separator />
-                </motion.div>
-              ))}
+              {navbarConfig.map((item, index) => {
+                return (
+                  <motion.div key={index} variants={animationItem}>
+                    <li className="w-full py-5">
+                      <Link
+                        href={item.link}
+                        key={index}
+                        className={cn(
+                          buttonVariants({ variant: "link" }),
+                          "flex items-center justify-center gap-1 py-3  text-lg font-semibold "
+                        )}
+                      >
+                        {item.icon}
+                        {item.text}
+                      </Link>
+                    </li>
+                    <Separator />
+                  </motion.div>)
+              })}
+
               <motion.div variants={animationItem}>
                 <li className="flex w-full items-center justify-center py-5">
                   <Button
@@ -232,20 +246,42 @@ const MobileNavbar = () => {
               </motion.div>
             </>
           ) : (
-            <div className="flex items-center">
-              <Link
-                href={"/auth/login"}
-                className={cn(buttonVariants({ variant: "default" }))}
-              >
-                Login
-              </Link>
-              <Link
-                href={"/auth/register"}
-                className={cn(buttonVariants({ variant: "outline" }))}
-              >
-                Sign Up
-              </Link>
+            <div className="flex flex-col gap-1">
+              {accessNavbar.map((item, index) => {
+                return (
+                  <motion.div key={index} variants={animationItem}>
+                    <li className="w-full py-5">
+                      <Link
+                        href={item.link}
+                        key={index}
+                        className={cn(
+                          buttonVariants({ variant: "link" }),
+                          "flex items-center justify-center gap-1 py-3  text-lg font-semibold "
+                        )}
+                      >
+                        {item.icon}
+                        {item.text}
+                      </Link>
+                    </li>
+                    <Separator />
+                  </motion.div>)
+              })}
+              <div className="flex items-center w-full gap-2 m-2">
+                <Link
+                  href={"/auth/login"}
+                  className={cn(buttonVariants({ variant: "default" }),"grow")}
+                >
+                  Login
+                </Link>
+                <Link
+                  href={"/auth/register"}
+                  className={cn(buttonVariants({ variant: "outline" }),"grow")}
+                >
+                  Sign Up
+                </Link>
+              </div>
             </div>
+
           )}
         </ul>
       </motion.nav>
