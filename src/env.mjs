@@ -21,7 +21,7 @@ export const env = createEnv({
         NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: z.string().min(1),
         NEXT_PUBLIC_BUCKET: z.string().min(1),
         NEXT_PUBLIC_APP_ID: z.string().min(1),
-        NEXT_PUBLIC_SITE_URL: z.string().min(1),
+        NEXT_PUBLIC_SITE_URL: z.string().min(1).default('http://localhost:3000'),
     },
 
     server: {
