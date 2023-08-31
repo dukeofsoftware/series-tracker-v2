@@ -7,7 +7,9 @@ import { getTokens } from "next-firebase-auth-edge/lib/next/tokens"
 import { authConfig } from "@/config/server-config"
 import { transformer } from "./transformer"
 import { Locale } from "@/config/i18n.config"
+
 export async function createContext(opts?: FetchCreateContextFnOptions) {
+  /* i need cookies but I cant access */
   const user = await getTokens(cookies(), authConfig)
   const language = (cookies().get("NEXT_LOCALE")?.value as Locale) || "en-US"
   return {

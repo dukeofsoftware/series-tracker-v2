@@ -7,6 +7,12 @@ import { env } from './src/env.mjs';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: env.NODE_ENV === 'production' ? 'standalone' : undefined,
+  poweredByHeader: false,
+  images: {
+    domains: ["image.tmdb.org", "api.themoviedb.org", "firebasestorage.googleapis.com"],
+    unoptimized: true,
+  },
+  basePath: '',
   typescript: {
     // Handled during CI
     ignoreBuildErrors: true,

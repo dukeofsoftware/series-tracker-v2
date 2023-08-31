@@ -2,7 +2,6 @@ import { FC } from "react"
 import type { Metadata } from "next"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { MovieResponse } from "@/types/movies"
 
 import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
@@ -13,7 +12,7 @@ import Similars from "@/components/tmdb/Similars"
 import StatusSelector from "@/components/tmdb/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
-import { serverClient } from "@/lib/trpc/serverClient"
+import { trpcCaller } from "@/trpc/trpc-caller"
 
 export async function generateMetadata({
   params,
@@ -23,7 +22,7 @@ export async function generateMetadata({
     lang: Locale
   }
 }): Promise<Metadata> {
-  const data = await serverClient.useGetTmdbMovie({
+  const data = await trpcCaller.useGetTmdbMovie({
     id: params.movieId,
     lang: params.lang,
   })
@@ -46,7 +45,7 @@ interface pageProps {
 }
 export const revalidate = 60 * 60
 const Page: FC<pageProps> = async ({ params }) => {
-  const data = await serverClient.useGetTmdbMovie({
+  const data = await trpcCaller.useGetTmdbMovie({
     id: params.movieId,
     lang: params.lang,
   })
