@@ -1,6 +1,6 @@
 # Tracker v2
 
-The aim of the project is to facilitate the tracking of TV series, movies, and perhaps many other things in the future. I used to use Notion to keep track of what I've watched, but doing it manually was quite cumbersome. Although there were similar applications, they had their issues. They didn't suffice to meet my needs. So, I wanted to develop an application like this.
+The aim of the project is to facilitate the tracking of TV series, movies, and many other things in the future. I used to use Notion to keep track of what I've watched, but doing it manually was quite cumbersome. Although there were similar applications, they had their issues. They didn't suffice to meet my needs. So, I wanted to develop an application like this.
 
 ## Roadmap
 
@@ -11,27 +11,27 @@ The aim of the project is to facilitate the tracking of TV series, movies, and p
 
 ## Basic Technologies Used
 
-**Client:** React, Firebase, Zustand, TailwindCSS, Shadcn-ui, Valibot, React Hook Form, React CSV, Next Themes, Query String
+**Client:** Next.js, React, Typescript, Firebase, TailwindCSS, shadcn-ui, valibot, react-hook-form, react-csv, next-themes, next-intl,
 
-**Server:** Next.js, next-firebase-auth-edge, Firebase Admin
+**Server:** Next.js, next-firebase-auth-edge, Firebase Admin, tRPC
 
 ## Lessons Learned
 
-While preparing the project, I encountered many challenges. One of the biggest was likely the multi-language support. Setting up both user authentication and multi-language interface took 5 days. The user login/logout system and Firebase Admin setup were challenging.
+While preparing the project, I encountered many challenges. One of the biggest was likely the multi-language support. Setting up both user authentication and the multi-language middleware took 5 days. The user login/logout system and Firebase Admin setup were challenging.
 
 ## Features
 
 - Dark/light mode switch with `next-themes`
-- Real-time data changes with `firebase`
-- Type safe api with `trpc`
+- Real-time data changes with `Firebase`
+- Type-safe API with `trpc`
 - PWA export with `next-pwa`
 - Mail sender with `node-mailer`
 - Pagination with `@tanstack/react-query`
-- Full control over the profile with `firebase` (adding profile picture, username, display name, changing password, changing email)
+- Full control over the profile with `firebase` (adding a profile picture, username, display name, changing password, changing email)
 - Mobile responsive
 - Multi-language support (tr, en, de) with `next-intl`
 - Secure authentication with `next-firebase-auth-edge`
-- Data export with `react-csv`
+- Data export with `react-CSV
 - Table functionality with `@tanstack/react-table`
 - User following
 - Adding to favorites, rating, adding status
@@ -41,7 +41,8 @@ While preparing the project, I encountered many challenges. One of the biggest w
 - Rate limiting
 - icons with `react-icons`
 - Debouncing with `use-debounce`
-- Real time messaging with firebase
+- Real-time messaging with Firebase
+- CI/CD with GitHub actions(every commit to preview or main branch automatically deploy new version to preview or production)
 
 ## Screenshots
 
@@ -56,7 +57,7 @@ While preparing the project, I encountered many challenges. One of the biggest w
 
 ## Optimization
 
-Using `next/dynamic` for import, server-side rendering (SSR), and react-query
+Using `next/dynamic` for import, server-side rendering (SSR), react-query, useMemo, memo
 
 ## Frequently Asked Questions
 
@@ -94,7 +95,7 @@ pnpm serve
 
 ## Environment Variables
 
-To run this project, you'll need to add the following environment variables to your `.env` file. You can find them in the `.env.example` file.
+To run this project, you must add the following environment variables to your `.env` file. You can find them in the `.env.example` file. Also, all environment variables come with type safety @/env.mjs so you can't start the application without adding all of them.
 
 `ANALYZE=`false
 
