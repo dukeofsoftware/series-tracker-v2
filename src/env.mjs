@@ -27,7 +27,6 @@ export const env = createEnv({
     server: {
         ANALYZE: toggle.default('false'),
         TMDB_TOKEN: z.string().min(1),
-        DATABASE_URL: z.string().min(1),
         FIREBASE_PRIVATE_KEY: z.string().min(1),
         FIREBASE_CLIENT_EMAIL: z.string().min(1),
         FIREBASE_PROJECT_ID: z.string().min(1),
@@ -54,7 +53,6 @@ export const env = createEnv({
         NEXT_PUBLIC_BUCKET: process.env.NEXT_PUBLIC_BUCKET,
         NEXT_PUBLIC_APP_ID: process.env.NEXT_PUBLIC_APP_ID,
         TMDB_TOKEN: process.env.TMDB_TOKEN,
-        DATABASE_URL: process.env.DATABASE_URL,
         FIREBASE_PRIVATE_KEY: process.env.FIREBASE_PRIVATE_KEY,
         FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
         FIREBASE_CLIENT_EMAIL: process.env.FIREBASE_CLIENT_EMAIL,
@@ -62,7 +60,6 @@ export const env = createEnv({
         USE_SECURE_COOKIES: process.env.USE_SECURE_COOKIES,
         MAILER_PASSWORD: process.env.MAILER_PASSWORD,
         MAILER_EMAIL: process.env.MAILER_EMAIL,
-
 
         ANALYZE: process.env.ANALYZE,
 

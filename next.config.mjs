@@ -21,12 +21,7 @@ const nextConfig = {
     // Handled during CI
     ignoreDuringBuilds: true,
   },
-  experimental: {
-    /**
-     * @enable NextAuth
-     */
-    // serverActions: true,
-  },
+
 };
 
 /**
@@ -34,7 +29,6 @@ const nextConfig = {
  * @param {{ defaultConfig: import('next').NextConfig }} options
  */
 const nextConfigWithPlugins = async (phase, { defaultConfig }) => {
-  /* Dynamically import plugins from devDependencies to reduce bundle size */
 
   const withBundleAnalyzer = (await import('@next/bundle-analyzer')).default({
     enabled: env.ANALYZE,
