@@ -21,27 +21,30 @@ While preparing the project, I encountered many challenges. One of the biggest w
 
 ## Features
 
-- Dark/light mode switch with `next-themes`
 - Real-time data changes with `Firebase`
-- Type-safe API with `trpc`
-- PWA export with `next-pwa`
-- Mail sender with `node-mailer`
-- Pagination with `@tanstack/react-query`
 - Full control over the profile with `firebase` (adding a profile picture, username, display name, changing password, changing email)
-- Mobile responsive
-- Multi-language support (tr, en, de) with `next-intl`
 - Secure authentication with `next-firebase-auth-edge`
-- Data export with `react-CSV
-- Table functionality with `@tanstack/react-table`
-- User following
-- Adding to favorites, rating, adding status
-- SEO support
-- Accessible components with Shadcn-ui
-- Form validation with `react-hook-form` and `valibot`
-- Rate limiting
-- icons with `react-icons`
-- Debouncing with `use-debounce`
 - Real-time messaging with Firebase
+
+- Built with `tailwindCSS`
+- Accessible components with Shadcn-ui
+- Dark/light mode switch with `next-themes`
+- icons with `react-icons`
+- Responsive design
+
+- Type-safe API with `tRPC`
+- Rate limiting
+- Multi-language support (tr, en, de) with `next-intl`
+- Mail sender with `node-mailer`
+- PWA export with `next-pwa` you can download like an Android or iOS app.
+- Adding to favorites, rating, adding status
+
+- Pagination with `@tanstack/react-query`
+- Table functionality with `@tanstack/react-table`
+- Form validation with `react-hook-form` and `valibot`
+- Data export with `react-csv`
+- SEO support
+- Debouncing with `use-debounce`
 - CI/CD with GitHub actions(every commit to preview or main branch automatically deploy new version to preview or production)
 
 ## Screenshots
