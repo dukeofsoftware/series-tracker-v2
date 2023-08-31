@@ -2,12 +2,13 @@
 // @ts-check
 
 import { env } from './src/env.mjs';
-
+import withPWA from "next-pwa"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: env.NODE_ENV === 'production' ? 'standalone' : undefined,
   poweredByHeader: false,
+  swcMinify: true,
   images: {
     domains: ["image.tmdb.org", "api.themoviedb.org", "firebasestorage.googleapis.com"],
     unoptimized: true,
@@ -34,12 +35,16 @@ const nextConfigWithPlugins = async (phase, { defaultConfig }) => {
     enabled: env.ANALYZE,
   });
 
-  const withPWA = (await import('@ducanh2912/next-pwa')).default({
-    dest: 'public',
-    disable: !env.PWA,
-  });
 
-  return withBundleAnalyzer(withPWA(nextConfig));
+  if (env.PWA) {
+    withPWA({
+      dest: "public",
+      register: true,
+      skipWaiting: true
+    })
+  }
+
+  return withBundleAnalyzer(nextConfig)
 };
 
 export default nextConfigWithPlugins;
