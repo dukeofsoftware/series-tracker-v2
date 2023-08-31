@@ -27,9 +27,9 @@ export async function generateMetadata({
   })
 
   return {
-    title: data.title,
-    description: data.overview,
-    keywords: data.genres.map((genre: {
+    title: data?.title,
+    description: data?.overview,
+    keywords: data?.genres.map((genre: {
       name: string
       id: number
     }) => genre.name).join(", "),
@@ -49,7 +49,7 @@ const Page: FC<PageProps> = async ({ params }) => {
     id: params.seriesId,
     lang: params.lang,
   })
-  
+
   if (!data) return notFound()
   return (
     <div className="container relative w-full px-0 ">
@@ -106,19 +106,21 @@ const Page: FC<PageProps> = async ({ params }) => {
                   {page.global.adult}
                 </Badge>
               )}
-              <Badge>
-                {formatMinutes(
-                  data?.runtime?.reduce((a: number, b: number) => a + b, 0),
-                  params.lang
-                ) || data.last_episode_to_air.runtime}
-              </Badge>
+              {data && data.runtime &&
+                <Badge>
+                  {formatMinutes(
+                    data?.runtime,
+                    params.lang
+                  ) }
+                </Badge>
+              }
             </div>
           </div>
           <p className="mb-2">{data.overview}</p>
           <div className="flex">
             <p className="text-xl font-semibold">{page.pages.tmdb.tags} </p>
             <div className="mx-2 flex flex-wrap items-center gap-1.5">
-              {data.genres.map((genre: {
+              {data.genres && data?.genres?.map((genre: {
                 name: string
                 id: number
               }) => (
