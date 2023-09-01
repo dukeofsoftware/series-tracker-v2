@@ -8,6 +8,7 @@
   },
   "starDescription": " {title} successfully rated",
   "global": {
+    "error":"Error",
     "rateLimitError": "You have reached the rate limit. Please try again later.",
     "adult": "Adult Content",
     "loading": "Loading...",
@@ -286,5 +287,11 @@
     "sss": "Faqs",
     "contact": "Contact",
     "about": "About"
+  },
+  "not-found": {
+    "title": "404",
+    "description": "Page Not Found...",
+    "exist": "The page you are looking for does not exist.",
+    "backToMain": "Back to Home Page"
   }
 }

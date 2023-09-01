@@ -25,7 +25,7 @@ export async function generateMetadata({
     id: params.seriesId,
     lang: params.lang,
   })
-
+  if (data.error) return notFound()
   return {
     title: data?.title,
     description: data?.overview,
@@ -42,15 +42,17 @@ interface PageProps {
     lang: "en-US" | "tr-TR" | "de-DE"
   }
 }
+
 export const revalidate = 60 * 60
 const Page: FC<PageProps> = async ({ params }) => {
+  await waiter(100000)
   const page = await getDictionary(params.lang)
   const data = await trpcCaller.useGetTmdbTv({
     id: params.seriesId,
     lang: params.lang,
   })
 
-  if (!data) return notFound()
+  if (data.error) return notFound()
   return (
     <div className="container relative w-full px-0 ">
       <div className="relative -z-10 max-h-[520px]">
@@ -111,7 +113,7 @@ const Page: FC<PageProps> = async ({ params }) => {
                   {formatMinutes(
                     data?.runtime,
                     params.lang
-                  ) }
+                  )}
                 </Badge>
               }
             </div>

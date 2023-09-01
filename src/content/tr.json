@@ -7,6 +7,7 @@
     }
   },
   "global": {
+    "error": "Hata",
     "rateLimitError": "İstek limitine ulaşıldı. Lütfen daha sonra tekrar deneyin",
     "adult": "Yetişkin İçeriği",
     "loading": "Yükleniyor...",
@@ -297,5 +298,11 @@
     "sss": "SSS",
     "contact": "İletişim",
     "about": "Hakkında"
+  },
+  "not-found": {
+    "title": "404",
+    "description": "Aradığınız sayfa bulunamadı...",
+    "exist": "İstediğiniz sayfa bulunmuyor.",
+    "backToMain": "Ana Sayfaya Dön"
   }
 }

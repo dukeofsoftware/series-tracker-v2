@@ -7,6 +7,7 @@
     }
   },
   "global": {
+    "error":"Fehler",
     "rateLimitError": " Sie haben das Limit erreicht. Bitte versuchen Sie es später erneut.",
     "adult": "Erwachseneninhalt",
     "loading": "Wird geladen...",
@@ -285,5 +286,11 @@
     "sss": "AGB",
     "contact": "Kontakt",
     "about": "Über uns"
+  },
+  "not-found": {
+    "title": "404",
+    "description": "Seite nicht gefunden...",
+    "exist": "Die von Ihnen gesuchte Seite existiert nicht.",
+    "backToMain": "Zurück zur Startseite"
   }
 }

@@ -52,7 +52,7 @@ const TrendFeedCardSkeleton = memo(() => {
     <ul className="mt-6 flex flex-wrap justify-center gap-5 px-20">
       {arr.map((_, i) => (
         <li key={i}>
-          <Skeleton className="relative h-[240px] w-[160px] rounded-md bg-black sm:h-[420px] sm:w-[280px]" />
+          <Skeleton className="relative h-[240px] w-[160px] rounded-md  sm:h-[420px] sm:w-[280px]" />
         </li>
       ))}
     </ul>
