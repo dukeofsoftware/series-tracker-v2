@@ -112,7 +112,7 @@ const Page: FC<PageProps> = async ({ params }) => {
               )}
             </div>
           </div>
-          <p className="mb-2">{data.overview}</p>
+          <p className="mb-2">{data.overview || page.pages.tmdb.noOverview}</p>
           <div className="flex">
             <p className="text-xl font-semibold">{page.pages.tmdb.tags} </p>
             <div className="mx-2 flex flex-wrap items-center gap-1.5">

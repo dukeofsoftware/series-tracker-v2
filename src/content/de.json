@@ -263,6 +263,7 @@
     },
     "tmdb": {
       "tags": "Tags:",
+      "noOverview": "Keine Übersicht verfügbar.",
       "movies": {
         "movie": {
           "similarMovies": "Ähnliche Filme"

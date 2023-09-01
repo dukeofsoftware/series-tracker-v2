@@ -50,7 +50,7 @@ const SearchFeed = ({}) => {
           ))
         )}
       </div>
-      {data?.total_pages && (
+      {data?.total_pages < 1 && (
         <PaginationParamsButtons
           total_pages={data.total_pages}
           pageDB={data.page}

@@ -106,7 +106,7 @@ const Page: FC<pageProps> = async ({ params }) => {
               <Badge>{formatMinutes(data.runtime, params.lang)}</Badge>
             </div>
           </div>
-          <p className="mb-2">{data.overview}</p>
+          <p className="mb-2">{data.overview || page.pages.tmdb.noOverview}</p>
           <div className="flex">
             <p className="text-xl  font-semibold">{page.pages.tmdb.tags}</p>
             {data?.genres && (

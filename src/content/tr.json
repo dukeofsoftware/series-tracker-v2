@@ -275,6 +275,7 @@
     },
     "tmdb": {
       "tags": "Etiketler:",
+      "noOverview": "Özet bulunamadı",
       "movies": {
         "movie": {
           "similarMovies": "Benzer Filmler"

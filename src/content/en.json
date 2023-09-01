@@ -76,7 +76,6 @@
       "createRoom": "Create a chat room with a user",
       "searchUser": "Search for a user"
     },
-
     "faqs": {
       "title": "Frequently Asked Questions",
       "description": "Find answers to frequently asked questions here.",
@@ -264,6 +263,7 @@
     },
     "tmdb": {
       "tags": "Tags:",
+      "noOverview": "No overview found.",
       "movies": {
         "movie": {
           "similarMovies": "Similar Movies"

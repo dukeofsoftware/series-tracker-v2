@@ -47,7 +47,7 @@ const Footer: FC<FooterProps> = ({ messages }) => {
   ]
   if (pathname.startsWith("/profile/chat")) return null
   return (
-    <footer className="mt-8 grid h-72 w-full grid-cols-2 bg-gray-950 p-8">
+    <footer className="mt-8 grid h-72 w-full grid-cols-2 bg-gray-200 dark:bg-gray-950 p-8">
       <div className="flex flex-col flex-wrap items-center  gap-2">
         <h3 className="text-center font-bold">{messages.footer.links}</h3>
         <Separator className="max-w-[180px]" />
