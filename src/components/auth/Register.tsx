@@ -29,7 +29,7 @@ import { toast } from "@/components/ui/use-toast"
 import GoogleAuth from "../GoogleAuth"
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 
-const Register = ({ }) => {
+const Register = ({}) => {
   const { getFirebaseAuth } = useFirebaseAuth()
   const global = useTranslations("global")
   const t = useTranslations("pages.auth.register")

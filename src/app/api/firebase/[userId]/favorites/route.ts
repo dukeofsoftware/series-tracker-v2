@@ -29,10 +29,7 @@ export async function GET(
       .then((snapshot) => {
         const movies: any = []
         snapshot.forEach((doc) => {
-          movies.push(
-            {...doc.data()
-            , media_type: `movie`
-            })
+          movies.push({ ...doc.data(), media_type: `movie` })
         })
         return movies
       })

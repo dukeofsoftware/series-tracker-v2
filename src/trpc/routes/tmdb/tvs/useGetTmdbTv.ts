@@ -1,12 +1,12 @@
+import { cookies } from "next/headers"
 import { publicProcedure } from "@/trpc/methods"
 import { limiter } from "@/trpc/routes"
 import { TrpcGetTmdbPageWithIdInput } from "@/trpc/routes/types"
 import { TRPCError } from "@trpc/server"
 
+import { Locale } from "@/config/i18n.config"
 import { options } from "@/config/tmdb-config"
 import { RateLimiterError } from "@/lib/rate-limit"
-import { cookies } from "next/headers"
-import { Locale } from "@/config/i18n.config"
 
 export const useGetTmdbTv = publicProcedure
   .input(TrpcGetTmdbPageWithIdInput)
@@ -15,7 +15,10 @@ export const useGetTmdbTv = publicProcedure
       await limiter.limit()
 
       const id = opts.input.id
-      const language = opts.input.lang ||  cookies().get("NEXT_LOCALE")?.value as Locale || "en-US"
+      const language =
+        opts.input.lang ||
+        (cookies().get("NEXT_LOCALE")?.value as Locale) ||
+        "en-US"
 
       const url = `https://api.themoviedb.org/3/tv/${id}?append_to_response=images%2Csimilar%2Cseasons&language=${language}`
       const data = await fetch(url, options).then((response) => response.json())

@@ -1,7 +1,8 @@
 "use client"
 
 import { FC, memo, useEffect, useMemo, useState } from "react"
-
+import { usePathname } from "next/navigation"
+import { trpcCaller } from "@/trpc/trpc-caller"
 import { useTranslations } from "next-intl"
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 import { BiLoaderAlt } from "react-icons/bi"
@@ -10,13 +11,11 @@ import { addData, getDocument } from "@/lib/firebase/firestore"
 import { useAuth } from "@/components/providers/context"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
-import { trpcCaller } from "@/trpc/trpc-caller"
-import { usePathname } from "next/navigation"
 
 interface AddToFavoritesProps {
-  movieResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbMovie"]>>;
+  movieResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbMovie"]>>
 
-  seriesResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbTv"]>>;
+  seriesResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbTv"]>>
 
   type: "movie" | "series"
 }
@@ -73,7 +72,10 @@ const AddToFavorites: FC<AddToFavoritesProps> = ({
     const id = movieResult?.id || seriesResult?.id
     if (!id) return
     try {
-      const data = await getDocument(`users/${user.uid}/${dataType}`, id.toString())
+      const data = await getDocument(
+        `users/${user.uid}/${dataType}`,
+        id.toString()
+      )
       if (!data?.status) {
         await addData(`users/${user.uid}/${dataType}`, id.toString(), {
           ...movieResult,

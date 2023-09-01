@@ -1,17 +1,17 @@
 import { FC } from "react"
+import { env } from "@/env.mjs"
 import { MovieCardType } from "@/types/movies"
 
 import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
 import TrendFeedCard from "@/components/feed/card/TrendFeedCard"
-import { env } from "@/env.mjs"
+
 interface pageProps {
   params: {
     userId: string
     lang: Locale
   }
 }
-
 
 const Page: FC<pageProps> = async ({ params }) => {
   const favorites = await fetch(
@@ -25,21 +25,17 @@ const Page: FC<pageProps> = async ({ params }) => {
         {t.favorites.title}
       </h1>
       <ul className="flex flex-wrap justify-center gap-4">
-        {favorites?.map((item: MovieCardType & { date: string }
-        ) => (
-
+        {favorites?.map((item: MovieCardType & { date: string }) => (
           <li key={item.id}>
             <TrendFeedCard
               result={{
                 ...item,
                 media_type: item.media_type,
                 date: item.date,
-
               }}
             />
           </li>
-        )
-        )}
+        ))}
       </ul>
     </div>
   )

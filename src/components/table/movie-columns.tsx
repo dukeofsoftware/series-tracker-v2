@@ -266,5 +266,4 @@ export const columns: ColumnDef<TMDB>[] = [
     accessorKey: "id",
     header: "id",
   },
-
 ]

@@ -1,8 +1,6 @@
-
 import { t } from "./init"
 
 export const isAuthenticated = t.middleware(({ ctx, next }) => {
-
   if (!ctx.user) {
     next({
       ctx: {

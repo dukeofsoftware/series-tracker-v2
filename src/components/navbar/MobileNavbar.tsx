@@ -69,17 +69,17 @@ const MobileNavbar = () => {
       link: "/profile/settings",
     },
   ]
-  const accessNavbar = [{
-
-    icon: <AiOutlineSearch className=" h-6 w-6" />,
-    text: global("searchUser"),
-    link: "/search/profile",
-  },
-  {
-    icon: <BsListUl className=" h-6 w-6" />,
-    text: "Tmdb",
-    link: "/tmdb",
-  },
+  const accessNavbar = [
+    {
+      icon: <AiOutlineSearch className=" h-6 w-6" />,
+      text: global("searchUser"),
+      link: "/search/profile",
+    },
+    {
+      icon: <BsListUl className=" h-6 w-6" />,
+      text: "Tmdb",
+      link: "/tmdb",
+    },
   ]
   const container = {
     hidden: { opacity: 0 },
@@ -226,7 +226,8 @@ const MobileNavbar = () => {
                       </Link>
                     </li>
                     <Separator />
-                  </motion.div>)
+                  </motion.div>
+                )
               })}
 
               <motion.div variants={animationItem}>
@@ -264,24 +265,24 @@ const MobileNavbar = () => {
                       </Link>
                     </li>
                     <Separator />
-                  </motion.div>)
+                  </motion.div>
+                )
               })}
-              <div className="flex items-center w-full gap-2 m-2">
+              <div className="m-2 flex w-full items-center gap-2">
                 <Link
                   href={"/auth/login"}
-                  className={cn(buttonVariants({ variant: "default" }),"grow")}
+                  className={cn(buttonVariants({ variant: "default" }), "grow")}
                 >
                   Login
                 </Link>
                 <Link
                   href={"/auth/register"}
-                  className={cn(buttonVariants({ variant: "outline" }),"grow")}
+                  className={cn(buttonVariants({ variant: "outline" }), "grow")}
                 >
                   Sign Up
                 </Link>
               </div>
             </div>
-
           )}
         </ul>
       </motion.nav>

@@ -1,6 +1,7 @@
-import 'client-only';
+import "client-only"
 
-import { createTRPCReact } from '@trpc/react-query';
-import { type AppRouter } from './routes';
+import { createTRPCReact } from "@trpc/react-query"
 
-export const trpcReact = createTRPCReact<AppRouter>({});
+import { type AppRouter } from "./routes"
+
+export const trpcReact = createTRPCReact<AppRouter>({})

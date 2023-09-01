@@ -52,9 +52,9 @@ export async function generateMetadata({
         "tr-TR": "/tr-TR",
       },
     },
-    manifest:"/manifest.json",
-    icons:{
-      src:"/assets/icons/icon-192x192.png",
+    manifest: "/manifest.json",
+    icons: {
+      src: "/assets/icons/icon-192x192.png",
     },
     publisher: "vercel",
   } as Metadata

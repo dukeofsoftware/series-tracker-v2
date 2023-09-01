@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ColumnDef } from "@tanstack/react-table"
 import { useTranslations } from "next-intl"
@@ -12,8 +13,6 @@ import AddToFavoriteSeries from "@/components/tmdb/AddToFavorites"
 import Rating from "@/components/tmdb/Rating"
 import StatusSelector from "@/components/tmdb/StatusSelector"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
-
 
 export type TMDB = {
   id: string
@@ -34,7 +33,6 @@ export const columns: ColumnDef<TMDB>[] = [
       const id = row.getValue("id")
       return (
         <Link href={`/tmdb/series/${id}`}>
-
           <Image
             className=" sm:block"
             src={`https://image.tmdb.org/t/p/w92${row.getValue("poster_path")}`}
@@ -43,7 +41,6 @@ export const columns: ColumnDef<TMDB>[] = [
             height={120}
           />
         </Link>
-
       )
     },
   },
@@ -241,6 +238,4 @@ export const columns: ColumnDef<TMDB>[] = [
     accessorKey: "id",
     header: "id",
   },
-
-
 ]

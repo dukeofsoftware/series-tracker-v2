@@ -11,8 +11,6 @@ interface SearchBarProps {
 }
 
 const SearchBar: FC<SearchBarProps> = ({ text, setText }) => {
-
-
   return (
     <div className=" relative flex w-full items-center">
       <Input

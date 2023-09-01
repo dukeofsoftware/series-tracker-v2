@@ -26,7 +26,6 @@ export async function POST(request: NextRequest) {
       },
       secure: true,
     })
-   
 
     const mailData = {
       from: env.MAILER_EMAIL,

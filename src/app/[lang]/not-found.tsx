@@ -9,18 +9,11 @@ export const metadata: Metadata = {
   description: "The page you're searching for does not exist.",
 }
 
-
-
 const PageNotFound = async () => {
-
   return (
     <section className="container mx-auto flex max-w-7xl flex-col items-center gap-6 pt-32 text-center">
-      <h1 className="text-7xl font-extrabold">
-        404
-      </h1>
-      <p>
-        The page you're searching for does not exist.
-      </p>
+      <h1 className="text-7xl font-extrabold">404</h1>
+      <p>The page you're searching for does not exist.</p>
       <Link
         className={buttonVariants({
           variant: "ghost",

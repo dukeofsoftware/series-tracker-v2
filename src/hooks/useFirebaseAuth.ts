@@ -1,3 +1,4 @@
+import { env } from "@/env.mjs"
 import {
   FirebaseApp,
   FirebaseOptions,
@@ -6,7 +7,7 @@ import {
   initializeApp,
 } from "firebase/app"
 import { connectAuthEmulator, getAuth } from "firebase/auth"
-import { env } from "@/env.mjs"
+
 import { clientConfig } from "@/config/client-config"
 
 const getFirebaseApp = (options: FirebaseOptions) => {

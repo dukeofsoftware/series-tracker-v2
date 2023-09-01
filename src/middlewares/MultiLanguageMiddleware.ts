@@ -2,6 +2,7 @@ import { NextRequest } from "next/server"
 import { match as matchLocale } from "@formatjs/intl-localematcher"
 import Negotiator from "negotiator"
 import createIntlMiddleware from "next-intl/middleware"
+
 import { i18n } from "@/config/i18n.config"
 
 function getLocale(request: NextRequest): string | undefined {

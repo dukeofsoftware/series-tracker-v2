@@ -1,4 +1,5 @@
-import {env} from "@/env.mjs"
+import { env } from "@/env.mjs"
+
 export const options = {
   method: "GET",
   headers: {

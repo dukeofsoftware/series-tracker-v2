@@ -1,12 +1,12 @@
+import { cookies } from "next/headers"
 import { publicProcedure } from "@/trpc/methods"
 import { limiter } from "@/trpc/routes"
 import { TrpcTmdbPaginateSearchInput } from "@/trpc/routes/types"
 import { TRPCError } from "@trpc/server"
 
+import { Locale } from "@/config/i18n.config"
 import { options } from "@/config/tmdb-config"
 import { RateLimiterError } from "@/lib/rate-limit"
-import { Locale } from "@/config/i18n.config"
-import { cookies } from "next/headers"
 
 export const usePaginateTmdbOnTheAirTv = publicProcedure
   .input(TrpcTmdbPaginateSearchInput)
@@ -15,7 +15,10 @@ export const usePaginateTmdbOnTheAirTv = publicProcedure
       await limiter.limit()
 
       const page = opts.input.page || "1"
-      const language = opts.input.lang ||  cookies().get("NEXT_LOCALE")?.value as Locale || "en-US"
+      const language =
+        opts.input.lang ||
+        (cookies().get("NEXT_LOCALE")?.value as Locale) ||
+        "en-US"
 
       const url = `https://api.themoviedb.org/3/tv/on_the_air?language=${language}&page=${page}`
       const data = await fetch(url, options).then((response) => response.json())

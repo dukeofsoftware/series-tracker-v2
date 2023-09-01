@@ -9,8 +9,6 @@ import { ThemeProvider } from "next-themes"
 import { formatLanguage } from "@/lib/utils"
 import { TrpcProvider } from "./TrpcProvider"
 
-
-
 interface ProvidersProps {
   children: React.ReactNode
   lang: string
@@ -27,7 +25,6 @@ const Providers: FC<ProvidersProps> = ({ children, lang, messages }) => {
     <>
       <NextIntlClientProvider locale={formatLanguage(lang)} messages={messages}>
         <TrpcProvider>
-
           <ThemeProvider attribute="class" enableSystem>
             {children}
             <Analytics
@@ -40,7 +37,6 @@ const Providers: FC<ProvidersProps> = ({ children, lang, messages }) => {
             />
           </ThemeProvider>
         </TrpcProvider>
-
       </NextIntlClientProvider>
     </>
   )

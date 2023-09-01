@@ -1,17 +1,18 @@
 "use client"
 
 import { FC, useEffect, useRef, useState } from "react"
+import { TmdbCardType } from "@/trpc/routes/types"
+import { trpcCaller } from "@/trpc/trpc-caller"
+import { trpcReact } from "@/trpc/trpc-react"
 import { useTranslations } from "next-intl"
 
 import TrendFeedCard, { TrendFeedCardSkeleton } from "./card/TrendFeedCard"
 import PaginationStateButtons from "./PaginationStateButtons"
-import { trpcCaller } from "@/trpc/trpc-caller"
-import { trpcReact } from "@/trpc/trpc-react"
-import { TmdbCardType } from "@/trpc/routes/types"
-
 
 interface TrendingFeedProps {
-  cachedData: Awaited<ReturnType<(typeof trpcCaller)["usePaginateTmdbTrending"]>>
+  cachedData: Awaited<
+    ReturnType<(typeof trpcCaller)["usePaginateTmdbTrending"]>
+  >
 }
 
 const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
@@ -19,21 +20,21 @@ const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
   const pageTranslation = useTranslations("pages.main")
   const t = useTranslations("global.messages")
   const ref = useRef<HTMLHeadingElement>(null)
-  const { data, isLoading, refetch, isFetching } = trpcReact.usePaginateTmdbTrending.useQuery({
-    page: page.toString(),
-
-  }, {
-    initialData: {
-      pages: [
-        cachedData.results,
-      ],
-      pageParams: [1],
-    },
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-
-  })
+  const { data, isLoading, refetch, isFetching } =
+    trpcReact.usePaginateTmdbTrending.useQuery(
+      {
+        page: page.toString(),
+      },
+      {
+        initialData: {
+          pages: [cachedData.results],
+          pageParams: [1],
+        },
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+      }
+    )
   useEffect(() => {
     refetch()
     if (page > 1) ref.current?.scrollIntoView({ behavior: "smooth" })
@@ -73,7 +74,12 @@ const TrendingFeed: FC<TrendingFeedProps> = ({ cachedData }) => {
           </div>
         </div>
       )}
-      <PaginationStateButtons pageState={page} setPageState={setPage} total_pages={data.total_pages} pageDB={data.page} />
+      <PaginationStateButtons
+        pageState={page}
+        setPageState={setPage}
+        total_pages={data.total_pages}
+        pageDB={data.page}
+      />
     </>
   )
 }

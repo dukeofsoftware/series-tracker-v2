@@ -59,8 +59,6 @@ const GoogleAuth: FC<GoogleAuthProps> = ({ className }) => {
       }
       setUsername(username)
 
-
-
       if (!user.emailVerified) {
         router.push("/verify-mail")
       }

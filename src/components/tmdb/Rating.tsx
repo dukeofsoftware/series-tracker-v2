@@ -1,20 +1,18 @@
 "use client"
 
 import React, { FC, memo, useEffect, useMemo, useState } from "react"
-
+import { trpcCaller } from "@/trpc/trpc-caller"
 import { useTranslations } from "next-intl"
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 
 import { addData, getDocument } from "@/lib/firebase/firestore"
 import { useAuth } from "@/components/providers/context"
 import { toast } from "@/components/ui/use-toast"
-import { trpcCaller } from "@/trpc/trpc-caller"
 
 interface RatingProps {
   type: "movie" | "series"
   movieResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbMovie"]>>
   seriesResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbTv"]>>
-
 }
 
 const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
@@ -51,7 +49,6 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
         setRating(newRating)
 
         const docPath = `users/${user.uid}/${dataType}`
-
 
         const exist = await getDocument(docPath, result.id.toString())
 
@@ -92,7 +89,6 @@ const Rating: FC<RatingProps> = ({ type, movieResult, seriesResult }) => {
       const result = type === "movie" ? movieResult : seriesResult
 
       if (result) {
-
         const docPath = `users/${user.uid}/${dataType}`
 
         const data = await getDocument(docPath, result.id.toString())

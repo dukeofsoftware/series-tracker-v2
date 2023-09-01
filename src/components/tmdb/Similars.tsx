@@ -16,7 +16,6 @@ const Similars: FC<SimilarsProps> = ({ title, similars }) => {
 
       <ul className=" mb-20 flex flex-wrap justify-center gap-5 px-20">
         {similars?.map((result, index) => (
-
           <li key={index}>
             <TrendFeedCard result={result} />
           </li>

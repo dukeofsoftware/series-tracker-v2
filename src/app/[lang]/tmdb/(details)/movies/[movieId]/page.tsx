@@ -2,6 +2,7 @@ import { FC } from "react"
 import type { Metadata } from "next"
 import Image from "next/image"
 import { notFound } from "next/navigation"
+import { trpcCaller } from "@/trpc/trpc-caller"
 
 import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
@@ -12,7 +13,6 @@ import Similars from "@/components/tmdb/Similars"
 import StatusSelector from "@/components/tmdb/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
-import { trpcCaller } from "@/trpc/trpc-caller"
 
 export async function generateMetadata({
   params,
@@ -30,10 +30,9 @@ export async function generateMetadata({
   return {
     title: data.title || data.original_title,
     description: data.overview,
-    keywords: data.genres.map((genre: {
-      name: string
-      id: number
-    }) => genre.name).join(", "),
+    keywords: data.genres
+      .map((genre: { name: string; id: number }) => genre.name)
+      .join(", "),
   } as Metadata
 }
 
@@ -112,10 +111,7 @@ const Page: FC<pageProps> = async ({ params }) => {
             <p className="text-xl  font-semibold">{page.pages.tmdb.tags}</p>
             {data?.genres && (
               <div className="mx-2 flex flex-wrap items-center gap-1.5">
-                {data.genres.map((genre: {
-                  name: string
-                  id: number
-                }) => (
+                {data.genres.map((genre: { name: string; id: number }) => (
                   <Badge key={genre.id}>{genre.name}</Badge>
                 ))}
               </div>

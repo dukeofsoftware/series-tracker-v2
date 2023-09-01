@@ -2,13 +2,13 @@ import { FC, memo } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
+import { TmdbCardType } from "@/trpc/routes/types"
 
 import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import AdultContent from "./AdultContent"
 import AirDate from "./AirDate"
 import CardContent from "./CardContent"
-import { TmdbCardType } from "@/trpc/routes/types"
 
 interface TrendFeedCardProps {
   result: TmdbCardType
@@ -31,9 +31,7 @@ const TrendFeedCard: FC<TrendFeedCardProps> = ({ result }) => {
           className="absolute rounded-md "
         />
         {result.adult && <AdultContent />}
-        <AirDate
-          date={result.date}
-        />
+        <AirDate date={result.date} />
         <CardContent
           title={result.title}
           original_title={result.original_title}

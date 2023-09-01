@@ -1,6 +1,8 @@
 import { FC } from "react"
 import { Metadata } from "next"
 import Image from "next/image"
+import { notFound } from "next/navigation"
+import { trpcCaller } from "@/trpc/trpc-caller"
 
 import { Locale } from "@/config/i18n.config"
 import { getDictionary } from "@/lib/dictionary"
@@ -11,8 +13,7 @@ import Similars from "@/components/tmdb/Similars"
 import StatusSelector from "@/components/tmdb/StatusSelector"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
-import { notFound } from "next/navigation"
-import { trpcCaller } from "@/trpc/trpc-caller"
+
 export async function generateMetadata({
   params,
 }: {
@@ -29,10 +30,9 @@ export async function generateMetadata({
   return {
     title: data?.title,
     description: data?.overview,
-    keywords: data?.genres.map((genre: {
-      name: string
-      id: number
-    }) => genre.name).join(", "),
+    keywords: data?.genres
+      .map((genre: { name: string; id: number }) => genre.name)
+      .join(", "),
   } as Metadata
 }
 
@@ -108,31 +108,27 @@ const Page: FC<PageProps> = async ({ params }) => {
                   {page.global.adult}
                 </Badge>
               )}
-              {data && data.runtime &&
-                <Badge>
-                  {formatMinutes(
-                    data?.runtime,
-                    params.lang
-                  )}
-                </Badge>
-              }
+              {data && data.runtime && (
+                <Badge>{formatMinutes(data?.runtime, params.lang)}</Badge>
+              )}
             </div>
           </div>
           <p className="mb-2">{data.overview}</p>
           <div className="flex">
             <p className="text-xl font-semibold">{page.pages.tmdb.tags} </p>
             <div className="mx-2 flex flex-wrap items-center gap-1.5">
-              {data.genres && data?.genres?.map((genre: {
-                name: string
-                id: number
-              }) => (
-                <Badge key={genre.id}>{genre.name}</Badge>
-              ))}
+              {data.genres &&
+                data?.genres?.map((genre: { name: string; id: number }) => (
+                  <Badge key={genre.id}>{genre.name}</Badge>
+                ))}
             </div>
           </div>
         </div>
       </div>
-      <Similars similars={data.similar} title={page.pages.tmdb.series.tv.similarSeries} />
+      <Similars
+        similars={data.similar}
+        title={page.pages.tmdb.series.tv.similarSeries}
+      />
     </div>
   )
 }

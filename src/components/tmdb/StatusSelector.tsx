@@ -1,11 +1,14 @@
 "use client"
 
 import { FC, memo, useEffect, useState } from "react"
-
+import { usePathname } from "next/navigation"
+import { trpcCaller } from "@/trpc/trpc-caller"
 import { deleteDoc, doc, onSnapshot } from "firebase/firestore"
 import { useTranslations } from "next-intl"
 
 import { addData, db, getDocument } from "@/lib/firebase/firestore"
+import { useAuth } from "@/components/providers/context"
+import { Button } from "@/components/ui/button"
 import {
   Select,
   SelectContent,
@@ -13,16 +16,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useAuth } from "@/components/providers/context"
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { toast } from "@/components/ui/use-toast"
-import { trpcCaller } from "@/trpc/trpc-caller"
-import { usePathname } from "next/navigation"
 
 interface StatusSelectorProps {
-  movieResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbMovie"]>>;
-  seriesResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbTv"]>>;
+  movieResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbMovie"]>>
+  seriesResult?: Awaited<ReturnType<(typeof trpcCaller)["useGetTmdbTv"]>>
 
   type: "movie" | "series"
 }
@@ -39,11 +38,12 @@ const StatusSelector: FC<StatusSelectorProps> = ({
   const { user } = useAuth()
   const pathname = usePathname()
   if (!user && !pathname.startsWith("/profile")) return null
-    useEffect(() => {
+  useEffect(() => {
     const unsubscribe = onSnapshot(
       doc(
         db,
-        `/users/${user?.uid}/${type === "series" ? "series" : "movies"}/${type === "series" ? seriesResult?.id : movieResult?.id
+        `/users/${user?.uid}/${type === "series" ? "series" : "movies"}/${
+          type === "series" ? seriesResult?.id : movieResult?.id
         }`
       ),
       (doc) => {

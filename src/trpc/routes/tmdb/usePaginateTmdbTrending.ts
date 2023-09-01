@@ -1,18 +1,21 @@
+import { cookies } from "next/headers"
 import { publicProcedure } from "@/trpc/methods"
 import { limiter } from "@/trpc/routes"
 import { TrpcTmdbPaginateSearchInput } from "@/trpc/routes/types"
 
+import { Locale } from "@/config/i18n.config"
 import { options } from "@/config/tmdb-config"
 import { RateLimiterError } from "@/lib/rate-limit"
-import { Locale } from "@/config/i18n.config"
-import { cookies } from "next/headers"
 
 export const usePaginateTmdbTrending = publicProcedure
   .input(TrpcTmdbPaginateSearchInput)
   .query(async (opts) => {
     try {
       await limiter.limit()
-      const language = opts.input.lang ||  cookies().get("NEXT_LOCALE")?.value as Locale || "en-US"
+      const language =
+        opts.input.lang ||
+        (cookies().get("NEXT_LOCALE")?.value as Locale) ||
+        "en-US"
       const page = opts.input.page || "1"
 
       const data = await fetch(

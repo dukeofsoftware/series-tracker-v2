@@ -1,15 +1,13 @@
-'use client'
+"use client"
 
-import { FC } from 'react'
+import { FC } from "react"
 
 interface UpcomingFeedProps {
-    cachedData: any
+  cachedData: any
 }
 
 const UpcomingFeed: FC<UpcomingFeedProps> = ({}) => {
-  return <>
-    UpcomingFeed
-  </>
+  return <>UpcomingFeed</>
 }
 
 export default UpcomingFeed
