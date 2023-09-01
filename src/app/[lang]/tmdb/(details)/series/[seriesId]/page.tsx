@@ -45,7 +45,6 @@ interface PageProps {
 
 export const revalidate = 60 * 60
 const Page: FC<PageProps> = async ({ params }) => {
-  await waiter(100000)
   const page = await getDictionary(params.lang)
   const data = await trpcCaller.useGetTmdbTv({
     id: params.seriesId,
