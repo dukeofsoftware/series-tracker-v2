@@ -71,6 +71,18 @@
   },
   "searchUser": "Search User",
   "pages": {
+    "contact":{
+        "title":"Contact",
+        "description":"Contact us",
+        "form":{
+            "name":"Name",
+            "email":"E-mail",
+            "message":"Message",
+            "button":"Send"
+        },
+        "toastDescription":"Your message has been sent successfully",
+        "toastErrorDescription":"An error occurred while sending your message"
+    },
     "chat": {
       "empty": "Select a user from the sidebar to start writing a message",
       "createRoom": "Create a chat room with a user",

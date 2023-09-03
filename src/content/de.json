@@ -71,6 +71,19 @@
   },
   "searchUser": "Benutzer suchen",
   "pages": {
+
+  "contact":{
+    "title":"Kontakt",
+    "description":"Kontaktieren Sie uns",
+    "form":{
+        "name":"Name",
+        "email":"E-Mail",
+        "message":"Nachricht",
+        "button":"Senden"
+    },
+    "toastDescription":"Ihre Nachricht wurde erfolgreich gesendet",
+    "toastErrorDescription":"Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten"
+  },
     "chat": {
       "createRoom": "Erstellen Sie einen Chat-Raum mit einem Benutzer",
       "searchUser": "Suchen Sie nach einem Benutzer",
