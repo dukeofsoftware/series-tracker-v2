@@ -2,13 +2,6 @@
 
 The aim of the project is to facilitate the tracking of TV series, movies, and many other things in the future. I used to use Notion to keep track of what I've watched, but doing it manually was quite cumbersome. Although there were similar applications, they had their issues. They didn't suffice to meet my needs. So, I wanted to develop an application like this.
 
-## Roadmap
-
-- Coming Soon
-- Creating lists
-- Commenting
-
-
 ## Basic Technologies Used
 
 **Client:** Next.js, React, Typescript, Firebase, TailwindCSS, shadcn-ui, valibot, react-hook-form, react-csv, next-themes, next-intl,
